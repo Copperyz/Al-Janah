@@ -1,0 +1,214 @@
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Validation Language Lines
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines contain the default error messages used by
+    | the validator class. Some of these rules have multiple versions such
+    | as the size rules. Feel free to tweak each of these messages here.
+    |
+    */
+
+    'accepted' => 'The :attribute must be accepted.',
+    'accepted_if' => 'The :attribute must be accepted when :other is :value.',
+    'active_url' => 'The :attribute is not a valid URL.',
+    'after' => 'The :attribute must be a date after :date.',
+    'after_or_equal' => 'The :attribute must be a date after or equal to :date.',
+    'alpha' => 'The :attribute must only contain letters.',
+    'alpha_dash' => 'The :attribute must only contain letters, numbers, dashes and underscores.',
+    'alpha_num' => 'The :attribute must only contain letters and numbers.',
+    'array' => 'The :attribute must be an array.',
+    'before' => 'The :attribute must be a date before :date.',
+    'before_or_equal' => 'The :attribute must be a date before or equal to :date.',
+    'between' => [
+        'numeric' => 'The :attribute must be between :min and :max.',
+        'file' => 'The :attribute must be between :min and :max kilobytes.',
+        'string' => 'The :attribute must be between :min and :max characters.',
+        'array' => 'The :attribute must have between :min and :max items.',
+    ],
+    'boolean' => 'The :attribute field must be true or false.',
+    'confirmed' => 'تأكيد :attribute غير متطابق.',
+    'current_password' => 'The password is incorrect.',
+    'date' => 'The :attribute is not a valid date.',
+    'date_equals' => 'The :attribute must be a date equal to :date.',
+    'date_format' => 'صيغة الحقل :attribute لا تتطابق مع الصيغة :format.',
+    'declined' => 'The :attribute must be declined.',
+    'declined_if' => 'The :attribute must be declined when :other is :value.',
+    'different' => 'The :attribute and :other must be different.',
+    'digits' => ':attribute يجب أن يكون :digits أرقام.',
+    'digits_between' => 'The :attribute must be between :min and :max digits.',
+    'dimensions' => 'The :attribute has invalid image dimensions.',
+    'distinct' => 'The :attribute field has a duplicate value.',
+    'email' => 'The :attribute must be a valid email address.',
+    'ends_with' => 'The :attribute must end with one of the following: :values.',
+    'enum' => 'The selected :attribute is invalid.',
+    'exists' => 'الـ :attribute المحدد غير صالح.',
+    'file' => 'The :attribute must be a file.',
+    'filled' => 'The :attribute field must have a value.',
+    'gt' => [
+        'numeric' => 'يجب أن يكون حقل :attribute أكبر من :value.',
+        'file' => 'يجب أن يكون حقل :attribute أكبر من :value كيلوبايت.',
+        'string' => 'يجب أن يكون حقل :attribute أكبر من :value أحرف.',
+        'array' => 'يجب أن يحتوي حقل :attribute على أكثر من :value عنصر.',
+    ],
+    'gte' => [
+        'numeric' => 'The :attribute must be greater than or equal to :value.',
+        'file' => 'The :attribute must be greater than or equal to :value kilobytes.',
+        'string' => 'The :attribute must be greater than or equal to :value characters.',
+        'array' => 'The :attribute must have :value items or more.',
+    ],
+    'image' => 'يجب أن تكون :attribute صورة.',
+    'in' => 'صيغة :attribute غير صالحة.',
+    'in_array' => 'The :attribute field does not exist in :other.',
+    'integer' => 'يجب أن يكون :attribute عدداً صحيحاً.',
+    'ip' => 'The :attribute must be a valid IP address.',
+    'ipv4' => 'The :attribute must be a valid IPv4 address.',
+    'ipv6' => 'The :attribute must be a valid IPv6 address.',
+    'json' => 'The :attribute must be a valid JSON string.',
+    'lt' => [
+        'numeric' => 'The :attribute must be less than :value.',
+        'file' => 'The :attribute must be less than :value kilobytes.',
+        'string' => 'The :attribute must be less than :value characters.',
+        'array' => 'The :attribute must have less than :value items.',
+    ],
+    'lte' => [
+        'numeric' => 'The :attribute must be less than or equal to :value.',
+        'file' => 'The :attribute must be less than or equal to :value kilobytes.',
+        'string' => 'The :attribute must be less than or equal to :value characters.',
+        'array' => 'The :attribute must not have more than :value items.',
+    ],
+    'mac_address' => 'The :attribute must be a valid MAC address.',
+    'max' => [
+        'numeric' => 'يجب أن لا يتجاوز :attribute :max.',
+        'file' => 'يجب أن لا يتجاوز حجم ملف :attribute :max كيلوبايت.',
+        'string' => 'يجب أن لا يتجاوز طول :attribute :max أحرف.',
+        'array' => 'يجب أن لا يحتوي :attribute على أكثر من :max عناصر.',
+    ],
+    'mimes' => 'يجب أن تكون :attribute ملف من نوع: :values.',
+    'mimetypes' => 'The :attribute must be a file of type: :values.',
+    'min' => [
+        'numeric' => 'يجب أن يكون :attribute على الأقل :min.',
+        'file' => 'يجب أن يكون حجم ملف :attribute على الأقل :min كيلوبايت.',
+        'string' => 'يجب أن يكون طول :attribute على الأقل :min أحرف.',
+        'array' => 'يجب أن يحتوي :attribute على الأقل :min عناصر.',
+    ],
+    'multiple_of' => 'The :attribute must be a multiple of :value.',
+    'not_in' => 'The selected :attribute is invalid.',
+    'not_regex' => 'The :attribute format is invalid.',
+    'numeric' => 'يجب أن يكون :attribute رقماً.',
+    'password' => 'The password is incorrect.',
+    'present' => 'The :attribute field must be present.',
+    'prohibited' => 'The :attribute field is prohibited.',
+    'prohibited_if' => 'The :attribute field is prohibited when :other is :value.',
+    'prohibited_unless' => 'The :attribute field is prohibited unless :other is in :values.',
+    'prohibits' => 'The :attribute field prohibits :other from being present.',
+    'regex' => 'صيغة :attribute غير صالحة.',
+    'required' => 'حقل :attribute مطلوب.',
+    'required_array_keys' => 'The :attribute field must contain entries for: :values.',
+    'required_if' => 'The :attribute field is required when :other is :value.',
+    'required_unless' => 'The :attribute field is required unless :other is in :values.',
+    'required_with' => 'The :attribute field is required when :values is present.',
+    'required_with_all' => 'The :attribute field is required when :values are present.',
+    'required_without' => 'The :attribute field is required when :values is not present.',
+    'required_without_all' => 'The :attribute field is required when none of :values are present.',
+    'same' => 'The :attribute and :other must match.',
+    'size' => [
+        'numeric' => 'The :attribute must be :size.',
+        'file' => 'The :attribute must be :size kilobytes.',
+        'string' => 'The :attribute must be :size characters.',
+        'array' => 'The :attribute must contain :size items.',
+    ],
+    'starts_with' => 'The :attribute must start with one of the following: :values.',
+    'string' => 'يجب أن يكون حقل :attribute نصّاً.',
+    'timezone' => 'The :attribute must be a valid timezone.',
+    'unique' => 'هذا :attribute مستخدم مسبقاً.',
+    'uploaded' => 'The :attribute failed to upload.',
+    'url' => 'يجب أن يكون :attribute عنوان URL صالح.',
+    'uuid' => 'The :attribute must be a valid UUID.',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Custom Validation Language Lines
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify custom validation messages for attributes using the
+    | convention "attribute.rule" to name the lines. This makes it quick to
+    | specify a specific custom language line for a given attribute rule.
+    |
+    */
+
+    'custom' => [
+        'attribute-name' => [
+            'rule-name' => 'custom-message',
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Custom Validation Attributes
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines are used to swap our attribute placeholder
+    | with something more reader friendly such as "E-Mail Address" instead
+    | of "email". This simply helps us make our message more expressive.
+    |
+    */
+
+    'attributes' => [
+        'title'               => 'العنوان',
+        'image'               => 'الصورة',
+        'body'                => 'النص',
+        'phone'               => 'رقم الهاتف',
+        'date'                => 'التاريخ',
+        'sport'               => 'الرياضة',
+        'firstName'           => 'الإسم الأول',
+        'fatherName'          => 'إسم الأب',
+        'lastName'            => 'اللقب',
+        'email'               => 'البريد الإلكتروني',
+        'birth'               => 'المواليد',
+        'city'                => 'المدينة',
+        'clubGym'             => 'النادي - الصالة',
+        'association'         => 'الإتحاد',
+        'specialty'           => 'التخصص',
+        'facebookLink'        => 'رابط الفيس بوك',
+        'instgramLink'        => 'رابط الإنستجرام',
+        'tiktokLink'          => 'رابط التيك توك',
+        'from_date'           => 'التاريخ من',
+        'to_date'             => 'التاريخ إلى',
+        'time'                => 'الوقت',
+        'address'             => 'المكان',
+        'price'               => 'السعر',
+        'eventtype'           => 'نوع الفعالية',
+        'coordinator'         => 'المنسق',
+        'referee'             => 'الحكم',
+        'currency'            => 'العملة',
+        'userType'            => 'الفئة',
+        'localWins'           => 'إنتصار محلي',
+        'localDefeat'         => 'هزيمة محلية',
+        'localDraw'           => 'تعادل محلي',
+        'internationalWins'   => 'إنتصار دولي',
+        'internationalDefeat' => 'هزيمة محلية',
+        'internationalDraw'   => 'تعادل دولي',
+        'localMatches'        => 'مباريات محلية',
+        'internationalMatches'=> 'مباريات دولية',
+        'location'            => 'الموقع',
+        'password'            => 'كلمة المرور',
+        'cityId'              => 'المدينة',
+        'sports'              => 'الرياضات',
+        'nid'                 => 'الرقم الوطني',
+        'profileImage'        => 'الصورة شخصية',
+        'identityPic'         => 'صورة الهوية',
+        'nidPic'              => 'صورة الرقم الوطني',
+        'publicationType'     => 'نوع النشر',
+        'name'                => 'الإسم',
+        'founded'             => 'التأسيس',
+        'brief'               => 'النص المختر'
+
+
+    ],
+
+];

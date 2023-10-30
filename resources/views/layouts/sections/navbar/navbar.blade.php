@@ -70,7 +70,7 @@ $navbarDetached = ($navbarDetached ?? '');
           <li class="nav-item navbar-dropdown dropdown-user dropdown">
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
               <div class="avatar avatar-online">
-                <img src="{{ Auth::user() ? Auth::user()->profile_photo_url : asset('assets/img/avatars/1.png') }}" alt class="h-auto rounded-circle">
+                <img src="{{ Auth::user()->profile_photo_url ? Auth::user()->profile_photo_url : asset('assets/img/avatars/1.png') }}" alt class="h-auto rounded-circle">
               </div>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -79,7 +79,7 @@ $navbarDetached = ($navbarDetached ?? '');
                   <div class="d-flex">
                     <div class="flex-shrink-0 me-3">
                       <div class="avatar avatar-online">
-                        <img src="{{ Auth::user() ? Auth::user()->profile_photo_url : asset('assets/img/avatars/1.png') }}" alt class="h-auto rounded-circle">
+                        <img src="{{ Auth::user()->profile_photo_url ? Auth::user()->profile_photo_url : asset('assets/img/avatars/1.png') }}" alt class="h-auto rounded-circle">
                       </div>
                     </div>
                     <div class="flex-grow-1">
@@ -117,15 +117,15 @@ $navbarDetached = ($navbarDetached ?? '');
                   <span class="align-middle">{{ __('Change Mode') }}</span></span>
                 </a>
               </li>
-              @if (Auth::check() && Laravel\Jetstream\Jetstream::hasApiFeatures())
+              {{-- @if (Auth::check() && Laravel\Jetstream\Jetstream::hasApiFeatures())
               <li>
                 <a class="dropdown-item" href="{{ route('api-tokens.index') }}">
                   <i class='ti ti-key me-2 ti-sm'></i>
                   <span class="align-middle">API Tokens</span>
                 </a>
               </li>
-              @endif
-              @if (Auth::User() && Laravel\Jetstream\Jetstream::hasTeamFeatures())
+              @endif --}}
+              {{-- @if (Auth::User() && Laravel\Jetstream\Jetstream::hasTeamFeatures())
               <li>
                 <div class="dropdown-divider"></div>
               </li>
@@ -140,16 +140,16 @@ $navbarDetached = ($navbarDetached ?? '');
                   <i class='ti ti-settings me-2'></i>
                   <span class="align-middle">Team Settings</span>
                 </a>
-              </li>
-              @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
+              </li> --}}
+              {{-- @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
               <li>
                 <a class="dropdown-item" href="{{ route('teams.create') }}">
                   <i class='ti ti-user me-2'></i>
                   <span class="align-middle">Create New Team</span>
                 </a>
               </li>
-              @endcan
-              @if (Auth::user()->allTeams()->count() > 1)
+              @endcan --}}
+              {{-- @if (Auth::user()->allTeams()->count() > 1)
               <li>
                 <div class="dropdown-divider"></div>
               </li>
@@ -165,9 +165,9 @@ $navbarDetached = ($navbarDetached ?? '');
               {{-- Below commented code read by artisan command while installing jetstream. !! Do not remove if you want to use jetstream. --}}
 
               {{-- <x-switchable-team :team="$team" /> --}}
-              @endforeach
+              {{-- @endforeach
               @endif
-              @endif
+              @endif --}}
               <li>
                 <div class="dropdown-divider"></div>
               </li>
@@ -175,7 +175,7 @@ $navbarDetached = ($navbarDetached ?? '');
               <li>
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                   <i class='ti ti-logout me-2'></i>
-                  <span class="align-middle">Logout</span>
+                  <span class="align-middle">{{__('Logout')}}</span>
                 </a>
               </li>
               <form method="POST" id="logout-form" action="{{ route('logout') }}">

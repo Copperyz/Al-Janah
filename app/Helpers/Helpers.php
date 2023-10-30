@@ -9,9 +9,7 @@ class Helpers
 {
   public static function appClasses()
   {
-
     $data = config('custom.custom');
-
 
     // default data array
     $DefaultData = [
@@ -31,15 +29,15 @@ class Helpers
       'footerFixed' => false,
       'customizerControls' => [
         'rtl',
-      'style',
-      'headerType',
-      'contentLayout',
-      'layoutCollapsed',
-      'showDropdownOnHover',
-      'layoutNavbarOptions',
-      'themes',
+        'style',
+        'headerType',
+        'contentLayout',
+        'layoutCollapsed',
+        'showDropdownOnHover',
+        'layoutNavbarOptions',
+        'themes',
       ],
-      //   'defaultLanguage'=>'en',
+      'defaultLanguage' => app()->getLocale(),
     ];
 
     // if any key missing of array from custom.php file it will be merge and set a default value from dataDefault array and store in data variable
@@ -62,7 +60,7 @@ class Helpers
       'menuFixed' => [true, false],
       'footerFixed' => [true, false],
       'customizerControls' => [],
-      // 'defaultLanguage'=>array('en'=>'en','fr'=>'fr','de'=>'de','pt'=>'pt'),
+      'defaultLanguage' => ['en' => 'en', 'ar' => 'ar'],
     ];
 
     //if myLayout value empty or not match with default options in custom.php config file then set a default value
@@ -91,7 +89,7 @@ class Helpers
         }
       }
     }
-    $styleVal = $data['myStyle'] == "dark" ? "dark" : "light";
+    $styleVal = $data['myStyle'] == 'dark' ? 'dark' : 'light';
     if (isset($_COOKIE['style'])) {
       $styleVal = $_COOKIE['style'];
     }
@@ -138,7 +136,6 @@ class Helpers
     if ($layoutClasses['menuFixed'] == true) {
       $layoutClasses['menuFixed'] = 'layout-menu-fixed';
     }
-
 
     // Footer Fixed
     if ($layoutClasses['footerFixed'] == true) {

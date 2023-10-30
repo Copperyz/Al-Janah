@@ -30,12 +30,6 @@ Route::get('/pages/misc-error', [MiscError::class, 'index'])->name('pages-misc-e
 // Route::get('/auth/login-basic', [LoginBasic::class, 'index'])->name('auth-login-basic');
 // Route::get('/auth/register-basic', [RegisterBasic::class, 'index'])->name('auth-register-basic');
 
-// Settings
-
-Route::middleware(['auth'])->group(function () {
-  // Route::view('home', 'home')->name('home');
-});
-
 Route::middleware(['guest'])->group(function () {
   Route::get('/login', function () {
     return view('auth.login');
@@ -49,5 +43,6 @@ Route::middleware(['auth'])->group(function () {
   Route::get('/', [HomePage::class, 'index'])->name('pages-home');
   Route::post('/logout', [AuthController::class, 'Logout'])->name('logout');
 
+  // Settings
   Route::get('/change-locale/{locale}', [Settings::class, 'setLocale'])->name('changeLocale');
 });

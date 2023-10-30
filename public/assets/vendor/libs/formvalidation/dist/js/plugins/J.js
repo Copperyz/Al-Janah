@@ -13,7 +13,7 @@ var __webpack_exports__ = {};
 /*!**************************************************************************!*\
   !*** ./resources/assets/vendor/libs/formvalidation/dist/js/plugins/J.js ***!
   \**************************************************************************/
-function _typeof2(obj) { "@babel/helpers - typeof"; return _typeof2 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof2(obj); }
+function _typeof2(o) { "@babel/helpers - typeof"; return _typeof2 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof2(o); }
 /**
  * FormValidation (https://formvalidation.io), v1.10.0 (2236098)
  * The best validation library for JavaScript

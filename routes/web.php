@@ -8,6 +8,7 @@ use App\Http\Controllers\pages\MiscError;
 use App\Http\Controllers\authentications\LoginBasic;
 use App\Http\Controllers\authentications\RegisterBasic;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Users;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,4 +46,6 @@ Route::middleware(['auth'])->group(function () {
 
   // Settings
   Route::get('/change-locale/{locale}', [Settings::class, 'setLocale'])->name('changeLocale');
+  Route::get('get-users', [Users::class, 'get_users'])->name('get-users');
+  Route::resource('users', Users::class);
 });

@@ -60,7 +60,7 @@
 }
 
 body {
-  background: #060606;
+  background: #11111a;
 }
 
 .bg-body {
@@ -1452,7 +1452,8 @@ li.ui-timepicker-selected,
 }
 
 .bg-menu-theme {
-  background-color: #222222 !important;
+  /* background-color: #222222 !important; */
+  background-color: #161926 !important;
   color: #b6bee3;
 }
 .bg-menu-theme.menu-horizontal {

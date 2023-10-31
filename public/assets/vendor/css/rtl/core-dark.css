@@ -12689,7 +12689,7 @@ button.list-group-item-gray.active {
 .card {
   background-clip: padding-box;
   box-shadow: 0 0.25rem 1.25rem rgba(15, 20, 34, 0.4);
-  background-color: #222222 !important;
+  background-color: #161926  !important;
 }
 .card .card-link {
   display: inline-block;
@@ -13269,7 +13269,7 @@ html:not([dir='rtl']) .card .card-separator {
 
 .offcanvas {
   box-shadow: 0 0.31rem 1.25rem 0 rgba(0, 0, 0, 0.4);
-  background-color: #222222 !important;
+  background-color: #161926  !important;
 }
 .offcanvas .offcanvas-header .btn-close {
   background-color: #3d425f;
@@ -20973,7 +20973,7 @@ html:not(.layout-menu-fixed) .menu-inner-shadow {
 }
 .layout-navbar .navbar-dropdown.dropdown-user .dropdown-menu {
   min-width: 14rem;
-  background-color: #222222 !important;
+  background-color: #161926  !important;
 }
 .layout-navbar[class*='bg-']:not(.bg-navbar-theme) .nav-item .input-group-text,
 .layout-navbar[class*='bg-']:not(.bg-navbar-theme) .nav-item .dropdown-toggle {

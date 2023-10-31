@@ -128,7 +128,7 @@ div.dt-button-collection {
 }
 
 div.dt-button-collection div.dropdown-menu {
-  /* position: relative; */
+  position: relative;
   display: block;
   background-color: transparent;
   border: none;
@@ -544,7 +544,7 @@ div.dt-button-collection .dt-button {
   background-color: #222222;
 }
 .dark-style div.dataTables_wrapper .dt-button-collection > div[role='menu'] {
-  box-shadow: 0 0.25rem 1rem rgba(15, 20, 34, 0.55);
+  /* box-shadow: 0 0.25rem 1rem rgba(15, 20, 34, 0.55); */
 }
 .dark-style .dataTable a:not([href]):not([tabindex]) {
   color: #28c76f;

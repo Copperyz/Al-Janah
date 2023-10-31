@@ -2,7 +2,7 @@
   display: -ms-flexbox;
   display: flex;
   -ms-flex-preferred-size: 100%;
-      flex-basis: 100%;
+  flex-basis: 100%;
   min-height: 100vh;
   width: 100%;
 }
@@ -11,20 +11,21 @@
 }
 .authentication-wrapper.authentication-basic {
   -ms-flex-align: center;
-      align-items: center;
+  align-items: center;
   -ms-flex-pack: center;
-      justify-content: center;
+  justify-content: center;
 }
 .authentication-wrapper.authentication-basic .card-body {
   padding: 2rem;
 }
 .authentication-wrapper.authentication-cover {
   -ms-flex-align: start;
-      align-items: flex-start;
+  align-items: flex-start;
 }
 .authentication-wrapper.authentication-cover .authentication-inner {
   height: 100%;
   margin: auto 0;
+  background-color: #181818;
 }
 .authentication-wrapper.authentication-cover .authentication-inner .auth-cover-bg {
   width: 100%;
@@ -32,6 +33,7 @@
   height: calc(100vh - 4rem);
   border-radius: 1.125rem;
   position: relative;
+  background-color: #222222 !important;
 }
 .authentication-wrapper.authentication-cover .authentication-inner .auth-cover-bg .auth-illustration {
   max-height: 65%;
@@ -57,7 +59,7 @@
 .authentication-wrapper.authentication-basic .authentication-inner:before {
   width: 238px;
   height: 233px;
-  content: " ";
+  content: ' ';
   position: absolute;
   top: -55px;
   left: -40px;
@@ -71,7 +73,7 @@
 .authentication-wrapper.authentication-basic .authentication-inner:after {
   width: 180px;
   height: 180px;
-  content: " ";
+  content: ' ';
   position: absolute;
   z-index: -1;
   bottom: -30px;
@@ -112,7 +114,7 @@
 }
 
 .dark-style .authentication-wrapper.authentication-bg {
-  background-color: #2f3349;
+  background-color: #1c1c1c;
 }
 .dark-style .auth-cover-bg-color {
   background-color: #25293c;

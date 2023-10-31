@@ -46,6 +46,6 @@ Route::middleware(['auth'])->group(function () {
 
   // Settings
   Route::get('/change-locale/{locale}', [Settings::class, 'setLocale'])->name('changeLocale');
-  Route::get('get-users', [Users::class, 'get_users'])->name('get-users');
   Route::resource('users', Users::class);
+  Route::get('get-users', [Users::class, 'get_users'])->name('get-users');
 });

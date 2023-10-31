@@ -20,21 +20,21 @@ $(function () {
 
   // Variable declaration for table
   var dt_user_table = $('.datatables-users'),
-    select2 = $('.select2'),
-    userView = baseUrl + 'app/user/view/account',
-    statusObj = {
-      1: { title: 'Pending', class: 'bg-label-warning' },
-      2: { title: 'Active', class: 'bg-label-success' },
-      3: { title: 'Inactive', class: 'bg-label-secondary' }
-    };
+    // select2 = $('.select2'),
+    userView = baseUrl + '';
+  // statusObj = {
+  //   1: { title: 'Pending', class: 'bg-label-warning' },
+  //   2: { title: 'Active', class: 'bg-label-success' },
+  //   3: { title: 'Inactive', class: 'bg-label-secondary' }
+  // };
 
-  if (select2.length) {
-    var $this = select2;
-    $this.wrap('<div class="position-relative"></div>').select2({
-      placeholder: 'Select Country',
-      dropdownParent: $this.parent()
-    });
-  }
+  // if (select2.length) {
+  //   var $this = select2;
+  //   $this.wrap('<div class="position-relative"></div>').select2({
+  //     placeholder: 'Select Country',
+  //     dropdownParent: $this.parent()
+  //   });
+  // }
 
   // Users datatable
   if (dt_user_table.length) {
@@ -53,7 +53,7 @@ $(function () {
           // For Responsive
           className: 'control',
           searchable: false,
-          orderable: false,
+          orderable: true,
           responsivePriority: 2,
           targets: 0,
           render: function (data, type, full, meta) {
@@ -115,13 +115,6 @@ $(function () {
               '<div class="d-flex align-items-center">' +
               '<a href="javascript:;" class="text-body"><i class="ti ti-edit ti-sm me-2"></i></a>' +
               '<a href="javascript:;" class="text-body delete-record"><i class="ti ti-trash ti-sm mx-2"></i></a>' +
-              '<a href="javascript:;" class="text-body dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical ti-sm mx-1"></i></a>' +
-              '<div class="dropdown-menu dropdown-menu-end m-0">' +
-              '<a href="' +
-              userView +
-              '" class="dropdown-item">View</a>' +
-              '<a href="javascript:;" class="dropdown-item">Suspend</a>' +
-              '</div>' +
               '</div>'
             );
           }

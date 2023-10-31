@@ -76,11 +76,11 @@ html:not([dir='rtl']) .bg-menu-theme.menu-horizontal .menu-inner > .menu-item > 
 }
 
 body {
-  background: rgb(22, 22, 22);
+  background: #25293c;
 }
 
 .bg-body {
-  background: #3c2525 !important;
+  background: #25293c !important;
 }
 
 .text-primary {
@@ -1433,7 +1433,7 @@ li.ui-timepicker-selected,
 }
 
 .bg-navbar-theme {
-  background-color: #222222 !important;
+  background-color: rgba(47, 51, 73, 0.95) !important;
   color: #b6bee3;
 }
 .bg-navbar-theme .navbar-brand,
@@ -1522,13 +1522,13 @@ li.ui-timepicker-selected,
 .layout-navbar-fixed .layout-page:before {
   -webkit-backdrop-filter: saturate(200%) blur(10px);
   backdrop-filter: saturate(200%) blur(10px);
-  /* background: linear-gradient(180deg, rgba(37, 41, 60, 0.7) 44%, rgba(37, 41, 60, 0.43) 73%, rgba(37, 41, 60, 0)); */
+  background: linear-gradient(180deg, rgba(37, 41, 60, 0.7) 44%, rgba(37, 41, 60, 0.43) 73%, rgba(37, 41, 60, 0));
   -webkit-mask: linear-gradient(#25293c, #25293c 18%, transparent 100%);
   mask: linear-gradient(#25293c, #25293c 18%, transparent 100%);
 }
 
 .bg-menu-theme {
-  background-color: #222222 !important;
+  background-color: #2f3349 !important;
   color: #b6bee3;
 }
 .bg-menu-theme.menu-horizontal {

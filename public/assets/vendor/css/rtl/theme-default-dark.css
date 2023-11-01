@@ -1504,7 +1504,7 @@ li.ui-timepicker-selected,
   box-shadow: 0 0 10px #434968;
   -webkit-backdrop-filter: saturate(200%) blur(6px);
   backdrop-filter: saturate(200%) blur(6px);
-  background-color: #161926 !important;
+  background-color: #171a2a !important;
 }
 
 .menu-horizontal {
@@ -1529,7 +1529,7 @@ li.ui-timepicker-selected,
 }
 
 .bg-menu-theme {
-  background-color: #161926 !important;
+  background-color: #171a2a !important;
   color: #b6bee3;
 }
 .bg-menu-theme.menu-horizontal {

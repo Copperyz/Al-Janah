@@ -21,7 +21,7 @@ $(function () {
   // Variable declaration for table
   var dt_user_table = $('.datatables-users'),
     // select2 = $('.select2'),
-    userView = baseUrl + '';
+    userView = baseUrl + 'users/';
   // statusObj = {
   //   1: { title: 'Pending', class: 'bg-label-warning' },
   //   2: { title: 'Active', class: 'bg-label-success' },
@@ -91,8 +91,7 @@ $(function () {
               '</div>' +
               '</div>' +
               '<div class="d-flex flex-column">' +
-              '<a href="' +
-              userView +
+              '<a href="' + userView + full['id'] +
               '" class="text-body text-truncate"><span class="fw-medium">' +
               $name +
               '</span></a>' +

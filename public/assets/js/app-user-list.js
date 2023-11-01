@@ -113,7 +113,7 @@ $(function () {
           render: function (data, type, full, meta) {
             return (
               '<div class="d-flex align-items-center">' +
-              '<a href="javascript:;" class="text-body"><i class="ti ti-edit ti-sm me-2"></i></a>' +
+              '<a href="javascript:;" class="text-body editUser" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEditUser"><i class="ti ti-edit ti-sm me-2"></i></a>' +
               '<a href="javascript:;" class="text-body delete-record"><i class="ti ti-trash ti-sm mx-2"></i></a>' +
               '</div>'
             );
@@ -130,17 +130,23 @@ $(function () {
         '<"col-sm-12 col-md-6"i>' +
         '<"col-sm-12 col-md-6"p>' +
         '>',
-      language: {
-        sLengthMenu: '_MENU_',
-        search: '',
-        searchPlaceholder: 'Search..'
+
+      "language": {
+        "search": searchTranslation,
+        "lengthMenu": `${showTranslation} _MENU_`,
+        "info": ` ${showingTranslation} _START_ ${toTranslation} _END_ ${ofTranslation} _TOTAL_ ${entriesTranslation}`,
+        "paginate": {
+          "next": nextTranslation,      // Change "Next" text
+          "previous": previousTranslation, // Change "Previous" text
+        },
+        "emptyTable": noEntriesAvailableTranslation
       },
       // Buttons with Dropdown
       buttons: [
         {
           extend: 'collection',
           className: 'btn btn-label-secondary dropdown-toggle mx-3',
-          text: '<i class="ti ti-screen-share me-1 ti-xs"></i>Export',
+          text: `<i class="ti ti-screen-share me-1 ti-xs"></i>${exportTranslation}`,
           buttons: [
             {
               extend: 'print',
@@ -278,7 +284,7 @@ $(function () {
           ]
         },
         {
-          text: '<i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Add New User</span>',
+          text: `<i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">${addNewUserTranslation}</span>`,
           className: 'add-new btn btn-primary',
           attr: {
             'data-bs-toggle': 'offcanvas',
@@ -300,18 +306,18 @@ $(function () {
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                    col.rowIndex +
-                    '" data-dt-column="' +
-                    col.columnIndex +
-                    '">' +
-                    '<td>' +
-                    col.title +
-                    ':' +
-                    '</td> ' +
-                    '<td>' +
-                    col.data +
-                    '</td>' +
-                    '</tr>'
+                col.rowIndex +
+                '" data-dt-column="' +
+                col.columnIndex +
+                '">' +
+                '<td>' +
+                col.title +
+                ':' +
+                '</td> ' +
+                '<td>' +
+                col.data +
+                '</td>' +
+                '</tr>'
                 : '';
             }).join('');
 
@@ -396,9 +402,192 @@ $(function () {
     });
   }
 
+
+  // If you have a submit button inside the form, you can bind the click event to it
+  $(".addNewUserForm :submit").on("click", function (event) {
+    // Trigger the form submission when the button is clicked
+    $(this).closest('form').submit();
+  });
+
+  var offcanvasAddUser = new bootstrap.Offcanvas($('#offcanvasAddUser'));
+
+  $(".addNewUserForm").on("submit", function (event) {
+    event.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+    var method = form.attr('method');
+    var formData = form.serialize();
+
+    $.ajax({
+      url: url,
+      method: method,
+      data: formData,
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function (response, status, xhr) {
+        $('.loading-overlay').css('display', 'none');
+        if (xhr.status === 200) {
+          // Handle a successful response
+          Swal.fire({
+            title: '',
+            text: response.message,
+            icon: 'success',
+            customClass: {
+              confirmButton: 'btn btn-primary'
+            },
+            buttonsStyling: false
+          }).then((result) => {
+            if (result.isConfirmed) {
+              offcanvasAddUser.hide();
+              // location.reload();
+              $("#addNewUserForm").trigger('reset');
+              dt_user.ajax.url('get-users').load();
+            }
+          });
+        }
+        else {
+          // Handle other status codes
+        }
+      },
+      error: function (response, xhr, status, error) {
+        $('.loading-overlay').css('display', 'none');
+        // Handle the error response here
+        var errorMessages = Object.values(response.responseJSON.errors).flat();
+        // Format error messages with line breaks
+        var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
+        // Create the Swal alert
+        Swal.fire({
+          title: response.responseJSON.message,
+          html: formattedErrorMessages,
+          icon: 'error',
+          confirmButtonText: continueTranslation,
+          customClass: {
+            confirmButton: 'btn btn-primary'
+          },
+          buttonsStyling: false
+        });
+      }
+    });
+
+  });
+
+  $(document).on('click', 'a.editUser', function () {
+    var data = dt_user.row($(this).closest('tr')).data();
+    $('#editUserForm').trigger("reset");
+    $('#editUserForm').find('[name="name"]').val(data.name);
+    $('#editUserForm').find('[name="email"]').val(data.email);
+    $('#editUserForm').find('[name="id"]').val(data.id);
+  });
+
+  var offcanvasEditUser = new bootstrap.Offcanvas($('#offcanvasEditUser'));
+
+  $('#editUserForm').submit(function (event) {
+    event.preventDefault(); // Prevent default form submission
+    // Make an AJAX request
+    $.ajax({
+      url: 'users/' + $('#editUserForm').find('[name="id"]').val(),
+      method: 'PUT',
+      data: $(this).serialize(),
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      dataType: 'json',
+      processData: false,
+      success: function (response, status, xhr) {
+        $('.loading-overlay').css('display', 'none');
+        if (xhr.status === 200) {
+          // Handle a successful response
+          Swal.fire({
+            title: '',
+            text: response.message,
+            icon: 'success',
+            customClass: {
+              confirmButton: 'btn btn-primary'
+            },
+            buttonsStyling: false
+          }).then((result) => {
+            if (result.isConfirmed) {
+              offcanvasEditUser.hide();
+              // location.reload();
+              $("#editUserForm").trigger('reset');
+              dt_user.ajax.url('get-users').load();
+            }
+          });
+        } else {
+          // Handle other status codes
+        }
+      },
+      error: function (response, xhr, status, error) {
+        $('.loading-overlay').css('display', 'none');
+        // Handle the error response here
+        var errorMessages = Object.values(response.responseJSON.errors).flat();
+        // Format error messages with line breaks
+        var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
+        // Create the Swal alert
+        Swal.fire({
+          title: response.responseJSON.message,
+          html: formattedErrorMessages,
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-primary'
+          },
+          buttonsStyling: false
+        });
+      }
+    });
+  });
+
   // Delete Record
   $('.datatables-users tbody').on('click', '.delete-record', function () {
-    dt_user.row($(this).parents('tr')).remove().draw();
+    // dt_user.row($(this).parents('tr')).remove().draw();
+    var data = dt_user.row($(this).closest('tr')).data();
+    Swal.fire({
+      title: areYouSureTranslation,
+      text: areYouSureTextTranslation,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: submitTranslation,
+      cancelButtonText: cancelTranslation,
+      customClass: {
+        confirmButton: 'btn btn-primary me-3',
+        cancelButton: 'btn btn-label-secondary'
+      },
+      buttonsStyling: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Perform the deletion action here
+        $.ajax({
+          url: './users/' + data.id,
+          type: 'DELETE',
+
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          success: function (response) {
+            dt_user.ajax.url('get-users').load();
+            Swal.fire({
+              icon: 'success',
+              title: '',
+              text: response.message,
+              confirmButtonText: continueTranslation,
+              customClass: {
+                confirmButton: 'btn btn-success'
+              }
+            });
+          },
+          error: function (xhr, status, error) {
+            Swal.fire({
+              title: `{{ __('An error occurred while deleting.') }}`,
+              text: `{{ __('This record cannot be deleted as it has related data associated with it.') }}`,
+              icon: 'error',
+              confirmButtonText: `{{ __('Back') }}`,
+              confirmButtonColor: '#dc3545',
+            });
+          },
+        });
+      }
+    });
   });
 
   // Filter form control to default size

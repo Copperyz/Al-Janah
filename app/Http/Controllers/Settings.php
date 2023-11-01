@@ -12,7 +12,7 @@ class Settings extends Controller
     if (!in_array($locale, ['en', 'fr', 'de', 'pt', 'ar'])) {
       abort(400);
     } else {
-      session()->put('locale', $locale);
+        session()->put('locale', $locale);
     }
 
     App::setLocale($locale);

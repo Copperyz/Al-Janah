@@ -107,7 +107,6 @@ $(function () {
         {
           // Actions
           targets: -1,
-          title: 'Actions',
           searchable: false,
           orderable: false,
           render: function (data, type, full, meta) {
@@ -426,17 +425,16 @@ $(function () {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
       success: function (response, status, xhr) {
-        $('.loading-overlay').css('display', 'none');
         if (xhr.status === 200) {
           // Handle a successful response
           Swal.fire({
             title: '',
             text: response.message,
             icon: 'success',
+            confirmButtonText: continueTranslation,
             customClass: {
-              confirmButton: 'btn btn-primary'
+              confirmButton: 'btn btn-success'
             },
-            buttonsStyling: false
           }).then((result) => {
             if (result.isConfirmed) {
               offcanvasAddUser.hide();
@@ -451,7 +449,6 @@ $(function () {
         }
       },
       error: function (response, xhr, status, error) {
-        $('.loading-overlay').css('display', 'none');
         // Handle the error response here
         var errorMessages = Object.values(response.responseJSON.errors).flat();
         // Format error messages with line breaks
@@ -495,23 +492,18 @@ $(function () {
       dataType: 'json',
       processData: false,
       success: function (response, status, xhr) {
-        $('.loading-overlay').css('display', 'none');
         if (xhr.status === 200) {
           // Handle a successful response
+          offcanvasEditUser.hide();
+          $("#editUserForm").trigger('reset');
+          dt_user.ajax.url('get-users').load();
           Swal.fire({
+            icon: 'success',
             title: '',
             text: response.message,
-            icon: 'success',
+            confirmButtonText: continueTranslation,
             customClass: {
-              confirmButton: 'btn btn-primary'
-            },
-            buttonsStyling: false
-          }).then((result) => {
-            if (result.isConfirmed) {
-              offcanvasEditUser.hide();
-              // location.reload();
-              $("#editUserForm").trigger('reset');
-              dt_user.ajax.url('get-users').load();
+              confirmButton: 'btn btn-success'
             }
           });
         } else {
@@ -519,7 +511,6 @@ $(function () {
         }
       },
       error: function (response, xhr, status, error) {
-        $('.loading-overlay').css('display', 'none');
         // Handle the error response here
         var errorMessages = Object.values(response.responseJSON.errors).flat();
         // Format error messages with line breaks

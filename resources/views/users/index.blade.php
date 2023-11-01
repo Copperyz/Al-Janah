@@ -131,10 +131,10 @@ $configData = Helper::appClasses();
             <thead class="border-top">
                 <tr>
                     <th></th>
-                    <th>User</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Actions</th>
+                    <th>{{__('User')}}</th>
+                    <th>{{__('Name')}}</th>
+                    <th>{{__('Email')}}</th>
+                    <th>{{__('Actions')}}</th>
                 </tr>
             </thead>
         </table>

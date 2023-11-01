@@ -42,6 +42,9 @@
   "Next": "التالي",
   "Previous": "السابق",
   "Are you sure?": "هل انت متأكد؟",
-  "You will not be able to revert this!": "لن تتمكن من استعادة البيانات المحذوفة!"
+  "You will not be able to revert this!": "لن تتمكن من استعادة البيانات المحذوفة!",
+  "Name": "الإسم",
+  "Actions": "الإجراءات",
+  "User": "المستخدم"
 
 }

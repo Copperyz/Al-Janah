@@ -11,6 +11,12 @@
       "icon": "menu-icon tf-icons ti ti-users",
       "name": "Users",
       "slug": "users.index"
+    },
+    {
+      "url": "roles",
+      "icon": "menu-icon tf-icons ti ti-users",
+      "name": "Roles",
+      "slug": "roles.index"
     }
   ]
 }

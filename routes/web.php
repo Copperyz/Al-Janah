@@ -9,6 +9,8 @@ use App\Http\Controllers\authentications\LoginBasic;
 use App\Http\Controllers\authentications\RegisterBasic;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Users;
+use App\Http\Controllers\RolesController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +48,12 @@ Route::middleware(['auth'])->group(function () {
 
   // Settings
   Route::get('/change-locale/{locale}', [Settings::class, 'setLocale'])->name('changeLocale');
+
+  // Users
   Route::resource('users', Users::class);
   Route::get('get-users', [Users::class, 'get_users'])->name('get-users');
+
+  // Roles
+  Route::resource('roles', RolesController::class);
+
 });

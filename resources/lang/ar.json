@@ -45,6 +45,21 @@
   "You will not be able to revert this!": "لن تتمكن من استعادة البيانات المحذوفة!",
   "Name": "الإسم",
   "Actions": "الإجراءات",
-  "User": "المستخدم"
-
+  "User": "المستخدم",
+  "Roles": "الأدوار",
+  "A role provided access to predefined menus and features so that depending on assigned role an administrator can have access to what the user needs.": "يوفر الدور إمكانية الوصول إلى القوائم والميزات المحددة مسبقًا بحيث يعتمد ذلك على الدور المعين يمكن للمسؤول الوصول إلى ما يحتاجه المستخدم.",
+  "Total": "إجمالي",
+  "Add a role, if it does not exist": "أضف دورًا إذا لم يكن موجودًا",
+  "Add Role": "إضافة دور",
+  "Edit Role": "تعديل دور",
+  "Access": "الوصول",
+  "Administrator Access ": "وصول المسؤول ",
+  "Select All": "تحديد الكل",
+  "Role Permissions": "أذونات الدور",
+  "Role Name": "إسم الدور",
+  "Set role permissions": "تعيين أذونات الدور",
+  "Enter a role name": "ادخل إسم الدور",
+  "Role created successfully": "تم إضافة الدور بنجاح",
+  "Role updated successfully": "تم تعديل الدور بنجاح",
+  "Role deleted successfully": "تم حذف الدور بنجاح"
 }

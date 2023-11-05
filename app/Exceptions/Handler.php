@@ -41,7 +41,6 @@ class Handler extends ExceptionHandler
   public function render($request, Throwable $exception)
   {
     if ($exception instanceof NotFoundHttpException) {
-      app()->setLocale(app()->getLocale());
       return response()->view('errors.pages-misc-error', [], 404);
     }
 

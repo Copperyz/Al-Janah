@@ -6,8 +6,7 @@
 
 $(function () {
   var dataTablePermissions = $('.datatables-permissions'),
-    dt_permission,
-    userList = baseUrl + 'app/user/list';
+    dt_permission;
   // Users List datatable
   if (dataTablePermissions.length) {
     dt_permission = dataTablePermissions.DataTable({
@@ -15,9 +14,7 @@ $(function () {
       columns: [
         // columns according to JSON
         { data: '' },
-        // { data: 'id' },
         { data: 'name' },
-        // { data: '' },
         { data: 'carbonDate' },
         { data: '' }
       ],
@@ -48,16 +45,6 @@ $(function () {
             return '<div style="direction: ltr;">' + data + '</div>';
           },
         },
-
-        {
-          targets: 1,
-          orderable: false,
-          render: function (data, type, full, meta) {
-            var $date = full['carbonDate'];
-            return '<td class="text-nowrap" style="direction: ltr;">' + $date + '</td>';
-          }
-        }
-        ,
         {
           // Actions
           targets: -1,

@@ -77,8 +77,11 @@ class AuthController extends Controller
 
   public function Logout(Request $request)
   {
-    Session::flush();
-    Auth::logout();
+    $userLocale = app()->getLocale(); // Get current locale
+    $request->session()->flush();
+    $request->session()->regenerate();
+    $request->session()->put('locale', $userLocale); // Store in session
+
     return redirect('login');
   }
 }

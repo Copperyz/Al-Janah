@@ -386,7 +386,7 @@ html:not([dir=rtl]).light-style .bs-stepper.vertical .bs-stepper-header {
 }
 
 .dark-style .bs-stepper {
-  background-color: #2f3349;
+  background-color: #171a2a;
 }
 .dark-style .bs-stepper .bs-stepper-header {
   border-bottom: 1px solid #434968;
@@ -402,7 +402,7 @@ html:not([dir=rtl]).light-style .bs-stepper.vertical .bs-stepper-header {
   color: #7983bb !important;
 }
 .dark-style .bs-stepper .bs-stepper-header .step:not(.active) .bs-stepper-circle {
-  background-color: #363b54;
+  background-color: #202437;
   color: #b6bee3;
 }
 .dark-style .bs-stepper .bs-stepper-header .step.active .bs-stepper-circle {
@@ -429,7 +429,7 @@ html:not([dir=rtl]).light-style .bs-stepper.vertical .bs-stepper-header {
   background-color: transparent;
 }
 .dark-style .bs-stepper.wizard-modern .bs-stepper-content {
-  background-color: #2f3349;
+  background-color: #171a2a;
   box-shadow: 0 0.25rem 1.25rem rgba(15, 20, 34, 0.4);
 }
 .dark-style .bs-stepper.wizard-icons .bs-stepper-header .bs-stepper-icon i {

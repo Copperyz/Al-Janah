@@ -558,7 +558,7 @@ html[class] .bootstrap-select.form-select {
 }
 
 .dark-style .bootstrap-select {
-  background-color: #2f3349;
+  background-color: #171a2a;
 }
 .dark-style .bootstrap-select .dropdown-toggle {
   border: 1px solid #434968;
@@ -571,7 +571,7 @@ html[class] .bootstrap-select.form-select {
   box-shadow: 0 -0.2rem 1.25rem rgba(15, 20, 34, 0.55) !important;
 }
 .dark-style .bootstrap-select .dropdown-menu .notify {
-  background: #2f3349;
+  background: #171a2a;
   border: 1px solid var(--bs-border-color-translucent);
 }
 .dark-style .bootstrap-select .dropdown-menu .popover-header button {

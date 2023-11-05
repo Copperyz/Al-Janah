@@ -297,10 +297,10 @@ html:not([dir=rtl]) .fc .fc-view-harness .fc-scrollgrid-section-header > * {
   color: #ea5455;
 }
 .dark-style .fc .fc-day-today {
-  background-color: #363b54 !important;
+  background-color: #202437 !important;
 }
 .dark-style .fc .fc-day-today .fc-popover-body {
-  background-color: #2f3349 !important;
+  background-color: #171a2a !important;
 }
 .dark-style .fc .fc-divider {
   background: #434968;
@@ -318,7 +318,7 @@ html:not([dir=rtl]) .fc .fc-view-harness .fc-scrollgrid-section-header > * {
 }
 .dark-style .fc .fc-list .fc-list-table th {
   border: 0;
-  background: #343951;
+  background: #1e2134;
 }
 .dark-style .fc .fc-list .fc-list-table .fc-list-event {
   cursor: pointer;
@@ -346,7 +346,7 @@ html:not([dir=rtl]) .fc .fc-view-harness .fc-scrollgrid-section-header > * {
   background-color: rgba(134, 146, 208, 0.16);
 }
 .dark-style .fc-event-primary:not(.fc-list-event) {
-  background-color: #3a3b64 !important;
+  background-color: #26264a !important;
   color: #7367f0 !important;
 }
 .dark-style .fc-event-primary:not(.fc-list-event) {
@@ -356,7 +356,7 @@ html:not([dir=rtl]) .fc .fc-view-harness .fc-scrollgrid-section-header > * {
   border-color: #7367f0 !important;
 }
 .dark-style .fc-event-secondary:not(.fc-list-event) {
-  background-color: #424659 !important;
+  background-color: #2e313f !important;
   color: #a8aaae !important;
 }
 .dark-style .fc-event-secondary:not(.fc-list-event) {
@@ -366,7 +366,7 @@ html:not([dir=rtl]) .fc .fc-view-harness .fc-scrollgrid-section-header > * {
   border-color: #a8aaae !important;
 }
 .dark-style .fc-event-success:not(.fc-list-event) {
-  background-color: #2e4b4f !important;
+  background-color: #1a3635 !important;
   color: #28c76f !important;
 }
 .dark-style .fc-event-success:not(.fc-list-event) {
@@ -376,7 +376,7 @@ html:not([dir=rtl]) .fc .fc-view-harness .fc-scrollgrid-section-header > * {
   border-color: #28c76f !important;
 }
 .dark-style .fc-event-info:not(.fc-list-event) {
-  background-color: #274c62 !important;
+  background-color: #133748 !important;
   color: #00cfe8 !important;
 }
 .dark-style .fc-event-info:not(.fc-list-event) {
@@ -386,7 +386,7 @@ html:not([dir=rtl]) .fc .fc-view-harness .fc-scrollgrid-section-header > * {
   border-color: #00cfe8 !important;
 }
 .dark-style .fc-event-warning:not(.fc-list-event) {
-  background-color: #504448 !important;
+  background-color: #3c2f2e !important;
   color: #ff9f43 !important;
 }
 .dark-style .fc-event-warning:not(.fc-list-event) {
@@ -396,7 +396,7 @@ html:not([dir=rtl]) .fc .fc-view-harness .fc-scrollgrid-section-header > * {
   border-color: #ff9f43 !important;
 }
 .dark-style .fc-event-danger:not(.fc-list-event) {
-  background-color: #4d384b !important;
+  background-color: #392331 !important;
   color: #ea5455 !important;
 }
 .dark-style .fc-event-danger:not(.fc-list-event) {
@@ -406,7 +406,7 @@ html:not([dir=rtl]) .fc .fc-view-harness .fc-scrollgrid-section-header > * {
   border-color: #ea5455 !important;
 }
 .dark-style .fc-event-light:not(.fc-list-event) {
-  background-color: #32364c !important;
+  background-color: #1e2132 !important;
   color: #44475b !important;
 }
 .dark-style .fc-event-light:not(.fc-list-event) {
@@ -416,7 +416,7 @@ html:not([dir=rtl]) .fc .fc-view-harness .fc-scrollgrid-section-header > * {
   border-color: #44475b !important;
 }
 .dark-style .fc-event-dark:not(.fc-list-event) {
-  background-color: #4a4d61 !important;
+  background-color: #363847 !important;
   color: #d7d8de !important;
 }
 .dark-style .fc-event-dark:not(.fc-list-event) {
@@ -426,7 +426,7 @@ html:not([dir=rtl]) .fc .fc-view-harness .fc-scrollgrid-section-header > * {
   border-color: #d7d8de !important;
 }
 .dark-style .fc-event-gray:not(.fc-list-event) {
-  background-color: rgba(70, 74, 94, 0.968) !important;
+  background-color: rgba(49, 52, 66, 0.968) !important;
   color: rgba(255, 255, 255, 0.8) !important;
 }
 .dark-style .fc-event-gray:not(.fc-list-event) {

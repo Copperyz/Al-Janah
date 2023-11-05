@@ -9,7 +9,7 @@ $configData = Helper::appClasses();
     <div class="app-brand demo">
         <a href="{{url('/')}}" class="app-brand-link">
             <span class="app-brand-logo demo">
-                @include('_partials.macros',["height"=>20])
+                @include('_partials.macros',["height"=>30])
             </span>
             <span class="app-brand-text demo menu-text fw-bold">{{__(config('variables.templateName'))}}</span>
         </a>

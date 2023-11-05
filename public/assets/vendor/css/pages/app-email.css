@@ -326,7 +326,7 @@
 }
 
 .dark-style .app-email .app-email-sidebar {
-  background-color: #2f3349;
+  background-color: #171a2a;
 }
 .dark-style .app-email .app-email-sidebar ul li:not(.active) a {
   color: #b6bee3;
@@ -351,11 +351,11 @@
   color: #ff9f43;
 }
 .dark-style .app-email .app-email-view .email-card-last:before {
-  background-color: rgba(47, 51, 73, 0.5);
+  background-color: rgba(23, 26, 42, 0.5);
   box-shadow: 0 0.25rem 1.25rem rgba(15, 20, 34, 0.4);
 }
 .dark-style .app-email .app-email-view .email-card-last:after {
-  background-color: rgba(47, 51, 73, 0.8);
+  background-color: rgba(23, 26, 42, 0.8);
   box-shadow: 0 0.25rem 1.25rem rgba(15, 20, 34, 0.4);
 }
 

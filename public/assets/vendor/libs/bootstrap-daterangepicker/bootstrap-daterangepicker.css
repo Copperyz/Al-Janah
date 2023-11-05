@@ -415,7 +415,7 @@ html:not([dir=rtl]) .daterangepicker .drp-calendar.right {
   box-shadow: 0 0.25rem 1rem rgba(15, 20, 34, 0.55);
   width: calc(14.4rem + 0px);
   margin-top: 0.25rem;
-  background-color: #2f3349;
+  background-color: #171a2a;
   border: 0px solid #434968;
   border-radius: 0.375rem;
   z-index: 1091 !important;
@@ -457,7 +457,7 @@ html:not([dir=rtl]) .daterangepicker .drp-calendar.right {
 }
 .dark-style .daterangepicker td.available:not(.active):hover,
 .dark-style .daterangepicker th.available:hover {
-  background-color: #363b54;
+  background-color: #202437;
 }
 .dark-style .daterangepicker td.off {
   color: #7983bb;
@@ -472,7 +472,7 @@ html:not([dir=rtl]) .daterangepicker .drp-calendar.right {
 }
 .dark-style .daterangepicker .calendar-table .next,
 .dark-style .daterangepicker .calendar-table .prev {
-  background-color: #363b54;
+  background-color: #202437;
 }
 .dark-style .daterangepicker .calendar-table .next span,
 .dark-style .daterangepicker .calendar-table .prev span {
@@ -488,11 +488,11 @@ html:not([dir=rtl]) .daterangepicker .drp-calendar.right {
   color: #b6bee3;
 }
 .dark-style .daterangepicker select.hourselect option, .dark-style .daterangepicker select.minuteselect option, .dark-style .daterangepicker select.secondselect option, .dark-style .daterangepicker select.ampmselect option {
-  background: #2f3349;
+  background: #171a2a;
 }
 .dark-style .daterangepicker select.monthselect option, .dark-style .daterangepicker select.yearselect option {
   color: #b6bee3;
-  background: #2f3349;
+  background: #171a2a;
 }
 .dark-style .daterangepicker select.monthselect option:disabled, .dark-style .daterangepicker select.yearselect option:disabled {
   color: #7983bb;

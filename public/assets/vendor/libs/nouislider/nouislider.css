@@ -695,7 +695,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
   background: #7983bb;
 }
 .dark-style .noUi-handle {
-  border: 2px solid #2f3349;
+  border: 2px solid #171a2a;
   box-shadow: 0 0.125rem 0.25rem rgba(15, 20, 34, 0.4);
   background: #4a5072 !important;
 }

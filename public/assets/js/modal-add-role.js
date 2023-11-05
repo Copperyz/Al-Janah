@@ -8,15 +8,15 @@ document.addEventListener('DOMContentLoaded', function (e) {
   (function () {
     // add role form validation
     FormValidation.formValidation(document.getElementById('addRoleForm'), {
-      // fields: {
-      //   modalRoleName: {
-      //     validators: {
-      //       notEmpty: {
-      //         message: 'Please enter role name'
-      //       }
-      //     }
-      //   }
-      // },
+      fields: {
+        modalRoleName: {
+          validators: {
+            notEmpty: {
+              message: 'Please enter role name'
+            }
+          }
+        }
+      },
       plugins: {
         trigger: new FormValidation.plugins.Trigger(),
         bootstrap5: new FormValidation.plugins.Bootstrap5({
@@ -37,14 +37,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
       checkboxList = document.querySelectorAll('[type="checkbox"]');
     selectAll.addEventListener('change', t => {
       checkboxList.forEach(e => {
-        e.checked = t.target.checked;
-      });
-    });
-
-    const editSelectAll = document.querySelector('#editSelectAll'),
-      editCheckboxList = document.querySelectorAll('[type="checkbox"]');
-    editSelectAll.addEventListener('change', t => {
-      editCheckboxList.forEach(e => {
         e.checked = t.target.checked;
       });
     });

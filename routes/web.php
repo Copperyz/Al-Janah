@@ -43,12 +43,14 @@ Route::middleware(['guest'])->group(function () {
   Route::post('/register', [AuthController::class, 'Register'])->name('register');
 });
 
+  // Settings
+  Route::get('/change-locale/{locale}', [Settings::class, 'setLocale'])->name('changeLocale');
+  
 Route::middleware(['auth'])->group(function () {
   Route::get('/', [HomePage::class, 'index'])->name('pages-home');
   Route::post('/logout', [AuthController::class, 'Logout'])->name('logout');
 
-  // Settings
-  Route::get('/change-locale/{locale}', [Settings::class, 'setLocale'])->name('changeLocale');
+
 
   // Users
   Route::resource('users', Users::class);

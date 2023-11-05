@@ -60,7 +60,7 @@ class Helpers
       'menuFixed' => [true, false],
       'footerFixed' => [true, false],
       'customizerControls' => [],
-      'defaultLanguage' => ['en' => 'en', 'ar' => 'ar'],
+      'defaultLanguage' => ['en' => 'en'],
     ];
 
     //if myLayout value empty or not match with default options in custom.php config file then set a default value

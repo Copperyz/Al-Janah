@@ -13,9 +13,9 @@ class Settings extends Controller
       abort(400);
     } else {
         session()->put('locale', $locale);
+        App::setLocale($locale);
     }
 
-    App::setLocale($locale);
     return redirect()->back();
   }
 }

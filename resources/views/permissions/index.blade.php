@@ -43,9 +43,7 @@ $configData = Helper::appClasses();
             <thead>
                 <tr>
                     <th></th>
-                    <!-- <th></th> -->
                     <th>{{__('Name')}}</th>
-                    <!-- <th>Assigned To</th> -->
                     <th>{{__('Created Date')}}</th>
                     <th>{{__('Actions')}}</th>
                 </tr>

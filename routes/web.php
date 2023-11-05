@@ -1,15 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\pages\HomePage;
+use App\Http\Controllers\Users;
 use App\Http\Controllers\Settings;
 use App\Http\Controllers\pages\Page2;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\pages\HomePage;
 use App\Http\Controllers\pages\MiscError;
+use App\Http\Controllers\RolesController;
+use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\authentications\LoginBasic;
 use App\Http\Controllers\authentications\RegisterBasic;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Users;
-use App\Http\Controllers\RolesController;
 
 
 /*
@@ -55,5 +56,10 @@ Route::middleware(['auth'])->group(function () {
 
   // Roles
   Route::resource('roles', RolesController::class);
+
+  // Roles
+  Route::resource('permissions', PermissionsController::class);
+  Route::get('get-permissions', [PermissionsController::class, 'get_permissions'])->name('get-permissions');
+
 
 });

@@ -17,6 +17,12 @@
       "icon": "menu-icon tf-icons ti ti-users",
       "name": "Roles",
       "slug": "roles.index"
+    },
+    {
+      "url": "permissions",
+      "icon": "menu-icon tf-icons ti ti-users",
+      "name": "Permissions",
+      "slug": "permissions.index"
     }
   ]
 }

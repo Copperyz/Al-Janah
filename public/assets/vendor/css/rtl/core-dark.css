@@ -37,7 +37,7 @@
   --bs-white-rgb: 255, 255, 255;
   --bs-black-rgb: 0, 0, 0;
   --bs-body-color-rgb: 182, 190, 227;
-  --bs-body-bg-rgb: 37, 41, 60;
+  --bs-body-bg-rgb: 17, 17, 26;
   --bs-font-sans-serif: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   --bs-font-monospace: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
@@ -47,7 +47,7 @@
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.47;
   --bs-body-color: #b6bee3;
-  --bs-body-bg: #25293c;
+  --bs-body-bg: #11111a;
   --bs-border-width: 1px;
   --bs-border-style: solid;
   --bs-border-color: #434968;
@@ -6985,11 +6985,11 @@ a.bg-lightest:hover, a.bg-lightest:focus {
 }
 
 .invert-text-white {
-  color: #25293c !important;
+  color: #11111a !important;
 }
 
 .invert-text-white[href]:hover:hover, .invert-text-white[href]:hover:focus {
-  color: #25293c !important;
+  color: #11111a !important;
 }
 
 .invert-text-dark {
@@ -7001,11 +7001,11 @@ a.bg-lightest:hover, a.bg-lightest:focus {
 }
 
 .invert-bg-white {
-  background-color: #25293c !important;
+  background-color: #11111a !important;
 }
 
 a.invert-bg-white:hover, a.invert-bg-white:focus {
-  background-color: #25293c !important;
+  background-color: #11111a !important;
 }
 
 .invert-bg-dark {
@@ -7021,7 +7021,7 @@ a.invert-bg-dark:hover, a.invert-bg-dark:focus {
 }
 
 .invert-border-white {
-  border-color: #25293c !important;
+  border-color: #11111a !important;
 }
 
 .container-p-x {
@@ -13760,7 +13760,7 @@ html:not([dir=rtl]) .card .card-separator {
 
 .bg-body {
   --bs-bg-opacity: 1;
-  background-color: #25293c !important;
+  background-color: #11111a !important;
 }
 
 .bg-transparent {
@@ -19803,7 +19803,7 @@ html:not(.layout-menu-fixed) .menu-inner-shadow {
   color: #b6bee3;
 }
 .layout-navbar .navbar-search-wrapper .navbar-search-suggestion .suggestion:hover, .layout-navbar .navbar-search-wrapper .navbar-search-suggestion .suggestion.active {
-  background: #25293c;
+  background: #11111a;
   color: #b6bee3;
 }
 .layout-navbar .navbar-search-wrapper .navbar-search-suggestion .suggestions-header {
@@ -21577,7 +21577,7 @@ html:not([dir=rtl]) .switches-stacked .switch {
 }
 .timeline .timeline-item .timeline-indicator i,
 .timeline .timeline-item .timeline-indicator-advanced i {
-  background-color: #25293c;
+  background-color: #11111a;
 }
 .card .timeline .timeline-item .timeline-indicator i,
 .card .timeline .timeline-item .timeline-indicator-advanced i {

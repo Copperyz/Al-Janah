@@ -656,10 +656,10 @@
 }
 
 .dark-style .tagify__dropdown.users-list .tagify__dropdown__item__avatar-wrap {
-  background: #25293c;
+  background: #11111a;
 }
 .dark-style .tagify__tag .tagify__tag__avatar-wrap {
-  background: #25293c;
+  background: #11111a;
 }
 .dark-style .tagify__dropdown.users-list .addAll {
   border-bottom: 1px solid #434968;
@@ -695,7 +695,7 @@
 
 .dark-style .tags-inline .tagify__dropdown__item {
   border: 1px solid #434968;
-  background: #25293c;
+  background: #11111a;
   color: #b6bee3;
 }
 .dark-style .tags-inline .tagify__dropdown__item--active {
@@ -857,7 +857,7 @@
   color: #b6bee3;
 }
 .dark-style .tagify__tag:hover:not([readonly]) div::before, .dark-style .tagify__tag:focus div::before {
-  box-shadow: 0 0 0 1.1em #25293c inset;
+  box-shadow: 0 0 0 1.1em #11111a inset;
 }
 .dark-style .tagify__tag__removeBtn {
   color: #b6bee3;

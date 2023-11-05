@@ -76,11 +76,11 @@ html:not([dir=rtl]) .bg-menu-theme.menu-horizontal .menu-inner > .menu-item > .m
 }
 
 body {
-  background: #25293c;
+  background: #11111a;
 }
 
 .bg-body {
-  background: #25293c !important;
+  background: #11111a !important;
 }
 
 .text-primary {
@@ -1336,9 +1336,9 @@ li.ui-timepicker-selected,
 .layout-navbar-fixed .layout-page:before {
   -webkit-backdrop-filter: saturate(200%) blur(10px);
           backdrop-filter: saturate(200%) blur(10px);
-  background: linear-gradient(180deg, rgba(37, 41, 60, 0.7) 44%, rgba(37, 41, 60, 0.43) 73%, rgba(37, 41, 60, 0));
-  -webkit-mask: linear-gradient(#25293c, #25293c 18%, transparent 100%);
-  mask: linear-gradient(#25293c, #25293c 18%, transparent 100%);
+  background: linear-gradient(180deg, rgba(17, 17, 26, 0.7) 44%, rgba(17, 17, 26, 0.43) 73%, rgba(17, 17, 26, 0));
+  -webkit-mask: linear-gradient(#11111a, #11111a 18%, transparent 100%);
+  mask: linear-gradient(#11111a, #11111a 18%, transparent 100%);
 }
 
 .layout-horizontal .layout-navbar {
@@ -1454,11 +1454,11 @@ html:not(.layout-menu-collapsed) .bg-menu-theme .menu-inner .menu-item:not(.acti
 }
 
 .layout-footer-fixed .layout-horizontal .bg-footer-theme {
-  background-color: #25293c !important;
+  background-color: #11111a !important;
   color: #b6bee3;
 }
 .layout-footer-fixed .layout-wrapper:not(.layout-horizontal) .bg-footer-theme .footer-container {
-  background-color: #25293c !important;
+  background-color: #11111a !important;
   color: #b6bee3;
 }
 .bg-footer-theme .footer-link {
@@ -1468,7 +1468,7 @@ html:not(.layout-menu-collapsed) .bg-menu-theme .menu-inner .menu-item:not(.acti
   color: #cfd3ec;
 }
 .bg-footer-theme .footer-link.disabled {
-  color: #7c82a0 !important;
+  color: #747993 !important;
 }
 .bg-footer-theme .footer-text {
   color: #cfd3ec;

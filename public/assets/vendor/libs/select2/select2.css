@@ -572,7 +572,7 @@ html:not([dir=rtl]) .select2-container--default .select2-selection--multiple .se
 }
 .dark-style .select2-container--default .select2-selection--multiple .select2-selection__choice {
   color: #b6bee3;
-  background-color: #25293c;
+  background-color: #11111a;
 }
 .dark-style .select2-container--default.select2-container--disabled .select2-selection--multiple {
   border-color: #434968 !important;

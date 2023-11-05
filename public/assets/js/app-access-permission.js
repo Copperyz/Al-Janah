@@ -6,16 +6,19 @@
 
 $(function () {
   var dataTablePermissions = $('.datatables-permissions'),
-    dt_permission;
+    dt_permission,
+    userList = baseUrl + 'app/user/list';
   // Users List datatable
   if (dataTablePermissions.length) {
     dt_permission = dataTablePermissions.DataTable({
-      ajax: 'get-permissions',
+      ajax: assetsPath + 'json/permissions-list.json', // JSON file to add data
       columns: [
         // columns according to JSON
         { data: '' },
+        { data: 'id' },
         { data: 'name' },
-        { data: 'carbonDate' },
+        { data: 'assigned_to' },
+        { data: 'created_date' },
         { data: '' }
       ],
       columnDefs: [
@@ -31,28 +34,58 @@ $(function () {
           }
         },
         {
-          // Name
           targets: 1,
+          searchable: false,
+          visible: false
+        },
+        {
+          // Name
+          targets: 2,
           render: function (data, type, full, meta) {
             var $name = full['name'];
             return '<span class="text-nowrap">' + $name + '</span>';
           }
         },
         {
-          targets: [2], // Specify the column index you want to modify
+          // User Role
+          targets: 3,
+          orderable: false,
           render: function (data, type, full, meta) {
-            // Adjust the direction style for the specific column
-            return '<div style="direction: ltr;">' + data + '</div>';
-          },
+            var $assignedTo = full['assigned_to'],
+              $output = '';
+            var roleBadgeObj = {
+              Admin: '<a href="' + userList + '"><span class="badge bg-label-primary m-1">Administrator</span></a>',
+              Manager: '<a href="' + userList + '"><span class="badge bg-label-warning m-1">Manager</span></a>',
+              Users: '<a href="' + userList + '"><span class="badge bg-label-success m-1">Users</span></a>',
+              Support: '<a href="' + userList + '"><span class="badge bg-label-info m-1">Support</span></a>',
+              Restricted:
+                '<a href="' + userList + '"><span class="badge bg-label-danger m-1">Restricted User</span></a>'
+            };
+            for (var i = 0; i < $assignedTo.length; i++) {
+              var val = $assignedTo[i];
+              $output += roleBadgeObj[val];
+            }
+            return '<span class="text-nowrap">' + $output + '</span>';
+          }
+        },
+        {
+          // remove ordering from Name
+          targets: 4,
+          orderable: false,
+          render: function (data, type, full, meta) {
+            var $date = full['created_date'];
+            return '<span class="text-nowrap">' + $date + '</span>';
+          }
         },
         {
           // Actions
           targets: -1,
           searchable: false,
+          title: 'Actions',
           orderable: false,
           render: function (data, type, full, meta) {
             return (
-              '<span class="text-nowrap"><button class="btn btn-sm btn-icon me-2 editPermission" data-bs-target="#editPermissionModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit"></i></button>' +
+              '<span class="text-nowrap"><button class="btn btn-sm btn-icon me-2" data-bs-target="#editPermissionModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit"></i></button>' +
               '<button class="btn btn-sm btn-icon delete-record"><i class="ti ti-trash"></i></button></span>'
             );
           }
@@ -68,20 +101,15 @@ $(function () {
         '<"col-sm-12 col-md-6"i>' +
         '<"col-sm-12 col-md-6"p>' +
         '>',
-      "language": {
-        "search": searchTranslation,
-        "lengthMenu": `${showTranslation} _MENU_`,
-        "info": ` ${showingTranslation} _START_ ${toTranslation} _END_ ${ofTranslation} _TOTAL_ ${entriesTranslation}`,
-        "paginate": {
-          "next": nextTranslation,      // Change "Next" text
-          "previous": previousTranslation, // Change "Previous" text
-        },
-        "emptyTable": noEntriesAvailableTranslation
+      language: {
+        sLengthMenu: 'Show _MENU_',
+        search: 'Search',
+        searchPlaceholder: 'Search..'
       },
       // Buttons with Dropdown
       buttons: [
         {
-          text: addPermissionTranslation,
+          text: 'Add Permission',
           className: 'add-new btn btn-primary mb-3 mb-md-0',
           attr: {
             'data-bs-toggle': 'modal',
@@ -106,18 +134,18 @@ $(function () {
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                col.rowIndex +
-                '" data-dt-column="' +
-                col.columnIndex +
-                '">' +
-                '<td>' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td>' +
-                col.data +
-                '</td>' +
-                '</tr>'
+                    col.rowIndex +
+                    '" data-dt-column="' +
+                    col.columnIndex +
+                    '">' +
+                    '<td>' +
+                    col.title +
+                    ':' +
+                    '</td> ' +
+                    '<td>' +
+                    col.data +
+                    '</td>' +
+                    '</tr>'
                 : '';
             }).join('');
 
@@ -125,182 +153,36 @@ $(function () {
           }
         }
       },
+      initComplete: function () {
+        // Adding role filter once table initialized
+        this.api()
+          .columns(3)
+          .every(function () {
+            var column = this;
+            var select = $(
+              '<select id="UserRole" class="form-select text-capitalize"><option value=""> Select Role </option></select>'
+            )
+              .appendTo('.user_role')
+              .on('change', function () {
+                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                column.search(val ? '^' + val + '$' : '', true, false).draw();
+              });
 
+            column
+              .data()
+              .unique()
+              .sort()
+              .each(function (d, j) {
+                select.append('<option value="' + d + '" class="text-capitalize">' + d + '</option>');
+              });
+          });
+      }
     });
   }
 
-  // // If you have a submit button inside the form, you can bind the click event to it
-  // $("#addPermissionForm :submit").on("click", function (event) {
-  //   // Trigger the form submission when the button is clicked
-  //   $(this).closest('form').submit();
-  // });
-
-
-  $("#addPermissionForm").on("submit", function (event) {
-    event.preventDefault();
-    var form = $(this);
-    var url = form.attr('action');
-    var method = form.attr('method');
-    var formData = form.serialize();
-
-    $.ajax({
-      url: url,
-      method: method,
-      data: formData,
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },
-      success: function (response, status, xhr) {
-        if (xhr.status === 200) {
-          // Handle a successful response
-          dt_permission.ajax.url('get-permissions').load();
-          Swal.fire({
-            title: '',
-            text: response.message,
-            icon: 'success',
-            confirmButtonText: continueTranslation,
-            customClass: {
-              confirmButton: 'btn btn-success'
-            },
-          }).then((result) => {
-            if (result.isConfirmed) {
-              $("#addPermissionForm").trigger('reset');
-              $('#addPermissionModal').modal('hide');
-            }
-          });
-        }
-        else {
-          // Handle other status codes
-        }
-      },
-      error: function (response, xhr, status, error) {
-        // Handle the error response here
-        var errorMessages = Object.values(response.responseJSON.errors).flat();
-        // Format error messages with line breaks
-        var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
-        // Create the Swal alert
-        Swal.fire({
-          title: response.responseJSON.message,
-          html: formattedErrorMessages,
-          icon: 'error',
-          confirmButtonText: continueTranslation,
-          customClass: {
-            confirmButton: 'btn btn-primary'
-          },
-          buttonsStyling: false
-        });
-      }
-    });
-
-  });
-
-  $(document).on('click', 'button.editPermission', function () {
-    $("#editPermissionForm").trigger('reset');
-    var data = dt_permission.row($(this).closest('tr')).data();
-    $('#editPermissionForm').find('[name="name"]').val(data.name);
-    $('#editPermissionForm').find('[name="id"]').val(data.id);
-  });
-
-  $('#editPermissionForm').submit(function (event) {
-    event.preventDefault(); // Prevent default form submission
-    // Make an AJAX request
-    $.ajax({
-      url: 'permissions/' + $('#editPermissionForm').find('[name="id"]').val(),
-      method: 'PUT',
-      data: $(this).serialize(),
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },
-      dataType: 'json',
-      processData: false,
-      success: function (response, status, xhr) {
-        if (xhr.status === 200) {
-          // Handle a successful response
-          $("#editPermissionForm").trigger('reset');
-          dt_permission.ajax.url('get-permissions').load();
-          Swal.fire({
-            icon: 'success',
-            title: '',
-            text: response.message,
-            confirmButtonText: continueTranslation,
-            customClass: {
-              confirmButton: 'btn btn-success'
-            }
-          });
-          $('#editPermissionModal').modal('hide');
-
-        } else {
-          // Handle other status codes
-        }
-      },
-      error: function (response, xhr, status, error) {
-        // Handle the error response here
-        var errorMessages = Object.values(response.responseJSON.errors).flat();
-        // Format error messages with line breaks
-        var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
-        // Create the Swal alert
-        Swal.fire({
-          title: response.responseJSON.message,
-          html: formattedErrorMessages,
-          icon: 'error',
-          customClass: {
-            confirmButton: 'btn btn-primary'
-          },
-          buttonsStyling: false
-        });
-      }
-    });
-  });
-
   // Delete Record
   $('.datatables-permissions tbody').on('click', '.delete-record', function () {
-    var data = dt_permission.row($(this).closest('tr')).data();
-    Swal.fire({
-      title: areYouSureTranslation,
-      text: areYouSureTextTranslation,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: submitTranslation,
-      cancelButtonText: cancelTranslation,
-      customClass: {
-        confirmButton: 'btn btn-primary me-3',
-        cancelButton: 'btn btn-label-secondary'
-      },
-      buttonsStyling: false
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // Perform the deletion action here
-        $.ajax({
-          url: './permissions/' + data.id,
-          type: 'DELETE',
-
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          },
-          success: function (response) {
-            dt_permission.ajax.url('get-permissions').load();
-            Swal.fire({
-              icon: 'success',
-              title: '',
-              text: response.message,
-              confirmButtonText: continueTranslation,
-              customClass: {
-                confirmButton: 'btn btn-success'
-              }
-            });
-          },
-          error: function (xhr, status, error) {
-            Swal.fire({
-              title: `{{ __('An error occurred while deleting.') }}`,
-              text: `{{ __('This record cannot be deleted as it has related data associated with it.') }}`,
-              icon: 'error',
-              confirmButtonText: `{{ __('Back') }}`,
-              confirmButtonColor: '#dc3545',
-            });
-          },
-        });
-      }
-    });
+    dt_permission.row($(this).parents('tr')).remove().draw();
   });
 
   // Filter form control to default size

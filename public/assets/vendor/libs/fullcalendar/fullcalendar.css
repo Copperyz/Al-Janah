@@ -307,7 +307,7 @@ html:not([dir=rtl]) .fc .fc-view-harness .fc-scrollgrid-section-header > * {
   border-color: #434968;
 }
 .dark-style .fc .fc-popover {
-  background-color: #25293c;
+  background-color: #11111a;
   border: 0;
 }
 .dark-style .fc .fc-popover .fc-popover-header {
@@ -330,7 +330,7 @@ html:not([dir=rtl]) .fc .fc-view-harness .fc-scrollgrid-section-header > * {
   border-color: #434968;
 }
 .dark-style .fc .fc-list .fc-list-empty {
-  background-color: #25293c;
+  background-color: #11111a;
 }
 .dark-style .fc table,
 .dark-style .fc .fc-timegrid-axis,

@@ -76,6 +76,110 @@ $configData = Helper::appClasses();
         </div>
     </div>
     @endforeach
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <!-- First Page Link -->
+            @if ($roles->onFirstPage())
+            <li class="page-item disabled">
+                <span class="page-link">
+                    @if (app()->getLocale() == 'ar')
+                    <i class="ti ti-chevrons-right ti-xs"></i>
+                    @else
+                    <i class="ti ti-chevrons-left ti-xs"></i>
+                    @endif
+                </span>
+            </li>
+            @else
+            <li class="page-item">
+                <a class="page-link" href="{{ $roles->url(1) }}">
+                    @if (app()->getLocale() == 'ar')
+                    <i class="ti ti-chevrons-right ti-xs"></i>
+                    @else
+                    <i class="ti ti-chevrons-left ti-xs"></i>
+                    @endif
+                </a>
+            </li>
+            @endif
+
+            <!-- Previous Page Link -->
+            @if ($roles->onFirstPage())
+            <li class="page-item disabled">
+                <span class="page-link">
+                    @if (app()->getLocale() == 'ar')
+                    <i class="ti ti-chevron-right ti-xs"></i>
+                    @else
+                    <i class="ti ti-chevron-left ti-xs"></i>
+                    @endif
+                </span>
+            </li>
+            @else
+            <li class="page-item">
+                <a class="page-link" href="{{ $roles->previousPageUrl() }}">
+                    @if (app()->getLocale() == 'ar')
+                    <i class="ti ti-chevron-right ti-xs"></i>
+                    @else
+                    <i class="ti ti-chevron-left ti-xs"></i>
+                    @endif
+                </a>
+            </li>
+            @endif
+
+            <!-- Numbered Page Links -->
+            @foreach ($roles->getUrlRange(1, $roles->lastPage()) as $page => $url)
+            <li class="page-item{{ $roles->currentPage() == $page ? ' active' : '' }}">
+                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+            </li>
+            @endforeach
+
+            <!-- Next Page Link -->
+            @if ($roles->hasMorePages())
+            <li class="page-item">
+                <a class="page-link" href="{{ $roles->nextPageUrl() }}">
+                    @if (app()->getLocale() == 'ar')
+                    <i class="ti ti-chevron-left ti-xs"></i>
+                    @else
+                    <i class="ti ti-chevron-right ti-xs"></i>
+                    @endif
+                </a>
+            </li>
+            @else
+            <li class="page-item disabled">
+                <span class="page-link">
+                    @if (app()->getLocale() == 'ar')
+                    <i class="ti ti-chevron-left ti-xs"></i>
+                    @else
+                    <i class="ti ti-chevron-right ti-xs"></i>
+                    @endif
+                </span>
+            </li>
+            @endif
+
+            <!-- Last Page Link -->
+            @if ($roles->hasMorePages())
+            <li class="page-item">
+                <a class="page-link" href="{{ $roles->url($roles->lastPage()) }}">
+                    @if (app()->getLocale() == 'ar')
+                    <i class="ti ti-chevrons-left ti-xs"></i>
+                    @else
+                    <i class="ti ti-chevrons-right ti-xs"></i>
+                    @endif
+                </a>
+            </li>
+            @else
+            <li class="page-item disabled">
+                <span class="page-link">
+                    @if (app()->getLocale() == 'ar')
+                    <i class="ti ti-chevrons-left ti-xs"></i>
+                    @else
+                    <i class="ti ti-chevrons-right ti-xs"></i>
+                    @endif
+                </span>
+            </li>
+            @endif
+        </ul>
+    </nav>
+
+
 
 </div>
 <script>

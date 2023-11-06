@@ -53,15 +53,13 @@ Route::middleware(['auth'])->group(function () {
 
 
   // Users
-  Route::resource('users', Users::class);
   Route::get('get-users', [Users::class, 'get_users'])->name('get-users');
+  Route::resource('users', Users::class);
 
   // Roles
   Route::resource('roles', RolesController::class);
 
   // Roles
-  Route::resource('permissions', PermissionsController::class);
   Route::get('get-permissions', [PermissionsController::class, 'get_permissions'])->name('get-permissions');
-
-
+  Route::resource('permissions', PermissionsController::class);
 });

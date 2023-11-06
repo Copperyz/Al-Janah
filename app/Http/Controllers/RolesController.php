@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
-use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Validator;
 
 class RolesController extends Controller
 {
@@ -33,7 +34,10 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
+         $request->validate([
+            'name' => 'required|string|unique:roles',
+        ]);
+        
         // Create the role
         $role = Role::create([
             'name' => $request->input('name'),
@@ -80,7 +84,12 @@ class RolesController extends Controller
 
         // Validate the request
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('roles', 'name')->ignore($id),
+            ],
             'permissions' => 'array', // Ensure permissions is an array
         ]);
 

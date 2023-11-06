@@ -75,5 +75,21 @@
   "Edit permission as per your requirements.": "تعديل إذن وفقا لمتطلباتك.",
   "By editing the permission name, you might break the system permissions functionality. Please ensure you're absolutely certain before proceeding.": "من خلال تعديل اسم الإذن، قد يؤدي ذلك إلى تعطيل وظيفة أذونات النظام. يرجى التأكد من أنك متأكد تمامًا قبل المتابعة.",
   "Warning": "تحذير",
-  "Assigning permissions to roles ensures that users with those roles have the necessary access to execute designated tasks and functionalities.": "يضمن تعيين الأذونات للأدوار أن المستخدمين الذين لديهم هذه الأدوار لديهم حق الوصول اللازم لتنفيذ المهام والوظائف المعينة."
+  "Assigning permissions to roles ensures that users with those roles have the necessary access to execute designated tasks and functionalities.": "يضمن تعيين الأذونات للأدوار أن المستخدمين الذين لديهم هذه الأدوار لديهم حق الوصول اللازم لتنفيذ المهام والوظائف المعينة.",
+  "Welcome to": "مرحبا بك في",
+  "Please sign-in to your account": "يرجى تسجيل الدخول إلى حسابك",
+  "Forgot Password?": "هل نسيت كلمة المرور؟",
+  "Remember Me": "تذكرني",
+  "New on our platform?": "جديد على منصتنا؟",
+  "Create an account": "إنشاء حساب",
+  "or": "أو",
+  "Enter your email": "ادخل البريد الإلكتروني",
+  "Enter your name": "ادخل الإسم",
+  "Let's get started by filling in the information below": "لنبدأ بتعبئة المعلومات أدناه",
+  "I agree to": "أنا أوافق على",
+  "privacy policy & terms": "سياسة الخصوصية والشروط",
+  "Sign up": "اشتراك",
+  "Already have an account?": "هل لديك حساب؟",
+  "Sign in instead": "تسجيل الدخول بدلا من ذلك",
+  "Sign in": "تسجيل دخول"
 }

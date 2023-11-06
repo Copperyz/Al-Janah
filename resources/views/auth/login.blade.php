@@ -57,23 +57,23 @@ $configData = Helper::appClasses();
                     </a>
                 </div>
                 <!-- /Logo -->
-                <h3 class="mb-1">Welcome to {{config('variables.templateName')}}! 👋</h3>
-                <p class="mb-4">Please sign-in to your account and start the adventure</p>
+                <h3 class="mb-1">{{__('Welcome to')}} {{config('variables.templateName')}}! 👋</h3>
+                <p class="mb-4">{{__('Please sign-in to your account')}}</p>
                 <form id="formAuthentication" class="mb-3" method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
+                        <label for="email" class="form-label">{{__('Email')}}</label>
                         <input type="text" class="form-control @error('email') is-invalid @enderror" id="email"
-                            name="email" placeholder="Enter your email or username" autofocus>
+                            name="email" placeholder="{{__('Enter your email')}}" autofocus>
                         @error('email')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3 form-password-toggle">
                         <div class="d-flex justify-content-between">
-                            <label class="form-label" for="password">Password</label>
+                            <label class="form-label" for="password">{{__('Password')}}</label>
                             <a href="{{ url('auth/forgot-password-cover') }}">
-                                <small>Forgot Password?</small>
+                                <small>{{__('Forgot Password?')}}</small>
                             </a>
                         </div>
                         <div class="input-group input-group-merge">
@@ -91,22 +91,22 @@ $configData = Helper::appClasses();
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="remember-me" name="remember">
                             <label class="form-check-label" for="remember-me">
-                                Remember Me
+                                {{__('Remember Me')}}
                             </label>
                         </div>
                     </div>
                     <button class="btn btn-primary d-grid w-100">
-                        Sign in
+                        {{__('Sign in')}}
                     </button>
                 </form>
                 <p class="text-center">
-                    <span>New on our platform?</span>
+                    <span>{{__('New on our platform?')}}</span>
                     <a href="{{url('register')}}">
-                        <span>Create an account</span>
+                        <span>{{__('Create an account')}}</span>
                     </a>
                 </p>
                 <div class="divider my-4">
-                    <div class="divider-text">or</div>
+                    <div class="divider-text">{{__('or')}}</div>
                 </div>
                 <div class="d-flex justify-content-center">
                     <a href="javascript:;" class="btn btn-icon btn-label-facebook me-3">

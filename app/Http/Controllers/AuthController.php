@@ -81,7 +81,6 @@ class AuthController extends Controller
     $request->session()->flush();
     $request->session()->regenerate();
     $request->session()->put('locale', $userLocale); // Store in session
-
     return redirect('login');
   }
 }

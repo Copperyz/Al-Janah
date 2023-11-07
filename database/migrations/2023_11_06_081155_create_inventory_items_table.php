@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('inventory_items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('inventoryId');
+            $table->unsignedBigInteger('inventory_id');
             $table->string('name');
-            $table->unsignedBigInteger('itemTypeId');
+            $table->unsignedBigInteger('item_type_id');
             $table->integer('height');
             $table->integer('width');
             $table->integer('size');
@@ -29,8 +29,8 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('inventoryId')->references('id')->on('inventories');
-            $table->foreign('itemTypeId')->references('id')->on('item_types');
+            $table->foreign('inventory_id')->references('id')->on('inventories');
+            $table->foreign('item_type_id')->references('id')->on('item_types');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('deleted_by')->references('id')->on('users')->onDelete('cascade');

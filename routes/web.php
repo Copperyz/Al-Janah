@@ -35,9 +35,7 @@ Route::get('/pages/misc-error', [MiscError::class, 'index'])->name('pages-misc-e
 // Route::get('/auth/register-basic', [RegisterBasic::class, 'index'])->name('auth-register-basic');
 
 Route::middleware(['guest'])->group(function () {
-  Route::get('/login', function () {
-    return view('auth.login');
-  })->name('login');
+  Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
   Route::post('/login', [AuthController::class, 'Login'])->name('Login');
   Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
   Route::post('/register', [AuthController::class, 'Register'])->name('register');
@@ -49,6 +47,8 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
   Route::get('/', [HomePage::class, 'index'])->name('pages-home');
   Route::post('/logout', [AuthController::class, 'Logout'])->name('logout');
+
+
 
 
 

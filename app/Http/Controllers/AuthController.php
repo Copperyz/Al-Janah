@@ -38,6 +38,16 @@ class AuthController extends Controller
     }
   }
 
+
+  public function showLogin(Request $request)
+  {
+    $userLocale = $request->session()->get('locale'); // Get current locale
+    $request->session()->flush();
+    $request->session()->regenerate();
+    $request->session()->put('locale', $userLocale); // Store in session
+    return view('auth.login');
+  }
+
   public function showRegister()
   {
     return view('auth.register');

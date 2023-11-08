@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('shipment_routes', function (Blueprint $table) {
             $table->id();
             $table->json('legs');
-            $table->decimal('price', 8, 2);
+            $table->decimal('shipment_price', 8, 2);
             $table->boolean('status')->default(true)->change();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
@@ -22,9 +22,9 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('deleted_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
+            $table->foreign('deleted_by')->references('id')->on('users');
         });
     }
 

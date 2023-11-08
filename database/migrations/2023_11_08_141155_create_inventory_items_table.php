@@ -10,25 +10,19 @@ return new class extends Migration {
    */
   public function up(): void
   {
-    Schema::create('payments', function (Blueprint $table) {
+    Schema::create('inventory_items', function (Blueprint $table) {
       $table->id();
+      $table->unsignedBigInteger('inventory_id');
       $table->unsignedBigInteger('order_id')->nullable();
-      $table->enum('transaction_type', ['order', 'shipment']);
-      $table
-        ->decimal('shipment_amount', 10, 2)
-        ->nullable()
-        ->default(0);
-      $table
-        ->decimal('order_amount', 10, 2)
-        ->nullable()
-        ->default(0);
-      $table->string('payment_method');
-      $table->string('transaction_id');
-      $table
-        ->boolean('cancel')
-        ->nullable()
-        ->default(0);
-      $table->enum('status', ['paid', 'refunded']);
+      $table->string('name');
+      $table->unsignedBigInteger('item_type_id');
+      $table->integer('height');
+      $table->integer('width');
+      $table->integer('size');
+      $table->integer('quantity');
+      $table->string('aisle');
+      $table->string('shelfNumber');
+      $table->string('row');
       $table->unsignedBigInteger('created_by')->nullable();
       $table->unsignedBigInteger('updated_by')->nullable();
       $table->unsignedBigInteger('deleted_by')->nullable();
@@ -36,9 +30,17 @@ return new class extends Migration {
       $table->softDeletes();
 
       $table
+        ->foreign('inventory_id')
+        ->references('id')
+        ->on('inventories');
+      $table
         ->foreign('order_id')
         ->references('id')
         ->on('orders');
+      $table
+        ->foreign('item_type_id')
+        ->references('id')
+        ->on('item_types');
       $table
         ->foreign('created_by')
         ->references('id')
@@ -59,6 +61,6 @@ return new class extends Migration {
    */
   public function down(): void
   {
-    Schema::dropIfExists('payments');
+    Schema::dropIfExists('inventory_items');
   }
 };

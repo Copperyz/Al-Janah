@@ -72,7 +72,7 @@ $configData = Helper::appClasses();
                     <hr class="my-3 mx-n4" />
 
 
-                    <div class="mb-3" data-repeater-list="orderItems">
+                    <div class="mb-3" data-repeater-list="orderItems" id="orderItems">
                         <div class="repeater-wrapper pt-0 pt-md-4" data-repeater-item>
                             <div class="d-flex border rounded position-relative pe-0">
                                 <div class="row w-100 p-3">
@@ -110,7 +110,6 @@ $configData = Helper::appClasses();
                                                 <option value="WY">Wyoming</option>
                                             </select>
                                         </div>
-
                                     </div>
                                     <div class="col-md-3 col-12 mb-md-0 mb-3">
                                         <p class="mb-2 repeater-title">{{__('Details')}}</p>
@@ -125,13 +124,18 @@ $configData = Helper::appClasses();
                                     </div>
                                     <div class="col-md-2 col-12 mb-md-0 mb-3">
                                         <p class="mb-2 repeater-title">{{__('Qty')}}</p>
-                                        <input name="qty" type="number" class="form-control invoice-item-qty"
+                                        <input name="quantity" type="number" class="form-control invoice-item-qty"
                                             placeholder="1" min="1" max="50" />
                                     </div>
+                                </div>
+                                <div class="d-flex flex-column align-items-center justify-content-between border-start p-2"
+                                    onclick="removeItem(this)">
+                                    <i class="ti ti-x cursor-pointer" data-repeater-delete></i>
                                 </div>
                             </div>
                         </div>
                     </div>
+
 
                     <div class="row pb-4">
                         <div class="col-12">
@@ -215,6 +219,27 @@ $configData = Helper::appClasses();
     </div>
     <!-- /Invoice Actions -->
 </div>
+
+<script>
+function removeItem(button) {
+    // Find the closest repeater item and remove it
+    $(button).closest('[data-repeater-item]').remove();
+
+    // Clear the fields in the removed item
+    clearFields();
+}
+
+function clearFields() {
+    // Clear the values in the form fields
+    $('[data-repeater-list="orderItems"] [name="parcel_types_id"]').val('').trigger('change');
+    $('[data-repeater-list="orderItems"] [name="good_types_id"]').val('').trigger('change');
+    $('[data-repeater-list="orderItems"] [name="price"]').val('');
+    $('[data-repeater-list="orderItems"] [name="height"]').val('');
+    $('[data-repeater-list="orderItems"] [name="width"]').val('');
+    $('[data-repeater-list="orderItems"] [name="weight"]').val('');
+    $('[data-repeater-list="orderItems"] [name="qty"]').val('');
+}
+</script>
 
 <!-- Offcanvas -->
 @include('_partials/_offcanvas/offcanvas-send-invoice')

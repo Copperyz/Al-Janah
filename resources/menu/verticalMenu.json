@@ -23,6 +23,23 @@
       "icon": "menu-icon tf-icons ti ti-users",
       "name": "Permissions",
       "slug": "permissions.index"
+    },
+    {
+      "url": "orders",
+      "icon": "menu-icon tf-icons ti ti-files",
+      "name": "Orders",
+      "slug": "orders",
+      "submenu": [
+        {
+          "url": "orders",
+          "name": "Orders List",
+          "slug": "orders.index"
+        },
+        {
+          "url": "orders/create",
+          "name": "Add Order",
+          "slug": "orders.create"
+        }]
     }
   ]
 }

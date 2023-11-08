@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
+
+    public function parcelType()
+    {
+        return $this->belongsTo(ParcelType::class, 'parcel_types_id');
+    }
+
+    public function payment()
+    {
+        return $this->hasOne(Payment::class, 'order_id');
+    }
 }

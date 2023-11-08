@@ -158,7 +158,7 @@ $(function () {
             title: '',
             text: response.message,
             icon: 'success',
-            confirmButtonText: continueTranslation,
+            confirmButtonText: doneTranslation,
             customClass: {
               confirmButton: 'btn btn-success'
             },
@@ -183,7 +183,7 @@ $(function () {
           title: response.responseJSON.message,
           html: formattedErrorMessages,
           icon: 'error',
-          confirmButtonText: continueTranslation,
+          confirmButtonText: doneTranslation,
           customClass: {
             confirmButton: 'btn btn-primary'
           },
@@ -222,7 +222,7 @@ $(function () {
             icon: 'success',
             title: '',
             text: response.message,
-            confirmButtonText: continueTranslation,
+            confirmButtonText: doneTranslation,
             customClass: {
               confirmButton: 'btn btn-success'
             }
@@ -283,7 +283,7 @@ $(function () {
               icon: 'success',
               title: '',
               text: response.message,
-              confirmButtonText: continueTranslation,
+              confirmButtonText: doneTranslation,
               customClass: {
                 confirmButton: 'btn btn-success'
               }

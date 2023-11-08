@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class OrderController extends Controller
 {
@@ -12,7 +13,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return view('orders.index');
     }
 
     /**
@@ -20,7 +21,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('orders.create');
     }
 
     /**
@@ -36,7 +37,8 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        $order = Order::find($order->id)->first();
+        return view('orders.show', compact('order'));
     }
 
     /**
@@ -44,7 +46,8 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        $order = Order::find($order->id)->first();
+        return view('orders.edit', compact('order'));
     }
 
     /**
@@ -61,5 +64,17 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+
+    public function get_orders()
+    {
+        $orders = Order::orderBy('id', 'DESC')->get();
+        foreach ($orders as $order) {
+            $order->parcelName = $order->parcelType->name;
+            $order->paymentStatus = $order->payment ? $order->payment->status : 'N/A';
+        }
+        return Datatables::of($orders)
+        ->rawColumns(['Options'])
+        ->make(true);
     }
 }

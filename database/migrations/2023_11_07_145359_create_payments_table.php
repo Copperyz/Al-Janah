@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('payment_method');
             $table->string('transaction_id');
             $table->boolean('cancel');
-            $table->string('status');
+            $table->enum('status', ['paid', 'pending', 'failed', 'refunded']);
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();

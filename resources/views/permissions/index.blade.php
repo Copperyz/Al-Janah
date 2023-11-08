@@ -68,7 +68,7 @@ var entriesTranslation = @json(__('entries'));
 
 var submitTranslation = @json(__('Submit'));
 var cancelTranslation = @json(__('Cancel'));
-var continueTranslation = @json(__('Continue'));
+var doneTranslation = @json(__('Done'));
 
 var areYouSureTranslation = @json(__('Are you sure?'));
 var areYouSureTextTranslation = @json(__('You will not be able to revert this!'));

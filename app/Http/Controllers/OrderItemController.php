@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
+
 
 class OrderItemController extends Controller
 {
@@ -61,5 +63,17 @@ class OrderItemController extends Controller
     public function destroy(OrderItem $orderItem)
     {
         //
+    }
+
+    public function get_order_itmes($id)
+    {
+        $orders = OrderItem::where('order_id', $id)->orderBy('id', 'DESC')->get();
+        foreach ($orders as $order) {
+            // $order->parcelName = $order->parcelType->name;
+            // $order->paymentStatus = $order->payment ? $order->payment->status : 'N/A';
+        }
+        return Datatables::of($orders)
+        ->rawColumns(['Options'])
+        ->make(true);
     }
 }

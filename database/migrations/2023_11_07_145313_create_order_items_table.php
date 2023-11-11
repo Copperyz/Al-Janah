@@ -13,9 +13,9 @@ return new class extends Migration {
     Schema::create('order_items', function (Blueprint $table) {
       $table->id();
       $table->unsignedBigInteger('order_id');
-      $table->unsignedBigInteger('parcel_types_id')->nullable();
       $table->unsignedBigInteger('good_types_id')->nullable();
-      $table->string('name');
+      $table->unsignedBigInteger('parcel_types_id')->nullable();
+      $table->string('name')->nullable();
       $table->integer('quantity');
       $table->decimal('price', 8, 2);
       $table->decimal('height', 8, 2);
@@ -32,13 +32,13 @@ return new class extends Migration {
         ->references('id')
         ->on('orders');
       $table
-        ->foreign('parcel_types_id')
-        ->references('id')
-        ->on('parcel_types');
-      $table
         ->foreign('good_types_id')
         ->references('id')
         ->on('good_types');
+      $table
+        ->foreign('parcel_types_id')
+        ->references('id')
+        ->on('parcel_types');
       $table
         ->foreign('created_by')
         ->references('id')

@@ -26,20 +26,9 @@
     },
     {
       "url": "orders",
-      "icon": "menu-icon tf-icons ti ti-files",
-      "name": "Orders",
-      "slug": "orders",
-      "submenu": [
-        {
-          "url": "orders",
-          "name": "Orders List",
-          "slug": "orders.index"
-        },
-        {
-          "url": "orders/create",
-          "name": "Add Order",
-          "slug": "orders.create"
-        }]
+      "icon": "menu-icon tf-icons ti ti-users",
+      "name": "Orders List",
+      "slug": "orders"
     }
   ]
 }

@@ -16,10 +16,10 @@ $(function () {
         // columns according to JSON
         { data: '' },
         { data: 'id' },
+        { data: 'customerName' },
         { data: 'date' },
-        { data: 'parcelName' },
         { data: 'amount' },
-        { data: 'paymentStatus' },
+        // { data: 'paymentStatus' },
         { data: 'action' }
       ],
       columnDefs: [
@@ -33,24 +33,24 @@ $(function () {
             return '';
           }
         },
-        {
-          // Invoice status
-          targets: 5,
-          render: function (data, type, full, meta) {
-            var $invoice_status = full['paymentStatus'];
-            var roleBadgeObj = {
-              paid: '<span class="badge badge-center rounded-pill bg-label-success w-px-30 h-px-30"><i class="ti ti-checks ti-sm"></i></span>',
-              pending: '<span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30"><i class="ti ti-hourglass-empty mx-2 ti-sm"></i></span>',
-              failed: '<span class="badge badge-center rounded-pill bg-label-danger w-px-30 h-px-30"><i class="ti ti-exclamation-circle ti-sm"></i></span>',
-              refunded:
-                '<span class="badge badge-center rounded-pill bg-label-info w-px-30 h-px-30"><i class="ti ti-receipt-refund ti-sm"></i></span>'
-            };
-            return (
-              roleBadgeObj[$invoice_status] +
-              '</span>'
-            );
-          }
-        },
+        // {
+        //   // Invoice status
+        //   targets: 4,
+        //   render: function (data, type, full, meta) {
+        //     var $invoice_status = full['paymentStatus'];
+        //     var roleBadgeObj = {
+        //       paid: '<span class="badge badge-center rounded-pill bg-label-success w-px-30 h-px-30"><i class="ti ti-checks ti-sm"></i></span>',
+        //       pending: '<span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30"><i class="ti ti-hourglass-empty mx-2 ti-sm"></i></span>',
+        //       failed: '<span class="badge badge-center rounded-pill bg-label-danger w-px-30 h-px-30"><i class="ti ti-exclamation-circle ti-sm"></i></span>',
+        //       refunded:
+        //         '<span class="badge badge-center rounded-pill bg-label-info w-px-30 h-px-30"><i class="ti ti-receipt-refund ti-sm"></i></span>'
+        //     };
+        //     return (
+        //       roleBadgeObj[$invoice_status] +
+        //       '</span>'
+        //     );
+        //   }
+        // },
         {
           // Actions
           targets: -1,
@@ -112,7 +112,53 @@ $(function () {
 
   // Delete Record
   $('.invoice-list-table tbody').on('click', '.delete-record', function () {
-    dt_invoice.row($(this).parents('tr')).remove().draw();
+    var data = dt_invoice.row($(this).closest('tr')).data();
+    Swal.fire({
+      title: areYouSureTranslation,
+      text: areYouSureTextTranslation,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: submitTranslation,
+      cancelButtonText: cancelTranslation,
+      customClass: {
+        confirmButton: 'btn btn-primary me-3',
+        cancelButton: 'btn btn-label-secondary'
+      },
+      buttonsStyling: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Perform the deletion action here
+        $.ajax({
+          url: './orders/' + data.id,
+          type: 'DELETE',
+
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          success: function (response) {
+            dt_invoice.ajax.url('get-orders').load();
+            Swal.fire({
+              icon: 'success',
+              title: '',
+              text: response.message,
+              confirmButtonText: doneTranslation,
+              customClass: {
+                confirmButton: 'btn btn-success'
+              }
+            });
+          },
+          error: function (xhr, status, error) {
+            Swal.fire({
+              title: `{{ __('An error occurred while deleting.') }}`,
+              text: `{{ __('This record cannot be deleted as it has related data associated with it.') }}`,
+              icon: 'error',
+              confirmButtonText: `{{ __('Back') }}`,
+              confirmButtonColor: '#dc3545',
+            });
+          },
+        });
+      }
+    });
   });
 
   // Filter form control to default size

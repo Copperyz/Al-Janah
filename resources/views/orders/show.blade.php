@@ -10,6 +10,7 @@ $configData = Helper::appClasses();
 
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/flatpickr/flatpickr.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/libs/select2/select2.css')}}" />
 @endsection
 
 @section('page-style')
@@ -27,12 +28,14 @@ $configData = Helper::appClasses();
 <script src="{{asset('assets/vendor/libs/cleavejs/cleave-phone.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/moment/moment.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script>
+<script src="{{asset('assets/vendor/libs/select2/select2.js')}}"></script>
 @endsection
 
 @section('page-script')
 <script src="{{asset('assets/js/app-order-items.js')}}"></script>
 <script src="{{asset('assets/js/offcanvas-add-payment.js')}}"></script>
 <script src="{{asset('assets/js/offcanvas-send-invoice.js')}}"></script>
+<script src="{{asset('assets/js/forms-selects.js')}}"></script>
 @endsection
 
 @section('content')
@@ -44,17 +47,6 @@ $configData = Helper::appClasses();
             <div class="card-body">
                 <div
                     class="d-flex justify-content-between flex-xl-row flex-md-column flex-sm-row flex-column m-sm-3 m-0">
-                    <div class="mb-xl-0 mb-4">
-                        <div class="d-flex svg-illustration mb-4 gap-2 align-items-center">
-                            @include('_partials.macros',["height"=>20,"withbg"=>''])
-                            <span class="app-brand-text fw-bold fs-4">
-                                {{ config('variables.templateName') }}
-                            </span>
-                        </div>
-                        <p class="mb-2">Office 149, 450 South Brand Brooklyn</p>
-                        <p class="mb-2">San Diego County, CA 91905, USA</p>
-                        <p class="mb-0">+1 (123) 456 7891, +44 (876) 543 2198</p>
-                    </div>
                     <div>
                         <h4 class="fw-medium mb-2">{{__('Order')}} #{{$order->id}}</h4>
                         <div class="mb-2 pt-1">
@@ -68,36 +60,40 @@ $configData = Helper::appClasses();
             <div class="card-body">
                 <div class="row p-sm-3 p-0">
                     <div class="col-xl-6 col-md-12 col-sm-5 col-12 mb-xl-0 mb-md-4 mb-sm-0 mb-4">
-                        <h6 class="mb-3">Invoice To:</h6>
-                        <p class="mb-1">Thomas shelby</p>
-                        <p class="mb-1">Shelby Company Limited</p>
-                        <p class="mb-1">Small Heath, B10 0HF, UK</p>
-                        <p class="mb-1">718-986-6062</p>
-                        <p class="mb-0">peakyFBlinders@gmail.com</p>
-                    </div>
-                    <div class="col-xl-6 col-md-12 col-sm-7 col-12">
-                        <h6 class="mb-4">Bill To:</h6>
+                        <h6 class="mb-3">{{__('Order Details')}}</h6>
                         <table>
                             <tbody>
                                 <tr>
-                                    <td class="pe-4">Total Due:</td>
-                                    <td class="fw-medium">$12,110.55</td>
+                                    <td class="pe-4">{{__('Name')}}:</td>
+                                    <td class="fw-medium">{{$order->customer->first_name}}
+                                        {{$order->customer->last_name}}</td>
                                 </tr>
                                 <tr>
-                                    <td class="pe-4">Bank name:</td>
-                                    <td>American Bank</td>
+                                    <td class="pe-4">{{__('Phone')}}:</td>
+                                    <td>{{$order->customer->phone}}</td>
                                 </tr>
                                 <tr>
-                                    <td class="pe-4">Country:</td>
-                                    <td>United States</td>
+                                    <td class="pe-4">{{__('Email')}}:</td>
+                                    <td>{{$order->customer->email}}</td>
                                 </tr>
                                 <tr>
-                                    <td class="pe-4">IBAN:</td>
-                                    <td>ETD95476213874685</td>
+                                    <td class="pe-4">{{__('Country')}}:</td>
+                                    <td>{{$order->customer->country->name}}</td>
                                 </tr>
                                 <tr>
-                                    <td class="pe-4">SWIFT code:</td>
-                                    <td>BR91905</td>
+                                    <td class="pe-4">{{__('City')}}:</td>
+                                    <td>{{$order->customer->city->name}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-xl-6 col-md-12 col-sm-7 col-12">
+                        <h6 class="mb-4">{{__('Bill')}}:</h6>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="pe-4">{{__('Total')}}:</td>
+                                    <td class="fw-medium">{{$order->amount}} LYD</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -109,10 +105,13 @@ $configData = Helper::appClasses();
                     <thead>
                         <tr>
                             <th></th>
-                            <th>{{__('Name')}}</th>
+                            <th>{{__('Good Type')}}</th>
+                            <th>{{__('Parcel Type')}}</th>
                             <th>{{__('Quantity')}}</th>
                             <th class="text-truncate">{{__('Height')}}</th>
                             <th>{{__('Width')}}</th>
+                            <th>{{__('Weight')}}</th>
+                            <th>{{__('Price')}}</th>
                             <th class="cell-fit">{{__('Actions')}}</th>
                         </tr>
                     </thead>
@@ -148,10 +147,10 @@ $configData = Helper::appClasses();
                     {{__('Print')}}
                 </a>
                 <a href="{{ route('orders.edit', ['order' => $order->id]) }}"
-                    class="btn btn-label-secondary d-grid w-100 mb-2">
+                    class="btn btn-label-warning d-grid w-100 mb-2">
                     {{__('Edit Order')}}
                 </a>
-                <button class="btn btn-primary d-grid w-100" data-bs-toggle="offcanvas"
+                <button class="btn btn-label-success d-grid w-100" data-bs-toggle="offcanvas"
                     data-bs-target="#addPaymentOffcanvas">
                     <span class="d-flex align-items-center justify-content-center text-nowrap"><i
                             class="ti ti-currency-dollar ti-xs me-2"></i>{{__('Add Payment')}}</span>
@@ -164,6 +163,7 @@ $configData = Helper::appClasses();
 
 <script>
 var orderId = '{{$order->id}}';
+var urlStart = '../';
 var addItemTranslation = @json(__('Add Item'));
 var exportTranslation = @json(__('Export'));
 var searchTranslation = @json(__('Search'));
@@ -187,5 +187,7 @@ var areYouSureTextTranslation = @json(__('You will not be able to revert this!')
 <!-- Offcanvas -->
 @include('_partials/_offcanvas/offcanvas-send-invoice')
 @include('_partials/_offcanvas/offcanvas-add-payment')
+@include('_partials/_modals/modal-add-order-item')
+@include('_partials/_modals/modal-edit-order-item')
 <!-- /Offcanvas -->
 @endsection

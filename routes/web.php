@@ -59,6 +59,7 @@ Route::middleware(['auth'])->group(function () {
   Route::resource('orders', OrderController::class);
 
   Route::get('get-orderItems/{id}', [OrderItemController::class, 'get_order_itmes'])->name('get-order-itmes');
+  Route::post('add-orderItem/{id}', [OrderItemController::class, 'add_order_item'])->name('add-order-item');
   Route::resource('order-itmes', OrderItemController::class);
 
 

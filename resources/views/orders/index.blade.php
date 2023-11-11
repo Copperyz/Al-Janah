@@ -94,10 +94,10 @@ $configData = Helper::appClasses();
                 <tr>
                     <th></th>
                     <th>#ID</th>
+                    <th>{{__('Customer')}}</th>
                     <th>{{__('Date')}}</th>
-                    <th>{{__('Parcel Type')}}</th>
                     <th class="text-truncate">{{__('Amount')}}</th>
-                    <th>{{__('Status')}}</th>
+                    <!-- <th>{{__('Status')}}</th> -->
                     <th class="cell-fit">{{__('Actions')}}</th>
                 </tr>
             </thead>

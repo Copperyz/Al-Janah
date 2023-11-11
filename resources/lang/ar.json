@@ -29,6 +29,7 @@
   "User added successfully": "تم إضافة المستخدم بنجاح",
   "User updated successfully": "تم تعديل المستخدم بنجاح",
   "User deleted successfully": "تم حذف المستخدم بنجاح",
+  "Search Inventory": "بحث عن مخزن",
   "Search": "بحث",
   "Show": "عرض",
   "Show Entries": "عرض :count",
@@ -120,6 +121,14 @@
   "Item Information": "معلومات عن العنصر",
   "Notes": "ملاحظات",
   "Enter amount": "ادخل القيمة",
-  "Customer": "الزبون"
-
+  "Customer": "الزبون",
+  "Inventory": "المخزن",
+  "Add Inventory": "إضافة مخزن",
+  "Inventory List": "قائمة المخازن",
+  "Branch": "الفرع",
+  "Total Items": "عدد العناصر",
+  "Select inventory branch": "إختر فرع المخزن",
+  "Add": "إضافة",
+  "Discard": "إلغاء",
+  "Please enter inventory name": "من فضلك ادخل اسم المخزن"
 }

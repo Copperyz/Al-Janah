@@ -39,7 +39,25 @@
           "url": "orders/create",
           "name": "Add Order",
           "slug": "orders.create"
-        }]
+        }
+      ]
+    },
+    {
+      "name": "Inventory",
+      "icon": "menu-icon ti ti-building-warehouse",
+      "slug": "inventory",
+      "submenu": [
+        {
+          "url": "InventoryItems/create",
+          "name": "Add Item",
+          "slug": "InventoryItems.create"
+        },
+        {
+          "url": "inventory",
+          "name": "Inventory List",
+          "slug": "inventory.index"
+        }
+      ]
     }
   ]
 }

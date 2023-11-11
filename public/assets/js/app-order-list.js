@@ -40,15 +40,14 @@ $(function () {
             var $invoice_status = full['paymentStatus'];
             var roleBadgeObj = {
               paid: '<span class="badge badge-center rounded-pill bg-label-success w-px-30 h-px-30"><i class="ti ti-checks ti-sm"></i></span>',
-              pending: '<span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30"><i class="ti ti-hourglass-empty mx-2 ti-sm"></i></span>',
-              failed: '<span class="badge badge-center rounded-pill bg-label-danger w-px-30 h-px-30"><i class="ti ti-exclamation-circle ti-sm"></i></span>',
+              pending:
+                '<span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30"><i class="ti ti-hourglass-empty mx-2 ti-sm"></i></span>',
+              failed:
+                '<span class="badge badge-center rounded-pill bg-label-danger w-px-30 h-px-30"><i class="ti ti-exclamation-circle ti-sm"></i></span>',
               refunded:
                 '<span class="badge badge-center rounded-pill bg-label-info w-px-30 h-px-30"><i class="ti ti-receipt-refund ti-sm"></i></span>'
             };
-            return (
-              roleBadgeObj[$invoice_status] +
-              '</span>'
-            );
+            return roleBadgeObj[$invoice_status] + '</span>';
           }
         },
         {
@@ -59,8 +58,12 @@ $(function () {
           render: function (data, type, full, meta) {
             return (
               '<div class="d-flex align-items-center">' +
-              '<a href="./orders/' + full['id'] + '" class= "text-body" > <i class="ti ti-eye mx-2 ti-sm"></i></a > ' +
-              '<a href="./orders/' + full['id'] + '/edit" class="text-body editUser"><i class="ti ti-edit ti-sm me-2"></i></a>' +
+              '<a href="./orders/' +
+              full['id'] +
+              '" class= "text-body" > <i class="ti ti-eye mx-2 ti-sm"></i></a > ' +
+              '<a href="./orders/' +
+              full['id'] +
+              '/edit" class="text-body editUser"><i class="ti ti-edit ti-sm me-2"></i></a>' +
               '<a href="javascript:;" class="text-body delete-record"><i class="ti ti-trash ti-sm mx-2"></i></a>' +
               '</div>'
             );
@@ -77,15 +80,15 @@ $(function () {
         '<"col-sm-12 col-md-6"i>' +
         '<"col-sm-12 col-md-6"p>' +
         '>',
-      "language": {
-        "search": searchTranslation,
-        "lengthMenu": `${showTranslation} _MENU_`,
-        "info": ` ${showingTranslation} _START_ ${toTranslation} _END_ ${ofTranslation} _TOTAL_ ${entriesTranslation}`,
-        "paginate": {
-          "next": nextTranslation,      // Change "Next" text
-          "previous": previousTranslation, // Change "Previous" text
+      language: {
+        search: searchTranslation,
+        lengthMenu: `${showTranslation} _MENU_`,
+        info: ` ${showingTranslation} _START_ ${toTranslation} _END_ ${ofTranslation} _TOTAL_ ${entriesTranslation}`,
+        paginate: {
+          next: nextTranslation, // Change "Next" text
+          previous: previousTranslation // Change "Previous" text
         },
-        "emptyTable": noEntriesAvailableTranslation
+        emptyTable: noEntriesAvailableTranslation
       },
       // Buttons with Dropdown
       buttons: [
@@ -96,7 +99,7 @@ $(function () {
             window.location = './orders/create';
           }
         }
-      ],
+      ]
     });
   }
 

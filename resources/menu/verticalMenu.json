@@ -47,6 +47,7 @@
       ]
     },
     {
+      "url": "orders",
       "icon": "menu-icon tf-icons ti ti-users",
       "name": "Orders List",
       "slug": "orders"

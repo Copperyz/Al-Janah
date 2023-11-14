@@ -147,7 +147,7 @@
   "Barcode": "الباركود",
   "Select Inventory": "اختر المخزن",
   "Select Order": "اختر الطلبية",
-  "Select Parcel": "اختر الطرد"
+  "Select Parcel": "اختر الطرد",
   "Select": "اختر",
   "Subtotal": "المجموع الفرعي",
   "Discount": "التخفيض",
@@ -179,7 +179,6 @@
   "Explore the details and information of the shipment route": "استكشاف تفاصيل ومعلومات مسار الشحن",
   "Type": "النوع",
   "Legs": "الأطراف",
-  "Add": "إضافة",
   "Shipment Price": "سعر الشحن",
   "Shipment Route added successfully": "تم إضافة مسار شحن بنجاح",
   "Shipment Route updated successfully": "تم تعديل مسار شحن بنجاح",

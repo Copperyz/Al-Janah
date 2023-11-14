@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shipment;
+use App\Models\Customer;
+use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class ShipmentController extends Controller
@@ -12,7 +15,11 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        //
+        $shipmentsCount = Shipment::count();
+        $customersCount = Customer::count();
+        $airCount = 0;
+        $seaCount = 0;
+        return view('shipments.index', compact('shipmentsCount', 'customersCount', 'airCount', 'seaCount'));
     }
 
     /**
@@ -61,5 +68,16 @@ class ShipmentController extends Controller
     public function destroy(Shipment $shipment)
     {
         //
+    }
+
+    public function get_shipments()
+    {
+        $shipments = Shipment::orderBy('id', 'DESC')->get();
+        foreach ($shipments as $order) {
+            // $order->customerName = $order->customer ? $order->customer->first_name.' '.$order->customer->last_name : 'N/A';
+            // $order->paymentStatus = $order->payment ? $order->payment->status : 'N/A';
+        }
+        return Datatables::of($shipments)
+        ->make(true);
     }
 }

@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('shipment_routes', function (Blueprint $table) {
             $table->id();
+            $table->enum('type', ['order', 'shipment']);
             $table->json('legs');
-            $table->decimal('shipment_price', 8, 2);
+            $table->decimal('shipment_price', 8, 2)->nullable();
             $table->boolean('status')->default(true)->change();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();

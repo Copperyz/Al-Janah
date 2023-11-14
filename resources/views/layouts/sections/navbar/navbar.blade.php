@@ -213,7 +213,9 @@ $navbarDetached = ($navbarDetached ?? '');
 
             // Construct the URL based on the new value
             var locale = isRtl ? 'ar' : 'en';
-            var url = './change-locale/' + locale;
+            // var url = './change-locale/' + locale;
+            var url = '{{ route("changeLocale", ["locale" => ":locale"]) }}';
+            url = url.replace(':locale', locale);
 
             // Update the link's href attribute
             changeLocaleButton.attr('href', url);

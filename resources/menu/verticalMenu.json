@@ -25,7 +25,28 @@
       "slug": "permissions"
     },
     {
-      "url": "orders",
+      "name": "Inventory",
+      "icon": "menu-icon ti ti-building-warehouse",
+      "slug": "inventory",
+      "submenu": [
+        {
+          "url": "inventory",
+          "name": "Inventory List",
+          "slug": "inventory.index"
+        },
+        {
+          "url": "inventoryItems",
+          "name": "Items List",
+          "slug": "inventoryItems.index"
+        },
+        {
+          "url": "inventoryItems/create",
+          "name": "Add Item",
+          "slug": "inventoryItems.create"
+        }
+      ]
+    },
+    {
       "icon": "menu-icon tf-icons ti ti-users",
       "name": "Orders List",
       "slug": "orders"

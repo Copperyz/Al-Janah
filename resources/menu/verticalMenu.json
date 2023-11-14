@@ -47,22 +47,22 @@
       ]
     },
     {
-      "url": "orders",
-      "icon": "menu-icon tf-icons ti ti-users",
-      "name": "Orders List",
-      "slug": "orders"
-    },
-    {
       "url": "shipments",
       "icon": "menu-icon tf-icons ti ti-users",
       "name": "Shipments List",
-      "slug": "shipments.index"
+      "slug": "shipments"
     },
     {
-      "url": "shipments_routes",
+      "url": "trips",
       "icon": "menu-icon tf-icons ti ti-users",
-      "name": "Shipments Routes",
-      "slug": "shipments_routes.index"
+      "name": "Trips List",
+      "slug": "trips.index"
+    },
+    {
+      "url": "trip_routes",
+      "icon": "menu-icon tf-icons ti ti-users",
+      "name": "Trip Routes",
+      "slug": "trip_routes.index"
     }
   ]
 }

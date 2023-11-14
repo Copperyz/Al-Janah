@@ -23,7 +23,7 @@
 @endsection
 
 @section('page-script')
-<script src="{{asset('assets/js/app-inventory-items.js')}}"></script>
+<script src="{{asset('assets/js/inventory/app-inventory-items.js')}}"></script>
 @endsection
 
 @section('content')
@@ -169,16 +169,16 @@
                                 @endforeach
                             </select>
                         </div>
-                        <!-- Orders -->
+                        <!-- shipments -->
                         <div class="mb-3 col ecommerce-select2-dropdown">
-                            <label class="form-label mb-1" for="order">
+                            <label class="form-label mb-1" for="shipment">
                                 {{__('Order')}}
                             </label>
-                            <select id="order" name="orderID" class="select2 form-select"
-                                data-placeholder="{{__('Select Order')}}">
+                            <select id="order" name="shipmentID" class="select2 form-select"
+                                data-placeholder="{{__('Select Shipment')}}">
                                 <option value=''>{{__('Select order')}}</option>
-                                @foreach ($orders as $order)
-                                <option value='{{$order->id}}'>{{$order->name}}</option>
+                                @foreach ($shipments as $shipment)
+                                <option value='{{$shipment->id}}'>{{$shipment->name}}</option>
                                 @endforeach
                             </select>
                         </div>

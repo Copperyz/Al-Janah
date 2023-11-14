@@ -23,9 +23,9 @@ $configData = Helper::appClasses();
 @endsection
 
 @section('page-script')
-<script src="{{asset('assets/js/app-access-permission.js')}}"></script>
-<script src="{{asset('assets/js/modal-add-permission.js')}}"></script>
-<script src="{{asset('assets/js/modal-edit-permission.js')}}"></script>
+<script src="{{asset('assets/js/permissions/app-access-permission.js')}}"></script>
+<script src="{{asset('assets/js/permissions/modal-add-permission.js')}}"></script>
+<script src="{{asset('assets/js/permissions/modal-edit-permission.js')}}"></script>
 @endsection
 
 @section('content')
@@ -75,7 +75,7 @@ var areYouSureTextTranslation = @json(__('You will not be able to revert this!')
 </script>
 
 <!-- Modal -->
-@include('_partials/_modals/modal-add-permission')
-@include('_partials/_modals/modal-edit-permission')
+@include('_partials/_modals/permissions/modal-add-permission')
+@include('_partials/_modals/permissions/modal-edit-permission')
 <!-- /Modal -->
 @endsection

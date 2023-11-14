@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('good_types', function (Blueprint $table) {
+        Schema::create('trip_routes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description');
-            $table->string('unit');
-            $table->decimal('shipment_price', 8, 2);
             $table->enum('type', ['Air', 'Sea']);
+            $table->json('legs');
+            $table->decimal('trip_price', 8, 2)->nullable();
+            $table->boolean('status')->default(true)->change();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
@@ -35,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('good_types');
+        Schema::dropIfExists('trip_routes');
     }
 };

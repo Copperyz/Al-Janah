@@ -15,7 +15,7 @@
 @endsection
 
 @section('page-script')
-<script src="{{asset('assets/js/app-inventory-items-list.js')}}"></script>
+<script src="{{asset('assets/js/inventory/app-inventory-items-list.js')}}"></script>
 @endsection
 
 @section('content')

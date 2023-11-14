@@ -29,7 +29,7 @@
 @endsection
 
 @section('page-script')
-<script src="{{asset('assets/js/app-inventory-list.js')}}"></script>
+<script src="{{asset('assets/js/inventory/app-inventory-list.js')}}"></script>
 @endsection
 
 @section('content')
@@ -44,8 +44,6 @@
             <table class="datatables-inventory-list table border-top">
                 <thead>
                     <tr>
-                        <th></th>
-                        <th>#</th>
                         <th>{{__('Inventory')}}</th>
                         <th class="text-nowrap ">{{__('Branch')}}&nbsp;</th>
                         <th class="text-nowrap ">{{__('Total Items')}}</th>

@@ -1,5 +1,5 @@
 <!-- Add New Address Modal -->
-<div class="modal fade" id="editShipmentRouteModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="editShipmentRouteModal" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-simple modal-add-new-address">
         <div class="modal-content p-3 p-md-5">
             <div class="modal-body">

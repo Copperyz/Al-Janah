@@ -81,7 +81,7 @@ $(function () {
       // Buttons with Dropdown
       buttons: [
         {
-          text: addPermissionTranslation,
+          text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addPermissionTranslation}</span>`,
           className: 'add-new btn btn-primary mb-3 mb-md-0',
           attr: {
             'data-bs-toggle': 'modal',

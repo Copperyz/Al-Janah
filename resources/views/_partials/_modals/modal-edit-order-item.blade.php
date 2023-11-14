@@ -1,5 +1,5 @@
 <!-- Edit User Modal -->
-<div class="modal fade" id="editOrderItemModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="editOrderItemModal" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-simple modal-edit-order-item">
         <div class="modal-content p-3 p-md-5">
             <div class="modal-body">

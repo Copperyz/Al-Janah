@@ -61,5 +61,5 @@ Route::middleware(['auth'])->group(function () {
   Route::resource('inventory', InventoryController::class);
   //InventoryItems
   Route::get('get-inventoryItems', [InventoryItemsController::class, 'getInventoryItems'])->name('get-inventoryItems');
-  Route::resource('InventoryItems', InventoryItemsController::class);
+  Route::resource('inventoryItems', InventoryItemsController::class);
 });

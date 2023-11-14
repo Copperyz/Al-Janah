@@ -102,4 +102,6 @@
 var addInventoryTranslation = @json(__('Add Inventory'));
 </script>
 
+<!-- Model -->
+@include('inventory/edit')
 @endsection

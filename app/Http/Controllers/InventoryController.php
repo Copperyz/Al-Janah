@@ -26,7 +26,7 @@ class InventoryController extends Controller
   public function index()
   {
     $branches = Branch::all();
-    return view('inventory.list')->with('branches', $branches);
+    return view('inventory.index')->with('branches', $branches);
   }
 
   /**
@@ -74,7 +74,17 @@ class InventoryController extends Controller
    */
   public function update(Request $request, string $id)
   {
-    //
+    try {
+      $inventory = Inventory::findOrFail($id);
+      $inventory->name = $request->name;
+      $inventory->branch_id = $request->branch;
+      $inventory->updated_by = auth()->id();
+      $inventory->save();
+
+      response()->json(['message' => __('Inventory updated successfully')], 200);
+    } catch (\Throwable $th) {
+      response()->json(['message' => __('Something went wrong')], 422);
+    }
   }
 
   /**

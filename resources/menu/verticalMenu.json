@@ -48,14 +48,19 @@
       "slug": "inventory",
       "submenu": [
         {
-          "url": "InventoryItems/create",
-          "name": "Add Item",
-          "slug": "InventoryItems.create"
-        },
-        {
           "url": "inventory",
           "name": "Inventory List",
           "slug": "inventory.index"
+        },
+        {
+          "url": "inventoryItems",
+          "name": "Items List",
+          "slug": "inventoryItems.index"
+        },
+        {
+          "url": "inventoryItems/create",
+          "name": "Add Item",
+          "slug": "inventoryItems.create"
         }
       ]
     }

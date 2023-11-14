@@ -56,10 +56,8 @@ $(function () {
           orderable: false,
           render: function (data, type, full, meta) {
             return (
-              '<div class="d-flex align-items-sm-center justify-content-sm-center">' +
-              '<button class="btn btn-sm btn-icon delete-record me-2"><i class="ti ti-trash"></i></button>' +
-              '<button class="btn btn-sm btn-icon"><i class="ti ti-edit"></i></button>' +
-              '</div>'
+              '<button class="btn btn-sm btn-icon editInventory" data-bs-target="#editInventoryModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit"></i></button>' +
+              '<button class="btn btn-sm btn-icon delete-record me-2"><i class="ti ti-trash"></i></button>'
             );
           }
         }
@@ -100,6 +98,64 @@ $(function () {
     $('.dt-action-buttons').addClass('pt-0');
     $('.dataTables_filter').addClass('me-3 ps-0');
   }
+
+  //Edit Record
+  $(document).on('click', 'button.editInventory', function () {
+    // $('#editInventoryForm').trigger('reset');
+    var data = dt_category.row($(this).closest('tr')).data();
+    $('#editInventoryForm').find('[name="name"]').val(data.name);
+    $('#editInventoryForm').find('[name="branch"]').val(data.branch_id);
+    $('#editInventoryForm').find('[name="id"]').val(data.id);
+  });
+
+  $('#editInventoryForm').submit(function (event) {
+    event.preventDefault();
+    var form = $(this);
+    var formData = form.serialize();
+
+    // Make an AJAX request
+    $.ajax({
+      url: 'inventory/' + $('#editInventoryForm').find('[name="id"]').val(),
+      method: 'PUT',
+      data: formData,
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function (response, status, xhr) {
+        if (xhr.status === 200) {
+          // Handle a successful response
+          form.trigger('reset');
+          dt_category.ajax.url('get-inventories').load();
+          Swal.fire({
+            icon: 'success',
+            title: '',
+            text: response.message,
+            confirmButtonText: doneTranslation,
+            customClass: {
+              confirmButton: 'btn btn-success'
+            }
+          });
+          $('#editInventoryModal').modal('hide');
+        }
+      },
+      error: function (response, xhr, status, error) {
+        // Handle the error response here
+        var errorMessages = Object.values(response.responseJSON.errors).flat();
+        // Format error messages with line breaks
+        var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
+        // Create the Swal alert
+        Swal.fire({
+          title: response.responseJSON.message,
+          html: formattedErrorMessages,
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-primary'
+          },
+          buttonsStyling: false
+        });
+      }
+    });
+  });
 
   // Delete Record
   $('.datatables-category-list tbody').on('click', '.delete-record', function () {

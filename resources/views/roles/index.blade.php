@@ -22,8 +22,8 @@ $configData = Helper::appClasses();
 @endsection
 
 @section('page-script')
-<script src="{{asset('assets/js/app-access-roles.js')}}"></script>
-<script src="{{asset('assets/js/modal-add-role.js')}}"></script>
+<script src="{{asset('assets/js/roles/app-access-roles.js')}}"></script>
+<script src="{{asset('assets/js/roles/modal-add-role.js')}}"></script>
 @endsection
 
 @section('content')
@@ -204,10 +204,8 @@ var areYouSureTranslation = @json(__('Are you sure?'));
 var areYouSureTextTranslation = @json(__('You will not be able to revert this!'));
 </script>
 
-<!-- Add Role Modal -->
-@include('_partials/_modals/modal-add-role')
-<!-- / Add Role Modal -->
-<!-- Edit Role Modal -->
-@include('_partials/_modals/modal-edit-role')
-<!-- / Edit Role Modal -->
+
+@include('_partials/_modals/roles/modal-add-role')
+@include('_partials/_modals/roles/modal-edit-role')
+
 @endsection

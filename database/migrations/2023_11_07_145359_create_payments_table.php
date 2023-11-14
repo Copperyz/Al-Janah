@@ -12,7 +12,7 @@ return new class extends Migration {
   {
     Schema::create('payments', function (Blueprint $table) {
       $table->id();
-      $table->unsignedBigInteger('order_id')->nullable();
+      $table->unsignedBigInteger('shipment_id')->nullable();
       $table->enum('transaction_type', ['order', 'shipment']);
       $table
         ->decimal('shipment_amount', 10, 2)
@@ -36,9 +36,9 @@ return new class extends Migration {
       $table->softDeletes();
 
       $table
-        ->foreign('order_id')
+        ->foreign('shipment_id')
         ->references('id')
-        ->on('orders');
+        ->on('shipments');
       $table
         ->foreign('created_by')
         ->references('id')

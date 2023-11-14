@@ -13,9 +13,14 @@ return new class extends Migration {
     Schema::create('inventory_items', function (Blueprint $table) {
       $table->id();
       $table->unsignedBigInteger('inventory_id');
-      $table->unsignedBigInteger('order_id')->nullable();
+      $table->unsignedBigInteger('shipment_id')->nullable();
+      $table->unsignedBigInteger('shipment_item_id')->nullable();
       $table->string('name');
-      $table->unsignedBigInteger('item_type_id');
+      $table->string('status', 20);
+      $table->string('itemCode', 13);
+      $table
+        ->unsignedBigInteger('parcel_types_id')
+        ->nullable();
       $table->integer('height');
       $table->integer('width');
       $table->integer('size');
@@ -29,18 +34,23 @@ return new class extends Migration {
       $table->timestamps();
       $table->softDeletes();
 
+
       $table
         ->foreign('inventory_id')
         ->references('id')
         ->on('inventories');
       $table
-        ->foreign('order_id')
+        ->foreign('shipment_id')
         ->references('id')
-        ->on('orders');
+        ->on('shipments');
       $table
-        ->foreign('item_type_id')
+        ->foreign('shipment_item_id')
         ->references('id')
-        ->on('item_types');
+        ->on('shipment_items');
+      $table
+        ->foreign('parcel_types_id')
+        ->references('id')
+        ->on('parcel_types');
       $table
         ->foreign('created_by')
         ->references('id')

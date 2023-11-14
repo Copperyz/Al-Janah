@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Shipment extends Model
 {
     use HasFactory;
+
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
+
+
+    public function payment()
+    {
+        return $this->hasOne(Payment::class, 'shipment_id');
+    }
 }

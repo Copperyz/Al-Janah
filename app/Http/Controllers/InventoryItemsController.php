@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Inventory;
 use App\Models\InventoryItem;
-use App\Models\Order;
+use App\Models\Shipment;
 use App\Models\ParcelType;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -42,12 +42,12 @@ class InventoryItemsController extends Controller
    */
   public function create()
   {
-    $orders = Order::all();
+    $shipments = Shipment::all();
     $parcelTypes = ParcelType::all();
     $inventory = Inventory::all();
 
     return view('inventoryItem.create')
-      ->with('orders', $orders)
+      ->with('shipments', $shipments)
       ->with('parcelTypes', $parcelTypes)
       ->with('inventories', $inventory);
   }
@@ -60,7 +60,7 @@ class InventoryItemsController extends Controller
     try {
       $inventoryItems = new InventoryItem();
       $inventoryItems->inventory_id = $request->inventoryID;
-      $inventoryItems->order_id = $request->orderID;
+      $inventoryItems->shipment_id = $request->shipmentID;
       $inventoryItems->name = $request->productName;
       $inventoryItems->status = $request->status;
       $inventoryItems->itemCode = $request->productBarcode;
@@ -95,13 +95,13 @@ class InventoryItemsController extends Controller
   public function edit(string $id)
   {
     $inventoryItem = InventoryItem::findOrFail($id);
-    $orders = Order::all();
+    $shipments = Shipment::all();
     $parcelTypes = ParcelType::all();
     $inventory = Inventory::all();
 
     return view('inventoryItem.edit')
       ->with('inventoryItem', $inventoryItem)
-      ->with('orders', $orders)
+      ->with('shipments', $shipments)
       ->with('parcelTypes', $parcelTypes)
       ->with('inventories', $inventory);
   }
@@ -115,7 +115,7 @@ class InventoryItemsController extends Controller
       $inventoryItems = InventoryItem::findOrFail($id);
 
       $inventoryItems->inventory_id = $request->inventoryID;
-      $inventoryItems->order_id = $request->orderID;
+      $inventoryItems->shipment_id = $request->shipmentID;
       $inventoryItems->name = $request->productName;
       $inventoryItems->status = $request->status;
       $inventoryItems->itemCode = $request->productBarcode;

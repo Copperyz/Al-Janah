@@ -21,7 +21,7 @@ $configData = Helper::appClasses();
 @endsection
 
 @section('page-script')
-<script src="{{asset('assets/js/shipments/app-shipment-list.js')}}"></script>
+<script src="{{asset('assets/js/trips/app-trips-list.js')}}"></script>
 @endsection
 
 @section('content')
@@ -60,8 +60,8 @@ $configData = Helper::appClasses();
                 <div class="col-sm-6 col-lg-3">
                     <div class="d-flex justify-content-between align-items-start border-end pb-3 pb-sm-0 card-widget-3">
                         <div>
-                            <h3 class="mb-1">{{$inProgressCount}}</h3>
-                            <p class="mb-0">{{__('In Progress')}}</p>
+                            <h3 class="mb-1">{{$airCount}}</h3>
+                            <p class="mb-0">{{__('Air')}}</p>
                         </div>
                         <span class="avatar me-sm-4">
                             <span class="avatar-initial bg-label-secondary rounded"><i
@@ -72,8 +72,8 @@ $configData = Helper::appClasses();
                 <div class="col-sm-6 col-lg-3">
                     <div class="d-flex justify-content-between align-items-start">
                         <div>
-                            <h3 class="mb-1">{{$deliveredCount}}</h3>
-                            <p class="mb-0">{{__('Delivered')}}</p>
+                            <h3 class="mb-1">{{$seaCount}}</h3>
+                            <p class="mb-0">{{__('Sea')}}</p>
                         </div>
                         <span class="avatar">
                             <span class="avatar-initial bg-label-secondary rounded"><i
@@ -86,7 +86,7 @@ $configData = Helper::appClasses();
     </div>
 </div>
 
-<!-- Order List Table -->
+<!-- Shipment List Table -->
 <div class="card">
     <div class="card-datatable table-responsive">
         <table class="shipment-list-table table border-top">
@@ -107,7 +107,24 @@ $configData = Helper::appClasses();
 
 
 <script>
-var addShipmentTranslation = @json(__('Add Shipment'));
+var addOrderTranslation = @json(__('Add Order'));
+var exportTranslation = @json(__('Export'));
+var searchTranslation = @json(__('Search'));
+var showTranslation = @json(__('Show'));
+var showingTranslation = @json(__('Showing'));
+var toTranslation = @json(__('to'));
+var ofTranslation = @json(__('of'));
+var nextTranslation = @json(__('Next'));
+var previousTranslation = @json(__('Previous'));
+var noEntriesAvailableTranslation = @json(__('No entries available'));
+var entriesTranslation = @json(__('entries'));
+
+var submitTranslation = @json(__('Submit'));
+var cancelTranslation = @json(__('Cancel'));
+var doneTranslation = @json(__('Done'));
+
+var areYouSureTranslation = @json(__('Are you sure?'));
+var areYouSureTextTranslation = @json(__('You will not be able to revert this!'));
 </script>
 
 @endsection

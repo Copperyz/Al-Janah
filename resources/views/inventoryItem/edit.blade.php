@@ -23,7 +23,7 @@
 @endsection
 
 @section('page-script')
-<script src="{{asset('assets/js/app-inventory-items.js')}}"></script>
+<script src="{{asset('assets/js/inventory/app-inventory-items.js')}}"></script>
 @endsection
 
 @section('content')
@@ -39,7 +39,7 @@
 
             <div class="d-flex flex-column justify-content-center">
                 <h4 class="mb-1 mt-3">{{__('Edit Product')}}</h4>
-                <!-- <p class="text-muted">Orders placed across your store</p> -->
+                <!-- <p class="text-muted">shipments placed across your store</p> -->
             </div>
             <div class="d-flex align-content-center flex-wrap gap-3">
                 <div class="d-flex gap-3"><button class="btn btn-label-secondary">{{__('Discard')}}</button>
@@ -176,17 +176,18 @@
                                 @endforeach
                             </select>
                         </div>
-                        <!-- Orders -->
+                        <!-- shipments -->
                         <div class="mb-3 col ecommerce-select2-dropdown">
                             <label class="form-label mb-1" for="order">
                                 {{__('Order')}}
                             </label>
-                            <select id="order" name="orderID" class="select2 form-select"
+                            <select id="order" name="shipmentID" class="select2 form-select"
                                 data-placeholder="{{__('Select Order')}}">
                                 <option value=''>{{__('Select order')}}</option>
-                                @foreach ($orders as $order)
-                                <option value='{{$order->id}}'
-                                    {{$order->id == $inventoryItem->order_id ? 'selected': ''}}>{{$order->name}}
+                                @foreach ($shipments as $shipment)
+                                <option value='{{$shipment->id}}'
+                                    {{$shipment->id == $inventoryItem->shipment_id ? 'selected': ''}}>
+                                    {{$shipment->name}}
                                 </option>
                                 @endforeach
                             </select>

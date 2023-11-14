@@ -9,6 +9,11 @@ use App\Http\Controllers\RolesController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderItemController;
+use App\Http\Controllers\ShipmentController;
+use App\Http\Controllers\ShipmentRouteController;
+
+
+
 
 
 
@@ -54,13 +59,21 @@ Route::middleware(['auth'])->group(function () {
   Route::get('get-permissions', [PermissionsController::class, 'get_permissions'])->name('get-permissions');
   Route::resource('permissions', PermissionsController::class);
 
-  
+  // Orders
   Route::get('get-orders', [OrderController::class, 'get_orders'])->name('get-orders');
   Route::resource('orders', OrderController::class);
 
+  // Order Items
   Route::get('get-orderItems/{id}', [OrderItemController::class, 'get_order_itmes'])->name('get-order-itmes');
+  Route::post('add-orderItem/{id}', [OrderItemController::class, 'add_order_item'])->name('add-order-item');
   Route::resource('order-itmes', OrderItemController::class);
 
+  // Shipments
+  Route::get('get-shipments', [ShipmentController::class, 'get_shipments'])->name('get-shipments');
+  Route::resource('shipments', ShipmentController::class);
 
+  // Shipments
+  Route::get('get-shipments-routes', [ShipmentRouteController::class, 'get_shipment_routes'])->name('get-shipments-routes');
+  Route::resource('shipments_routes', ShipmentRouteController::class);
   
 });

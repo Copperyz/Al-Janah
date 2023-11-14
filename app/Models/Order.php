@@ -4,15 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    public function parcelType()
+    
+
+    public function customer()
     {
-        return $this->belongsTo(ParcelType::class, 'parcel_types_id');
+        return $this->belongsTo(Customer::class, 'customer_id');
     }
+
 
     public function payment()
     {

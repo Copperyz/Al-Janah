@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class ShipmentRoute extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['type', 'legs', 'shipment_price'];
+
+    protected $casts = [
+        'legs' => 'array',
+    ];
 }

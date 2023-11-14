@@ -28,6 +28,7 @@ $configData = Helper::appClasses();
 <script src="{{asset('assets/js/offcanvas-send-invoice.js')}}"></script>
 <script src="{{asset('assets/js/app-invoice-add.js')}}"></script>
 <script src="{{asset('assets/js/forms-selects.js')}}"></script>
+<script src="{{asset('assets/js/form-layouts.js')}}"></script>
 @endsection
 
 @section('content')
@@ -45,8 +46,8 @@ $configData = Helper::appClasses();
                             <div class="mb-3">
                                 <label for="html5-datetime-local-input"
                                     class="form-label me-4 fw-medium">{{__('Date')}}</label>
-                                <input class="form-control" type="datetime-local" value=""
-                                    id="html5-datetime-local-input" name="date" />
+                                <input class="form-control date-picker" id="datePicker" type="datetime-local"
+                                    placeholder="{{__('Enter date')}}" name="date" />
                             </div>
                             <div class="mb-3">
                                 <label for="salesperson" class="form-label me-4 fw-medium">{{__('Amount')}}</label>
@@ -57,7 +58,10 @@ $configData = Helper::appClasses();
                                 <label for="customer_id" class="form-label me-4 fw-medium">{{__('Customer')}}</label>
                                 <select id="customer_id" class="select2 form-select form-select-lg"
                                     data-allow-clear="true" name="customer_id">
-                                    <!-- Options for customers -->
+                                    <option disabled selected>{{__('Select')}}</option>
+                                    @foreach($customers as $customer)
+                                    <option value="{{$customer->id}}">{{$customer->first_name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -77,21 +81,16 @@ $configData = Helper::appClasses();
                             <div class="d-flex border rounded position-relative pe-0">
                                 <div class="row w-100 p-3">
                                     <div class="col-md-6 col-12 mb-md-0 mb-3">
-                                        <p class="mb-2 repeater-title">Item</p>
+                                        <p class="mb-2 repeater-title">{{__('Item')}}</p>
                                         <div class="mb-3">
                                             <label for="parcel_types_id"
                                                 class="form-label me-4 fw-medium">{{__('Parcel Type')}}</label>
                                             <select id="parcel_types_id" class="select2 form-select"
                                                 data-allow-clear="true" name="parcel_types_id">
-                                                <option value="AZ">Arizona</option>
-                                                <option value="CO" selected>Colorado</option>
-                                                <option value="ID">Idaho</option>
-                                                <option value="MT">Montana</option>
-                                                <option value="NE">Nebraska</option>
-                                                <option value="NM">New Mexico</option>
-                                                <option value="ND">North Dakota</option>
-                                                <option value="UT">Utah</option>
-                                                <option value="WY">Wyoming</option>
+                                                <option disabled selected>{{__('Select')}}</option>
+                                                @foreach($parcelTypes as $parcelType)
+                                                <option value="{{$parcelType->id}}">{{$parcelType->name}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="mb-3">
@@ -99,15 +98,10 @@ $configData = Helper::appClasses();
                                                 class="form-label me-4 fw-medium">{{__('Good Type')}}</label>
                                             <select id="good_types_id" class="select2 form-select"
                                                 data-allow-clear="true" name="good_types_id">
-                                                <option value="AZ">Arizona</option>
-                                                <option value="CO" selected>Colorado</option>
-                                                <option value="ID">Idaho</option>
-                                                <option value="MT">Montana</option>
-                                                <option value="NE">Nebraska</option>
-                                                <option value="NM">New Mexico</option>
-                                                <option value="ND">North Dakota</option>
-                                                <option value="UT">Utah</option>
-                                                <option value="WY">Wyoming</option>
+                                                <option disabled selected>{{__('Select')}}</option>
+                                                @foreach($goodTypes as $goodType)
+                                                <option value="{{$goodType->id}}">{{$goodType->name}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -125,7 +119,7 @@ $configData = Helper::appClasses();
                                     <div class="col-md-2 col-12 mb-md-0 mb-3">
                                         <p class="mb-2 repeater-title">{{__('Qty')}}</p>
                                         <input name="quantity" type="number" class="form-control invoice-item-qty"
-                                            placeholder="1" min="1" max="50" />
+                                            placeholder="1" min="1" max="50" value="1" />
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column align-items-center justify-content-between border-start p-2"
@@ -145,40 +139,7 @@ $configData = Helper::appClasses();
                     </div>
 
 
-                    <hr class="my-3 mx-n4" />
 
-                    <div class="row p-0 p-sm-4">
-                        <div class="col-md-6 mb-md-0 mb-3">
-                            <div class="d-flex align-items-center mb-3">
-                                <label for="salesperson" class="form-label me-4 fw-medium">Salesperson:</label>
-                                <input type="text" class="form-control ms-3" id="salesperson"
-                                    placeholder="Edward Crowley" />
-                            </div>
-                            <input type="text" class="form-control" id="invoiceMsg"
-                                placeholder="Thanks for your business" />
-                        </div>
-                        <div class="col-md-6 d-flex justify-content-end">
-                            <div class="invoice-calculations">
-                                <div class="d-flex justify-content-between mb-2">
-                                    <span class="w-px-100">Subtotal:</span>
-                                    <span class="fw-medium">$00.00</span>
-                                </div>
-                                <div class="d-flex justify-content-between mb-2">
-                                    <span class="w-px-100">Discount:</span>
-                                    <span class="fw-medium">$00.00</span>
-                                </div>
-                                <div class="d-flex justify-content-between mb-2">
-                                    <span class="w-px-100">Tax:</span>
-                                    <span class="fw-medium">$00.00</span>
-                                </div>
-                                <hr />
-                                <div class="d-flex justify-content-between">
-                                    <span class="w-px-100">Total:</span>
-                                    <span class="fw-medium">$00.00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     <hr class="my-3 mx-n4" />
 
@@ -188,6 +149,31 @@ $configData = Helper::appClasses();
                                 <label for="note" class="form-label fw-medium">{{__('Notes')}}</label>
                                 <textarea class="form-control" rows="2" id="note" placeholder=""
                                     name="notes"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-3 mx-n4" />
+
+                    <div class="row p-0 p-sm-4">
+                        <div class="col-md-6 mb-md-0 mb-3">
+
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-end">
+                            <div class="invoice-calculations">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="w-px-100 me-2">{{__('Subtotal')}}</span>
+                                    <span class="fw-medium">$00.00</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="w-px-100">{{__('Discount')}}</span>
+                                    <span class="fw-medium">$00.00</span>
+                                </div>
+                                <hr />
+                                <div class="d-flex justify-content-between">
+                                    <span class="w-px-100">{{__('Total')}}</span>
+                                    <span class="fw-medium">$00.00</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -207,18 +193,37 @@ $configData = Helper::appClasses();
                             class="ti ti-send ti-xs me-2"></i>Send Invoice</span>
                 </button> -->
                 <!-- <a href="{{url('app/invoice/preview')}}" class="btn btn-label-secondary d-grid w-100 mb-2">Preview</a> -->
-                <button class="btn btn-primary d-grid w-100 mb-2 submitButton" id="submitButton">
-                    <span class="d-flex align-items-center justify-content-center text-nowrap">{{__('Submit')}}</span>
-                </button>
-                <button class="btn btn-danger d-grid w-100 mb-2 cancelButton">
-                    <span class="d-flex align-items-center justify-content-center text-nowrap"
-                        id="cancelButton">{{__('Cancel')}}</span>
-                </button>
+                <div class="d-flex my-2">
+                    <button type="button" class="btn btn-label-danger w-100 cancelButton me-2">{{__('Cancel')}}</button>
+                    <button type="button" class="btn btn-label-primary w-100 submitButton">{{__('Submit')}}</button>
+                </div>
+
             </div>
         </div>
     </div>
     <!-- /Invoice Actions -->
 </div>
+
+<script>
+var addOrderTranslation = @json(__('Add Order'));
+var exportTranslation = @json(__('Export'));
+var searchTranslation = @json(__('Search'));
+var showTranslation = @json(__('Show'));
+var showingTranslation = @json(__('Showing'));
+var toTranslation = @json(__('to'));
+var ofTranslation = @json(__('of'));
+var nextTranslation = @json(__('Next'));
+var previousTranslation = @json(__('Previous'));
+var noEntriesAvailableTranslation = @json(__('No entries available'));
+var entriesTranslation = @json(__('entries'));
+
+var submitTranslation = @json(__('Submit'));
+var cancelTranslation = @json(__('Cancel'));
+var doneTranslation = @json(__('Done'));
+
+var areYouSureTranslation = @json(__('Are you sure?'));
+var areYouSureTextTranslation = @json(__('You will not be able to revert this!'));
+</script>
 
 <script>
 function removeItem(button) {

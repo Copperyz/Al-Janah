@@ -42,7 +42,7 @@ $configData = Helper::appClasses();
         $activeClass = null;
         $currentRouteName = Route::currentRouteName();
 
-        if ($currentRouteName === $menu->slug) {
+        if (str_contains($currentRouteName, $menu->slug)) {
         $activeClass = 'active';
         }
         elseif (isset($menu->submenu)) {

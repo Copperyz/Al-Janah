@@ -21,7 +21,7 @@ $configData = Helper::appClasses();
 @endsection
 
 @section('page-script')
-<script src="{{asset('assets/js/app-order-list.js')}}"></script>
+<script src="{{asset('assets/js/app-shipment-list.js')}}"></script>
 @endsection
 
 @section('content')
@@ -47,8 +47,8 @@ $configData = Helper::appClasses();
                 <div class="col-sm-6 col-lg-3">
                     <div class="d-flex justify-content-between align-items-start card-widget-2 border-end pb-3 pb-sm-0">
                         <div>
-                            <h3 class="mb-1">{{$ordersCount}}</h3>
-                            <p class="mb-0">{{__('Orders')}}</p>
+                            <h3 class="mb-1">{{$shipmentsCount}}</h3>
+                            <p class="mb-0">{{__('Shipments')}}</p>
                         </div>
                         <span class="avatar me-lg-4">
                             <span class="avatar-initial bg-label-secondary rounded"><i
@@ -60,8 +60,8 @@ $configData = Helper::appClasses();
                 <div class="col-sm-6 col-lg-3">
                     <div class="d-flex justify-content-between align-items-start border-end pb-3 pb-sm-0 card-widget-3">
                         <div>
-                            <h3 class="mb-1">{{$inProgressCount}}</h3>
-                            <p class="mb-0">{{__('In Progress')}}</p>
+                            <h3 class="mb-1">{{$airCount}}</h3>
+                            <p class="mb-0">{{__('Air')}}</p>
                         </div>
                         <span class="avatar me-sm-4">
                             <span class="avatar-initial bg-label-secondary rounded"><i
@@ -72,8 +72,8 @@ $configData = Helper::appClasses();
                 <div class="col-sm-6 col-lg-3">
                     <div class="d-flex justify-content-between align-items-start">
                         <div>
-                            <h3 class="mb-1">{{$deliveredCount}}</h3>
-                            <p class="mb-0">{{__('Delivered')}}</p>
+                            <h3 class="mb-1">{{$seaCount}}</h3>
+                            <p class="mb-0">{{__('Sea')}}</p>
                         </div>
                         <span class="avatar">
                             <span class="avatar-initial bg-label-secondary rounded"><i
@@ -86,10 +86,10 @@ $configData = Helper::appClasses();
     </div>
 </div>
 
-<!-- Order List Table -->
+<!-- Shipment List Table -->
 <div class="card">
     <div class="card-datatable table-responsive">
-        <table class="order-list-table table border-top">
+        <table class="shipment-list-table table border-top">
             <thead>
                 <tr>
                     <th></th>

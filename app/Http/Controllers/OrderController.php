@@ -20,7 +20,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('orders.index');
+        $ordersCount = Order::count();
+        $customersCount = Customer::count();
+        $deliveredCount = 0;
+        $inProgressCount = 0;
+        return view('orders.index', compact('ordersCount', 'customersCount', 'deliveredCount', 'inProgressCount'));
     }
 
     /**
@@ -169,7 +173,6 @@ class OrderController extends Controller
             $order->paymentStatus = $order->payment ? $order->payment->status : 'N/A';
         }
         return Datatables::of($orders)
-        ->rawColumns(['Options'])
         ->make(true);
     }
 }

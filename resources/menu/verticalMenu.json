@@ -10,25 +10,37 @@
       "url": "users",
       "icon": "menu-icon tf-icons ti ti-users",
       "name": "Users",
-      "slug": "users.index"
+      "slug": "users"
     },
     {
       "url": "roles",
       "icon": "menu-icon tf-icons ti ti-users",
       "name": "Roles",
-      "slug": "roles.index"
+      "slug": "roles"
     },
     {
       "url": "permissions",
       "icon": "menu-icon tf-icons ti ti-users",
       "name": "Permissions",
-      "slug": "permissions.index"
+      "slug": "permissions"
     },
     {
       "url": "orders",
       "icon": "menu-icon tf-icons ti ti-users",
       "name": "Orders List",
       "slug": "orders"
+    },
+    {
+      "url": "shipments",
+      "icon": "menu-icon tf-icons ti ti-users",
+      "name": "Shipments List",
+      "slug": "shipments.index"
+    },
+    {
+      "url": "shipments_routes",
+      "icon": "menu-icon tf-icons ti ti-users",
+      "name": "Shipments Routes",
+      "slug": "shipments_routes.index"
     }
   ]
 }

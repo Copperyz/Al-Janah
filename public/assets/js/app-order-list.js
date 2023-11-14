@@ -1,16 +1,16 @@
 /**
- * App Invoice List (jquery)
+ * App order List (jquery)
  */
 
 'use strict';
 
 $(function () {
   // Variable declaration for table
-  var dt_invoice_table = $('.invoice-list-table');
+  var dt_order_table = $('.order-list-table');
 
-  // Invoice datatable
-  if (dt_invoice_table.length) {
-    var dt_invoice = dt_invoice_table.DataTable({
+  // order datatable
+  if (dt_order_table.length) {
+    var dt_order = dt_order_table.DataTable({
       ajax: 'get-orders',
       columns: [
         // columns according to JSON
@@ -34,10 +34,10 @@ $(function () {
           }
         },
         // {
-        //   // Invoice status
+        //   // order status
         //   targets: 4,
         //   render: function (data, type, full, meta) {
-        //     var $invoice_status = full['paymentStatus'];
+        //     var $order_status = full['paymentStatus'];
         //     var roleBadgeObj = {
         //       paid: '<span class="badge badge-center rounded-pill bg-label-success w-px-30 h-px-30"><i class="ti ti-checks ti-sm"></i></span>',
         //       pending: '<span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30"><i class="ti ti-hourglass-empty mx-2 ti-sm"></i></span>',
@@ -46,7 +46,7 @@ $(function () {
         //         '<span class="badge badge-center rounded-pill bg-label-info w-px-30 h-px-30"><i class="ti ti-receipt-refund ti-sm"></i></span>'
         //     };
         //     return (
-        //       roleBadgeObj[$invoice_status] +
+        //       roleBadgeObj[$order_status] +
         //       '</span>'
         //     );
         //   }
@@ -71,7 +71,7 @@ $(function () {
       dom:
         '<"row mx-1"' +
         '<"col-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-start gap-2"l<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start mt-md-0 mt-3"B>>' +
-        '<"col-12 col-md-6 d-flex align-items-center justify-content-end flex-column flex-md-row pe-3 gap-md-3"f<"invoice_status mb-3 mb-md-0">>' +
+        '<"col-12 col-md-6 d-flex align-items-center justify-content-end flex-column flex-md-row pe-3 gap-md-3"f<"order_status mb-3 mb-md-0">>' +
         '>t' +
         '<"row mx-2"' +
         '<"col-sm-12 col-md-6"i>' +
@@ -101,7 +101,7 @@ $(function () {
   }
 
   // On each datatable draw, initialize tooltip
-  dt_invoice_table.on('draw.dt', function () {
+  dt_order_table.on('draw.dt', function () {
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
       return new bootstrap.Tooltip(tooltipTriggerEl, {
@@ -111,8 +111,8 @@ $(function () {
   });
 
   // Delete Record
-  $('.invoice-list-table tbody').on('click', '.delete-record', function () {
-    var data = dt_invoice.row($(this).closest('tr')).data();
+  $('.order-list-table tbody').on('click', '.delete-record', function () {
+    var data = dt_order.row($(this).closest('tr')).data();
     Swal.fire({
       title: areYouSureTranslation,
       text: areYouSureTextTranslation,
@@ -136,7 +136,7 @@ $(function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           },
           success: function (response) {
-            dt_invoice.ajax.url('get-orders').load();
+            dt_order.ajax.url('get-orders').load();
             Swal.fire({
               icon: 'success',
               title: '',

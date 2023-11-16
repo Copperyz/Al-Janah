@@ -111,7 +111,7 @@
                     <th>{{__('Inventory')}}</th>
                     <!-- <th>{{__('Quantity')}}</th> -->
                     <th>{{__('Aisle')}}</th>
-                    <th>{{__('Shelf Number')}}</th>
+                    <th>{{__('Shelf')}}</th>
                     <th>{{__('Row')}}</th>
                     <th>{{__('Status')}}</th>
                     <th>{{__('Actions')}}</th>

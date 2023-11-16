@@ -69,14 +69,14 @@
                 <!-- Name -->
                 <div class="mb-3">
                     <label class="form-label" for="ecommerce-category-title">{{__('Name')}}</label>
-                    <input type="text" class="form-control" id="ecommerce-category-title"
-                        placeholder="Enter category title" name="inventoryName" aria-label="category title">
+                    <input type="text" class="form-control" required id="ecommerce-category-title"
+                        placeholder="{{__('Enter inventory name')}}" name="inventoryName" aria-label="category title">
                 </div>
 
                 <!-- Parent category -->
                 <div class="mb-3 ecommerce-select2-dropdown">
                     <label class="form-label" for="inventory-branch">{{__('Branch')}}</label>
-                    <select id="inventory-branch" class="select2 form-select" name="branchID"
+                    <select id="inventory-branch" required class="select2 form-select" name="branchID"
                         data-placeholder="Select inventory branch">
                         <option value=''>{{__('Select inventory branch')}}</option>
                         @foreach ($branches as $branch)
@@ -98,6 +98,9 @@
 
 <script>
 var addInventoryTranslation = @json(__('Add Inventory'));
+window.translations = {
+    custom: @json(__('validation.custom'))
+};
 </script>
 
 <!-- Model -->

@@ -41,10 +41,15 @@ class InventoryController extends Controller
    */
   public function store(Request $request)
   {
+    $request->validate([
+      'inventoryName' => 'bail|required|unique:inventories,name|max:255',
+      'branchID' => 'required',
+    ]);
     try {
       $inventory = new Inventory();
       $inventory->name = $request->inventoryName;
       $inventory->branch_id = $request->branchID;
+      $inventory->created_by = auth()->id();
       $inventory->save();
 
       return response()->json(['message' => __('Inventory added successfully')], 200);
@@ -74,10 +79,14 @@ class InventoryController extends Controller
    */
   public function update(Request $request, string $id)
   {
+    $request->validate([
+      'name' => 'bail|required|max:255',
+      'branchID' => 'required',
+    ]);
     try {
       $inventory = Inventory::findOrFail($id);
       $inventory->name = $request->name;
-      $inventory->branch_id = $request->branch;
+      $inventory->branch_id = $request->branchID;
       $inventory->updated_by = auth()->id();
       $inventory->save();
 
@@ -92,6 +101,14 @@ class InventoryController extends Controller
    */
   public function destroy(string $id)
   {
-    //
+    try {
+      $inventory = Inventory::findOrFail($id);
+      $inventory->deleted_by = auth()->id();
+      $inventory->delete();
+      $inventory->save();
+      return response()->json(['message' => __('Inventory deleted successfully')], 200);
+    } catch (\Throwable $th) {
+      return response()->json(['message' => __('Something went wrong')], 422);
+    }
   }
 }

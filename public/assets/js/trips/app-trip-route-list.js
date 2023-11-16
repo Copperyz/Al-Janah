@@ -15,7 +15,7 @@ $(function () {
             columns: [
                 // columns according to JSON
                 { data: '' },
-                { data: 'type' },
+                { data: 'typeLocale' },
                 { data: 'legs_combined' },
                 { data: 'trip_price' },
                 { data: 'action' }
@@ -89,7 +89,7 @@ $(function () {
             buttons: [
                 {
                     text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addTripRouteTranslation}</span>`,
-                    className: 'add-new btn btn-primary mb-3 mb-md-0',
+                    className: 'add-new btn btn-primary mb-3 mb-md-0 addTripRoute',
                     attr: {
                         'data-bs-toggle': 'modal',
                         'data-bs-target': '#addTripRouteModal'
@@ -110,6 +110,11 @@ $(function () {
                 boundary: document.body
             });
         });
+    });
+
+    $(document).on('click', 'button.addTripRoute', function () {
+        $("#addTripRouteForm").trigger('reset');
+        $("#points").empty();
     });
 
     $("#addTripRouteForm").on("submit", function (event) {
@@ -183,23 +188,45 @@ $(function () {
                     response.legs.forEach(function (leg, index) {
                         // Determine the color based on leg type
                         var colorClass = '';
-                        var typeTranslation = '';
+                        var legTypeTranslation = '';
+                        var countryLocaleTranslation = '';
                         switch (leg.type) {
-                            case 'Start':
+                            case 'Origin':
                                 colorClass = 'timeline-point-success'; // Green
-                                typeTranslation = startTranslation;
+                                legTypeTranslation = originTranslation;
                                 break;
                             case 'Transit':
                                 colorClass = 'timeline-point-warning'; // Yellow
-                                typeTranslation = transitTranslation;
+                                legTypeTranslation = transitTranslation;
                                 break;
-                            case 'End':
+                            case 'Destination':
                                 colorClass = 'timeline-point-danger'; // Red
-                                typeTranslation = endTranslation;
+                                legTypeTranslation = destinationTranslation;
                                 break;
                             default:
                                 colorClass = 'timeline-point-info'; // Default to blue for unknown types
                         }
+                        switch (leg.country) {
+                            case 'Libya':
+                                countryLocaleTranslation = libyaTranslation;
+                                break;
+                            case 'Turkey':
+                                countryLocaleTranslation = turkeyTranslation;
+                                break;
+                            case 'Dubai':
+                                countryLocaleTranslation = dubaiTranslation;
+                                break;
+                            case 'China':
+                                countryLocaleTranslation = chinaTranslation;
+                                break;
+                            case 'Tunis':
+                                countryLocaleTranslation = tunisTranslation;
+                                break;
+                            default:
+                                colorClass = 'timeline-point-info'; // Default to blue for unknown types
+                        }
+
+
 
                         // Create a new timeline item
                         var timelineItem = $('<li class="timeline-item timeline-item-transparent ps-4"></li>');
@@ -212,13 +239,13 @@ $(function () {
 
                         // Create the timeline header
                         var timelineHeader = $('<div class="timeline-header"></div>');
-                        timelineHeader.append('<h6 class="mb-0">' + typeTranslation + '</h6>');
+                        timelineHeader.append('<h6 class="mb-0">' + legTypeTranslation + '</h6>');
 
                         // Add header to the event
                         timelineEvent.append(timelineHeader);
 
                         // Add description to the event
-                        timelineEvent.append('<p class="mb-2">' + countryTranslation + ': ' + leg.country + '</p>');
+                        timelineEvent.append('<p class="mb-2">' + countryTranslation + ': ' + countryLocaleTranslation + '</p>');
 
                         // Add the timeline event to the timeline item
                         timelineItem.append(timelineEvent);
@@ -232,6 +259,17 @@ $(function () {
                         }
                     });
                 }
+                var routeTypeTranslation = '';
+                switch (response.type) {
+                    case 'Air':
+                        routeTypeTranslation = airTranslation;
+                        break;
+                    case 'Sea':
+                        routeTypeTranslation = seaTranslation;
+                        break;
+                    default:
+                        colorClass = 'timeline-point-info'; // Default to blue for unknown types
+                }
 
                 // Add the final shipment details
                 var finalItem = $('<li class="timeline-item timeline-item-transparent ps-4"></li>');
@@ -239,7 +277,7 @@ $(function () {
 
                 var finalEvent = $('<div class="timeline-event"></div>');
                 finalEvent.append('<div class="timeline-header"><h6 class="mb-0">' + tripDetailsTranslation + '</h6></div>');
-                finalEvent.append('<p class="mb-2">' + typeTranslation + ': ' + response.type + '</p>');
+                finalEvent.append('<p class="mb-2">' + typeTranslation + ': ' + routeTypeTranslation + '</p>');
                 finalEvent.append('<p class="mb-2">' + tripPriceTranslation + ': $' + response.trip_price + '</p>');
 
                 finalItem.append(finalEvent);
@@ -271,19 +309,20 @@ $(function () {
         function createLegContainer(leg, index) {
             var legContainer = $('<div data-repeater-list="points"><div data-repeater-item><div class="row"></div></div></div>');
 
-            var typeSelect = $(`<div class="mb-3 col-5 mb-0"><label class="form-label" for="form-repeater-1-3">Type</label><select class="select2 form-select" data-allow-clear="true" name="points[${index}][type]"></select></div>`);
+            var typeSelect = $(`<div class="mb-3 col-5 mb-0"><label class="form-label" for="form-repeater-1-3">${typeTranslation}</label><select class="select2 form-select" data-allow-clear="true" name="points[${index}][type]"></select></div>`);
             typeSelect.find('select').append('<option selected disabled>' + selectTranslation + '</option>');
-            typeSelect.find('select').append('<option value="Start">Start Point</option>');
-            typeSelect.find('select').append('<option value="Transit">Transit</option>');
-            typeSelect.find('select').append('<option value="End">End Point</option>');
+            typeSelect.find('select').append('<option value="Origin">' + originTranslation + '</option>');
+            typeSelect.find('select').append('<option value="Transit">' + transitTranslation + '</option>');
+            typeSelect.find('select').append('<option value="Destination">' + destinationTranslation + '</option>');
             typeSelect.find('select').val(leg.type);
 
-            var countrySelect = $(`<div class="mb-3 col-5 mb-0"><label class="form-label" for="form-repeater-1-4">Country</label><select class="select2 form-select" data-allow-clear="true" name="points[${index}][country]"></select></div>`);
+            var countrySelect = $(`<div class="mb-3 col-5 mb-0"><label class="form-label" for="form-repeater-1-4">${countryTranslation}</label><select class="select2 form-select" data-allow-clear="true" name="points[${index}][country]"></select></div>`);
             countrySelect.find('select').append('<option selected disabled>' + selectTranslation + '</option>');
-            countrySelect.find('select').append('<option value="Turkey">Turkey</option>');
-            countrySelect.find('select').append('<option value="China">China</option>');
-            countrySelect.find('select').append('<option value="Tunis">Tunis</option>');
-            countrySelect.find('select').append('<option value="Libya">Libya</option>');
+            countrySelect.find('select').append('<option value="Turkey">' + turkeyTranslation + '</option>');
+            countrySelect.find('select').append('<option value="China">' + chinaTranslation + '</option>');
+            countrySelect.find('select').append('<option value="Tunis">' + tunisTranslation + '</option>');
+            countrySelect.find('select').append('<option value="Dubai">' + dubaiTranslation + '</option>');
+            countrySelect.find('select').append('<option value="Libya">' + libyaTranslation + '</option>');
             countrySelect.find('select').val(leg.country);
 
             var deleteButton = $('<div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0"><button class="btn btn-label-danger mt-4" data-repeater-delete><i class="ti ti-x ti-xs me-1"></i></button></div>');

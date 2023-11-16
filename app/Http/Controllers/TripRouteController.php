@@ -44,6 +44,7 @@ class TripRouteController extends Controller
             'type' => $request->input('type'),
             'legs' => $request->input('points'),
             'trip_price' => $request->input('trip_price'),
+            'created_by' => auth()->user()->id,
         ]);
 
         // Save the instance to the database
@@ -95,6 +96,7 @@ class TripRouteController extends Controller
         $tripRoute->type = $request->input('type');
         $tripRoute->legs = $request->input('points');
         $tripRoute->trip_price = $request->input('trip_price');
+        $tripRoute->updated_by = auth()->user()->id;
 
         // Save the updated instance to the database
         $tripRoute->save();
@@ -108,9 +110,11 @@ class TripRouteController extends Controller
     public function destroy(string $id)
     {
         $tripRoute = TripRoute::find($id);
+        $tripRoute->deleted_by = auth()->user()->id;
 
         if ($tripRoute) {
             $tripRoute->delete();
+            $tripRoute->save();
 
             return response()->json(['message' => __('Trip Route deleted successfully')]);
         }
@@ -123,13 +127,14 @@ class TripRouteController extends Controller
         $tripRoutes = TripRoute::orderBy('id', 'DESC')->get();
 
        foreach ($tripRoutes as $tripRoute) {
-            $names = '';
+            $legsCombined = '';
             foreach ($tripRoute->legs as $leg) {
                 if (!empty($leg['country'])) {
-                    $names .= ' - ' . $leg['country'];
+                    $legsCombined .= ($legsCombined ? '. ' : '') . ' ' . __($leg['type']) . ' (' . __($leg['country']) . ') ';
                 }
             }
-            $tripRoute->legs_combined = ltrim($names, ' - ');  // Remove leading ' - ' if any
+            $tripRoute->legs_combined = $legsCombined;    
+            $tripRoute->typeLocale = __($tripRoute->type); 
         }
 
         return Datatables::of($tripRoutes)->make(true);

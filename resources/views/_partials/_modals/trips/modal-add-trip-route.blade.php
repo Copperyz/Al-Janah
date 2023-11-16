@@ -62,7 +62,7 @@
                     </div>
                     <hr>
                     <h5 class="mb-2">{{__('Legs')}}</h5>
-                    <div data-repeater-list="points">
+                    <div data-repeater-list="points" id="points">
                         <div data-repeater-item>
                             <div class="row">
                                 <div class="mb-3 col-5 mb-0">
@@ -70,9 +70,9 @@
                                     <select id="form-repeater-1-3" class="select2 form-select" data-allow-clear="true"
                                         name="type">
                                         <option selected disabled>{{__('Select')}}</option>
-                                        <option value="Start">Start Point</option>
-                                        <option value="Transit">Transit</option>
-                                        <option value="End">End Point</option>
+                                        <option value="Origin">{{__('Origin')}}</option>
+                                        <option value="Transit">{{__('Transit')}}</option>
+                                        <option value="Destination">{{__('Destination')}}</option>
                                     </select>
                                 </div>
                                 <div class="mb-3 col-5 mb-0">
@@ -80,10 +80,11 @@
                                     <select id="form-repeater-1-4" class="select2 form-select" data-allow-clear="true"
                                         name="country">
                                         <option selected disabled>{{__('Select')}}</option>
-                                        <option value="Turkey">Turkey</option>
-                                        <option value="China">China</option>
-                                        <option value="Tunis">Tunis</option>
-                                        <option value="Libya">Libya</option>
+                                        <option value="Turkey">{{__('Turkey')}}</option>
+                                        <option value="China">{{__('China')}}</option>
+                                        <option value="Tunis">{{__('Tunis')}}</option>
+                                        <option value="Dubai">{{__('Dubai')}}</option>
+                                        <option value="Libya">{{__('Libya')}}</option>
                                     </select>
                                 </div>
                                 <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">

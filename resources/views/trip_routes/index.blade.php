@@ -6,7 +6,7 @@ $configData = Helper::appClasses();
 
 @extends('layouts/layoutMaster')
 
-@section('title', __('Trips List'))
+@section('title', __('Trip Routes'))
 
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}">
@@ -64,14 +64,17 @@ var tripPriceTranslation = @json(__('Trip Price'));
 var tripDetailsTranslation = @json(__('Trip Details'));
 var typeTranslation = @json(__('Type'));
 var selectTranslation = @json(__('Select'));
-var startTranslation = @json(__('Start'));
+var originTranslation = @json(__('Origin'));
 var transitTranslation = @json(__('Transit'));
-var endTranslation = @json(__('End'));
+var destinationTranslation = @json(__('Destination'));
 var countryTranslation = @json(__('Country'));
-
-
-
-
+var libyaTranslation = @json(__('Libya'));
+var turkeyTranslation = @json(__('Turkey'));
+var chinaTranslation = @json(__('China'));
+var dubaiTranslation = @json(__('Dubai'));
+var tunisTranslation = @json(__('Tunis'));
+var airTranslation = @json(__('Air'));
+var seaTranslation = @json(__('Sea'));
 
 var exportTranslation = @json(__('Export'));
 var searchTranslation = @json(__('Search'));

@@ -29,9 +29,6 @@
                         </select>
                     </div>
 
-
-
-
                     <div class="col-12 col-md-6">
                         <label class="form-label">{{__('Price')}}</label>
                         <input name="price" type="number" class="form-control invoice-item-price mb-3"

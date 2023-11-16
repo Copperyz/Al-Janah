@@ -6,20 +6,19 @@
 
 $(function () {
     // Variable declaration for table
-    var dt_shipment_table = $('.shipment-list-table');
-
-    // shipment datatable
-    if (dt_shipment_table.length) {
-        var dt_shipment = dt_shipment_table.DataTable({
-            ajax: 'get-shipments',
+    var dt_trips_table = $('.trips-list-table');
+    // trips datatable
+    if (dt_trips_table.length) {
+        var dt_trips = dt_trips_table.DataTable({
+            ajax: 'get-trips',
             columns: [
                 // columns according to JSON
                 { data: '' },
-                { data: 'id' },
-                { data: 'customerName' },
-                { data: 'date' },
-                { data: 'amount' },
-                // { data: 'paymentStatus' },
+                { data: 'tracking_no' },
+                { data: 'delivery_code' },
+                { data: 'status' },
+                { data: 'departure_date' },
+                { data: 'estimated_delivery_date' },
                 { data: 'action' }
             ],
             columnDefs: [
@@ -59,8 +58,8 @@ $(function () {
                     render: function (data, type, full, meta) {
                         return (
                             '<div class="d-flex align-items-center">' +
-                            '<a href="./orders/' + full['id'] + '" class= "text-body" > <i class="ti ti-eye mx-2 ti-sm"></i></a > ' +
-                            '<a href="./orders/' + full['id'] + '/edit" class="text-body editUser"><i class="ti ti-edit ti-sm me-2"></i></a>' +
+                            '<span class="text-nowrap"><button class="btn btn-sm btn-icon me-2 showTrip" data-bs-target="#showTripModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-eye"></i></button>' +
+                            '<span class="text-nowrap"><button class="btn btn-sm btn-icon me-2 editTrip" data-bs-target="#editTripModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit"></i></button>' +
                             '<a href="javascript:;" class="text-body delete-record"><i class="ti ti-trash ti-sm mx-2"></i></a>' +
                             '</div>'
                         );
@@ -90,10 +89,14 @@ $(function () {
             // Buttons with Dropdown
             buttons: [
                 {
-                    text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addOrderTranslation}</span>`,
-                    className: 'btn btn-primary',
-                    action: function (e, dt, button, config) {
-                        window.location = './orders/create';
+                    text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addTripTranslation}</span>`,
+                    className: 'add-new btn btn-primary mb-3 mb-md-0 addTrip',
+                    attr: {
+                        'data-bs-toggle': 'modal',
+                        'data-bs-target': '#addTripModal'
+                    },
+                    init: function (api, node, config) {
+                        $(node).removeClass('btn-secondary');
                     }
                 }
             ],
@@ -101,7 +104,7 @@ $(function () {
     }
 
     // On each datatable draw, initialize tooltip
-    dt_shipment_table.on('draw.dt', function () {
+    dt_trips_table.on('draw.dt', function () {
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl, {
@@ -110,9 +113,157 @@ $(function () {
         });
     });
 
+    $(document).on('click', 'button.addTrip', function () {
+        // Store the default option value
+        var defaultTripRouteId = $("#trip_route_id option:selected").val();
+        var defaultCurrentStatus = $("#current_status option:selected").val();
+
+        $("#addTripForm").trigger('reset');
+        $("#trip_route_id").val(null).trigger('change');
+        $("#current_status").val(null).trigger('change');
+
+        // Set the default option back
+        $("#trip_route_id").val(defaultTripRouteId).trigger('change');
+        $("#current_status").val(defaultCurrentStatus).trigger('change');
+    });
+
+    $("#addTripForm").on("submit", function (event) {
+        event.preventDefault();
+        var form = $(this);
+        var url = form.attr('action');
+        var method = form.attr('method');
+        var formData = form.serialize();
+        $.ajax({
+            url: url,
+            method: method,
+            data: formData,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response, status, xhr) {
+                if (xhr.status === 200) {
+                    // Handle a successful response
+                    dt_trips.ajax.url('get-trips').load();
+                    Swal.fire({
+                        title: '',
+                        text: response.message,
+                        icon: 'success',
+                        confirmButtonText: doneTranslation,
+                        customClass: {
+                            confirmButton: 'btn btn-success'
+                        },
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $("#addTripForm").trigger('reset');
+                            $('#addTripModal').modal('hide');
+                        }
+                    });
+                }
+                else {
+                    // Handle other status codes
+                }
+            },
+            error: function (response, xhr, status, error) {
+                // Handle the error response here
+                var errorMessages = Object.values(response.responseJSON.errors).flat();
+                // Format error messages with line breaks
+                var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
+                // Create the Swal alert
+                Swal.fire({
+                    title: response.responseJSON.message,
+                    html: formattedErrorMessages,
+                    icon: 'error',
+                    confirmButtonText: doneTranslation,
+                    customClass: {
+                        confirmButton: 'btn btn-primary'
+                    },
+                    buttonsStyling: false
+                });
+            }
+        });
+
+    });
+
+    $(document).on('click', 'button.editTrip', function () {
+        $("#editTripForm").trigger('reset');
+        var defaultTripRouteId = $("#edit_trip_route_id option:selected").val();
+        var defaultCurrentStatus = $("#edit_current_status option:selected").val();
+
+        $("#addTripForm").trigger('reset');
+        $("#edit_trip_route_id").val(null).trigger('change');
+        $("#edit_current_status").val(null).trigger('change');
+
+        // Set the default option back
+        $("#edit_trip_route_id").val(defaultTripRouteId).trigger('change');
+        $("#edit_current_status").val(defaultCurrentStatus).trigger('change');
+
+        var data = dt_trips.row($(this).closest('tr')).data();
+        $('#editTripForm').find('[name="departure_date"]').val(data.departure_date);
+        $('#editTripForm').find('[name="estimated_delivery_date"]').val(data.estimated_delivery_date);
+        $('#editTripForm').find('[name="id"]').val(data.id);
+
+        if (data.trip_route_id)
+            $('#editTripForm').find('[name="trip_route_id"]').val(data.trip_route_id).trigger('change');
+        if (data.current_status)
+            $('#editTripForm').find('[name="current_status"]').val(data.current_status).trigger('change');
+    });
+
+    $("#editTripForm").on("submit", function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: './trips/' + $('#editTripForm').find('[name="id"]').val(),
+            method: 'PUT',
+            data: $(this).serialize(),
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response, status, xhr) {
+                if (xhr.status === 200) {
+                    // Handle a successful response
+                    dt_trips.ajax.url('get-trips').load();
+                    Swal.fire({
+                        title: '',
+                        text: response.message,
+                        icon: 'success',
+                        confirmButtonText: doneTranslation,
+                        customClass: {
+                            confirmButton: 'btn btn-success'
+                        },
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $("#editTripForm").trigger('reset');
+                            $('#editTripModal').modal('hide');
+                        }
+                    });
+                }
+                else {
+                    // Handle other status codes
+                }
+            },
+            error: function (response, xhr, status, error) {
+                // Handle the error response here
+                var errorMessages = Object.values(response.responseJSON.errors).flat();
+                // Format error messages with line breaks
+                var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
+                // Create the Swal alert
+                Swal.fire({
+                    title: response.responseJSON.message,
+                    html: formattedErrorMessages,
+                    icon: 'error',
+                    confirmButtonText: doneTranslation,
+                    customClass: {
+                        confirmButton: 'btn btn-primary'
+                    },
+                    buttonsStyling: false
+                });
+            }
+        });
+
+    });
+
     // Delete Record
-    $('.shipment-list-table tbody').on('click', '.delete-record', function () {
-        var data = dt_shipment.row($(this).closest('tr')).data();
+    $('.trips-list-table tbody').on('click', '.delete-record', function () {
+        var data = dt_trips.row($(this).closest('tr')).data();
         Swal.fire({
             title: areYouSureTranslation,
             text: areYouSureTextTranslation,
@@ -129,14 +280,14 @@ $(function () {
             if (result.isConfirmed) {
                 // Perform the deletion action here
                 $.ajax({
-                    url: './orders/' + data.id,
+                    url: './trips/' + data.id,
                     type: 'DELETE',
 
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function (response) {
-                        dt_shipment.ajax.url('get-orders').load();
+                        dt_trips.ajax.url('get-trips').load();
                         Swal.fire({
                             icon: 'success',
                             title: '',

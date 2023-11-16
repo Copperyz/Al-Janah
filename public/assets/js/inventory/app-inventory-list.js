@@ -35,8 +35,6 @@ $(function () {
         { data: 'action' }
       ],
       columnDefs: [
-
-
         {
           // Actions
           targets: -1,
@@ -128,6 +126,8 @@ $(function () {
       error: function (response, xhr, status, error) {
         // Handle the error response here
         var errorMessages = Object.values(response.responseJSON.errors).flat();
+
+        var firstError = Object.values(response.responseJSON.errors)[0];
         // Format error messages with line breaks
         var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
         // Create the Swal alert
@@ -145,8 +145,55 @@ $(function () {
   });
 
   // Delete Record
-  $('.datatables-category-list tbody').on('click', '.delete-record', function () {
-    dt_category.row($(this).parents('tr')).remove().draw();
+  $('.datatables-inventory-list tbody').on('click', '.delete-record', function () {
+    var data = dt_category.row($(this).closest('tr')).data();
+
+    Swal.fire({
+      title: areYouSureTranslation,
+      text: areYouSureTextTranslation,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: submitTranslation,
+      cancelButtonText: cancelTranslation,
+      customClass: {
+        confirmButton: 'btn btn-primary me-3',
+        cancelButton: 'btn btn-label-secondary'
+      },
+      buttonsStyling: false
+    }).then(result => {
+      if (result.isConfirmed) {
+        // Perform the deletion action here
+        $.ajax({
+          url: './inventory/' + data.id,
+          type: 'DELETE',
+
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          success: function (response) {
+            dt_category.ajax.url('get-inventories').load();
+            Swal.fire({
+              icon: 'success',
+              title: '',
+              text: response.message,
+              confirmButtonText: doneTranslation,
+              customClass: {
+                confirmButton: 'btn btn-success'
+              }
+            });
+          },
+          error: function (xhr, status, error) {
+            Swal.fire({
+              title: `{{ __('An error occurred while deleting.') }}`,
+              text: `{{ __('This record cannot be deleted as it has related data associated with it.') }}`,
+              icon: 'error',
+              confirmButtonText: `{{ __('Back') }}`,
+              confirmButtonColor: '#dc3545'
+            });
+          }
+        });
+      }
+    });
   });
 
   // Filter form control to default size
@@ -163,79 +210,24 @@ $(function () {
 
   var offcanvasAddInventory = new bootstrap.Offcanvas($('#offcanvasEcommerceCategoryList'));
 
-  $('#addInventoryForm').on('submit', function (event) {
-    event.preventDefault();
-    var form = $(this);
-    var url = form.attr('action');
-    var method = form.attr('method');
-    var formData = form.serialize();
-
-    $.ajax({
-      url: url,
-      method: method,
-      data: formData,
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },
-      success: function (response, status, xhr) {
-        if (xhr.status === 200) {
-          // Handle a successful response
-          Swal.fire({
-            title: '',
-            text: response.message,
-            icon: 'success',
-            confirmButtonText: doneTranslation,
-            customClass: {
-              confirmButton: 'btn btn-success'
-            }
-          }).then(result => {
-            if (result.isConfirmed) {
-              offcanvasAddInventory.hide();
-              // location.reload();
-              $('#addInventoryForm').trigger('reset');
-              dt_category.ajax.url('get-inventories').load();
-            }
-          });
-        } else {
-          // Handle other status codes
-        }
-      },
-      error: function (response, xhr, status, error) {
-        // Handle the error response here
-        var errorMessages = Object.values(response.responseJSON.errors).flat();
-        // Format error messages with line breaks
-        var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
-        // Create the Swal alert
-        Swal.fire({
-          title: response.responseJSON.message,
-          html: formattedErrorMessages,
-          icon: 'error',
-          confirmButtonText: doneTranslation,
-          customClass: {
-            confirmButton: 'btn btn-primary'
-          },
-          buttonsStyling: false
-        });
-      }
-    });
-  });
   //For form validation
   const addInventoryForm = document.getElementById('addInventoryForm');
+  // const editInventoryForm = document.getElementById('editInventoryForm');
 
   //Add New customer Form Validation
-  const fv = FormValidation.formValidation(addInventoryForm, {
+  const fvAdd = FormValidation.formValidation(addInventoryForm, {
     fields: {
       inventoryName: {
         validators: {
           notEmpty: {
-            message: 'Please enter inventory name'
+            message: window.translations.custom.inventoryName.required
           }
         }
       },
       branchID: {
         validators: {
           notEmpty: {
-            message: 'Please chooes Branch'
+            message: window.translations.custom.branchID.required
           }
         }
       }
@@ -255,5 +247,62 @@ $(function () {
       // defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
       autoFocus: new FormValidation.plugins.AutoFocus()
     }
+  });
+
+  $('#addInventoryForm').on('submit', function (event) {
+    event.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+    var method = form.attr('method');
+    var formData = form.serialize();
+
+    $.ajax({
+      url: url,
+      method: method,
+      data: formData,
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function (response, status, xhr) {
+        console.log(response);
+        if (xhr.status === 200) {
+          // Handle a successful response
+          Swal.fire({
+            title: '',
+            text: response.message,
+            icon: 'success',
+            confirmButtonText: doneTranslation,
+            customClass: {
+              confirmButton: 'btn btn-success'
+            }
+          }).then(result => {
+            if (result.isConfirmed) {
+              $('#addInventoryForm').trigger('reset');
+              dt_category.ajax.url('get-inventories').load();
+              offcanvasAddInventory.hide();
+              // location.reload();
+            }
+          });
+        }
+      },
+      error: function (response, xhr, status, error) {
+        // Handle the error response here
+        var errorMessages = Object.values(response.responseJSON.errors).flat();
+        var firstMessage = Object.values(response.responseJSON.errors)[0][0];
+        // Format error messages with line breaks
+        var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
+        // Create the Swal alert
+        Swal.fire({
+          title: firstMessage,
+          html: formattedErrorMessages,
+          icon: 'error',
+          confirmButtonText: doneTranslation,
+          customClass: {
+            confirmButton: 'btn btn-primary'
+          },
+          buttonsStyling: false
+        });
+      }
+    });
   });
 });

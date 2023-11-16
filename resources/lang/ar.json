@@ -31,6 +31,11 @@
   "User deleted successfully": "تم حذف المستخدم بنجاح",
   "Inventory added successfully": "تم إضافة المخزن بنجاح",
   "Search Inventory": "بحث عن مخزن",
+  "Enter inventory name": "ادخل اسم المخزن",
+  "Edit inventory": "تعديل المخزن",
+  "Edit inventory name and branch": "تعديل اسم المخزن و الفرع",
+  "Inventory deleted successfully": "تم حذف المخزن بنجاح",
+  "Item Code": "رمز الصنف",
   "Search": "بحث",
   "Show": "عرض",
   "Show Entries": "عرض :count",
@@ -191,5 +196,4 @@
   "Transit": "عبور",
   "End": "نهاية",
   "Trips List": "قائمة الرحلات"
-
 }

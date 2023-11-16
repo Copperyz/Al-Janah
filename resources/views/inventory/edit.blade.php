@@ -17,9 +17,15 @@
                         <input type="hidden" name="id" id="id">
                     </div>
                     <div class="col-sm-12">
-                        <label class="form-label" for="name">{{__('Branch')}}</label>
-                        <input type="text" id="name" name="branch" class="form-control"
-                            placeholder="{{__('Enter inventory branch')}}" tabindex="-1" />
+
+                        <label class="form-label" for="inventory-branch">{{__('Branch')}}</label>
+                        <select id="inventory-branch" required class="select2 form-select" name="branchID"
+                            data-placeholder="Select inventory branch">
+                            <option value=''>{{__('Select inventory branch')}}</option>
+                            @foreach ($branches as $branch)
+                            <option value='{{$branch->id}}'>{{$branch->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-sm-3 mb-12">
                         <input type="hidden" name="id" id="id">

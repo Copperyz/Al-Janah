@@ -162,14 +162,19 @@ $(function () {
         // Manually initialize Select2 for both old and new selects
         initializeSelect2($(this).find('.select2'));
       },
-      hide: function (e) {
-        confirm('Are you sure you want to delete this element?') && $(this).slideUp(e);
-      }
     });
 
+    // Handle delete button click event separately
+    formRepeater.on('click', '.btn-label-danger[data-repeater-delete]', function (e) {
+      e.preventDefault(); // Prevent default click action
+      $(this).closest('.data-repeater-item').slideUp(function () {
+        $(this).remove();
+      });
+    });
 
     // Explicitly initialize Select2 for existing selects
     initializeSelect2(formRepeater.find('.select2'));
+
     // Bind click event for the "Add" button
     $('.btn-primary[data-repeater-create]').on('click', function (e) {
       e.preventDefault(); // Prevent default click action
@@ -177,8 +182,6 @@ $(function () {
       newItem.find('select.select2').select2({ allowClear: true }); // Manually initialize Select2 for the new item
       formRepeater.find('.data-repeater-list').append(newItem); // Append the new item to the repeater list
     });
-
-
   }
 
   function initializeSelect2(selectElements) {
@@ -187,9 +190,4 @@ $(function () {
       dropdownParent: selectElements.closest('.modal') // Set the dropdown parent to the modal
     });
   }
-
-
-
-
-
 });

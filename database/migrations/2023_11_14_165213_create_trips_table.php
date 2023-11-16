@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('tracking_no');
             $table->string('delivery_code');
             $table->string('current_status');
-            $table->dateTime('departure_date');
-            $table->dateTime('estimated_delivery_date');
+            $table->dateTime('departure_date')->nullable();
+            $table->dateTime('estimated_delivery_date')->nullable();
             $table->unsignedBigInteger('trip_route_id')->nullable();
 
             $table->foreign('trip_route_id')->references('id')->on('trip_routes');

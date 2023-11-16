@@ -12,16 +12,21 @@ $configData = Helper::appClasses();
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}">
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css')}}">
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css')}}">
+<link rel="stylesheet" href="{{asset('assets/vendor/libs/select2/select2.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/libs/flatpickr/flatpickr.css')}}" />
 @endsection
 
 @section('vendor-script')
 <script src="{{asset('assets/vendor/libs/moment/moment.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script>
-
+<script src="{{asset('assets/vendor/libs/select2/select2.js')}}"></script>
+<script src="{{asset('assets/vendor/libs/flatpickr/flatpickr.js')}}"></script>
 @endsection
 
 @section('page-script')
+<script src="{{asset('assets/js/forms-selects.js')}}"></script>
 <script src="{{asset('assets/js/trips/app-trips-list.js')}}"></script>
+<script src="{{asset('assets/js/form-layouts.js')}}"></script>
 @endsection
 
 @section('content')
@@ -47,8 +52,8 @@ $configData = Helper::appClasses();
                 <div class="col-sm-6 col-lg-3">
                     <div class="d-flex justify-content-between align-items-start card-widget-2 border-end pb-3 pb-sm-0">
                         <div>
-                            <h3 class="mb-1">{{$shipmentsCount}}</h3>
-                            <p class="mb-0">{{__('Shipments')}}</p>
+                            <h3 class="mb-1">{{$tripsCount}}</h3>
+                            <p class="mb-0">{{__('Trips')}}</p>
                         </div>
                         <span class="avatar me-lg-4">
                             <span class="avatar-initial bg-label-secondary rounded"><i
@@ -60,8 +65,8 @@ $configData = Helper::appClasses();
                 <div class="col-sm-6 col-lg-3">
                     <div class="d-flex justify-content-between align-items-start border-end pb-3 pb-sm-0 card-widget-3">
                         <div>
-                            <h3 class="mb-1">{{$airCount}}</h3>
-                            <p class="mb-0">{{__('Air')}}</p>
+                            <h3 class="mb-1">{{$deliveredCount}}</h3>
+                            <p class="mb-0">{{__('Delivered')}}</p>
                         </div>
                         <span class="avatar me-sm-4">
                             <span class="avatar-initial bg-label-secondary rounded"><i
@@ -72,8 +77,8 @@ $configData = Helper::appClasses();
                 <div class="col-sm-6 col-lg-3">
                     <div class="d-flex justify-content-between align-items-start">
                         <div>
-                            <h3 class="mb-1">{{$seaCount}}</h3>
-                            <p class="mb-0">{{__('Sea')}}</p>
+                            <h3 class="mb-1">{{$inProgressCount}}</h3>
+                            <p class="mb-0">{{__('In Progress')}}</p>
                         </div>
                         <span class="avatar">
                             <span class="avatar-initial bg-label-secondary rounded"><i
@@ -89,15 +94,15 @@ $configData = Helper::appClasses();
 <!-- Shipment List Table -->
 <div class="card">
     <div class="card-datatable table-responsive">
-        <table class="shipment-list-table table border-top">
+        <table class="trips-list-table table border-top">
             <thead>
                 <tr>
                     <th></th>
-                    <th>#ID</th>
-                    <th>{{__('Customer')}}</th>
-                    <th>{{__('Date')}}</th>
-                    <th class="text-truncate">{{__('Amount')}}</th>
-                    <!-- <th>{{__('Status')}}</th> -->
+                    <th class="text-truncate">{{__('Tracking NO')}}</th>
+                    <th class="text-truncate">{{__('Delivery Code')}}</th>
+                    <th class="text-truncate">{{__('Status')}}</th>
+                    <th class="text-truncate">{{__('Departure Date')}}</th>
+                    <th class="text-truncate">{{__('Estimated Delivery Date')}}</th>
                     <th class="cell-fit">{{__('Actions')}}</th>
                 </tr>
             </thead>
@@ -107,7 +112,7 @@ $configData = Helper::appClasses();
 
 
 <script>
-var addOrderTranslation = @json(__('Add Order'));
+var addTripTranslation = @json(__('Add Trip'));
 var exportTranslation = @json(__('Export'));
 var searchTranslation = @json(__('Search'));
 var showTranslation = @json(__('Show'));
@@ -126,5 +131,8 @@ var doneTranslation = @json(__('Done'));
 var areYouSureTranslation = @json(__('Are you sure?'));
 var areYouSureTextTranslation = @json(__('You will not be able to revert this!'));
 </script>
+
+@include('_partials/_modals/trips/modal-add-trip')
+@include('_partials/_modals/trips/modal-edit-trip')
 
 @endsection

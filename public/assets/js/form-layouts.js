@@ -58,7 +58,7 @@
     datepickerList.forEach(function (datepicker) {
       datepicker.flatpickr({
         enableTime: true,
-        dateFormat: "Y-m-d h:m K",
+        dateFormat: "Y-m-d h:i K",
         monthSelectorType: 'static'
       });
     });

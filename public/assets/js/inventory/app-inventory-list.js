@@ -9,19 +9,6 @@
 $(function () {
   var dt_category_list_table = $('.datatables-inventory-list');
 
-  //select2 for dropdowns in offcanvas
-
-  // var select2 = $('.select2');
-  // if (select2.length) {
-  //   select2.each(function () {
-  //     var $this = $(this);
-  //     $this.wrap('<div class="position-relative"></div>').select2({
-  //       dropdownParent: $this.parent(),
-  //       placeholder: $this.data('placeholder') //for dynamic placeholder
-  //     });
-  //   });
-  // }
-
   // Customers List Datatable
 
   if (dt_category_list_table.length) {
@@ -203,50 +190,10 @@ $(function () {
     $('.dataTables_length .form-select').removeClass('form-select-sm');
   }, 300);
 
+  // create inventory
   $('#addInventoryForm :submit').on('click', function (event) {
     // Trigger the form submission when the button is clicked
     $(this).closest('form').submit();
-  });
-
-  var offcanvasAddInventory = new bootstrap.Offcanvas($('#offcanvasEcommerceCategoryList'));
-
-  //For form validation
-  const addInventoryForm = document.getElementById('addInventoryForm');
-  // const editInventoryForm = document.getElementById('editInventoryForm');
-
-  //Add New customer Form Validation
-  const fvAdd = FormValidation.formValidation(addInventoryForm, {
-    fields: {
-      inventoryName: {
-        validators: {
-          notEmpty: {
-            message: window.translations.custom.inventoryName.required
-          }
-        }
-      },
-      branchID: {
-        validators: {
-          notEmpty: {
-            message: window.translations.custom.branchID.required
-          }
-        }
-      }
-    },
-    plugins: {
-      trigger: new FormValidation.plugins.Trigger(),
-      bootstrap5: new FormValidation.plugins.Bootstrap5({
-        // Use this for enabling/changing valid/invalid class
-        eleValidClass: 'is-valid',
-        rowSelector: function (field, ele) {
-          // field is the field name & ele is the field element
-          return '.mb-3';
-        }
-      }),
-      submitButton: new FormValidation.plugins.SubmitButton(),
-      // Submit the form when all fields are valid
-      // defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
-      autoFocus: new FormValidation.plugins.AutoFocus()
-    }
   });
 
   $('#addInventoryForm').on('submit', function (event) {
@@ -288,12 +235,11 @@ $(function () {
       error: function (response, xhr, status, error) {
         // Handle the error response here
         var errorMessages = Object.values(response.responseJSON.errors).flat();
-        var firstMessage = Object.values(response.responseJSON.errors)[0][0];
         // Format error messages with line breaks
         var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
         // Create the Swal alert
         Swal.fire({
-          title: firstMessage,
+          title: response.responseJSON.message,
           html: formattedErrorMessages,
           icon: 'error',
           confirmButtonText: doneTranslation,
@@ -304,5 +250,46 @@ $(function () {
         });
       }
     });
+  });
+
+  var offcanvasAddInventory = new bootstrap.Offcanvas($('#offcanvasEcommerceCategoryList'));
+
+  //For form validation
+  const addInventoryForm = document.getElementById('addInventoryForm');
+  // const editInventoryForm = document.getElementById('editInventoryForm');
+
+  //Add New customer Form Validation
+  const fvAdd = FormValidation.formValidation(addInventoryForm, {
+    fields: {
+      inventoryName: {
+        validators: {
+          notEmpty: {
+            message: window.translations.custom.inventoryName.required
+          }
+        }
+      },
+      branchID: {
+        validators: {
+          notEmpty: {
+            message: window.translations.custom.branchID.required
+          }
+        }
+      }
+    },
+    plugins: {
+      trigger: new FormValidation.plugins.Trigger(),
+      bootstrap5: new FormValidation.plugins.Bootstrap5({
+        // Use this for enabling/changing valid/invalid class
+        eleValidClass: 'is-valid',
+        rowSelector: function (field, ele) {
+          // field is the field name & ele is the field element
+          return '.mb-3';
+        }
+      }),
+      submitButton: new FormValidation.plugins.SubmitButton(),
+      // Submit the form when all fields are valid
+      // defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+      autoFocus: new FormValidation.plugins.AutoFocus()
+    }
   });
 });

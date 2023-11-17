@@ -209,10 +209,16 @@
   "Trip updated successfully": "تم تعديل رحلة بنجاح",
   "Trip deleted successfully": "تم حذف رحلة بنجاح",
   "Tracking NO": "رقم التتبع",
-  "Delivery Code": "كود التسليم" ,
+  "Delivery Code": "كود التسليم",
   "Libya": "ليبيا",
   "Turkey": "تركيا",
   "China": "الصين",
   "Dubai": "دبي",
-  "Tunis": "تونس"
+  "Tunis": "تونس",
+  "Inventory Item List": "قائمة اصناف المخزن",
+  "Categorize": "تصنيفات ",
+  "Inventory updated successfully": "تم تعديل المخزن بنجاح",
+  "Self": "الرف",
+  "Shipment": "الشحنة",
+  "Inventory Item deleted successfully": "تم حذف العنصر بنجاح"
 }

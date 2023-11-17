@@ -1,6 +1,6 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'Items List - Inventory')
+@section('title', __('Inventory Item List'))
 
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}" />
@@ -120,5 +120,7 @@
         </table>
     </div>
 </div>
-
+<script>
+var addInventoryItemTranslation = @json(__('Add Product'));
+</script>
 @endsection

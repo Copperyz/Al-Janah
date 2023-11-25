@@ -220,5 +220,13 @@
   "Inventory updated successfully": "تم تعديل المخزن بنجاح",
   "Self": "الرف",
   "Shipment": "الشحنة",
-  "Inventory Item deleted successfully": "تم حذف العنصر بنجاح"
+  "Inventory Item deleted successfully": "تم حذف العنصر بنجاح",
+  "Show Trip": "عرض الرحلة",
+  "In Preparation": "قيد التجهيز",
+  "Ready to Pickup": "جاهزة للإستلام",
+  "Confirm shipment At Watehouse": "تأكيد الشحنة في المستودع",
+  "Confirm shipment Enroute": "تأكيد الشحنة في الطريق",
+  "Confirm": "تأكيد",
+  "Change Trip Status successfully": "تم تغير حالة الرحلة بنجاح",
+  "Note": "ملاحظة"
 }

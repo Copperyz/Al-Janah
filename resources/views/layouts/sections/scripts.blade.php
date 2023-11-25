@@ -31,6 +31,9 @@ var doneTranslation = @json(__('Done'));
 
 var areYouSureTranslation = @json(__('Are you sure?'));
 var areYouSureTextTranslation = @json(__('You will not be able to revert this!'));
+
+var btnConfirmWarehouse = @json(__('Confirm shipment At Watehouse'));
+var btnConfirmEnroute = @json(__('Confirm shipment Enroute'));
 </script>
 <!-- END: Theme JS-->
 <!-- Pricing Modal JS-->

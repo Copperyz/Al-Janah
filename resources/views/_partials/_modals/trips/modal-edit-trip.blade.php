@@ -25,8 +25,11 @@
                             <select id="edit_current_status" class="select2 form-select form-select-lg"
                                 data-allow-clear="true" name="current_status">
                                 <option disabled selected>{{__('Select')}}</option>
+                                <option value="In Preparation">{{__('In Preparation')}}</option>
                                 <option value="At Warehouse">{{__('At Warehouse')}}</option>
                                 <option value="Enroute">{{__('Enroute')}}</option>
+                                <option value="Ready to Pickup">{{__('Ready to Pickup')}}</option>
+
                             </select>
                         </div>
                     </div>

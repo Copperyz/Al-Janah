@@ -99,7 +99,6 @@ $configData = Helper::appClasses();
                 <tr>
                     <th></th>
                     <th class="text-truncate">{{__('Tracking NO')}}</th>
-                    <th class="text-truncate">{{__('Delivery Code')}}</th>
                     <th class="text-truncate">{{__('Status')}}</th>
                     <th class="text-truncate">{{__('Departure Date')}}</th>
                     <th class="text-truncate">{{__('Estimated Delivery Date')}}</th>

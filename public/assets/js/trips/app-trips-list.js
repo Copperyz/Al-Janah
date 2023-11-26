@@ -13,9 +13,8 @@ $(function () {
             ajax: 'get-trips',
             columns: [
                 // columns according to JSON
-                { data: '' },
                 { data: 'tracking_no' },
-                { data: 'delivery_code' },
+                { data: 'shipmentsCount' },
                 { data: 'status' },
                 { data: 'departure_date' },
                 { data: 'estimated_delivery_date' },
@@ -23,45 +22,15 @@ $(function () {
             ],
             columnDefs: [
                 {
-                    // For Responsive
-                    className: 'control',
-                    responsivePriority: 2,
-                    searchable: false,
-                    targets: 0,
-                    render: function (data, type, full, meta) {
-                        return '';
-                    }
-                },
-                // {
-                //   // shipment status
-                //   targets: 4,
-                //   render: function (data, type, full, meta) {
-                //     var $shipment_status = full['paymentStatus'];
-                //     var roleBadgeObj = {
-                //       paid: '<span class="badge badge-center rounded-pill bg-label-success w-px-30 h-px-30"><i class="ti ti-checks ti-sm"></i></span>',
-                //       pending: '<span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30"><i class="ti ti-hourglass-empty mx-2 ti-sm"></i></span>',
-                //       failed: '<span class="badge badge-center rounded-pill bg-label-danger w-px-30 h-px-30"><i class="ti ti-exclamation-circle ti-sm"></i></span>',
-                //       refunded:
-                //         '<span class="badge badge-center rounded-pill bg-label-info w-px-30 h-px-30"><i class="ti ti-receipt-refund ti-sm"></i></span>'
-                //     };
-                //     return (
-                //       roleBadgeObj[$shipment_status] +
-                //       '</span>'
-                //     );
-                //   }
-                // },
-                {
                     // Actions
                     targets: -1,
                     searchable: false,
                     orderable: false,
                     render: function (data, type, full, meta) {
                         return (
-                            '<div class="d-flex align-items-center">' +
-                            '<span class="text-nowrap"><button class="btn btn-sm btn-icon me-2 showTrip" data-bs-target="#showTripModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-eye"></i></button>' +
-                            '<span class="text-nowrap"><button class="btn btn-sm btn-icon me-2 editTrip" data-bs-target="#editTripModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit"></i></button>' +
-                            '<a href="javascript:;" class="text-body delete-record"><i class="ti ti-trash ti-sm mx-2"></i></a>' +
-                            '</div>'
+                            '<span><button class="btn btn-sm btn-warning me-2 showTripShipment" data-bs-target="#showTripShipmentModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-package ti-lg"></i></button>' +
+                            '<span><button class="btn btn-sm btn-info me-2 editTrip" data-bs-target="#editTripModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit ti-lg"></i></button>' +
+                            '<span><button class="btn btn-sm btn-danger me-2 delete-record"><i class="ti ti-trash ti-lg"></i></button>'
                         );
                     }
                 }
@@ -310,6 +279,191 @@ $(function () {
                 });
             }
         });
+    });
+
+    // Variable declaration for table
+    var dt_shipment_table = $('.shipment-list-table');
+    // shipment datatable
+    if (dt_shipment_table.length) {
+        var dt_shipment = dt_shipment_table.DataTable({
+            select: {
+                style: 'multi',
+                selector: 'td:first-child input[type="checkbox"]',
+            },
+            columns: [
+                // columns according to JSON
+                { data: 'id' },
+                { data: 'customerName' },
+                { data: 'date' },
+                { data: 'amount' },
+            ],
+            rowCallback: function (row, data) {
+                if (data.selected == 1) {
+                    $('input.dt-checkboxes', row).prop('checked', true);
+                    $(row).addClass('selected');
+                } else {
+                    $('input.dt-checkboxes', row).prop('checked', false);
+                    $(row).removeClass('selected');
+                }
+            },
+            columnDefs: [
+                {
+                    // For Checkboxes
+                    targets: 0,
+                    searchable: false,
+                    orderable: false,
+                    render: function () {
+                        return '<input type="checkbox" class="dt-checkboxes form-check-input">';
+                    },
+                    checkboxes: {
+                        selectRow: true,
+                        selectAllRender: '<input type="checkbox" class="form-check-input">'
+                    }
+                }
+            ],
+            order: [[1, 'desc']],
+            dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>><"table-responsive"t><"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+            select: {
+                // Select style
+                style: 'multi'
+            },
+            "language": {
+                "search": searchTranslation,
+                "lengthMenu": `${showTranslation} _MENU_`,
+                "info": ` ${showingTranslation} _START_ ${toTranslation} _END_ ${ofTranslation} _TOTAL_ ${entriesTranslation}`,
+                "paginate": {
+                    "next": nextTranslation,      // Change "Next" text
+                    "previous": previousTranslation, // Change "Previous" text
+                },
+                "emptyTable": noEntriesAvailableTranslation,
+                select: {
+                    rows: {
+                        _: `${rowSelectedTranslation} %d ${rows}`,
+                        1: onlyRow
+                    }
+                }
+            },
+            // Buttons with Dropdown
+            buttons: [
+                {
+                    text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addTripTranslation}</span>`,
+                    className: 'add-new btn btn-primary mb-3 mb-md-0 addTrip',
+                    attr: {
+                        'data-bs-toggle': 'modal',
+                        'data-bs-target': '#addTripModal'
+                    },
+                    init: function (api, node, config) {
+                        $(node).removeClass('btn-secondary');
+                    }
+                }
+            ],
+        });
+    }
+
+    var selectedRows = [];
+
+
+    // On each datatable draw, initialize tooltip
+    dt_shipment_table.on('draw.dt', function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl, {
+                boundary: document.body
+            });
+        });
+    });
+
+    var selectedRows = [];  // Declare selectedRows outside the event handler
+
+
+    // Event listener for the checkbox change
+    dt_shipment.on('select', function (e, dt, type, indexes) {
+        var selectedData = dt_shipment.rows(indexes).data().toArray();
+        // Filter out rows that are already in selectedRows
+        selectedData = selectedData.filter(row => !selectedRows.some(selectedRow => selectedRow.id === row.id));
+        selectedRows.push(...selectedData);
+    });
+
+
+    dt_shipment.on('deselect', function (e, dt, type, indexes) {
+        var deselectedData = dt_shipment.rows(indexes).data().toArray();
+        // Remove rows that are being deselected from selectedRows
+        selectedRows = selectedRows.filter(selectedRow => !deselectedData.some(row => row.id === selectedRow.id));
+    });
+
+
+    $(document).on('click', 'button.showTripShipment', function () {
+        var data = dt_trips.row($(this).closest('tr')).data();
+        $('#id').val(data.id);
+
+        // Reset selectedRows array
+        selectedRows = [];
+
+        dt_shipment.ajax.url('get-trip-shipments/' + data.id).load(function () {
+            // Iterate over the rows and update selected rows
+            dt_shipment.rows().every(function (index, element) {
+                var rowData = this.data();
+
+                if (rowData.selected == 1) {
+                    // Update selectedRows if the row is selected
+                    selectedRows.push(rowData);
+                }
+            });
+        });
+    });
+
+
+
+    // Event listener for the submit button
+    $('#showTripShipmentModal').on('click', 'button.btn-primary', function () {
+        $.ajax({
+            url: './trip_shipments/' + $('#id').val(),
+            method: 'PUT',
+            data: { selectedRows: selectedRows },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response, status, xhr) {
+                if (xhr.status === 200) {
+                    // Handle a successful response
+                    dt_trips.ajax.url('get-trips').load();
+                    Swal.fire({
+                        title: '',
+                        text: response.message,
+                        icon: 'success',
+                        confirmButtonText: doneTranslation,
+                        customClass: {
+                            confirmButton: 'btn btn-success'
+                        },
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $('#showTripShipmentModal').modal('hide');
+                        }
+                    });
+                }
+                else {
+                    // Handle other status codes
+                }
+            },
+            error: function (response, xhr, status, error) {
+                // Handle the error response here
+                var errorMessages = Object.values(response.responseJSON.errors).flat();
+                // Format error messages with line breaks
+                var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
+                // Create the Swal alert
+                Swal.fire({
+                    title: response.responseJSON.message,
+                    html: formattedErrorMessages,
+                    icon: 'error',
+                    confirmButtonText: doneTranslation,
+                    customClass: {
+                        confirmButton: 'btn btn-primary'
+                    },
+                    buttonsStyling: false
+                });
+            }
+        });
+
     });
 
     // Filter form control to default size

@@ -13,4 +13,9 @@ class Trip extends Model
 
     protected $fillable = ['tracking_no', 'delivery_code', 'trip_route_id', 'current_status', 'departure_date', 'estimated_delivery_date', 'created_by', 'updated_by', 'deleted_by'];
 
+     public function shipments()
+    {
+        return $this->belongsToMany(Shipment::class, 'trip_shipments');
+    }
+
 }

@@ -22,4 +22,9 @@ class Shipment extends Model
     {
         return $this->hasOne(Payment::class, 'shipment_id');
     }
+
+    public function trips()
+    {
+        return $this->belongsToMany(Trip::class, 'trip_shipments');
+    }
 }

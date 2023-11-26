@@ -214,5 +214,10 @@
   "Turkey": "تركيا",
   "China": "الصين",
   "Dubai": "دبي",
-  "Tunis": "تونس"
+  "Tunis": "تونس",
+  "  You have selected  ": "  لقد قمت باختيار",
+  "rows": "صفوف",
+  "  Click a row to select it  ": "  انقر على الصف لتحديده",
+  "  Only 1 row selected  ": "  تم اختيار صف واحد فقط",
+  "Trip Shipments updated successfully": "تم تحديث شحنات الرحلة بنجاح"
 }

@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Trip;
 use App\Models\Customer;
+use App\Models\Shipment;
 use App\Models\TripRoute;
 use Illuminate\Support\Str;
+use App\Models\TripShipment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -185,13 +188,25 @@ class TripController extends Controller
     return response()->json(['message' => __('Trip Route not found')], 404);
   }
 
-  public function get_trips()
-  {
-    $trips = Trip::orderBy('id', 'DESC')->get();
-    return Datatables::of($trips)
-      ->addColumn('status', function ($trips) {
+    public function get_trip_shipments($id){
+        $shipments = Shipment::select(
+            'shipments.*',
+            DB::raw('(CASE WHEN trip_shipments.trip_id = ' . intval($id) . ' THEN 1 ELSE 0 END) AS selected')
+        )
+        ->leftJoin('trip_shipments', 'shipments.id', '=', 'trip_shipments.shipment_id')
+        ->where(function ($query) use ($id) {
+            $query->whereNull('trip_shipments.shipment_id')
+                ->orWhere('trip_shipments.trip_id', $id);
+        })
+        ->get();
+        return Datatables::of($shipments)
+        ->addColumn('customerName', function ($shipment) {
+        return $shipment->customer ? $shipment->customer->first_name.' '.$shipment->customer->last_name : 'N/A';
+         })
+        ->addColumn('status', function ($trips) {
         return __($trips->current_status);
-      })
-      ->make(true);
-  }
+        })
+        ->make(true);
+    }
 }
+

@@ -14,6 +14,7 @@ use App\Http\Controllers\ShipmentItemController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\TripHistoryController;
 use App\Http\Controllers\TripRouteController;
+use App\Http\Controllers\TripShipmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,7 +65,11 @@ Route::middleware(['auth'])->group(function () {
 
   // Trips
   Route::get('get-trips', [TripController::class, 'get_trips'])->name('get-trips');
+  Route::get('get-trip-shipments/{id}', [TripController::class, 'get_trip_shipments'])->name('get-trip-shipments');
   Route::resource('trips', TripController::class);
+
+   // Trip Shipment
+  Route::resource('trip_shipments', TripShipmentController::class);
 
   // Trips Routes
   Route::get('get-trip-routes', [TripRouteController::class, 'get_trip_routes'])->name('get-trip-routes');

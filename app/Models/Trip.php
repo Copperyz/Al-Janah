@@ -28,8 +28,15 @@ class Trip extends Model
     return $this->belongsTo(TripRoute::class);
   }
 
+     public function shipments()
+    {
+        return $this->belongsToMany(Shipment::class, 'trip_shipments');
+    }
+
   public function tripHistory()
   {
     return $this->hasMany(TripHistory::class);
   }
+  
 }
+

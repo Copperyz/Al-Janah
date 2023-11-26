@@ -7,6 +7,7 @@ use App\Models\Trip;
 use App\Models\Customer;
 use App\Models\Shipment;
 use App\Models\TripRoute;
+use App\Models\TripHistory;
 use Illuminate\Support\Str;
 use App\Models\TripShipment;
 use Illuminate\Http\Request;
@@ -220,5 +221,16 @@ class TripController extends Controller
         return __($trips->current_status);
         })
         ->make(true);
+    }
+
+     public function tracking($id){
+      
+      $tripId = Trip::where('tracking_no', $id)->first();
+
+      $tripHistory = TripHistory::where('trip_id', $tripId->id)->get();
+
+      $tripRoute = TripRoute::find($tripId->trip_route_id);
+
+      return view('trips.tracking', compact('tripHistory', 'tripRoute'));
     }
 }

@@ -66,6 +66,7 @@ Route::middleware(['auth'])->group(function () {
   // Trips
   Route::get('get-trips', [TripController::class, 'get_trips'])->name('get-trips');
   Route::get('get-trip-shipments/{id}', [TripController::class, 'get_trip_shipments'])->name('get-trip-shipments');
+  Route::get('tracking/{id}', [TripController::class, 'tracking'])->name('tracking');
   Route::resource('trips', TripController::class);
 
    // Trip Shipment

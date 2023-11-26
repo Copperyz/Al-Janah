@@ -9,7 +9,7 @@
                     <p class="text-muted">{{__('Edit inventory name and branch')}}</p>
                 </div>
 
-                <form id="editInventoryForm" class="row" onsubmit="return false">
+                <form id="editInventoryForm" class="row">
                     <div class="col-sm-12">
                         <label class="form-label" for="name">{{__('Name')}}</label>
                         <input type="text" id="name" name="name" class="form-control"

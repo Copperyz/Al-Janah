@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\Inventory;
 use App\Models\InventoryItem;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class InventoryController extends Controller
 {
@@ -41,10 +43,20 @@ class InventoryController extends Controller
    */
   public function store(Request $request)
   {
-    $request->validate([
+    $validator = Validator::make($request->all(), [
       'inventoryName' => 'bail|required|unique:inventories,name|max:255',
-      'branchID' => 'required',
+      'branchID' => 'required|exists:branches,id',
     ]);
+    if ($validator->fails()) {
+      return response()->json(
+        [
+          'message' => __('The given data was invalid'),
+          'errors' => $validator->errors(),
+        ],
+        422
+      );
+    }
+
     try {
       $inventory = new Inventory();
       $inventory->name = $request->inventoryName;
@@ -79,10 +91,19 @@ class InventoryController extends Controller
    */
   public function update(Request $request, string $id)
   {
-    $request->validate([
-      'name' => 'bail|required|max:255',
-      'branchID' => 'required',
+    $validator = Validator::make($request->all(), [
+      'name' => ['bail', 'required', Rule::unique('inventories', 'name')->ignore($id), 'max:255'],
+      'branchID' => 'required|exists:branches,id',
     ]);
+    if ($validator->fails()) {
+      return response()->json(
+        [
+          'message' => __('The given data was invalid'),
+          'errors' => $validator->errors(),
+        ],
+        422
+      );
+    }
     try {
       $inventory = Inventory::findOrFail($id);
       $inventory->name = $request->name;
@@ -90,9 +111,9 @@ class InventoryController extends Controller
       $inventory->updated_by = auth()->id();
       $inventory->save();
 
-      response()->json(['message' => __('Inventory updated successfully')], 200);
+      return response()->json(['message' => __('Inventory updated successfully')], 200);
     } catch (\Throwable $th) {
-      response()->json(['message' => __('Something went wrong')], 422);
+      return response()->json(['message' => __('Something went wrong')], 422);
     }
   }
 

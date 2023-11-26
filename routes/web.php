@@ -12,10 +12,8 @@ use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\ShipmentItemController;
 use App\Http\Controllers\TripController;
+use App\Http\Controllers\TripHistoryController;
 use App\Http\Controllers\TripRouteController;
-
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -58,7 +56,9 @@ Route::middleware(['auth'])->group(function () {
   Route::resource('shipments', ShipmentController::class);
 
   // Shipment Items
-  Route::get('get-shipmentItems/{id}', [ShipmentItemController::class, 'get_shipment_itmes'])->name('get-shipment-itmes');
+  Route::get('get-shipmentItems/{id}', [ShipmentItemController::class, 'get_shipment_itmes'])->name(
+    'get-shipment-itmes'
+  );
   Route::post('add-shipmentItem/{id}', [ShipmentItemController::class, 'add_shipment_item'])->name('add-shipment-item');
   Route::resource('shipment-itmes', ShipmentItemController::class);
 
@@ -69,13 +69,15 @@ Route::middleware(['auth'])->group(function () {
   // Trips Routes
   Route::get('get-trip-routes', [TripRouteController::class, 'get_trip_routes'])->name('get-trip-routes');
   Route::resource('trip_routes', TripRouteController::class);
-  
-   //Inventory
+
+  // Trips Routes
+  // Route::get('get-trip-routes', [TripRouteController::class, 'get_trip_routes'])->name('get-trip-routes');
+  Route::resource('trip-history', TripHistoryController::class);
+
+  //Inventory
   Route::get('get-inventories', [InventoryController::class, 'getInventories'])->name('get-inventories');
   Route::resource('inventory', InventoryController::class);
   //InventoryItems
   Route::get('get-inventoryItems', [InventoryItemsController::class, 'getInventoryItems'])->name('get-inventoryItems');
   Route::resource('inventoryItems', InventoryItemsController::class);
-
-  
 });

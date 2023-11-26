@@ -8,6 +8,7 @@ use App\Models\Shipment;
 use App\Models\ParcelType;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
 
 class InventoryItemsController extends Controller
 {
@@ -57,6 +58,26 @@ class InventoryItemsController extends Controller
    */
   public function store(Request $request)
   {
+    $validator = Validator::make($request->all(), [
+      'inventoryID' => ['required', 'exists:inventories,id'],
+      'productHeight' => ['nullable', 'numeric', 'min:1'],
+      'productWidth' => ['nullable', 'numeric', 'min:1'],
+      'productWeight' => ['nullable', 'numeric', 'min:1'],
+      'productAisle' => ['required', 'numeric', 'min:1'],
+      'productRow' => ['required', 'numeric', 'min:1'],
+      'productSelf' => ['required', 'numeric', 'min:1'],
+      'productQty' => ['required', 'numeric', 'min:1'],
+    ]);
+    if ($validator->fails()) {
+      return response()->json(
+        [
+          'message' => __('The given data was invalid'),
+          'errors' => $validator->errors(),
+        ],
+        422
+      );
+    }
+
     try {
       $inventoryItems = new InventoryItem();
       $inventoryItems->inventory_id = $request->inventoryID;
@@ -111,6 +132,26 @@ class InventoryItemsController extends Controller
    */
   public function update(Request $request, string $id)
   {
+    $validator = Validator::make($request->all(), [
+      'inventoryID' => ['required', 'exists:inventories,id'],
+      'productHeight' => ['nullable', 'numeric', 'min:1'],
+      'productWidth' => ['nullable', 'numeric', 'min:1'],
+      'productWeight' => ['nullable', 'numeric', 'min:1'],
+      'productAisle' => ['required', 'numeric', 'min:1'],
+      'productRow' => ['required', 'numeric', 'min:1'],
+      'productSelf' => ['required', 'numeric', 'min:1'],
+      'productQty' => ['required', 'numeric', 'min:1'],
+    ]);
+    if ($validator->fails()) {
+      return response()->json(
+        [
+          'message' => __('The given data was invalid'),
+          'errors' => $validator->errors(),
+        ],
+        422
+      );
+    }
+
     try {
       $inventoryItems = InventoryItem::findOrFail($id);
 
@@ -130,9 +171,9 @@ class InventoryItemsController extends Controller
       $inventoryItems->updated_by = auth()->id();
 
       $inventoryItems->save();
-      response()->json(['message' => __('Item updated successfully')], 200);
+      return response()->json(['message' => __('Item updated successfully')], 200);
     } catch (\Throwable $th) {
-      response()->json(['message' => __('Something went wrong')], 422);
+      return response()->json(['message' => __('Something went wrong')], 422);
     }
   }
 

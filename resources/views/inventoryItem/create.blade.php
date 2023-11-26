@@ -1,6 +1,6 @@
 @extends('layouts/layoutMaster')
 
-@section('title', __('Add Product - Inventory'))
+@section('title', __('Add Product'))
 
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/typography.css')}}" />
@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/dropzone/dropzone.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/flatpickr/flatpickr.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/tagify/tagify.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/libs/@form-validation/umd/styles/index.min.css')}}" />
+
 @endsection
 
 @section('vendor-script')
@@ -20,6 +22,9 @@
 <script src="{{asset('assets/vendor/libs/jquery-repeater/jquery-repeater.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/flatpickr/flatpickr.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/tagify/tagify.js')}}"></script>
+<script src="{{asset('assets/vendor/libs/@form-validation/umd/bundle/popular.min.js')}}"></script>
+<script src="{{asset('assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js')}}"></script>
+<script src="{{asset('assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js')}}"></script>
 @endsection
 
 @section('page-script')
@@ -32,7 +37,7 @@
 </h4>
 
 <div class="app-ecommerce">
-    <form action="{{route('inventoryItems.store')}}" method="POST" class="inventory-form">
+    <form action="{{route('inventoryItems.store')}}" method="POST" class="inventory-form" id="inventoryItemForm">
         <!-- Add Product -->
         <div
             class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
@@ -63,18 +68,19 @@
                         <div class="mb-3">
                             <label class="form-label" for="ecommerce-product-name">{{__('Name')}}</label>
                             <input type="text" class="form-control" id="ecommerce-product-name"
-                                placeholder="{{__('Product Name')}}" name="productName" aria-label="Product title">
+                                placeholder="{{__('Product Name')}}" required name="productName"
+                                aria-label="Product title">
                         </div>
                         <div class="row mb-3">
                             <div class="col"><label class="form-label"
                                     for="ecommerce-product-sku">{{__('Quantity')}}</label>
                                 <input type="number" class="form-control" id="ecommerce-product-sku"
-                                    placeholder="{{__('Qty')}}" name="productQty" aria-label="Product Qty">
+                                    placeholder="{{__('Qty')}}" required name="productQty" aria-label="Product Qty">
                             </div>
                             <div class="col"><label class="form-label"
                                     for="ecommerce-product-barcode">{{__('Barcode')}}</label>
                                 <input type="text" class="form-control" id="ecommerce-product-barcode"
-                                    placeholder="0123-4567" name="productBarcode" aria-label="Product barcode">
+                                    placeholder="0123-4567" required name="productBarcode" aria-label="Product barcode">
                             </div>
                         </div>
 
@@ -114,19 +120,20 @@
                                         <div class="mb-3 col-md-4 col-sm-6">
                                             <label class="form-label" for="form-aisle">{{__('Aisle')}}</label>
                                             <input type="number" class="form-control" id="form-aisle"
-                                                placeholder="{{__('Aisle')}}" name="productAisle"
+                                                placeholder="{{__('Aisle')}}" required name="productAisle"
                                                 aria-label="Product Aisle">
                                         </div>
                                         <div class="mb-3 col-md-4 col-sm-6">
                                             <label class="form-label" for="form-self">{{__('Shelf')}}</label>
                                             <input type="number" class="form-control" id="form-self"
-                                                placeholder="{{__('Self')}}" name="productSelf"
+                                                placeholder="{{__('Self')}}" required name="productSelf"
                                                 aria-label="Product Self">
                                         </div>
                                         <div class="mb-3 col-md-4 col-sm-6">
                                             <label class="form-label" for="form-row">{{__('Row')}}</label>
                                             <input type="number" class="form-control" id="form-row"
-                                                placeholder="{{__('Row')}}" name="productRow" aria-label="Product Row">
+                                                placeholder="{{__('Row')}}" required name="productRow"
+                                                aria-label="Product Row">
                                         </div>
 
 
@@ -153,7 +160,7 @@
                 <!-- Organize Card -->
                 <div class="card mb-4">
                     <div class="card-header">
-                        <h5 class="card-title mb-0">Organize</h5>
+                        <h5 class="card-title mb-0">{{__('Categorize')}}</h5>
                     </div>
                     <div class="card-body">
                         <!-- Inventory -->
@@ -161,9 +168,8 @@
                             <label class="form-label mb-1" for="inv">
                                 {{__('Inventory')}}
                             </label>
-                            <select id="inv" name="inventoryID" class="select2 form-select"
-                                data-placeholder="{{__('Select Inventory')}}">
-                                <option value=''>{{__('Select inventory')}}</option>
+                            <select id="inv" required name="inventoryID" class="select2 form-select">
+                                <option value=''>{{__('Select')}}</option>
                                 @foreach ($inventories as $inventory)
                                 <option value='{{$inventory->id}}'>{{$inventory->name}}</option>
                                 @endforeach
@@ -172,11 +178,10 @@
                         <!-- shipments -->
                         <div class="mb-3 col ecommerce-select2-dropdown">
                             <label class="form-label mb-1" for="shipment">
-                                {{__('Order')}}
+                                {{__('Shipment')}}
                             </label>
-                            <select id="order" name="shipmentID" class="select2 form-select"
-                                data-placeholder="{{__('Select Shipment')}}">
-                                <option value=''>{{__('Select order')}}</option>
+                            <select id="shipment" name="shipmentID" class="select2 form-select">
+                                <option value=''>{{__('Select')}}</option>
                                 @foreach ($shipments as $shipment)
                                 <option value='{{$shipment->id}}'>{{$shipment->name}}</option>
                                 @endforeach
@@ -187,9 +192,8 @@
                             <label class="form-label mb-1" for="parcel">
                                 {{__('Parcel Type')}}
                             </label>
-                            <select id="parcel" name="parcelType" class="select2 form-select"
-                                data-placeholder="{{__('Select Parcel')}}">
-                                <option value=''>{{__('Select parcel type')}}</option>
+                            <select id="parcel" name="parcelType" class="select2 form-select">
+                                <option value=''>{{__('Select')}}</option>
                                 @foreach ($parcelTypes as $parcel)
                                 <option value='{{$parcel->id}}'>{{$parcel->name}}</option>
                                 @endforeach
@@ -350,5 +354,9 @@
     <!-- /Inventory -->
 </div>
 </div>
-
+<script>
+window.translations = {
+    custom: @json(__('validation.custom'))
+};
+</script>
 @endsection

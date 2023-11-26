@@ -18,12 +18,10 @@ return new class extends Migration {
       $table->string('name');
       $table->string('status', 20);
       $table->string('itemCode', 13);
-      $table
-        ->unsignedBigInteger('parcel_types_id')
-        ->nullable();
-      $table->integer('height');
-      $table->integer('width');
-      $table->integer('size');
+      $table->unsignedBigInteger('parcel_types_id')->nullable();
+      $table->integer('height')->nullable();
+      $table->integer('width')->nullable();
+      $table->integer('size')->nullable();
       $table->integer('quantity');
       $table->string('aisle');
       $table->string('shelfNumber');
@@ -33,7 +31,6 @@ return new class extends Migration {
       $table->unsignedBigInteger('deleted_by')->nullable();
       $table->timestamps();
       $table->softDeletes();
-
 
       $table
         ->foreign('inventory_id')

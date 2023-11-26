@@ -11,6 +11,8 @@ use App\Models\ParcelType;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+
 
 class ShipmentController extends Controller
 {
@@ -71,6 +73,12 @@ class ShipmentController extends Controller
         $shipment->amount = $request->amount;
         $shipment->customer_id = $request->customer_id;
         // $shipment->notes = $request->notes;
+        $delivery_code = Str::random(12);
+        while (Shipment::where('delivery_code', $delivery_code)->exists()) {
+        // Regenerate if the generated tracking number already exists
+        $delivery_code = Str::random(12);
+        }
+        $shipment->delivery_code = $delivery_code;
         $shipment->save();
         for ($i=0; $i < count($request->shipmentItems); $i++) { 
             $shipmentItem = new ShipmentItem();

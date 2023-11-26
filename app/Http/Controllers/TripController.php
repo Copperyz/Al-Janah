@@ -188,6 +188,19 @@ class TripController extends Controller
     return response()->json(['message' => __('Trip Route not found')], 404);
   }
 
+  public function get_trips()
+    {
+        $trips = Trip::orderBy('id', 'DESC')->get();
+        return Datatables::of($trips)
+        ->addColumn('status', function ($trips) {
+        return __($trips->current_status);
+         })
+         ->addColumn('shipmentsCount', function ($trip) {
+            return $trip->shipments->count();
+        })
+        ->make(true);
+    }
+
     public function get_trip_shipments($id){
         $shipments = Shipment::select(
             'shipments.*',
@@ -209,4 +222,3 @@ class TripController extends Controller
         ->make(true);
     }
 }
-

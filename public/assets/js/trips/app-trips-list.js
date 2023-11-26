@@ -5,73 +5,73 @@
 'use strict';
 
 $(function () {
-    // Variable declaration for table
-    var dt_trips_table = $('.trips-list-table');
-    // trips datatable
-    if (dt_trips_table.length) {
-        var dt_trips = dt_trips_table.DataTable({
-            ajax: 'get-trips',
-            columns: [
-                // columns according to JSON
-                { data: 'tracking_no' },
-                { data: 'shipmentsCount' },
-                { data: 'status' },
-                { data: 'departure_date' },
-                { data: 'estimated_delivery_date' },
-                { data: 'action' }
-            ],
-            columnDefs: [
-                {
-                    // Actions
-                    targets: -1,
-                    searchable: false,
-                    orderable: false,
-                    render: function (data, type, full, meta) {
-                        return (
-                            '<a href="./trips/' + full['id'] + '" class= "text-body" > <i class="ti ti-eye mx-2 ti-sm"></i></a > ' +
-                            '<span><button class="btn btn-sm btn-warning me-2 showTripShipment" data-bs-target="#showTripShipmentModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-package ti-lg"></i></button>' +
-                            '<span><button class="btn btn-sm btn-info me-2 editTrip" data-bs-target="#editTripModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit ti-lg"></i></button>' +
-                            '<span><button class="btn btn-sm btn-danger me-2 delete-record"><i class="ti ti-trash ti-lg"></i></button>'
-                        );
-                    }
-                }
-            ],
-            order: [[1, 'desc']],
-            dom:
-                '<"row mx-1"' +
-                '<"col-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-start gap-2"l<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start mt-md-0 mt-3"B>>' +
-                '<"col-12 col-md-6 d-flex align-items-center justify-content-end flex-column flex-md-row pe-3 gap-md-3"f<"shipment_status mb-3 mb-md-0">>' +
-                '>t' +
-                '<"row mx-2"' +
-                '<"col-sm-12 col-md-6"i>' +
-                '<"col-sm-12 col-md-6"p>' +
-                '>',
-            "language": {
-                "search": searchTranslation,
-                "lengthMenu": `${showTranslation} _MENU_`,
-                "info": ` ${showingTranslation} _START_ ${toTranslation} _END_ ${ofTranslation} _TOTAL_ ${entriesTranslation}`,
-                "paginate": {
-                    "next": nextTranslation,      // Change "Next" text
-                    "previous": previousTranslation, // Change "Previous" text
-                },
-                "emptyTable": noEntriesAvailableTranslation
-            },
-            // Buttons with Dropdown
-            buttons: [
-                {
-                    text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addTripTranslation}</span>`,
-                    className: 'add-new btn btn-primary mb-3 mb-md-0 addTrip',
-                    attr: {
-                        'data-bs-toggle': 'modal',
-                        'data-bs-target': '#addTripModal'
-                    },
-                    init: function (api, node, config) {
-                        $(node).removeClass('btn-secondary');
-                    }
-                }
-            ],
-        });
-    }
+  // Variable declaration for table
+  var dt_trips_table = $('.trips-list-table');
+  // trips datatable
+  if (dt_trips_table.length) {
+    var dt_trips = dt_trips_table.DataTable({
+      ajax: 'get-trips',
+      columns: [
+        // columns according to JSON
+        { data: 'tracking_no' },
+        { data: 'shipmentsCount' },
+        { data: 'status' },
+        { data: 'departure_date' },
+        { data: 'estimated_delivery_date' },
+        { data: 'action' }
+      ],
+      columnDefs: [
+        {
+          // Actions
+          targets: -1,
+          searchable: false,
+          orderable: false,
+          render: function (data, type, full, meta) {
+            return (
+              '<a href="./trips/' + full['id'] + '" class= "btn btn-sm btn-success me-2" > <i class="ti ti-eye ti-lg"></i></a > ' +
+              '<span><button class="btn btn-sm btn-warning me-2 showTripShipment" data-bs-target="#showTripShipmentModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-package ti-lg"></i></button>' +
+              '<span><button class="btn btn-sm btn-info me-2 editTrip" data-bs-target="#editTripModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit ti-lg"></i></button>' +
+              '<span><button class="btn btn-sm btn-danger me-2 delete-record"><i class="ti ti-trash ti-lg"></i></button>'
+            );
+          }
+        }
+      ],
+      order: [[1, 'desc']],
+      dom:
+        '<"row mx-1"' +
+        '<"col-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-start gap-2"l<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start mt-md-0 mt-3"B>>' +
+        '<"col-12 col-md-6 d-flex align-items-center justify-content-end flex-column flex-md-row pe-3 gap-md-3"f<"shipment_status mb-3 mb-md-0">>' +
+        '>t' +
+        '<"row mx-2"' +
+        '<"col-sm-12 col-md-6"i>' +
+        '<"col-sm-12 col-md-6"p>' +
+        '>',
+      "language": {
+        "search": searchTranslation,
+        "lengthMenu": `${showTranslation} _MENU_`,
+        "info": ` ${showingTranslation} _START_ ${toTranslation} _END_ ${ofTranslation} _TOTAL_ ${entriesTranslation}`,
+        "paginate": {
+          "next": nextTranslation,      // Change "Next" text
+          "previous": previousTranslation, // Change "Previous" text
+        },
+        "emptyTable": noEntriesAvailableTranslation
+      },
+      // Buttons with Dropdown
+      buttons: [
+        {
+          text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addTripTranslation}</span>`,
+          className: 'add-new btn btn-primary mb-3 mb-md-0 addTrip',
+          attr: {
+            'data-bs-toggle': 'modal',
+            'data-bs-target': '#addTripModal'
+          },
+          init: function (api, node, config) {
+            $(node).removeClass('btn-secondary');
+          }
+        }
+      ],
+    });
+  }
 
   // On each datatable draw, initialize tooltip
   dt_trips_table.on('draw.dt', function () {
@@ -277,195 +277,195 @@ $(function () {
     });
   });
 
-    // Variable declaration for table
-    var dt_shipment_table = $('.shipment-list-table');
-    // shipment datatable
-    if (dt_shipment_table.length) {
-        var dt_shipment = dt_shipment_table.DataTable({
-            select: {
-                style: 'multi',
-                selector: 'td:first-child input[type="checkbox"]',
-            },
-            columns: [
-                // columns according to JSON
-                { data: 'id' },
-                { data: 'customerName' },
-                { data: 'date' },
-                { data: 'amount' },
-            ],
-            rowCallback: function (row, data) {
-                if (data.selected == 1) {
-                    $('input.dt-checkboxes', row).prop('checked', true);
-                    $(row).addClass('selected');
-                } else {
-                    $('input.dt-checkboxes', row).prop('checked', false);
-                    $(row).removeClass('selected');
-                }
-            },
-            columnDefs: [
-                {
-                    // For Checkboxes
-                    targets: 0,
-                    searchable: false,
-                    orderable: false,
-                    render: function () {
-                        return '<input type="checkbox" class="dt-checkboxes form-check-input">';
-                    },
-                    checkboxes: {
-                        selectRow: true,
-                        selectAllRender: '<input type="checkbox" class="form-check-input">'
-                    }
-                }
-            ],
-            order: [[1, 'desc']],
-            dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>><"table-responsive"t><"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-            select: {
-                // Select style
-                style: 'multi'
-            },
-            "language": {
-                "search": searchTranslation,
-                "lengthMenu": `${showTranslation} _MENU_`,
-                "info": ` ${showingTranslation} _START_ ${toTranslation} _END_ ${ofTranslation} _TOTAL_ ${entriesTranslation}`,
-                "paginate": {
-                    "next": nextTranslation,      // Change "Next" text
-                    "previous": previousTranslation, // Change "Previous" text
-                },
-                "emptyTable": noEntriesAvailableTranslation,
-                select: {
-                    rows: {
-                        _: `${rowSelectedTranslation} %d ${rows}`,
-                        1: onlyRow
-                    }
-                }
-            },
-            // Buttons with Dropdown
-            buttons: [
-                {
-                    text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addTripTranslation}</span>`,
-                    className: 'add-new btn btn-primary mb-3 mb-md-0 addTrip',
-                    attr: {
-                        'data-bs-toggle': 'modal',
-                        'data-bs-target': '#addTripModal'
-                    },
-                    init: function (api, node, config) {
-                        $(node).removeClass('btn-secondary');
-                    }
-                }
-            ],
-        });
-    }
-
-    var selectedRows = [];
-
-
-    // On each datatable draw, initialize tooltip
-    dt_shipment_table.on('draw.dt', function () {
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl, {
-                boundary: document.body
-            });
-        });
+  // Variable declaration for table
+  var dt_shipment_table = $('.shipment-list-table');
+  // shipment datatable
+  if (dt_shipment_table.length) {
+    var dt_shipment = dt_shipment_table.DataTable({
+      select: {
+        style: 'multi',
+        selector: 'td:first-child input[type="checkbox"]',
+      },
+      columns: [
+        // columns according to JSON
+        { data: 'id' },
+        { data: 'customerName' },
+        { data: 'date' },
+        { data: 'amount' },
+      ],
+      rowCallback: function (row, data) {
+        if (data.selected == 1) {
+          $('input.dt-checkboxes', row).prop('checked', true);
+          $(row).addClass('selected');
+        } else {
+          $('input.dt-checkboxes', row).prop('checked', false);
+          $(row).removeClass('selected');
+        }
+      },
+      columnDefs: [
+        {
+          // For Checkboxes
+          targets: 0,
+          searchable: false,
+          orderable: false,
+          render: function () {
+            return '<input type="checkbox" class="dt-checkboxes form-check-input">';
+          },
+          checkboxes: {
+            selectRow: true,
+            selectAllRender: '<input type="checkbox" class="form-check-input">'
+          }
+        }
+      ],
+      order: [[1, 'desc']],
+      dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>><"table-responsive"t><"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+      select: {
+        // Select style
+        style: 'multi'
+      },
+      "language": {
+        "search": searchTranslation,
+        "lengthMenu": `${showTranslation} _MENU_`,
+        "info": ` ${showingTranslation} _START_ ${toTranslation} _END_ ${ofTranslation} _TOTAL_ ${entriesTranslation}`,
+        "paginate": {
+          "next": nextTranslation,      // Change "Next" text
+          "previous": previousTranslation, // Change "Previous" text
+        },
+        "emptyTable": noEntriesAvailableTranslation,
+        select: {
+          rows: {
+            _: `${rowSelectedTranslation} %d ${rows}`,
+            1: onlyRow
+          }
+        }
+      },
+      // Buttons with Dropdown
+      buttons: [
+        {
+          text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addTripTranslation}</span>`,
+          className: 'add-new btn btn-primary mb-3 mb-md-0 addTrip',
+          attr: {
+            'data-bs-toggle': 'modal',
+            'data-bs-target': '#addTripModal'
+          },
+          init: function (api, node, config) {
+            $(node).removeClass('btn-secondary');
+          }
+        }
+      ],
     });
+  }
 
-    var selectedRows = [];  // Declare selectedRows outside the event handler
+  var selectedRows = [];
 
 
-    // Event listener for the checkbox change
-    dt_shipment.on('select', function (e, dt, type, indexes) {
-        var selectedData = dt_shipment.rows(indexes).data().toArray();
-        // Filter out rows that are already in selectedRows
-        selectedData = selectedData.filter(row => !selectedRows.some(selectedRow => selectedRow.id === row.id));
-        selectedRows.push(...selectedData);
+  // On each datatable draw, initialize tooltip
+  dt_shipment_table.on('draw.dt', function () {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl, {
+        boundary: document.body
+      });
     });
+  });
+
+  var selectedRows = [];  // Declare selectedRows outside the event handler
 
 
-    dt_shipment.on('deselect', function (e, dt, type, indexes) {
-        var deselectedData = dt_shipment.rows(indexes).data().toArray();
-        // Remove rows that are being deselected from selectedRows
-        selectedRows = selectedRows.filter(selectedRow => !deselectedData.some(row => row.id === selectedRow.id));
+  // Event listener for the checkbox change
+  dt_shipment.on('select', function (e, dt, type, indexes) {
+    var selectedData = dt_shipment.rows(indexes).data().toArray();
+    // Filter out rows that are already in selectedRows
+    selectedData = selectedData.filter(row => !selectedRows.some(selectedRow => selectedRow.id === row.id));
+    selectedRows.push(...selectedData);
+  });
+
+
+  dt_shipment.on('deselect', function (e, dt, type, indexes) {
+    var deselectedData = dt_shipment.rows(indexes).data().toArray();
+    // Remove rows that are being deselected from selectedRows
+    selectedRows = selectedRows.filter(selectedRow => !deselectedData.some(row => row.id === selectedRow.id));
+  });
+
+
+  $(document).on('click', 'button.showTripShipment', function () {
+    var data = dt_trips.row($(this).closest('tr')).data();
+    $('#id').val(data.id);
+
+    // Reset selectedRows array
+    selectedRows = [];
+
+    dt_shipment.ajax.url('get-trip-shipments/' + data.id).load(function () {
+      // Iterate over the rows and update selected rows
+      dt_shipment.rows().every(function (index, element) {
+        var rowData = this.data();
+
+        if (rowData.selected == 1) {
+          // Update selectedRows if the row is selected
+          selectedRows.push(rowData);
+        }
+      });
     });
-
-
-    $(document).on('click', 'button.showTripShipment', function () {
-        var data = dt_trips.row($(this).closest('tr')).data();
-        $('#id').val(data.id);
-
-        // Reset selectedRows array
-        selectedRows = [];
-
-        dt_shipment.ajax.url('get-trip-shipments/' + data.id).load(function () {
-            // Iterate over the rows and update selected rows
-            dt_shipment.rows().every(function (index, element) {
-                var rowData = this.data();
-
-                if (rowData.selected == 1) {
-                    // Update selectedRows if the row is selected
-                    selectedRows.push(rowData);
-                }
-            });
-        });
-    });
+  });
 
 
 
-    // Event listener for the submit button
-    $('#showTripShipmentModal').on('click', 'button.btn-primary', function () {
-        $.ajax({
-            url: './trip_shipments/' + $('#id').val(),
-            method: 'PUT',
-            data: { selectedRows: selectedRows },
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  // Event listener for the submit button
+  $('#showTripShipmentModal').on('click', 'button.btn-primary', function () {
+    $.ajax({
+      url: './trip_shipments/' + $('#id').val(),
+      method: 'PUT',
+      data: { selectedRows: selectedRows },
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function (response, status, xhr) {
+        if (xhr.status === 200) {
+          // Handle a successful response
+          dt_trips.ajax.url('get-trips').load();
+          Swal.fire({
+            title: '',
+            text: response.message,
+            icon: 'success',
+            confirmButtonText: doneTranslation,
+            customClass: {
+              confirmButton: 'btn btn-success'
             },
-            success: function (response, status, xhr) {
-                if (xhr.status === 200) {
-                    // Handle a successful response
-                    dt_trips.ajax.url('get-trips').load();
-                    Swal.fire({
-                        title: '',
-                        text: response.message,
-                        icon: 'success',
-                        confirmButtonText: doneTranslation,
-                        customClass: {
-                            confirmButton: 'btn btn-success'
-                        },
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $('#showTripShipmentModal').modal('hide');
-                        }
-                    });
-                }
-                else {
-                    // Handle other status codes
-                }
-            },
-            error: function (response, xhr, status, error) {
-                // Handle the error response here
-                var errorMessages = Object.values(response.responseJSON.errors).flat();
-                // Format error messages with line breaks
-                var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
-                // Create the Swal alert
-                Swal.fire({
-                    title: response.responseJSON.message,
-                    html: formattedErrorMessages,
-                    icon: 'error',
-                    confirmButtonText: doneTranslation,
-                    customClass: {
-                        confirmButton: 'btn btn-primary'
-                    },
-                    buttonsStyling: false
-                });
+          }).then((result) => {
+            if (result.isConfirmed) {
+              $('#showTripShipmentModal').modal('hide');
             }
+          });
+        }
+        else {
+          // Handle other status codes
+        }
+      },
+      error: function (response, xhr, status, error) {
+        // Handle the error response here
+        var errorMessages = Object.values(response.responseJSON.errors).flat();
+        // Format error messages with line breaks
+        var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
+        // Create the Swal alert
+        Swal.fire({
+          title: response.responseJSON.message,
+          html: formattedErrorMessages,
+          icon: 'error',
+          confirmButtonText: doneTranslation,
+          customClass: {
+            confirmButton: 'btn btn-primary'
+          },
+          buttonsStyling: false
         });
-
+      }
     });
 
-    // Filter form control to default size
-    // ? setTimeout used for multilingual table initialization
-    setTimeout(() => {
-        $('.dataTables_filter .form-control').removeClass('form-control-sm');
-        $('.dataTables_length .form-select').removeClass('form-select-sm');
-    }, 300);
+  });
+
+  // Filter form control to default size
+  // ? setTimeout used for multilingual table initialization
+  setTimeout(() => {
+    $('.dataTables_filter .form-control').removeClass('form-control-sm');
+    $('.dataTables_length .form-select').removeClass('form-select-sm');
+  }, 300);
 });

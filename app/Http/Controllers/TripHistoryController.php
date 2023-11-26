@@ -37,7 +37,7 @@ class TripHistoryController extends Controller
         'trip_id' => 'required',
         'status' => 'required',
         'currentLeg' => 'required',
-        'note' => 'nullable',
+        'note' => 'required',
         // Add a custom validation rule for uniqueness based on multiple columns
         'trip_id' => [
           'required',
@@ -77,7 +77,7 @@ class TripHistoryController extends Controller
 
       return response()->json(['message' => __('Change Trip Status successfully')], 200);
     } catch (\Throwable $th) {
-      return response()->json(['message' => __('Something went wrong')], 422);
+      return response()->json(['message' => $th], 422);
     }
   }
 

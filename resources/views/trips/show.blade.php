@@ -1,3 +1,9 @@
+@php
+$customizerHidden = 'customizer-hide';
+$configData = Helper::appClasses();
+@endphp
+
+
 @extends('layouts/layoutMaster')
 
 @section('title', __('Show Trip'))

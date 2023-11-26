@@ -6,14 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
 class TripRoute extends Model
 {
-    use HasFactory, SoftDeletes;
+  use HasFactory, SoftDeletes;
 
-    protected $fillable = ['type', 'legs', 'trip_price', 'created_by', 'updated_by', 'deleted_by'];
+  protected $fillable = ['type', 'legs', 'trip_price', 'created_by', 'updated_by', 'deleted_by'];
 
-    protected $casts = [
-        'legs' => 'array',
-    ];
+  protected $casts = [
+    'legs' => 'array',
+  ];
+  public function trip()
+  {
+    return $this->hasMany(Trip::class);
+  }
 }

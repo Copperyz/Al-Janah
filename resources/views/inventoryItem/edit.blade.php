@@ -1,6 +1,6 @@
 @extends('layouts/layoutMaster')
 
-@section('title', __('Edit Product - Inventory'))
+@section('title', __('Edit Product'))
 
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/typography.css')}}" />
@@ -157,7 +157,7 @@
                 <!-- Organize Card -->
                 <div class="card mb-4">
                     <div class="card-header">
-                        <h5 class="card-title mb-0">Organize</h5>
+                        <h5 class="card-title mb-0">{{__('Categorize')}}</h5>
                     </div>
                     <div class="card-body">
                         <!-- Inventory -->
@@ -167,7 +167,7 @@
                             </label>
                             <select id="inv" name="inventoryID" class="select2 form-select"
                                 data-placeholder="{{__('Select Inventory')}}">
-                                <option value=''>{{__('Select inventory')}}</option>
+                                <option value=''>{{__('Select')}}</option>
                                 @foreach ($inventories as $inventory)
                                 <option value='{{$inventory->id}}'
                                     {{$inventory->id == $inventoryItem->inventory_id ? 'selected': ''}}>
@@ -179,11 +179,11 @@
                         <!-- shipments -->
                         <div class="mb-3 col ecommerce-select2-dropdown">
                             <label class="form-label mb-1" for="order">
-                                {{__('Order')}}
+                                {{__('Shipment')}}
                             </label>
                             <select id="order" name="shipmentID" class="select2 form-select"
                                 data-placeholder="{{__('Select Order')}}">
-                                <option value=''>{{__('Select order')}}</option>
+                                <option value=''>{{__('Select')}}</option>
                                 @foreach ($shipments as $shipment)
                                 <option value='{{$shipment->id}}'
                                     {{$shipment->id == $inventoryItem->shipment_id ? 'selected': ''}}>
@@ -199,7 +199,7 @@
                             </label>
                             <select id="parcel" name="parcelType" class="select2 form-select"
                                 data-placeholder="{{__('Select Parcel')}}">
-                                <option value=''>{{__('Select parcel type')}}</option>
+                                <option value=''>{{__('Select')}}</option>
                                 @foreach ($parcelTypes as $parcel)
                                 <option value='{{$parcel->id}}'
                                     {{$parcel->id == $inventoryItem->parcel_types_id ? 'selected': ''}}>

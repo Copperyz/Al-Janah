@@ -143,6 +143,7 @@ return [
   'custom' => [
     'inventoryName' => [
       'required' => 'الرجاء إدخال اسم المخزن',
+      'unique' => 'إسم المخزن مستخدم مسبقاً',
     ],
     'branchID' => [
       'required' => 'الرجاء اختيار الفرع',
@@ -227,5 +228,12 @@ return [
     'weight' => __('Weight'),
     'quantity' => __('Quantity'),
     'notes' => __('Notes'),
+    'productQty' => 'عدد القطع',
+    'productName' => 'اسم المنتج',
+    'productBarcode' => 'رمز المنتج',
+    'productSelf' => 'الرف',
+    'productAisle' => 'الممر',
+    'productRow' => 'الصف',
+    'inventoryID' => 'المخزن',
   ],
 ];

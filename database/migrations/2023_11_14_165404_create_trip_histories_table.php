@@ -4,36 +4,48 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('trip_histories', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('trip_id')->nullable();
-            $table->string('status');
-            $table->integer('current_route_leg');
-            $table->unsignedBigInteger('created_by')->nullable();
-            $table->unsignedBigInteger('updated_by')->nullable();
-            $table->unsignedBigInteger('deleted_by')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
+return new class extends Migration {
+  /**
+   * Run the migrations.
+   */
+  public function up(): void
+  {
+    Schema::create('trip_histories', function (Blueprint $table) {
+      $table->id();
+      $table->unsignedBigInteger('trip_id')->nullable();
+      $table->string('status');
+      $table->tinyInteger('route_leg');
+      $table->string('note');
+      $table->unsignedBigInteger('created_by')->nullable();
+      $table->unsignedBigInteger('updated_by')->nullable();
+      $table->unsignedBigInteger('deleted_by')->nullable();
+      $table->timestamps();
+      $table->softDeletes();
 
-            $table->foreign('trip_id')->references('id')->on('trips');
-            $table->foreign('created_by')->references('id')->on('users');
-            $table->foreign('updated_by')->references('id')->on('users');
-            $table->foreign('deleted_by')->references('id')->on('users');
-        });
-    }
+      $table
+        ->foreign('trip_id')
+        ->references('id')
+        ->on('trips');
+      $table
+        ->foreign('created_by')
+        ->references('id')
+        ->on('users');
+      $table
+        ->foreign('updated_by')
+        ->references('id')
+        ->on('users');
+      $table
+        ->foreign('deleted_by')
+        ->references('id')
+        ->on('users');
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('trip_histories');
-    }
+  /**
+   * Reverse the migrations.
+   */
+  public function down(): void
+  {
+    Schema::dropIfExists('trip_histories');
+  }
 };

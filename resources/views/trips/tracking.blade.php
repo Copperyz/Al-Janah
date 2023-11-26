@@ -38,8 +38,12 @@ $configData = Helper::appClasses();
                 <!-- Map Menu -->
                 <div class="app-logistics-fleet-sidebar col h-100" id="app-logistics-fleet-sidebar">
                     <div class="card-header border-0 pt-4 pb-2 d-flex justify-content-between">
-                        <h5 class="mb-0 card-title">{{__('Tracking Shipment')}}</h5>
-                        <!-- Sidebar close button -->
+                        <h5 class="mb-0 card-title">{{__('Tracking Shipment')}}
+                            <span class="small text-success">
+                                ({{ Str::of(request()->url())->afterLast('/') }})
+                            </span>
+                        </h5>
+
 
                     </div>
                     <!-- Sidebar when screen < md -->

@@ -155,7 +155,7 @@ $configData = Helper::appClasses();
 
                                                 @if($leg['type'] != "Destination")
                                                 <input name="radio{{$leg['country']}}" class="form-check-input"
-                                                    data-next-route="{{$key + 1}}"
+                                                    data-next-route="{{$key}}"
                                                     data-current-country="{{$leg['country']}}" type="radio"
                                                     value="Enroute" id="radioEnroute{{$leg['country']}}" />
                                                 @else
@@ -224,7 +224,14 @@ $configData = Helper::appClasses();
                                 <h6 class="card-title mb-0">{{__($trip->tripRoute->legs[$history->route_leg]['type'])}}
                                 </h6>
                                 <div class="meta">
-                                    <span class="badge rounded-pill bg-label-primary">{{__($history->status)}}</span>
+                                    @php
+                                    $nextIndex = $history->route_leg + 1;
+                                    @endphp
+                                    <span class="badge rounded-pill bg-label-primary">
+                                        {{ __($history->status)}}
+                                        {{$history->status == 'Enroute' && isset($trip->tripRoute->legs[$nextIndex]['country']) ? ' '.__('to').' '.__($trip->tripRoute->legs[$nextIndex]['country']) : null }}
+                                    </span>
+
                                     <span
                                         class="badge rounded-pill bg-label-success">{{__($trip->tripRoute->legs[$history->route_leg]['country'])}}</span>
                                 </div>

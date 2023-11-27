@@ -215,6 +215,11 @@
   "China": "الصين",
   "Dubai": "دبي",
   "Tunis": "تونس",
+  "  You have selected  ": "  لقد قمت باختيار",
+  "rows": "صفوف",
+  "  Click a row to select it  ": "  انقر على الصف لتحديده",
+  "  Only 1 row selected  ": "  تم اختيار صف واحد فقط",
+  "Trip Shipments updated successfully": "تم تحديث شحنات الرحلة بنجاح",
   "Inventory Item List": "قائمة اصناف المخزن",
   "Categorize": "تصنيفات ",
   "Inventory updated successfully": "تم تعديل المخزن بنجاح",
@@ -228,5 +233,7 @@
   "Confirm shipment Enroute": "تأكيد الشحنة في الطريق",
   "Confirm": "تأكيد",
   "Change Trip Status successfully": "تم تغير حالة الرحلة بنجاح",
-  "Note": "ملاحظة"
+  "Note": "ملاحظة",
+  "Tracking Shipment": "تتبع الشحنة",
+  "Tracking shipments involves monitoring the movement and status of packages or goods during their transit from the origin to the destination. The process begins with the initiation of a shipment, assigning a unique tracking number to each package. Relevant information, including origin, destination, package details, and estimated delivery time, is associated with this tracking number.": "يتضمن تتبع الشحنات مراقبة حركة الطرود أو البضائع وحالتها أثناء عبورها من المحطة الأصلية إلى الوجهة. تبدأ العملية ببدء الشحنة، مع تخصيص رقم تتبع فريد لكل طرد. ترتبط المعلومات ذات الصلة، بما في ذلك المنشأ والوجهة وتفاصيل الحزمة ووقت التسليم المقدر، برقم التتبع هذا."
 }

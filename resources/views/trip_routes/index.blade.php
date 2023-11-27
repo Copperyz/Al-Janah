@@ -64,35 +64,6 @@ var tripPriceTranslation = @json(__('Trip Price'));
 var tripDetailsTranslation = @json(__('Trip Details'));
 var typeTranslation = @json(__('Type'));
 var selectTranslation = @json(__('Select'));
-var originTranslation = @json(__('Origin'));
-var transitTranslation = @json(__('Transit'));
-var destinationTranslation = @json(__('Destination'));
-var countryTranslation = @json(__('Country'));
-var libyaTranslation = @json(__('Libya'));
-var turkeyTranslation = @json(__('Turkey'));
-var chinaTranslation = @json(__('China'));
-var dubaiTranslation = @json(__('Dubai'));
-var tunisTranslation = @json(__('Tunis'));
-var airTranslation = @json(__('Air'));
-var seaTranslation = @json(__('Sea'));
-
-var exportTranslation = @json(__('Export'));
-var searchTranslation = @json(__('Search'));
-var showTranslation = @json(__('Show'));
-var showingTranslation = @json(__('Showing'));
-var toTranslation = @json(__('to'));
-var ofTranslation = @json(__('of'));
-var nextTranslation = @json(__('Next'));
-var previousTranslation = @json(__('Previous'));
-var noEntriesAvailableTranslation = @json(__('No entries available'));
-var entriesTranslation = @json(__('entries'));
-
-var submitTranslation = @json(__('Submit'));
-var cancelTranslation = @json(__('Cancel'));
-var doneTranslation = @json(__('Done'));
-
-var areYouSureTranslation = @json(__('Are you sure?'));
-var areYouSureTextTranslation = @json(__('You will not be able to revert this!'));
 </script>
 
 

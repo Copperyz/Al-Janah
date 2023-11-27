@@ -17,21 +17,17 @@
     const iconsStepper = new Stepper(wizardIcons, {
       linear: true
     });
+    // const historyCount = document.querySelector(`[data-historyCount]`).getAttribute('data-historyCount');
+    // if (historyCount > 0) {
+    //   document.getElementById('noteWrapper').style.display = 'block';
+    // }
 
     const radioButtons = document.querySelectorAll('input[type="radio"]');
     // Replace 'yourTargetCountry' with the actual value you are looking for
     const targetCountry = document.querySelector(`[data-country]`).getAttribute('data-country');
     const targetStatus = document.querySelector(`[data-status]`).getAttribute('data-status');
     // const tripHistory = document.getElementById('tripHistory').value;
-    // if (targetStatus === 'Delivered') {
-    //   document.getElementById('wizardBody').remove();
-    //   document.getElementById('reviewRoute').style.display = 'block';
-    // } else {
-    //   document.getElementById('wizardBody').style.display = 'block';
-    // }
-    // if (tripHistory) {
-    //   document.getElementById('noteContainer').style.display = 'block';
-    // }
+
     // Find the index of the step with the matching data-country value
     const targetStepIndex = Array.from(iconsStepper._steps).findIndex(step => {
       return step.getAttribute('data-target') === '#route' + targetCountry;
@@ -44,8 +40,8 @@
 
     // Set the Stepper to the specific index
     // iconsStepper.to(indexToFocus);
-    // const currentCountrySpan = document.getElementById('currentCountrySpan');
-    // const currentStatusSpan = document.getElementById('currentStatusSpan');
+    const currentCountrySpan = document.getElementById('currentCountrySpan');
+    const currentStatusSpan = document.getElementById('currentStatusSpan');
 
     if (wizardIconsBtnNextList) {
       wizardIconsBtnNextList.forEach((wizardIconsBtnNext, index) => {
@@ -64,7 +60,6 @@
 
         wizardIconsBtnNext.addEventListener('click', event => {
           let form = wizardIconsBtnNext.closest('form');
-
           // Extract the trip id
           const tripID = form.querySelector(`input[name=trip_id]`).value;
           // Extract the currentCountry value from the form
@@ -121,20 +116,53 @@
                       confirmButton: 'btn btn-success'
                     }
                   });
-                  // currentCountrySpan.textContent = window.translations[currentCountry];
-                  // currentStatusSpan.textContent = window.translations[checkedValue];
+                  //to change current country and status with thier translate
+                  var countryTranslation;
+                  var statusTranslate;
+                  switch (currentCountry) {
+                    case 'Libya':
+                      countryTranslation = libyaTranslation;
+                      break;
+                    case 'Turkey':
+                      countryTranslation = turkeyTranslation;
+                      break;
+                    case 'Dubai':
+                      countryTranslation = dubaiTranslation;
+                      break;
+                    case 'China':
+                      countryTranslation = chinaTranslation;
+                      break;
+                    case 'Tunis':
+                      countryTranslation = tunisTranslation;
+                      break;
+                    default:
+                      countryTranslation = currentCountry; // Default to blue for unknown types
+                  }
+                  switch (checkedValue) {
+                    case 'At Warehouse':
+                      statusTranslate = atWarehouseTranslate;
+                      break;
+                    case 'Enroute':
+                      statusTranslate = enrouteTranslate;
+                      break;
+                    default:
+                      statusTranslate = checkedValue; // Default to blue for unknown types
+                  }
+
+                  currentCountrySpan.textContent = countryTranslation;
+                  currentStatusSpan.textContent = statusTranslate;
                   var noteInputValue = document.getElementById('note').value;
-                  console.log(noteInputValue);
                   // Update the content of the <p> tag with the input value
-                  document.getElementById('noteContent').innerText = noteInputValue;
+                  // document.getElementById('noteWrapper').style.display = 'block';
+                  // document.getElementById('noteContent').innerText = noteInputValue;
                   if (checkedValue == 'Enroute') {
+                    window.location.reload();
                     iconsStepper.next();
                   } else if (checkedValue == 'Delivered') {
-                    // document.getElementById('wizardBody').remove();
-                    // document.getElementById('reviewRoute').style.display = 'block';
                     window.location.reload();
                   } else {
-                    this.disabled = true;
+                    // wizardIconsBtnNext.disabled = true;
+                    window.location.reload();
                   }
                 },
                 error: function (response, xhr, status, error) {

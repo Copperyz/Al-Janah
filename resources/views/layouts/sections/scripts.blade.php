@@ -34,6 +34,20 @@ var areYouSureTextTranslation = @json(__('You will not be able to revert this!')
 
 var btnConfirmWarehouse = @json(__('Confirm shipment At Watehouse'));
 var btnConfirmEnroute = @json(__('Confirm shipment Enroute'));
+var originTranslation = @json(__('Origin'));
+var destinationTranslation = @json(__('Destination'));
+var transitTranslation = @json(__('Transit'));
+var countryTranslation = @json(__('Country'));
+var libyaTranslation = @json(__('Libya'));
+var turkeyTranslation = @json(__('Turkey'));
+var chinaTranslation = @json(__('China'));
+var dubaiTranslation = @json(__('Dubai'));
+var tunisTranslation = @json(__('Tunis'));
+var airTranslation = @json(__('Air'));
+var seaTranslation = @json(__('Sea'));
+var deliverdTranslate = @json(__('Delivered'));
+var atWarehouseTranslate = @json(__('At Warehouse'));
+var enrouteTranslate = @json(__('Enroute'));
 </script>
 <!-- END: Theme JS-->
 <!-- Pricing Modal JS-->

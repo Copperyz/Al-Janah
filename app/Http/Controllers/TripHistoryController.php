@@ -37,7 +37,7 @@ class TripHistoryController extends Controller
         'trip_id' => 'required',
         'status' => 'required',
         'currentLeg' => 'required',
-        'note' => 'required',
+        // 'note' => 'required',
         // Add a custom validation rule for uniqueness based on multiple columns
         'trip_id' => [
           'required',

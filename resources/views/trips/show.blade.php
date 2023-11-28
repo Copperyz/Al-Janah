@@ -24,7 +24,7 @@ $configData = Helper::appClasses();
 @endsection
 
 @section('page-script')
-<script src="{{asset('assets/js/form-wizard-icons.js')}}"></script>
+<script src="{{asset('assets/js/trips/trip-stages.js')}}"></script>
 <script src="{{asset('assets/js/extended-ui-timeline.js')}}"></script>
 @endsection
 

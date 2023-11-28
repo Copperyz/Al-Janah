@@ -17,10 +17,6 @@
     const iconsStepper = new Stepper(wizardIcons, {
       linear: true
     });
-    // const historyCount = document.querySelector(`[data-historyCount]`).getAttribute('data-historyCount');
-    // if (historyCount > 0) {
-    //   document.getElementById('noteWrapper').style.display = 'block';
-    // }
 
     const radioButtons = document.querySelectorAll('input[type="radio"]');
     // Replace 'yourTargetCountry' with the actual value you are looking for
@@ -36,6 +32,10 @@
     if (targetStepIndex !== -1) {
       // Use the stepTo method to navigate to the target step
       iconsStepper.to(targetStepIndex + 1);
+    }
+    if (targetStatus === 'Enroute') {
+      // Use the stepTo method to navigate to the target step
+      iconsStepper.next();
     }
 
     // Set the Stepper to the specific index
@@ -151,10 +151,7 @@
 
                   currentCountrySpan.textContent = countryTranslation;
                   currentStatusSpan.textContent = statusTranslate;
-                  var noteInputValue = document.getElementById('note').value;
-                  // Update the content of the <p> tag with the input value
-                  // document.getElementById('noteWrapper').style.display = 'block';
-                  // document.getElementById('noteContent').innerText = noteInputValue;
+
                   if (checkedValue == 'Enroute') {
                     window.location.reload();
                     iconsStepper.next();

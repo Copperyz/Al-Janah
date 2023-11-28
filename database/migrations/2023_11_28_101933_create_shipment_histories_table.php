@@ -10,13 +10,14 @@ return new class extends Migration {
    */
   public function up(): void
   {
-    Schema::create('shipments', function (Blueprint $table) {
+    Schema::create('shipment_histories', function (Blueprint $table) {
       $table->id();
-      $table->unsignedBigInteger('customer_id')->nullable();
-      $table->string('tracking_no', 50);
-      $table->string('delivery_code', 50);
-      $table->decimal('amount', 10, 2);
-      $table->date('date');
+      $table->unsignedBigInteger('trip_id');
+      $table->unsignedBigInteger('shipment_id');
+      $table->string('status', 50);
+      $table->string('change_type', 50);
+      $table->tinyInteger('route_leg');
+      $table->string('note');
       $table->unsignedBigInteger('created_by')->nullable();
       $table->unsignedBigInteger('updated_by')->nullable();
       $table->unsignedBigInteger('deleted_by')->nullable();
@@ -24,9 +25,13 @@ return new class extends Migration {
       $table->softDeletes();
 
       $table
-        ->foreign('customer_id')
+        ->foreign('trip_id')
         ->references('id')
-        ->on('customers');
+        ->on('trips');
+      $table
+        ->foreign('shipment_id')
+        ->references('id')
+        ->on('shipments');
       $table
         ->foreign('created_by')
         ->references('id')
@@ -47,6 +52,6 @@ return new class extends Migration {
    */
   public function down(): void
   {
-    Schema::dropIfExists('shipments');
+    Schema::dropIfExists('shipment_histories');
   }
 };

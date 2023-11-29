@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use App\Models\Shipment;
+use App\Models\Country;
 use App\Models\Customer;
 use App\Models\GoodType;
-use App\Models\ShipmentItem;
+use App\Models\Shipment;
 use App\Models\ParcelType;
+use Illuminate\Support\Str;
+use App\Models\ShipmentItem;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
 
 class ShipmentController extends Controller
@@ -36,7 +37,8 @@ class ShipmentController extends Controller
         $customers = Customer::all();
         $parcelTypes = ParcelType::all();
         $goodTypes = GoodType::all();
-        return view('shipments.create', compact('customers', 'parcelTypes', 'goodTypes'));
+        $countries = Country::all();
+        return view('shipments.create', compact('customers', 'parcelTypes', 'goodTypes', 'countries'));
     }
 
     /**

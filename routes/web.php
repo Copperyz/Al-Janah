@@ -15,6 +15,8 @@ use App\Http\Controllers\TripController;
 use App\Http\Controllers\TripHistoryController;
 use App\Http\Controllers\TripRouteController;
 use App\Http\Controllers\TripShipmentController;
+use App\Http\Controllers\PriceController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -86,4 +88,9 @@ Route::middleware(['auth'])->group(function () {
   //InventoryItems
   Route::get('get-inventoryItems', [InventoryItemsController::class, 'getInventoryItems'])->name('get-inventoryItems');
   Route::resource('inventoryItems', InventoryItemsController::class);
+
+   // Prices
+  Route::get('get-prices', [PriceController::class, 'get_prices'])->name('get-prices');
+  Route::get('get-price', [PriceController::class, 'get_price'])->name('get-price');
+  Route::resource('prices', PriceController::class);
 });

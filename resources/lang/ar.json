@@ -42,6 +42,7 @@
   "Showing": "عرض",
   "to": "إلى",
   "item": "عنصر",
+  "Item": "عنصر",
   "of": "من",
   "entries": "عنصر",
   "No entries available": "لاتوجد بيانات",
@@ -235,5 +236,14 @@
   "Change Trip Status successfully": "تم تغير حالة الرحلة بنجاح",
   "Note": "ملاحظة",
   "Tracking Shipment": "تتبع الشحنة",
-  "Tracking shipments involves monitoring the movement and status of packages or goods during their transit from the origin to the destination. The process begins with the initiation of a shipment, assigning a unique tracking number to each package. Relevant information, including origin, destination, package details, and estimated delivery time, is associated with this tracking number.": "يتضمن تتبع الشحنات مراقبة حركة الطرود أو البضائع وحالتها أثناء عبورها من المحطة الأصلية إلى الوجهة. تبدأ العملية ببدء الشحنة، مع تخصيص رقم تتبع فريد لكل طرد. ترتبط المعلومات ذات الصلة، بما في ذلك المنشأ والوجهة وتفاصيل الحزمة ووقت التسليم المقدر، برقم التتبع هذا."
+  "Tracking shipments involves monitoring the movement and status of packages or goods during their transit from the origin to the destination. The process begins with the initiation of a shipment, assigning a unique tracking number to each package. Relevant information, including origin, destination, package details, and estimated delivery time, is associated with this tracking number.": "يتضمن تتبع الشحنات مراقبة حركة الطرود أو البضائع وحالتها أثناء عبورها من المحطة الأصلية إلى الوجهة. تبدأ العملية ببدء الشحنة، مع تخصيص رقم تتبع فريد لكل طرد. ترتبط المعلومات ذات الصلة، بما في ذلك المنشأ والوجهة وتفاصيل الحزمة ووقت التسليم المقدر، برقم التتبع هذا.",
+  "Prices": "الأسعار",
+  "Add Price": "إضافة تسعيرة",
+  "Edit Price": "تعديل تسعيرة",
+  "From": "من",
+  "To": "إلى",
+  "Price added successfully": "تم إضافة تسعيرة بنجاح",
+  "Price updated successfully": "تم تعديل تسعيرة بنجاح",
+  "Price deleted successfully": "تم حذف تسعيرة بنجاح",
+  "Calculate Price": "احسب السعر"
 }

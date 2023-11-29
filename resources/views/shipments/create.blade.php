@@ -68,7 +68,26 @@ $configData = Helper::appClasses();
 
                         <!-- Second Column -->
                         <div class="col-md-6 mb-md-0 mb-3">
-
+                            <div class="mb-3">
+                                <label for="from_country_id" class="form-label me-4 fw-medium">{{__('From')}}</label>
+                                <select id="from_country_id" class="select2 form-select form-select-lg"
+                                    data-allow-clear="true" name="from_country_id">
+                                    <option disabled selected>{{__('Select')}}</option>
+                                    @foreach($countries as $country)
+                                    <option value="{{$country->id}}">{{__($country->name)}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="to_country_id" class="form-label me-4 fw-medium">{{__('To')}}</label>
+                                <select id="to_country_id" class="select2 form-select form-select-lg"
+                                    data-allow-clear="true" name="to_country_id">
+                                    <option disabled selected>{{__('Select')}}</option>
+                                    @foreach($countries as $country)
+                                    <option value="{{$country->id}}">{{__($country->name)}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
 
@@ -104,17 +123,31 @@ $configData = Helper::appClasses();
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <div class="mb-3">
+                                            <button type="button"
+                                                class="btn btn-primary calculate-price-btn">{{__('Calculate Price')}}</button>
+
+                                        </div>
+
                                     </div>
                                     <div class="col-md-3 col-12 mb-md-0 mb-3">
                                         <p class="mb-2 repeater-title">{{__('Details')}}</p>
-                                        <input name="price" type="number" class="form-control invoice-item-price mb-3"
-                                            placeholder="{{__('Price')}}" min="12" />
+                                        <label for="parcel_types_id"
+                                            class="form-label me-4 fw-medium">{{__('Height')}}</label>
                                         <input name="height" type="number" class="form-control invoice-item-price mb-3"
-                                            placeholder="{{__('Height')}}" min="12" />
+                                            placeholder="{{__('Height')}}" />
+                                        <label for="parcel_types_id"
+                                            class="form-label me-4 fw-medium">{{__('Width')}}</label>
                                         <input name="width" type="number" class="form-control invoice-item-price mb-3"
-                                            placeholder="{{__('Width')}}" min="12" />
+                                            placeholder="{{__('Width')}}" />
+                                        <label for="parcel_types_id"
+                                            class="form-label me-4 fw-medium">{{__('Weight')}}</label>
                                         <input name="weight" type="number" class="form-control invoice-item-price mb-3"
-                                            placeholder="{{__('Weight')}}" min="12" />
+                                            placeholder="{{__('Weight')}}" />
+                                        <label for="parcel_types_id"
+                                            class="form-label me-4 fw-medium">{{__('Price')}}</label>
+                                        <input name="price" type="number" class="form-control invoice-item-price mb-3"
+                                            placeholder="{{__('Price')}}" />
                                     </div>
                                     <div class="col-md-2 col-12 mb-md-0 mb-3">
                                         <p class="mb-2 repeater-title">{{__('Qty')}}</p>

@@ -233,7 +233,7 @@
   "Confirm shipment At Watehouse": "تأكيد الشحنة في المستودع",
   "Confirm shipment Enroute": "تأكيد الشحنة في الطريق",
   "Confirm": "تأكيد",
-  "Change Trip Status successfully": "تم تغير حالة الرحلة بنجاح",
+  "Trip Status Changed successfully": "تم تغير حالة الرحلة بنجاح",
   "Note": "ملاحظة",
   "Tracking Shipment": "تتبع الشحنة",
   "Tracking shipments involves monitoring the movement and status of packages or goods during their transit from the origin to the destination. The process begins with the initiation of a shipment, assigning a unique tracking number to each package. Relevant information, including origin, destination, package details, and estimated delivery time, is associated with this tracking number.": "يتضمن تتبع الشحنات مراقبة حركة الطرود أو البضائع وحالتها أثناء عبورها من المحطة الأصلية إلى الوجهة. تبدأ العملية ببدء الشحنة، مع تخصيص رقم تتبع فريد لكل طرد. ترتبط المعلومات ذات الصلة، بما في ذلك المنشأ والوجهة وتفاصيل الحزمة ووقت التسليم المقدر، برقم التتبع هذا.",
@@ -245,5 +245,10 @@
   "Price added successfully": "تم إضافة تسعيرة بنجاح",
   "Price updated successfully": "تم تعديل تسعيرة بنجاح",
   "Price deleted successfully": "تم حذف تسعيرة بنجاح",
-  "Calculate Price": "احسب السعر"
+  "Calculate Price": "احسب السعر",
+  "Shipment Status Changed successfully": "تم تغير حالة الشحنة بنجاح",
+  "shipment changing reason": "سبب تغيير الشحنة",
+  "The shipment route has been changed": "تم تغيير مسار الشحنة",
+  "The shipment has been canceled": "تم إلغاء الشحنة",
+  "The shipment is ready for pickup": "الشحنة جاهزة للإستلام"
 }

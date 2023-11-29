@@ -10,10 +10,12 @@ return new class extends Migration {
    */
   public function up(): void
   {
-    Schema::create('trip_histories', function (Blueprint $table) {
+    Schema::create('shipment_histories', function (Blueprint $table) {
       $table->id();
-      $table->unsignedBigInteger('trip_id')->nullable();
-      $table->string('status');
+      $table->unsignedBigInteger('trip_id');
+      $table->unsignedBigInteger('shipment_id');
+      $table->string('status', 50);
+      $table->string('change_type', 50);
       $table->tinyInteger('route_leg');
       $table->string('note')->nullable();
       $table->unsignedBigInteger('created_by')->nullable();
@@ -26,6 +28,10 @@ return new class extends Migration {
         ->foreign('trip_id')
         ->references('id')
         ->on('trips');
+      $table
+        ->foreign('shipment_id')
+        ->references('id')
+        ->on('shipments');
       $table
         ->foreign('created_by')
         ->references('id')
@@ -46,6 +52,6 @@ return new class extends Migration {
    */
   public function down(): void
   {
-    Schema::dropIfExists('trip_histories');
+    Schema::dropIfExists('shipment_histories');
   }
 };

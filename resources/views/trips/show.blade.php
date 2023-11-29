@@ -24,7 +24,7 @@ $configData = Helper::appClasses();
 @endsection
 
 @section('page-script')
-<script src="{{asset('assets/js/form-wizard-icons.js')}}"></script>
+<script src="{{asset('assets/js/trips/trip-stages.js')}}"></script>
 <script src="{{asset('assets/js/extended-ui-timeline.js')}}"></script>
 @endsection
 
@@ -41,8 +41,8 @@ $configData = Helper::appClasses();
             <h5 class="mb-1 mt-3 d-flex flex-wrap gap-2 align-items-end">{{__('Tracking NO')}}
                 {{$trip->tracking_no}}
                 <span class="badge bg-label-success"> <i style="font-size: 0.81em;" class="ti ti-circle-filled"></i>
-                    <span id="currentCountrySpan"
-                        data-country="{{$trip->currentLegData['country']}}">{{__($trip->currentLegData['country'])}}</span>
+                    <span id="currentCountrySpan" data-country="{{$trip->currentLegData['country']}}"
+                        data-historyCount="{{count($trip->tripHistory)}}">{{__($trip->currentLegData['country'])}}</span>
                 </span>
                 <span class="badge bg-label-info"><i style="font-size: 0.81em;" class="ti ti-circle-filled"></i>
                     <span id="currentStatusSpan" data-status="{{$trip->current_status}}">
@@ -170,9 +170,10 @@ $configData = Helper::appClasses();
 
                                 </div>
                             </div>
-                            @if($trip->tripHistory !== null && $trip->tripHistory !== false && count($trip->tripHistory)
+                            @if($trip->tripHistory !== null && $trip->tripHistory !== false &&
+                            count($trip->tripHistory)
                             > 0)
-                            <div class="alert alert-warning" role="alert">
+                            <div class="alert alert-warning" role="alert" id="noteWrapper">
                                 <h6 class="alert-heading mb-2">{{__('Note')}}</h6>
                                 <p id="noteContent" class="mb-0">
 
@@ -180,6 +181,7 @@ $configData = Helper::appClasses();
                                 </p>
                             </div>
                             @endif
+
                             <div class="mb-3 col-12 mb-3">
                                 <label class="form-label" for="note">{{__('Notes')}}</label>
                                 <input type="hidden" name="trip_id" value="{{ $trip->id }}">

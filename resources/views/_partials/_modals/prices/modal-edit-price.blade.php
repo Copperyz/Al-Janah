@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-md-6 mb-3 mb-3">
                             <label for="from_country_id" class="form-label me-4 fw-medium">{{__('From')}}</label>
-                            <select id="from_country_id" class="select2 form-select form-select-lg"
+                            <select id="edit_from_country_id" class="select2 form-select form-select-lg"
                                 data-allow-clear="true" name="from_country_id">
                                 <option disabled selected>{{__('Select')}}</option>
                                 @foreach($countries as $country)
@@ -22,7 +22,7 @@
                         </div>
                         <div class="col-md-6 mb-3 mb-3">
                             <label for="to_country_id" class="form-label me-4 fw-medium">{{__('To')}}</label>
-                            <select id="to_country_id" class="select2 form-select form-select-lg"
+                            <select id="edit_to_country_id" class="select2 form-select form-select-lg"
                                 data-allow-clear="true" name="to_country_id">
                                 <option disabled selected>{{__('Select')}}</option>
                                 @foreach($countries as $country)
@@ -34,7 +34,7 @@
                     <div class="row">
                         <div class="col-md-6 mb-3 mb-3">
                             <label for="parcel_types_id" class="form-label me-4 fw-medium">{{__('Parcel Type')}}</label>
-                            <select id="parcel_types_id" class="select2 form-select" data-allow-clear="true"
+                            <select id="edit_parcel_types_id" class="select2 form-select" data-allow-clear="true"
                                 name="parcel_types_id">
                                 <option disabled selected>{{__('Select')}}</option>
                                 @foreach($parcelTypes as $parcelType)
@@ -44,7 +44,7 @@
                         </div>
                         <div class="col-md-6 mb-3 mb-3">
                             <label for="to_country_id" class="form-label me-4 fw-medium">{{__('Good Type')}}</label>
-                            <select id="good_types_id" class="select2 form-select" data-allow-clear="true"
+                            <select id="edit_good_types_id" class="select2 form-select" data-allow-clear="true"
                                 name="good_types_id">
                                 <option disabled selected>{{__('Select')}}</option>
                                 @foreach($goodTypes as $goodType)

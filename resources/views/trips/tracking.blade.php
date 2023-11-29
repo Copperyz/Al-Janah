@@ -51,42 +51,51 @@ $configData = Helper::appClasses();
                         <!-- Menu Accordion -->
                         <div class="accordion p-2" id="fleet" data-bs-toggle="sidebar"
                             data-target="#app-logistics-fleet-sidebar">
+                            @php
+                            $groupedHistory = collect($shipmentHistory)->groupBy('country');
+                            @endphp
 
-                            @foreach($tripRoute->legs as $index => $leg)
-                            <!-- Fleet {{$index+1}} -->
-                            <div class="accordion-item border-0 mb-4" id="fl-{{$index+1}}">
-                                <div class="accordion-header" id="fleet{{$index+1}}">
+                            @foreach($groupedHistory as $country => $countryHistory)
+                            <!-- Get the type from the first record for the country -->
+                            @php
+                            $countryType = $countryHistory[0]['type'];
+                            @endphp
+
+                            <!-- Display a block for each country -->
+                            <div class="accordion-item border-0 mb-4" id="fl-{{$countryHistory[0]['route_leg']+1}}">
+                                <div class="accordion-header" id="fleet{{$countryHistory[0]['route_leg']+1}}">
                                     <div role="button" class="accordion-button collapsed shadow-none align-items-center"
-                                        data-bs-toggle="collapse" data-bs-target="#fleetCollapse{{$index+1}}"
-                                        aria-expanded="true" aria-controls="fleetCollapse{{$index+1}}">
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#fleetCollapse{{$countryHistory[0]['route_leg']+1}}_{{$countryHistory[0]['tripRouteId']}}"
+                                        aria-expanded="true"
+                                        aria-controls="fleetCollapse{{$countryHistory[0]['route_leg']+1}}_{{$countryHistory[0]['tripRouteId']}}">
                                         <div class="d-flex align-items-center">
                                             <div class="avatar-wrapper">
                                                 <div class="avatar me-2">
-                                                    @if($leg['type'] === 'Origin')
+                                                    @if($countryType === 'Origin')
                                                     <span class="avatar-initial rounded-circle bg-label-secondary"><i
                                                             class="ti ti-home text-body ti-sm"></i></span>
-                                                    @elseif($leg['type'] === 'Transit')
+                                                    @elseif($countryType === 'Transit')
                                                     <span class="avatar-initial rounded-circle bg-label-secondary"><i
                                                             class="ti ti-truck text-body ti-sm"></i></span>
-                                                    @elseif($leg['type'] === 'Destination')
+                                                    @elseif($countryType === 'Destination')
                                                     <span class="avatar-initial rounded-circle bg-label-secondary"><i
                                                             class="ti ti-flag text-body ti-sm"></i></span>
                                                     @endif
                                                 </div>
                                             </div>
                                             <span class="d-flex flex-column">
-                                                <span class="h6 mb-0">{{__($leg['type'])}}</span>
-                                                <span class="text-muted">{{__($leg['country'])}}</span>
+                                                <span class="h6 mb-0">{{__($countryType)}}</span>
+                                                <span class="text-muted">{{__($country)}}</span>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="fleetCollapse{{$index+1}}" class="accordion-collapse collapse"
-                                    data-bs-parent="#fleet">
+                                <div id="fleetCollapse{{$countryHistory[0]['route_leg']+1}}_{{$countryHistory[0]['tripRouteId']}}"
+                                    class="accordion-collapse collapse" data-bs-parent="#fleet">
                                     <div class="accordion-body pt-3 pb-0">
                                         <ul class="timeline ps-3 mb-0">
-                                            @foreach($shipment->shipmentHistory as $key => $history)
-                                            @if($history['route_leg'] === $index)
+                                            @foreach($countryHistory as $history)
                                             <li class="timeline-item ms-1 ps-4 border-left-dashed">
                                                 <span
                                                     class="timeline-indicator-advanced timeline-indicator-success border-0 shadow-none">
@@ -104,34 +113,13 @@ $configData = Helper::appClasses();
                                                     </p>
                                                 </div>
                                             </li>
-                                            @if ($history['status'] === 'At Warehouse' &&
-                                            !isset($shipment->shipmentHistory[$key +
-                                            1]))
-                                            <!-- Display the next step in origin with no green check -->
-                                            <li class="timeline-item ms-1 ps-4 border-left-dashed">
-                                                <span
-                                                    class="timeline-indicator-advanced timeline-indicator-secondary border-0 shadow-none">
-                                                    <i class='ti ti-circle'></i>
-                                                </span>
-                                                <div class="timeline-event ps-0 pb-0">
-                                                    <div class="timeline-header">
-                                                        <small class="text-uppercase fw-medium">
-                                                            {{__('Enroute')}}
-                                                        </small>
-                                                    </div>
-                                                    <!-- Additional details for the next step -->
-                                                </div>
-                                            </li>
-                                            @endif
-                                            @endif
                                             @endforeach
                                         </ul>
-
-
                                     </div>
                                 </div>
                             </div>
                             @endforeach
+
 
                         </div>
                     </div>

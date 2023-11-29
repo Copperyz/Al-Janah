@@ -87,13 +87,14 @@ class TripShipmentController extends Controller
           $note = '';
       }
       if ($deSelectedRows !== null) {
+        return 'dkjkdj';
         foreach ($deSelectedRows as $key => $row) {
           $row = is_array($row) ? (object) $row : $row;
 
           $shipment = Shipment::findOrFail($row->id);
-          $shipment->detour = $request->selectedChangeType;
+          $shipment->detour = $request->selectedChangeType === "Detour" ? 1 : 0;
           $shipment->updated_by = auth()->user()->id;
-          $shipment->store();
+          $shipment->save();
 
           $shipmentHistory = new ShipmentHistory();
           $shipmentHistory->trip_id = $trip->id;

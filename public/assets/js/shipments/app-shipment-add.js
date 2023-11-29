@@ -150,6 +150,72 @@ $(function () {
   // Set the value of the input element to the formatted date
   $('#datePicker').val(formattedDate);
 
+  var price = 0;
+
+
+  $(document).on('click', '.calculate-price-btn', function () {
+    var $container = $(this).closest('.repeater-wrapper'); // Adjust the selector based on your actual HTML structure
+
+    // Check if the container is found
+    if ($container.length) {
+      // Now try to get the values of input fields
+      var height = $container.find('[name$="[height]"]').val();
+      var width = $container.find('[name$="[width]"]').val();
+      var weight = $container.find('[name$="[weight]"]').val();
+
+      // Get values of select elements within the current repeater item
+      var parcelTypeId = $container.find('[name$="[parcel_types_id]"]').val();
+      var goodTypeId = $container.find('[name$="[good_types_id]"]').val();
+
+      var from_country_id = $('#addShipmentForm').find('[name="from_country_id"]').val();
+      var to_country_id = $('#addShipmentForm').find('[name="to_country_id"]').val();
+
+      // Check if all required inputs are filled
+      if (height && width && weight && parcelTypeId && goodTypeId && from_country_id && to_country_id) {
+        // Call your function with these values
+        $.ajax({
+          url: "../get-price",
+          method: 'GET',
+          data: {
+            weight: weight,
+            height: height,
+            width: width,
+            parcelTypeId: parcelTypeId,
+            goodTypeId: goodTypeId,
+            from_country_id: from_country_id,
+            to_country_id: to_country_id,
+          },
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          success: function (response) {
+            // Update the UI with the calculated price
+            var value = response > 0 ? response : price;
+            $container.find('[name$="[price]"]').val(value)
+          },
+          error: function (error) {
+          }
+        });
+      } else {
+        // Show error message using Swal.fire
+        Swal.fire({
+          title: 'Error',
+          text: 'Please fill in all required fields.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          customClass: {
+            confirmButton: 'btn btn-primary'
+          },
+          buttonsStyling: false
+        });
+      }
+    } else {
+      console.log('Container not found.');
+    }
+  });
+
+
+
 
 
   // If you have a submit button inside the form, you can bind the click event to it

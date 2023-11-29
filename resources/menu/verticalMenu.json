@@ -63,6 +63,12 @@
       "icon": "menu-icon tf-icons ti ti-users",
       "name": "Trip Routes",
       "slug": "trip_routes.index"
+    },
+    {
+      "url": "prices",
+      "icon": "menu-icon ti ti-map-pin-dollar",
+      "name": "Prices",
+      "slug": "prices.index"
     }
   ]
 }

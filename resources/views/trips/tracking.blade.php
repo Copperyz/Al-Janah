@@ -85,7 +85,7 @@ $configData = Helper::appClasses();
                                     data-bs-parent="#fleet">
                                     <div class="accordion-body pt-3 pb-0">
                                         <ul class="timeline ps-3 mb-0">
-                                            @foreach($tripHistory as $key => $history)
+                                            @foreach($shipment->shipmentHistory as $key => $history)
                                             @if($history['route_leg'] === $index)
                                             <li class="timeline-item ms-1 ps-4 border-left-dashed">
                                                 <span
@@ -104,7 +104,8 @@ $configData = Helper::appClasses();
                                                     </p>
                                                 </div>
                                             </li>
-                                            @if ($history['status'] === 'At Warehouse' && !isset($tripHistory[$key +
+                                            @if ($history['status'] === 'At Warehouse' &&
+                                            !isset($shipment->shipmentHistory[$key +
                                             1]))
                                             <!-- Display the next step in origin with no green check -->
                                             <li class="timeline-item ms-1 ps-4 border-left-dashed">

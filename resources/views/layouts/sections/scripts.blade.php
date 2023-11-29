@@ -48,6 +48,7 @@ var seaTranslation = @json(__('Sea'));
 var deliverdTranslate = @json(__('Delivered'));
 var atWarehouseTranslate = @json(__('At Warehouse'));
 var enrouteTranslate = @json(__('Enroute'));
+var shipmentReasonTranslate = @json(__('shipment changing reason'));
 </script>
 <!-- END: Theme JS-->
 <!-- Pricing Modal JS-->

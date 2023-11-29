@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ShipmentHistory;
 use App\Models\Trip;
 use App\Models\TripHistory;
 use Illuminate\Http\Request;
@@ -16,7 +17,6 @@ class TripHistoryController extends Controller
    */
   public function index()
   {
-    //
   }
 
   /**
@@ -68,14 +68,26 @@ class TripHistoryController extends Controller
         $tripHistory->created_by = auth()->user()->id;
         $tripHistory->save();
 
-        $trip = Trip::findOrFail($request->trip_id);
+        $trip = Trip::with('shipments')->findOrFail($request->trip_id);
         $trip->current_status = $request->status;
         $trip->current_route_leg = $request->currentLeg;
         $trip->updated_by = auth()->user()->id;
         $trip->save();
+
+        foreach ($trip->shipments as $key => $shipment) {
+          $shipmentHistory = new ShipmentHistory();
+          $shipmentHistory->trip_id = $trip->id;
+          $shipmentHistory->shipment_id = $shipment->id;
+          $shipmentHistory->status = $request->status;
+          $shipmentHistory->change_type = $shipment->detour == 1 ? 'Detour' : 'Initial';
+          $shipmentHistory->route_leg = $request->currentLeg;
+          $shipmentHistory->note = $request->note;
+          $shipmentHistory->created_by = auth()->user()->id;
+          $shipmentHistory->save();
+        }
       });
 
-      return response()->json(['message' => __('Change Trip Status successfully')], 200);
+      return response()->json(['message' => __('Trip Status Changed successfully')], 200);
     } catch (\Throwable $th) {
       return response()->json(['message' => $th], 422);
     }

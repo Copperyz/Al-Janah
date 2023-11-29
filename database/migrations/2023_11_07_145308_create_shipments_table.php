@@ -17,6 +17,7 @@ return new class extends Migration {
       $table->string('delivery_code', 50);
       $table->decimal('amount', 10, 2);
       $table->date('date');
+      $table->tinyInteger('detour')->default(0);
       $table->unsignedBigInteger('created_by')->nullable();
       $table->unsignedBigInteger('updated_by')->nullable();
       $table->unsignedBigInteger('deleted_by')->nullable();

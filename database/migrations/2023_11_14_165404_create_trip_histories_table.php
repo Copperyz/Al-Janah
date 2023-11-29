@@ -15,7 +15,7 @@ return new class extends Migration {
       $table->unsignedBigInteger('trip_id')->nullable();
       $table->string('status');
       $table->tinyInteger('route_leg');
-      $table->string('note');
+      $table->string('note')->nullable();
       $table->unsignedBigInteger('created_by')->nullable();
       $table->unsignedBigInteger('updated_by')->nullable();
       $table->unsignedBigInteger('deleted_by')->nullable();

@@ -10,6 +10,7 @@ use App\Http\Controllers\pages\HomePage;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\ShipmentController;
+use App\Http\Controllers\ShipmentHistoryController;
 use App\Http\Controllers\ShipmentItemController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\TripHistoryController;
@@ -63,13 +64,16 @@ Route::middleware(['auth'])->group(function () {
   Route::post('add-shipmentItem/{id}', [ShipmentItemController::class, 'add_shipment_item'])->name('add-shipment-item');
   Route::resource('shipment-itmes', ShipmentItemController::class);
 
+  // Shipment history
+  Route::resource('shipment-history', ShipmentHistoryController::class);
+
   // Trips
   Route::get('get-trips', [TripController::class, 'get_trips'])->name('get-trips');
   Route::get('get-trip-shipments/{id}', [TripController::class, 'get_trip_shipments'])->name('get-trip-shipments');
   Route::get('tracking/{id}', [TripController::class, 'tracking'])->name('tracking');
   Route::resource('trips', TripController::class);
 
-   // Trip Shipment
+  // Trip Shipment
   Route::resource('trip_shipments', TripShipmentController::class);
 
   // Trips Routes

@@ -28,7 +28,9 @@ $(function () {
           orderable: false,
           render: function (data, type, full, meta) {
             return (
-              '<a href="./trips/' + full['id'] + '" class= "btn btn-sm btn-success me-2" > <i class="ti ti-eye ti-lg"></i></a > ' +
+              '<a href="./trips/' +
+              full['id'] +
+              '" class= "btn btn-sm btn-success me-2" > <i class="ti ti-eye ti-lg"></i></a > ' +
               '<span><button class="btn btn-sm btn-warning me-2 showTripShipment" data-bs-target="#showTripShipmentModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-package ti-lg"></i></button>' +
               '<span><button class="btn btn-sm btn-info me-2 editTrip" data-bs-target="#editTripModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit ti-lg"></i></button>' +
               '<span><button class="btn btn-sm btn-danger me-2 delete-record"><i class="ti ti-trash ti-lg"></i></button>'
@@ -46,15 +48,15 @@ $(function () {
         '<"col-sm-12 col-md-6"i>' +
         '<"col-sm-12 col-md-6"p>' +
         '>',
-      "language": {
-        "search": searchTranslation,
-        "lengthMenu": `${showTranslation} _MENU_`,
-        "info": ` ${showingTranslation} _START_ ${toTranslation} _END_ ${ofTranslation} _TOTAL_ ${entriesTranslation}`,
-        "paginate": {
-          "next": nextTranslation,      // Change "Next" text
-          "previous": previousTranslation, // Change "Previous" text
+      language: {
+        search: searchTranslation,
+        lengthMenu: `${showTranslation} _MENU_`,
+        info: ` ${showingTranslation} _START_ ${toTranslation} _END_ ${ofTranslation} _TOTAL_ ${entriesTranslation}`,
+        paginate: {
+          next: nextTranslation, // Change "Next" text
+          previous: previousTranslation // Change "Previous" text
         },
-        "emptyTable": noEntriesAvailableTranslation
+        emptyTable: noEntriesAvailableTranslation
       },
       // Buttons with Dropdown
       buttons: [
@@ -69,7 +71,7 @@ $(function () {
             $(node).removeClass('btn-secondary');
           }
         }
-      ],
+      ]
     });
   }
 
@@ -284,14 +286,14 @@ $(function () {
     var dt_shipment = dt_shipment_table.DataTable({
       select: {
         style: 'multi',
-        selector: 'td:first-child input[type="checkbox"]',
+        selector: 'td:first-child input[type="checkbox"]'
       },
       columns: [
         // columns according to JSON
         { data: 'id' },
         { data: 'customerName' },
         { data: 'date' },
-        { data: 'amount' },
+        { data: 'amount' }
       ],
       rowCallback: function (row, data) {
         if (data.selected == 1) {
@@ -323,15 +325,15 @@ $(function () {
         // Select style
         style: 'multi'
       },
-      "language": {
-        "search": searchTranslation,
-        "lengthMenu": `${showTranslation} _MENU_`,
-        "info": ` ${showingTranslation} _START_ ${toTranslation} _END_ ${ofTranslation} _TOTAL_ ${entriesTranslation}`,
-        "paginate": {
-          "next": nextTranslation,      // Change "Next" text
-          "previous": previousTranslation, // Change "Previous" text
+      language: {
+        search: searchTranslation,
+        lengthMenu: `${showTranslation} _MENU_`,
+        info: ` ${showingTranslation} _START_ ${toTranslation} _END_ ${ofTranslation} _TOTAL_ ${entriesTranslation}`,
+        paginate: {
+          next: nextTranslation, // Change "Next" text
+          previous: previousTranslation // Change "Previous" text
         },
-        "emptyTable": noEntriesAvailableTranslation,
+        emptyTable: noEntriesAvailableTranslation,
         select: {
           rows: {
             _: `${rowSelectedTranslation} %d ${rows}`,
@@ -352,12 +354,11 @@ $(function () {
             $(node).removeClass('btn-secondary');
           }
         }
-      ],
+      ]
     });
   }
 
   var selectedRows = [];
-
 
   // On each datatable draw, initialize tooltip
   dt_shipment_table.on('draw.dt', function () {
@@ -369,9 +370,9 @@ $(function () {
     });
   });
 
-  var selectedRows = [];  // Declare selectedRows outside the event handler
-
-
+  var selectedRows = []; // Declare selectedRows outside the event handler
+  var deSelectedRows = []; // Declare deSelectedRows outside the event handler
+  var selectedChangeType;
   // Event listener for the checkbox change
   dt_shipment.on('select', function (e, dt, type, indexes) {
     var selectedData = dt_shipment.rows(indexes).data().toArray();
@@ -380,13 +381,61 @@ $(function () {
     selectedRows.push(...selectedData);
   });
 
-
   dt_shipment.on('deselect', function (e, dt, type, indexes) {
     var deselectedData = dt_shipment.rows(indexes).data().toArray();
-    // Remove rows that are being deselected from selectedRows
-    selectedRows = selectedRows.filter(selectedRow => !deselectedData.some(row => row.id === selectedRow.id));
-  });
+    // Display SweetAlert with a dropdown for choices
+    const choices = ['Detour', 'Cancel', 'Complete'];
 
+    // Create a custom HTML content with radio buttons for choices
+    const htmlContent = `
+        <div style="display: flex; justify-content: space-around; margin: 1em 0;">
+            ${choices
+              .map(
+                choice => `
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="radioOption" value="${choice}" id="radio_${choice}" ${
+                  choice == 'Detour' ? 'checked' : ''
+                }>
+                    <label class="form-check-label" for="radio_${choice}">${choice}</label>
+                </div>
+            `
+              )
+              .join('')}
+        </div>
+    `;
+
+    // Display SweetAlert with custom HTML content
+    Swal.fire({
+      title: '',
+      text: shipmentReasonTranslate,
+      icon: 'warning',
+      html: htmlContent,
+      showCancelButton: true,
+      confirmButtonText: submitTranslation,
+      cancelButtonText: cancelTranslation,
+      customClass: {
+        confirmButton: 'btn btn-primary me-3',
+        cancelButton: 'btn btn-label-secondary'
+      },
+      buttonsStyling: false,
+      preConfirm: () => {
+        // Return the selected value
+        const selectedRadio = document.querySelector('input[name="radioOption"]:checked');
+        return selectedRadio ? selectedRadio.value : '';
+      }
+    }).then(result => {
+      if (result.isConfirmed) {
+        selectedRows = selectedRows.filter(selectedRow => !deselectedData.some(row => row.id === selectedRow.id));
+        deselectedData = deselectedData.filter(
+          row => !deSelectedRows.some(deSelectedRow => deSelectedRow.id === row.id)
+        );
+        selectedChangeType = result.value;
+        // Remove rows that are being deselected from selectedRows
+        deSelectedRows.push(...deselectedData);
+        // Continue with any additional logic or actions
+      }
+    });
+  });
 
   $(document).on('click', 'button.showTripShipment', function () {
     var data = dt_trips.row($(this).closest('tr')).data();
@@ -402,20 +451,21 @@ $(function () {
 
         if (rowData.selected == 1) {
           // Update selectedRows if the row is selected
+          console.log(rowData.selected, 'ddd');
           selectedRows.push(rowData);
+        } else {
+          console.log(rowData.selected);
         }
       });
     });
   });
-
-
 
   // Event listener for the submit button
   $('#showTripShipmentModal').on('click', 'button.btn-primary', function () {
     $.ajax({
       url: './trip_shipments/' + $('#id').val(),
       method: 'PUT',
-      data: { selectedRows: selectedRows },
+      data: { selectedRows, deSelectedRows, selectedChangeType },
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
@@ -430,14 +480,13 @@ $(function () {
             confirmButtonText: doneTranslation,
             customClass: {
               confirmButton: 'btn btn-success'
-            },
-          }).then((result) => {
+            }
+          }).then(result => {
             if (result.isConfirmed) {
               $('#showTripShipmentModal').modal('hide');
             }
           });
-        }
-        else {
+        } else {
           // Handle other status codes
         }
       },
@@ -459,7 +508,6 @@ $(function () {
         });
       }
     });
-
   });
 
   // Filter form control to default size

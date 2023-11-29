@@ -17,7 +17,7 @@ return new class extends Migration {
       $table->string('status', 50);
       $table->string('change_type', 50);
       $table->tinyInteger('route_leg');
-      $table->string('note');
+      $table->string('note')->nullable();
       $table->unsignedBigInteger('created_by')->nullable();
       $table->unsignedBigInteger('updated_by')->nullable();
       $table->unsignedBigInteger('deleted_by')->nullable();

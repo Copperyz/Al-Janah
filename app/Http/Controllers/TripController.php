@@ -190,47 +190,47 @@ class TripController extends Controller
   }
 
   public function get_trips()
-    {
-        $trips = Trip::orderBy('id', 'DESC')->get();
-        return Datatables::of($trips)
-        ->addColumn('status', function ($trips) {
+  {
+    $trips = Trip::orderBy('id', 'DESC')->get();
+    return Datatables::of($trips)
+      ->addColumn('status', function ($trips) {
         return __($trips->current_status);
-         })
-         ->addColumn('shipmentsCount', function ($trip) {
-            return $trip->shipments->count();
-        })
-        ->make(true);
-    }
+      })
+      ->addColumn('shipmentsCount', function ($trip) {
+        return $trip->shipments->count();
+      })
+      ->make(true);
+  }
 
-    public function get_trip_shipments($id){
-        $shipments = Shipment::select(
-            'shipments.*',
-            DB::raw('(CASE WHEN trip_shipments.trip_id = ' . intval($id) . ' THEN 1 ELSE 0 END) AS selected')
-        )
-        ->leftJoin('trip_shipments', 'shipments.id', '=', 'trip_shipments.shipment_id')
-        ->where(function ($query) use ($id) {
-            $query->whereNull('trip_shipments.shipment_id')
-                ->orWhere('trip_shipments.trip_id', $id);
-        })
-        ->get();
-        return Datatables::of($shipments)
-        ->addColumn('customerName', function ($shipment) {
-        return $shipment->customer ? $shipment->customer->first_name.' '.$shipment->customer->last_name : 'N/A';
-         })
-        ->addColumn('status', function ($trips) {
+  public function get_trip_shipments($id)
+  {
+    $shipments = Shipment::select(
+      'shipments.*',
+      DB::raw('(CASE WHEN trip_shipments.trip_id = ' . intval($id) . ' THEN 1 ELSE 0 END) AS selected')
+    )
+      ->leftJoin('trip_shipments', 'shipments.id', '=', 'trip_shipments.shipment_id')
+      ->where(function ($query) use ($id) {
+        $query->whereNull('trip_shipments.shipment_id')->orWhere('trip_shipments.trip_id', $id);
+      })
+      ->get();
+    return Datatables::of($shipments)
+      ->addColumn('customerName', function ($shipment) {
+        return $shipment->customer ? $shipment->customer->first_name . ' ' . $shipment->customer->last_name : 'N/A';
+      })
+      ->addColumn('status', function ($trips) {
         return __($trips->current_status);
-        })
-        ->make(true);
-    }
+      })
+      ->make(true);
+  }
 
-     public function tracking($id){
-      
-      $tripId = Trip::where('tracking_no', $id)->first();
+  public function tracking($id)
+  {
+    $shipment = Shipment::with('shipmentHistory', 'trips')
+      ->where('tracking_no', $id)
+      ->first();
+    $tripId = $shipment->shipmentHistory->last()->trip_id;
+    $tripRoute = Trip::findOrFail($tripId)->tripRoute;
 
-      $tripHistory = TripHistory::where('trip_id', $tripId->id)->get();
-
-      $tripRoute = TripRoute::find($tripId->trip_route_id);
-
-      return view('trips.tracking', compact('tripHistory', 'tripRoute'));
-    }
+    return view('trips.tracking', compact('shipment', 'tripRoute'));
+  }
 }

@@ -1,4 +1,3 @@
-
 <!-- BEGIN: Vendor JS-->
 <script src="{{asset('assets/vendor/js/dropdown-hover.js')}}"></script>
 <script src="{{asset('assets/vendor/js/mega-dropdown.js')}}"></script>
@@ -9,6 +8,8 @@
 @yield('vendor-script')
 <!-- END: Page Vendor JS-->
 <!-- BEGIN: Theme JS-->
+<script src="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.js')}}"></script>
+
 <script src="{{ asset(mix('assets/js/front-main.js')) }}"></script>
 <!-- END: Theme JS-->
 <!-- Pricing Modal JS-->

@@ -451,10 +451,8 @@ $(function () {
 
         if (rowData.selected == 1) {
           // Update selectedRows if the row is selected
-          console.log(rowData.selected, 'ddd');
           selectedRows.push(rowData);
         } else {
-          console.log(rowData.selected);
         }
       });
     });

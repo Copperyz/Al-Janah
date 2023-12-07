@@ -2,9 +2,16 @@
   "menu": [
     {
       "url": "/",
+      "name": "Website",
+      "icon": "menu-icon tf-icons ti ti-files",
+      "slug": "landing-page",
+      "target": "_blank"
+    },
+    {
+      "url": "dashboard",
       "name": "Home",
       "icon": "menu-icon tf-icons ti ti-smart-home",
-      "slug": "pages-home"
+      "slug": "dashboard"
     },
     {
       "url": "users",

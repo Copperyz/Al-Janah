@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('prices', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('good_types_id')->nullable();
-            $table->unsignedBigInteger('parcel_types_id')->nullable();
             $table->unsignedBigInteger('from_country_id')->nullable();
             $table->unsignedBigInteger('to_country_id')->nullable();
             $table->decimal('price', 8, 2);
@@ -28,10 +27,6 @@ return new class extends Migration
                 ->foreign('good_types_id')
                 ->references('id')
                 ->on('good_types');
-            $table
-                ->foreign('parcel_types_id')
-                ->references('id')
-                ->on('parcel_types');
             $table
                 ->foreign('from_country_id')
                 ->references('id')

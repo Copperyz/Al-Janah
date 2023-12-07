@@ -38,7 +38,6 @@ class AuthController extends Controller
     }
   }
 
-
   public function showLogin(Request $request)
   {
     $userLocale = $request->session()->get('locale'); // Get current locale
@@ -74,7 +73,7 @@ class AuthController extends Controller
       // Login the user after registration
       Auth::login($user);
       // Redirect or return a response as needed
-      return redirect('/');
+      return redirect('/dashboard');
     } catch (\Exception $e) {
       // Rollback the transaction in case of any errors
       DB::rollback();

@@ -40,6 +40,36 @@ $configData = Helper::appClasses();
         <div class="card invoice-preview-card">
             <div class="card-body">
                 <form class="source-item pt-4 px-0 px-sm-4" id="addShipmentForm">
+                    <div class="col-md-12 mb-md-0 p-0 p-sm-4 row">
+                        <label for="customer_id" class="form-label me-4 fw-medium">{{__('Customer')}}</label>
+                        <div class="col-md-10">
+                            <select id="customer_id" class="select2 form-select form-select-lg" data-allow-clear="true"
+                                name="customer_id">
+                                <option disabled selected>{{__('Select')}}</option>
+                                @foreach($customers as $customer)
+                                <option value="{{$customer->id}}">
+                                    @if($customer->customer_code)
+                                    {{$customer->customer_code}}
+                                    -
+                                    @endif
+                                    {{$customer->first_name}} {{$customer->last_name}}
+                                    @if($customer->email)
+                                    - {{$customer->email}}
+                                    @endif
+                                    @if($customer->phone)
+                                    - {{$customer->phone}}
+                                    @endif
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary" data-bs-target="#addCustomerModal" data-bs-toggle="modal"
+                                data-bs-dismiss="modal">
+                                <i class="ti ti-plus me-md-1"></i>
+                            </button>
+                        </div>
+                    </div>
                     <div class="row p-0 p-sm-4">
                         <!-- First Column -->
                         <div class="col-md-6 mb-md-0 mb-3">
@@ -54,37 +84,19 @@ $configData = Helper::appClasses();
                                 <input type="text" class="form-control" id="salesperson"
                                     placeholder="{{__('Enter amount')}}" name="amount" />
                             </div>
-                            <div class="mb-3">
-                                <label for="customer_id" class="form-label me-4 fw-medium">{{__('Customer')}}</label>
-                                <select id="customer_id" class="select2 form-select form-select-lg"
-                                    data-allow-clear="true" name="customer_id">
-                                    <option disabled selected>{{__('Select')}}</option>
-                                    @foreach($customers as $customer)
-                                    <option value="{{$customer->id}}">{{$customer->first_name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
                         </div>
+
 
                         <!-- Second Column -->
                         <div class="col-md-6 mb-md-0 mb-3">
                             <div class="mb-3">
-                                <label for="from_country_id" class="form-label me-4 fw-medium">{{__('From')}}</label>
-                                <select id="from_country_id" class="select2 form-select form-select-lg"
-                                    data-allow-clear="true" name="from_country_id">
+                                <label for="trip_route_id"
+                                    class="form-label me-4 fw-medium">{{__('Trip Route')}}</label>
+                                <select id="trip_route_id" class="select2 form-select form-select-lg"
+                                    data-allow-clear="true" name="trip_route_id">
                                     <option disabled selected>{{__('Select')}}</option>
-                                    @foreach($countries as $country)
-                                    <option value="{{$country->id}}">{{__($country->name)}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="to_country_id" class="form-label me-4 fw-medium">{{__('To')}}</label>
-                                <select id="to_country_id" class="select2 form-select form-select-lg"
-                                    data-allow-clear="true" name="to_country_id">
-                                    <option disabled selected>{{__('Select')}}</option>
-                                    @foreach($countries as $country)
-                                    <option value="{{$country->id}}">{{__($country->name)}}</option>
+                                    @foreach($tripRoutes as $tripRoute)
+                                    <option value="{{$tripRoute->id}}">{{__($tripRoute->legs_combined)}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -195,12 +207,12 @@ $configData = Helper::appClasses();
                         <div class="col-md-6 d-flex justify-content-end">
                             <div class="invoice-calculations">
                                 <div class="d-flex justify-content-between mb-2">
-                                    <span class="w-px-100 me-2">{{__('Subtotal')}}</span>
-                                    <span class="fw-medium">$00.00</span>
+                                    <span class="w-px-100 me-2">{{__('Trip fare')}}</span>
+                                    <span id="tripFareValue" class="fw-medium">$00.00</span>
                                 </div>
                                 <div class="d-flex justify-content-between mb-2">
-                                    <span class="w-px-100">{{__('Discount')}}</span>
-                                    <span class="fw-medium">$00.00</span>
+                                    <span class="w-px-100">{{__('Freight cost')}}</span>
+                                    <span id="freightValue" class="fw-medium">$00.00</span>
                                 </div>
                                 <hr />
                                 <div class="d-flex justify-content-between">
@@ -282,4 +294,6 @@ function clearFields() {
 <!-- Offcanvas -->
 @include('_partials/_offcanvas/offcanvas-send-invoice')
 <!-- /Offcanvas -->
+@include('_partials/_modals/shipments/modal-add-customer')
+
 @endsection

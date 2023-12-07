@@ -33,16 +33,6 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3 mb-3">
-                            <label for="parcel_types_id" class="form-label me-4 fw-medium">{{__('Parcel Type')}}</label>
-                            <select id="edit_parcel_types_id" class="select2 form-select" data-allow-clear="true"
-                                name="parcel_types_id">
-                                <option disabled selected>{{__('Select')}}</option>
-                                @foreach($parcelTypes as $parcelType)
-                                <option value="{{$parcelType->id}}">{{$parcelType->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-6 mb-3 mb-3">
                             <label for="to_country_id" class="form-label me-4 fw-medium">{{__('Good Type')}}</label>
                             <select id="edit_good_types_id" class="select2 form-select" data-allow-clear="true"
                                 name="good_types_id">
@@ -52,9 +42,7 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="mb-3 col-12 mb-3">
+                        <div class="col-md-6 mb-3 mb-3">
                             <label class="form-label" for="price">{{__('Price')}}</label>
                             <input type="number" id="price" name="price" class="form-control"
                                 placeholder="{{__('Price')}}" required />

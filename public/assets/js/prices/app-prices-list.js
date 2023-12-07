@@ -17,7 +17,6 @@ $(function () {
                 { data: '' },
                 { data: 'fromCountry' },
                 { data: 'toCountry' },
-                { data: 'parcelType' },
                 { data: 'goodType' },
                 { data: 'price' },
                 { data: 'action' }
@@ -180,7 +179,6 @@ $(function () {
         var data = dt_prices.row($(this).closest('tr')).data();
         $('#editPriceForm').find('[name="from_country_id"]').val(data.from_country_id).trigger('change');
         $('#editPriceForm').find('[name="to_country_id"]').val(data.to_country_id).trigger('change');
-        $('#editPriceForm').find('[name="parcel_types_id"]').val(data.parcel_types_id).trigger('change');
         $('#editPriceForm').find('[name="good_types_id"]').val(data.good_types_id).trigger('change');
         $('#editPriceForm').find('[name="price"]').val(data.price);
         $('#editPriceForm').find('[name="id"]').val(data.id);

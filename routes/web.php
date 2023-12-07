@@ -4,6 +4,7 @@ use App\Http\Controllers\Users;
 use App\Http\Controllers\Settings;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FrontPagesController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\InventoryItemsController;
 use App\Http\Controllers\pages\HomePage;
@@ -19,7 +20,6 @@ use App\Http\Controllers\TripShipmentController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\CustomerController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +30,10 @@ use App\Http\Controllers\CustomerController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// Front Pages
+Route::get('/', [FrontPagesController::class, 'index'])->name('landing-page');
+Route::get('/shipment-price', [FrontPagesController::class, 'showPriceSections'])->name('shipment-price');
+Route::post('/shipment/price-submit', [FrontPagesController::class, 'getPrice'])->name('shipment.get.price');
 
 Route::middleware(['guest'])->group(function () {
   Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -42,7 +46,7 @@ Route::middleware(['guest'])->group(function () {
 Route::get('/change-locale/{locale}', [Settings::class, 'setLocale'])->name('changeLocale');
 
 Route::middleware(['auth'])->group(function () {
-  Route::get('/', [HomePage::class, 'index'])->name('pages-home');
+  Route::get('dashboard', [HomePage::class, 'index'])->name('dashboard');
   Route::post('/logout', [AuthController::class, 'Logout'])->name('logout');
 
   // Users
@@ -94,10 +98,11 @@ Route::middleware(['auth'])->group(function () {
   Route::get('get-inventoryItems', [InventoryItemsController::class, 'getInventoryItems'])->name('get-inventoryItems');
   Route::resource('inventoryItems', InventoryItemsController::class);
 
-   // Prices
+  // Prices
   Route::get('get-prices', [PriceController::class, 'get_prices'])->name('get-prices');
   Route::get('get-price', [PriceController::class, 'get_price'])->name('get-price');
   Route::resource('prices', PriceController::class);
+
 
   // Customers
   Route::resource('customers', CustomerController::class);

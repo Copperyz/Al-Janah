@@ -223,50 +223,56 @@ class TripController extends Controller
       ->make(true);
   }
 
-public function tracking($id)
-{
+  public function tracking($id)
+  {
     $shipment = Shipment::with('shipmentHistory', 'trips')
-        ->where('tracking_no', $id)
-        ->first();
+      ->where('tracking_no', $id)
+      ->first();
 
-    $tripIds = $shipment->shipmentHistory->pluck('trip_id')->unique()->values();
-    $tripRoutes = Trip::whereIn('id', $tripIds)->with('tripRoute')->get()->pluck('tripRoute');
+    $tripIds = $shipment->shipmentHistory
+      ->pluck('trip_id')
+      ->unique()
+      ->values();
+    $tripRoutes = Trip::whereIn('id', $tripIds)
+      ->with('tripRoute')
+      ->get()
+      ->pluck('tripRoute');
 
     $shipmentHistory = $shipment->shipmentHistory->map(function ($history) use ($tripRoutes) {
-        $history->tripRouteId = Trip::where('id', $history->trip_id)->pluck('trip_route_id')->first();
-        return $history;
+      $history->tripRouteId = Trip::where('id', $history->trip_id)
+        ->pluck('trip_route_id')
+        ->first();
+      return $history;
     });
-
- 
 
     $shipmentHistory = $shipmentHistory->map(function ($history) use ($tripRoutes) {
-        $matchingTripRoute = $tripRoutes->firstWhere('id', $history->tripRouteId);
+      $matchingTripRoute = $tripRoutes->firstWhere('id', $history->tripRouteId);
 
-        if ($matchingTripRoute) {
-            $leg = $matchingTripRoute->legs[$history->route_leg];
-            $history->country = $leg['country'];
-            $history->type = $leg['type'];
+      if ($matchingTripRoute) {
+        $leg = $matchingTripRoute->legs[$history->route_leg];
+        $history->country = $leg['country'];
+        $history->type = $leg['type'];
+      }
 
-        }
-
-        return $history;
+      return $history;
     });
 
-    $shipmentHistory = $shipmentHistory->groupBy('country')->map(function ($groupedHistories) {
-    $uniqueTripRouteIds = $groupedHistories->pluck('tripRouteId')->unique();
+    $shipmentHistory = $shipmentHistory
+      ->groupBy('country')
+      ->map(function ($groupedHistories) {
+        $uniqueTripRouteIds = $groupedHistories->pluck('tripRouteId')->unique();
 
-    if ($uniqueTripRouteIds->count() > 1) {
+        if ($uniqueTripRouteIds->count() > 1) {
           // If there are multiple tripRouteIds for the same country, set type to 'Transit'
           $groupedHistories->transform(function ($history) {
-              $history->type = 'Transit';
-              return $history;
+            $history->type = 'Transit';
+            return $history;
           });
-    }
-    return $groupedHistories;
-    })->flatten();
-
-
+        }
+        return $groupedHistories;
+      })
+      ->flatten();
 
     return view('trips.tracking', compact('shipmentHistory', 'tripRoutes'));
-}
+  }
 }

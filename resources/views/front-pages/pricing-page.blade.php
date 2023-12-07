@@ -347,55 +347,116 @@ function updateColor(e) {
         element.style.display = 'none';
     }
 }
-document.addEventListener('DOMContentLoaded', function(event) {
-    var form = document.getElementById('shipmentPriceForm');
-    var formData = new FormData(form);
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        if (document.getElementById('section3')) {
-            return;
-        }
-        var url = form.getAttribute('action');
-        var method = form.getAttribute('method');
-        var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+// document.addEventListener('DOMContentLoaded', function(event) {
+//     var form = document.getElementById('shipmentPriceForm');
+//     var formData = new FormData(form);
+//     form.addEventListener('submit', function(event) {
+//         event.preventDefault();
+//         if (document.getElementById('section3')) {
+//             return;
+//         }
+//         var url = form.getAttribute('action');
+//         var method = form.getAttribute('method');
+//         var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-        fetch(url, {
-                method: method,
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
+//         fetch(url, {
+//                 method: method,
+//                 headers: {
+//                     'X-CSRF-TOKEN': csrfToken
+//                 },
+//                 body: formData
+//             })
+//             .then(response => response.json())
+//             .then(data => {
+//                 var section3 = document.createElement('section');
+//                 section3.id = 'section3';
+//                 section3.className = 'pricing-free-trial  fade-in';
+//                 section3.innerHTML = `<div class="card p-5 d-flex align-items-center">
+//                 <div class="col-lg-6 order-3 order-xl-0">
+//     <div class="card" style="background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);">
+//       <div class="d-flex align-items-center text-center row">
+//         <div class="col-12">
+//           <div class="card-body text-nowrap">
+//             <h4 class="card-title mb-0">{{__('Thank You for your time')}} 🎉</h4>
+//             <p class="mb-2">{{__('Your Shipment Price is')}} :</p>
+//             <h4 class="text-success mb-1">دل${data.data}</h4>
+//             <a href="javascript:;" class="btn btn-primary">{{__('Register Now')}}</a>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+//                 </div>`;
+
+//                 form.parentNode.appendChild(section3);
+//             })
+//             .catch(error => {
+//                 console.error('Error:', error);
+//                 // Handle error, show alert, etc.
+//             });
+//     });
+
+
+// });
+
+
+$("#shipmentPriceForm").on("submit", function(event) {
+    event.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+    var method = form.attr('method');
+    var formData = form.serialize();
+
+    $.ajax({
+        url: url,
+        method: method,
+        data: formData,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response, status, xhr) {
+            if (xhr.status === 200) {
+                // Handle a successful response
+                console.log(response.data)
+                // Swal.fire({
+                //     title: '',
+                //     text: response.message,
+                //     icon: 'success',
+                //     confirmButtonText: doneTranslation,
+                //     customClass: {
+                //         confirmButton: 'btn btn-success'
+                //     },
+                // }).then((result) => {
+                //     if (result.isConfirmed) {
+                //         offcanvasAddUser.hide();
+                //         // location.reload();
+                //         $("#addNewUserForm").trigger('reset');
+                //         dt_user.ajax.url('get-users').load();
+                //     }
+                // });
+            } else {
+                // Handle other status codes
+            }
+        },
+        error: function(response, xhr, status, error) {
+            // Handle the error response here
+            var errorMessages = Object.values(response.responseJSON.errors).flat();
+            // Format error messages with line breaks
+            var formattedErrorMessages = errorMessages.join(
+                '<br>'); // Join the error messages with <br> tags
+            // Create the Swal alert
+            Swal.fire({
+                title: response.responseJSON.message,
+                html: formattedErrorMessages,
+                icon: 'error',
+                confirmButtonText: doneTranslation,
+                customClass: {
+                    confirmButton: 'btn btn-primary'
                 },
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                var section3 = document.createElement('section');
-                section3.id = 'section3';
-                section3.className = 'pricing-free-trial  fade-in';
-                section3.innerHTML = `<div class="card p-5 d-flex align-items-center">
-                <div class="col-lg-6 order-3 order-xl-0">
-    <div class="card" style="background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);">
-      <div class="d-flex align-items-center text-center row">
-        <div class="col-12">
-          <div class="card-body text-nowrap">
-            <h4 class="card-title mb-0">{{__('Thank You for your time')}} 🎉</h4>
-            <p class="mb-2">{{__('Your Shipment Price is')}} :</p>
-            <h4 class="text-success mb-1">دل${data.data}</h4>
-            <a href="javascript:;" class="btn btn-primary">{{__('Register Now')}}</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-                </div>`;
-
-                form.parentNode.appendChild(section3);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                // Handle error, show alert, etc.
+                buttonsStyling: false
             });
+        }
     });
-
 
 });
 </script>

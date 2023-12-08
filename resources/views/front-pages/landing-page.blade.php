@@ -1,4 +1,6 @@
 @php
+$customizerHidden = 'customizer-hide';
+
 $configData = Helper::appClasses();
 @endphp
 
@@ -39,7 +41,8 @@ $configData = Helper::appClasses();
                         <span class="hero-btn-item position-absolute d-none d-md-flex text-heading">{{__('Join us')}}
                             <img src="{{asset('assets/img/front-pages/icons/Join-community-arrow.png')}}"
                                 alt="Join us arrow" class="scaleX-n1-rtl" /></span>
-                        <a href="#" class="btn btn-primary btn-lg">{{__('Track your shipment')}}</a>
+                        <a href="{{route('track-shipment')}}"
+                            class="btn btn-primary btn-lg">{{__('Track your shipment')}}</a>
                     </div>
                 </div>
                 <!-- <div id="heroDashboardAnimation" class="hero-animation-img">

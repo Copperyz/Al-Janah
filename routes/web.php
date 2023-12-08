@@ -33,6 +33,8 @@ use App\Http\Controllers\PriceController;
 Route::get('/', [FrontPagesController::class, 'index'])->name('landing-page');
 Route::get('/shipment-price', [FrontPagesController::class, 'showPriceSections'])->name('shipment-price');
 Route::post('/shipment/price-submit', [FrontPagesController::class, 'getPrice'])->name('shipment.get.price');
+Route::get('track-shipment', [FrontPagesController::class, 'trackShipmentPage'])->name('track-shipment');
+Route::post('track-shipment-data', [FrontPagesController::class, 'trackShipmentData'])->name('track-shipment-data');
 
 Route::middleware(['guest'])->group(function () {
   Route::get('/login', [AuthController::class, 'showLogin'])->name('login');

@@ -1,38 +1,7 @@
-@php
-$customizerHidden = 'customizer-hide';
-$configData = Helper::appClasses();
-@endphp
-
-@extends('layouts/layoutMaster')
-
-@section('title', __('Tracking Shipment'))
-
-@section('vendor-style')
-<link rel="stylesheet" href="{{asset('assets/vendor/libs/mapbox-gl/mapbox-gl.css')}}" />
-@endsection
-
-@section('page-style')
-<link rel="stylesheet" href="{{asset('assets/vendor/css/pages/app-logistics-fleet.css')}}" />
-
-@endsection
-
-@section('vendor-script')
-<script src="{{asset('assets/vendor/libs/mapbox-gl/mapbox-gl.js')}}"></script>
-@endsection
-
-@section('page-script')
-<script src="{{asset('assets/js/trips/app-tracking-fleet.js')}}"></script>
-@endsection
-
-@section('content')
-
-<div class="alert alert-primary alert-dismissible" role="alert">
-    {{__('Tracking shipments involves monitoring the movement and status of packages or goods during their transit from the origin to the destination. The process begins with the initiation of a shipment, assigning a unique tracking number to each package. Relevant information, including origin, destination, package details, and estimated delivery time, is associated with this tracking number.')}}
-</div>
-
-<div class="container">
+@if(count($shipmentHistory) > 0)
+<div class="container animate__fadeInDown">
     <div class="row justify-content-center">
-        <div class="card col-md-6">
+        <div class="card col-md-12">
             <!-- Map Menu Wrapper -->
             <div class="d-flex">
                 <!-- Map Menu -->
@@ -131,5 +100,6 @@ $configData = Helper::appClasses();
         </div>
     </div>
 </div>
-
-@endsection
+@else
+<h3>{{__('No results found')}}.</h3>
+@endif

@@ -49,7 +49,6 @@ $configData = Helper::appClasses();
                     <th></th>
                     <th>{{__('From')}}</th>
                     <th>{{__('To')}}</th>
-                    <th>{{__('Parcel Type')}}</th>
                     <th>{{__('Good Type')}}</th>
                     <th>{{__('Price')}}</th>
                     <th class="cell-fit">{{__('Actions')}}</th>

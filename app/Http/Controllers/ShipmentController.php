@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\City;
 use App\Models\Country;
 use App\Models\Customer;
 use App\Models\GoodType;
 use App\Models\Shipment;
+use App\Models\TripRoute;
 use App\Models\ParcelType;
 use Illuminate\Support\Str;
 use App\Models\ShipmentItem;
@@ -38,7 +40,19 @@ class ShipmentController extends Controller
         $parcelTypes = ParcelType::all();
         $goodTypes = GoodType::all();
         $countries = Country::all();
-        return view('shipments.create', compact('customers', 'parcelTypes', 'goodTypes', 'countries'));
+        $cities = City::all();
+        $tripRoutes = TripRoute::all();
+        foreach ($tripRoutes as $tripRoute) {
+            $legsCombined = '';
+            foreach ($tripRoute->legs as $leg) {
+                if (!empty($leg['country'])) {
+                    $legsCombined .= ($legsCombined ? '. ' : '') . ' ' . __($leg['type']) . ' (' . __($leg['country']) . ') ';
+                }
+            }
+            $tripRoute->legs_combined = $legsCombined;    
+            $tripRoute->typeLocale = __($tripRoute->type); 
+        }
+        return view('shipments.create', compact('customers', 'parcelTypes', 'goodTypes', 'countries', 'cities', 'tripRoutes'));
     }
 
     /**

@@ -167,11 +167,10 @@ $(function () {
       var parcelTypeId = $container.find('[name$="[parcel_types_id]"]').val();
       var goodTypeId = $container.find('[name$="[good_types_id]"]').val();
 
-      var from_country_id = $('#addShipmentForm').find('[name="from_country_id"]').val();
-      var to_country_id = $('#addShipmentForm').find('[name="to_country_id"]').val();
+      var trip_route_id = $('#addShipmentForm').find('[name="trip_route_id"]').val();
 
       // Check if all required inputs are filled
-      if (height && width && weight && parcelTypeId && goodTypeId && from_country_id && to_country_id) {
+      if (height && width && weight && parcelTypeId && goodTypeId && trip_route_id) {
         // Call your function with these values
         $.ajax({
           url: "../get-price",
@@ -182,8 +181,7 @@ $(function () {
             width: width,
             parcelTypeId: parcelTypeId,
             goodTypeId: goodTypeId,
-            from_country_id: from_country_id,
-            to_country_id: to_country_id,
+            trip_route_id: trip_route_id
           },
           headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -279,6 +277,77 @@ $(function () {
     $("#shipmentItems").empty();
   });
 
+  $("#addCustomerForm").on("submit", function (event) {
+    event.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+    var method = form.attr('method');
+    var formData = form.serialize();
+    $.ajax({
+      url: url,
+      method: method,
+      data: formData,
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function (response, status, xhr) {
+        if (xhr.status === 200) {
+          // Handle a successful response
+          Swal.fire({
+            title: '',
+            text: response.message,
+            icon: 'success',
+            confirmButtonText: doneTranslation,
+            customClass: {
+              confirmButton: 'btn btn-success'
+            },
+          }).then((result) => {
+            if (result.isConfirmed) {
+              location.reload();
+              $("#addCustomerForm").trigger('reset');
+              $('#addCustomerModal').modal('hide');
+            }
+          });
+        }
+        else {
+          // Handle other status codes
+        }
+      },
+      error: function (response, xhr, status, error) {
+        // Handle the error response here
+        var errorMessages = Object.values(response.responseJSON.errors).flat();
+        // Format error messages with line breaks
+        var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
+        // Create the Swal alert
+        Swal.fire({
+          title: response.responseJSON.message,
+          html: formattedErrorMessages,
+          icon: 'error',
+          confirmButtonText: doneTranslation,
+          customClass: {
+            confirmButton: 'btn btn-primary'
+          },
+          buttonsStyling: false
+        });
+      }
+    });
+
+  });
+
+  $('#trip_route_id').change(function () {
+    $.ajax({
+      url: "../trip_routes/" + $(this).val(),
+      method: 'GET',
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function (response) {
+        $('#tripFareValue').text('$' + response.trip_price);
+      },
+      error: function (error) {
+      }
+    });
+  });
 
 
 });

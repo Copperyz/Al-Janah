@@ -18,6 +18,7 @@ use App\Http\Controllers\TripHistoryController;
 use App\Http\Controllers\TripRouteController;
 use App\Http\Controllers\TripShipmentController;
 use App\Http\Controllers\PriceController;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,4 +104,6 @@ Route::middleware(['auth'])->group(function () {
   Route::get('get-prices', [PriceController::class, 'get_prices'])->name('get-prices');
   Route::get('get-price', [PriceController::class, 'get_price'])->name('get-price');
   Route::resource('prices', PriceController::class);
+  // Customers
+  Route::resource('customers', CustomerController::class);
 });

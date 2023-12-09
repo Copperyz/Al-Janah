@@ -92,6 +92,7 @@ class ShipmentItemController extends Controller
             'height' => ['required', 'numeric', 'min:0'],
             'width' => ['required', 'numeric', 'min:0'],
             'weight' => ['required', 'numeric', 'min:0'],
+            'length' => ['required', 'numeric', 'min:0'],
             'quantity' => ['required', 'numeric', 'min:0'],
         ]);
         if ($validator->fails()) {
@@ -107,6 +108,7 @@ class ShipmentItemController extends Controller
         $shipmentItem->height = $request->height;
         $shipmentItem->width = $request->width;
         $shipmentItem->weight = $request->weight;
+        $shipmentItem->length = $request->length;
         $shipmentItem->quantity = $request->quantity;
         $shipmentItem->save();
 

@@ -71,6 +71,7 @@ class ShipmentController extends Controller
             'shipmentItems.*.height' => ['required', 'numeric', 'min:1'],
             'shipmentItems.*.width' => ['required', 'numeric', 'min:1'],
             'shipmentItems.*.weight' => ['required', 'numeric', 'min:1'],
+            'shipmentItems.*.length' => ['required', 'numeric', 'min:1'],
             'shipmentItems.*.quantity' => ['required', 'numeric', 'min:1', 'max:50'],
             'notes' => ['nullable', 'string'],
         ]);
@@ -105,6 +106,7 @@ class ShipmentController extends Controller
                 $shipmentItem->height = $request->shipmentItems[$i]['height'];
                 $shipmentItem->width = $request->shipmentItems[$i]['width'];
                 $shipmentItem->weight = $request->shipmentItems[$i]['weight'];
+                $shipmentItem->length = $request->shipmentItems[$i]['length'];
                 $shipmentItem->quantity = $request->shipmentItems[$i]['quantity'];
                 $shipmentItem->save();
         }

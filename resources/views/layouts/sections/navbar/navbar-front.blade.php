@@ -34,7 +34,7 @@ $activeClass = in_array($currentRouteName, $activeRoutes) ? 'active' : '';
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link fw-medium" aria-current="page"
-                            href="{{route('landing-page')}}">{{__('Home')}}</a>
+                            href="{{route('dashboard')}}">{{__('Dashboard')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link fw-medium" href="#landingFeatures">{{__('Services')}}</a>
@@ -101,11 +101,26 @@ $activeClass = in_array($currentRouteName, $activeRoutes) ? 'active' : '';
                 </li>
                 <!-- / Style Switcher-->
                 <!-- navbar button: Start -->
+                @guest
                 <li>
-                    <a href="{{route('login')}}" class="btn btn-primary" target="_blank"><span
+                    <a href="{{route('login')}}" class="btn btn-primary"><span
                             class="tf-icons ti ti-login scaleX-n1-rtl me-md-1"></span><span
                             class="d-none d-md-block">{{__('Login/Register')}}</span></a>
                 </li>
+                @else
+                <li>
+                    <a class="btn btn-primary" href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <span class="tf-icons ti ti-login scaleX-n1-rtl me-md-1"></span>
+                        <span class="d-none d-md-block">{{__('Logout')}}</span>
+                    </a>
+                    <form method="POST" id="logout-form" action="{{ route('logout') }}">
+                        @csrf
+                    </form>
+                </li>
+
+                @endguest
+
                 <!-- navbar button: End -->
             </ul>
             <!-- Toolbar: End -->

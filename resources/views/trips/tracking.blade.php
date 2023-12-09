@@ -101,5 +101,5 @@
     </div>
 </div>
 @else
-<h3>{{__('No results found')}}.</h3>
+<h3>{{__('No results were found.')}}</h3>
 @endif

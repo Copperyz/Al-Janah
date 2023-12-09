@@ -332,5 +332,15 @@
   "What is customs clearance?": "ما هو التخليص الجمركي؟",
   "All formalities and requirements to be completed for goods entering and leaving a specific national territory in order to control and approve their transportation. The customs agent is responsible for completing these formalities on behalf of the importer or exporter, and for submitting a declaration of information to the competent customs authority in each case": "يجب استكمال جميع الإجراءات والمتطلبات الخاصة بالبضائع التي تدخل وتخرج من إقليم وطني محدد من أجل مراقبة نقلها والموافقة عليها. ويكون الوكيل الجمركي مسؤولاً عن استكمال هذه الإجراءات نيابة عن المستورد أو المصدر، وتقديم إقرار بالمعلومات إلى السلطة الجمركية المختصة في كل حالة",
   "What is completed customs clearance?": "ما هو التخليص الجمركي المكتمل؟",
-  "Customs clearance means that the customs procedure has been completed, i.e. that all of the paperwork has been submitted and that the shipment can continue on its way": "التخليص الجمركي يعني أن الإجراءات الجمركية قد اكتملت، أي أنه تم تقديم جميع الأوراق وأن الشحنة يمكن أن تستمر في طريقها"
+  "Customs clearance means that the customs procedure has been completed, i.e. that all of the paperwork has been submitted and that the shipment can continue on its way": "التخليص الجمركي يعني أن الإجراءات الجمركية قد اكتملت، أي أنه تم تقديم جميع الأوراق وأن الشحنة يمكن أن تستمر في طريقها",
+  "Length": "الطول",
+  "Good Type": "نوع البضاعة",
+  "Your Shipment Price is": "سعر الشحن الخاص بك هو",
+  "Shipment Price": "سعر الشحن",
+  "Pricing Plans": "خطط التسعير",
+  "Get started with us and Choose a trip route and fill shipment details": "ابدأ معنا واختر مسار الرحلة واملأ تفاصيل الشحنة",
+  "Track Your Shipment Status": "تتبع حالة الشحنة الخاصة بك",
+  "Tracking Number": "رقم التتبع",
+  "Track Shipment": "تتبع شحنة",
+  "No results were found.": "لم يتم العثور على نتائج."
 }

@@ -50,6 +50,11 @@
                             placeholder="{{__('Weight')}}" min="0" />
                     </div>
                     <div class="col-12 col-md-6">
+                        <label class="form-label">{{__('Length')}}</label>
+                        <input name="length" type="number" class="form-control invoice-item-price mb-3"
+                            placeholder="{{__('Length')}}" min="0" />
+                    </div>
+                    <div class="col-12 col-md-6">
                         <label class="form-label">{{__('Quantity')}}</label>
                         <input name="quantity" type="number" class="form-control invoice-item-price mb-3"
                             placeholder="{{__('Quantity')}}" min="0" />

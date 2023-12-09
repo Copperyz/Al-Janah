@@ -89,6 +89,16 @@ class FrontPagesController extends Controller
     // Logic to handle form submission
     $countries = Country::all();
     $tripRoutes = TripRoute::all();
+    foreach ($tripRoutes as $tripRoute) {
+            $legsCombined = '';
+            foreach ($tripRoute->legs as $leg) {
+                if (!empty($leg['country'])) {
+                    $legsCombined .= ($legsCombined ? '. ' : '') . ' ' . __($leg['type']) . ' (' . __($leg['country']) . ') ';
+                }
+            }
+            $tripRoute->legs_combined = $legsCombined;    
+            $tripRoute->typeLocale = __($tripRoute->type); 
+    }
     $parcelTypes = ParcelType::all();
     $goodTypes = GoodType::all();
     $currentSection = 1;
@@ -133,6 +143,6 @@ class FrontPagesController extends Controller
         $price = $newPrice;
     }
 // $price * $request->input('weight')
-    return response()->json(['data' => 44]);
+    return response()->json(['data' => $price * $request->input('weight')]);
   }
 }

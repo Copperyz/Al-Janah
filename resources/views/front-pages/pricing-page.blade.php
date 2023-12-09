@@ -1,17 +1,27 @@
 @php
+$customizerHidden = 'customizer-hide';
 $configData = Helper::appClasses();
 @endphp
 
 @extends('layouts/layoutMaster')
 
-@section('title', 'Pricing - Front Pages')
+@section('title', __('Shipment Price'))
+
+@section('vendor-style')
+<link rel="stylesheet" href="{{asset('assets/vendor/libs/select2/select2.css')}}" />
+@endsection
 
 @section('page-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/css/pages/front-page-pricing.css')}}" />
 @endsection
 
+@section('vendor-script')
+<script src="{{asset('assets/vendor/libs/select2/select2.js')}}"></script>
+@endsection
+
 @section('page-script')
 <script src="{{asset('assets/js/front-page-pricing.js')}}"></script>
+<script src="{{asset('assets/js/forms-selects.js')}}"></script>
 @endsection
 
 
@@ -73,9 +83,8 @@ $configData = Helper::appClasses();
 <!-- Pricing Plans -->
 <section class="section-py first-section-pt">
     <div class="container">
-        <h2 class="text-center mb-2">Pricing Plans</h2>
-        <p class="text-center"> Get started with us - it's perfect for individuals and teams. Choose a subscription plan
-            that meets your needs. </p>
+        <h2 class="text-center mb-2">{{__('Pricing Plans')}}</h2>
+        <p class="text-center">{{__('Get started with us and Choose a trip route and fill shipment details')}}</p>
 
 
     </div>
@@ -96,17 +105,12 @@ $configData = Helper::appClasses();
 
                         <div class="col-md-6">
                             <label class="form-label" for="from-country">{{__('Trip Route')}}</label>
-                            <select id="from-country" name="trip-route" required class="select2 form-select"
+                            <select id="from-country" name="trip_route_id" required class="select2 form-select"
                                 data-allow-clear="true">
-                                <option value=''>{{__('Select')}}</option>
-                                @foreach ($tripRoutes as $route)
-                                <option value='{{$route->id}}'>
-                                    @foreach($route->legs as $leg)
-                                    {{ __($leg['type']) . ' ' . __($leg['country']) . ' - ' }}
-                                    @endforeach
-                                </option>
+                                <option disabled selected>{{__('Select')}}</option>
+                                @foreach($tripRoutes as $tripRoute)
+                                <option value="{{$tripRoute->id}}">{{__($tripRoute->legs_combined)}}</option>
                                 @endforeach
-
                             </select>
 
                         </div>
@@ -117,9 +121,9 @@ $configData = Helper::appClasses();
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="goodType">{{__('Goods Type')}}</label>
-                            <select id="goodType" required name="good-type" class="select2 form-select"
+                            <select id="goodType" required name="goodTypeId" class="select2 form-select"
                                 data-allow-clear="true">
-                                <option value=''>{{__('Select')}}</option>
+                                <option disabled selected>{{__('Select')}}</option>
                                 @foreach ($goodTypes as $type)
                                 <option value='{{$type->id}}'>{{$type->name}}</option>
                                 @endforeach
@@ -416,24 +420,35 @@ $("#shipmentPriceForm").on("submit", function(event) {
         },
         success: function(response, status, xhr) {
             if (xhr.status === 200) {
-                // Handle a successful response
-                console.log(response.data)
-                // Swal.fire({
-                //     title: '',
-                //     text: response.message,
-                //     icon: 'success',
-                //     confirmButtonText: doneTranslation,
-                //     customClass: {
-                //         confirmButton: 'btn btn-success'
-                //     },
-                // }).then((result) => {
-                //     if (result.isConfirmed) {
-                //         offcanvasAddUser.hide();
-                //         // location.reload();
-                //         $("#addNewUserForm").trigger('reset');
-                //         dt_user.ajax.url('get-users').load();
-                //     }
-                // });
+                // Remove existing section3 if it exists
+                var existingSection3 = document.getElementById('section3');
+                if (existingSection3) {
+                    existingSection3.parentNode.removeChild(existingSection3);
+                }
+
+                // Create a new section3
+                var section3 = document.createElement('section');
+                section3.id = 'section3';
+                section3.className = 'pricing-free-trial  fade-in';
+                section3.innerHTML = `<div class="card p-5 d-flex align-items-center">
+                    <div class="col-lg-6 order-3 order-xl-0">
+                        <div class="card" style="background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);">
+                            <div class="d-flex align-items-center text-center row">
+                                <div class="col-12">
+                                    <div class="card-body text-nowrap">
+                                        <h4 class="card-title mb-0">{{__('Thank You for your time')}} 🎉</h4>
+                                        <p class="mb-2">{{__('Your Shipment Price is')}} :</p>
+                                        <h4 class="text-success mb-1">${response.data} LYD</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+
+                // Append the new section3 to the form
+                var form = document.getElementById('shipmentPriceForm');
+                form.appendChild(section3);
             } else {
                 // Handle other status codes
             }

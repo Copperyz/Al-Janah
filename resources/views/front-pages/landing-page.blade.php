@@ -84,7 +84,7 @@ $configData = Helper::appClasses();
                         <img src="{{asset('assets/img/front-pages/icons/laptop.png')}}" alt="laptop charging" />
                     </div>
                     <h5 class="mb-3 text-center">{{__('General Cargo Shipments and Containers')}}</h5>
-                    <p class="features-icon-description">
+                    <p class="features-icon-description" style="text-align: justify;">
                         {{__('We operate in a number of challenging destinations where we recognize our clients’ needs for reliable import and export services. No matter where the goods are travelling to or from, our goal is to provide complete customer satisfaction through consistent quality service. We manage and facilitate FCL (Full Container Load), LCL (Less Than Container load), ODC (Over Dimension Cargo) and Reefer Cargo Shipments to and from anywhere in the world')}}.
                     </p>
                 </div>
@@ -92,8 +92,8 @@ $configData = Helper::appClasses();
                     <div class="text-center mb-3">
                         <img src="{{asset('assets/img/front-pages/icons/rocket.png')}}" alt="transition up" />
                     </div>
-                    <h5 class="mb-3 text-center ">{{__('Oil and Gas Transportation and Logistics')}}</h5>
-                    <p class="features-icon-description">
+                    <h5 class="mb-3 text-center">{{__('Oil and Gas Transportation and Logistics')}}</h5>
+                    <p class="features-icon-description" style="text-align: justify;">
                         {{__('When it comes to managing the logistics of oil and gas, safety and efficiency are the greatest concerns. At MESC, we have extensive experience of providing specialized logistic services for this industry. We offer comprehensive management concepts and flexible solutions for all kinds of support needed')}}.
                     </p>
                 </div>
@@ -102,7 +102,7 @@ $configData = Helper::appClasses();
                         <img src="{{asset('assets/img/front-pages/icons/paper.png')}}" alt="edit" />
                     </div>
                     <h5 class="mb-3 text-center">{{__('Dry Masonry / Cattle Transport')}}</h5>
-                    <p class="features-icon-description">
+                    <p class="features-icon-description" style="text-align: justify;">
                         {{__('We provide competitive prices for high quality services in Cattle/Animal Transport ( Cows, Sheep, Dears, Camels, and Horses ) , these vessels are especially designed with areas equipped with animal feeders mimicking those found in farms, with ventilation and locking systems that can be set according to the need for temperature and/or air supply, they are also equipped with automatic feeding belts, and waste disposal systems. We also provide dry masonry transport solutions with full retailer services')}}
                     </p>
                 </div>
@@ -112,7 +112,7 @@ $configData = Helper::appClasses();
                     </div>
                     <h5 class="mb-3 text-center">
                         {{__('Custom Clearance / Storage & Transport / Door to Door Delivery')}}</h5>
-                    <p class="features-icon-description">
+                    <p class="features-icon-description" style="text-align: justify;">
                         {{__('In 2018 MESC Freight & Logistics Company began a venture with ( Alafdal Custom Clearance Services Company ).( Alafdal Company ) was established in 1990, and is one of the most renowned companies in the field')}}.
                     </p>
                 </div>
@@ -121,7 +121,7 @@ $configData = Helper::appClasses();
                         <img src="{{asset('assets/img/front-pages/icons/user.png')}}" alt="lifebelt" />
                     </div>
                     <h5 class="mb-3 text-center">{{__('Ship Supply Services')}}</h5>
-                    <p class="features-icon-description">
+                    <p class="features-icon-description" style="text-align: justify;">
                         {{__('Crew Member Accomodation & Catering')}}.<br> {{__('Providing Security Liaisons')}}.<br>
                         {{__('Supervising Cargo Condition & Count')}}.<br>
                         {{__('Solutions for Heavy Lifting Utilities')}}.
@@ -734,7 +734,7 @@ $configData = Helper::appClasses();
     <!-- CTA: Start -->
     <section id="landingCTA" class="section-py landing-cta p-lg-0 pb-0">
         <div class="container">
-            <div class="row align-items-center gy-5 gy-lg-0">
+            <div class="row align-items-center gy-5 gy-lg-0 py-5">
                 <div class="col-lg-6 text-center text-lg-start">
                     <h6 class="h2 fw-bold mb-1">{{__('Explore Our Competitive Shipping Prices')}}!</h6>
                     <p class="fw-medium mb-4">
@@ -743,8 +743,8 @@ $configData = Helper::appClasses();
                     <a href="{{route('shipment-price')}}" class="btn btn-lg btn-primary">{{__('Shipping Price')}}</a>
                 </div>
                 <div class="col-lg-6 pt-lg-5 text-center text-lg-end">
-                    <img src="{{asset('assets/img/front-pages/landing-page/cta-dashboard.png')}}" alt="cta dashboard"
-                        class="img-fluid" />
+                    <!-- <img src="{{asset('assets/img/front-pages/landing-page/cta-dashboard.png')}}" alt="cta dashboard"
+                        class="img-fluid" /> -->
                 </div>
             </div>
         </div>

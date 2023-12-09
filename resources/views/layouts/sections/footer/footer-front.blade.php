@@ -12,9 +12,9 @@
                         <span
                             class="app-brand-text demo footer-link fw-bold ms-2 ps-1">{{ config('variables.templateName') }}</span>
                     </a>
-                    <p class="footer-text mb-6">
+                    <p class="footer-text mb-6" style="text-align: justify;">
                         {{__('Al Janah Company is a specialized firm in the field of shipping and express logistics services, providing comprehensive and tailored solutions for all your shipping needs. Al Jenaah Company boasts a professional team of experts in air freight who work efficiently and precisely to ensure the timely arrival of your shipment at its destination at the lowest cost. Additionally, Al Jenaah Company possesses an extensive network of relationships with global shipping and transportation companies and institutions, enabling it to offer diverse and flexible services to its clients. Al Jenaah Shipping Company is the company that meets and exceeds your expectations if you are looking for fast, premium, and competitively priced air freight services.')}}<br>
-                        {{__('(Peace of mind, wherever you are...)')}} <br>{{__('(Your goods, our responsibility...)')}}
+
                     </p>
                     <!-- <form class="footer-form">
                         <label for="footer-email" class="small">Subscribe to newsletter</label>
@@ -29,9 +29,9 @@
                     </form> -->
                 </div>
                 <div class="col-lg-6">
-                    <h6 class="footer-title mb-4">{{__('What We Do')}}</h6>
+                    <h4 class="footer-title mb-4">{{__('What We Do')}}</h4>
 
-                    <p class="footer-text mb-6">
+                    <p class="footer-text mb-6" style="text-align: justify;">
                         {{__('We deliver all types of cargo from Libya to all around the world, whether it were Full Shipments, Shared Shipments, or Air Freight. Completing all paperwork and procedures required with due diligance, and also delivering cargo from Libya to all around the globe')}}.
                     </p>
                     <!-- <form class="footer-form">

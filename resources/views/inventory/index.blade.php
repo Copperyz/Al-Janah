@@ -1,3 +1,8 @@
+@php
+$customizerHidden = 'customizer-hide';
+$configData = Helper::appClasses();
+@endphp
+
 @extends('layouts/layoutMaster')
 
 @section('title', __('Inventory List'))
@@ -44,8 +49,8 @@
             <table class="datatables-inventory-list table border-top">
                 <thead>
                     <tr>
-                        <th>{{__('Inventory')}}</th>
-                        <th class="text-nowrap ">{{__('Branch')}}&nbsp;</th>
+                        <th>{{__('Description')}}</th>
+                        <th class="text-nowrap ">{{__('Address')}}&nbsp;</th>
                         <th class="text-nowrap ">{{__('Total Items')}}</th>
                         <th class="text-lg">{{__('Actions')}}</th>
                     </tr>
@@ -68,17 +73,17 @@
 
                 <!-- Name -->
                 <div class="mb-3">
-                    <label class="form-label" for="ecommerce-category-title">{{__('Name')}}</label>
+                    <label class="form-label" for="ecommerce-category-title">{{__('Description')}}</label>
                     <input type="text" class="form-control" required id="ecommerce-category-title"
-                        placeholder="{{__('Enter inventory name')}}" name="inventoryName" aria-label="category title">
+                        placeholder="{{__('Description')}}" name="inventoryName" aria-label="category title">
                 </div>
 
                 <!-- Parent category -->
                 <div class="mb-3 ecommerce-select2-dropdown">
-                    <label class="form-label" for="inventory-branch">{{__('Branch')}}</label>
+                    <label class="form-label" for="inventory-branch">{{__('Address')}}</label>
                     <select id="inventory-branch" required class="select2 form-select" name="branchID"
                         data-placeholder="Select inventory branch">
-                        <option value=''>{{__('Select inventory branch')}}</option>
+                        <option value=''>{{__('Select')}}</option>
                         @foreach ($branches as $branch)
                         <option value='{{$branch->id}}'>{{$branch->name}}</option>
                         @endforeach

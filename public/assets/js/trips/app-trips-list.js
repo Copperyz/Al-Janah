@@ -292,6 +292,7 @@ $(function () {
         // columns according to JSON
         { data: 'id' },
         { data: 'customerName' },
+        { data: 'tracking_no' },
         { data: 'date' },
         { data: 'amount' }
       ],
@@ -390,17 +391,16 @@ $(function () {
     const htmlContent = `
         <div style="display: flex; justify-content: space-around; margin: 1em 0;">
             ${choices
-              .map(
-                choice => `
+        .map(
+          choice => `
                 <div class="form-check">
-                    <input type="radio" class="form-check-input" name="radioOption" value="${choice}" id="radio_${choice}" ${
-                  choice == 'Detour' ? 'checked' : ''
-                }>
+                    <input type="radio" class="form-check-input" name="radioOption" value="${choice}" id="radio_${choice}" ${choice == 'Detour' ? 'checked' : ''
+            }>
                     <label class="form-check-label" for="radio_${choice}">${choice}</label>
                 </div>
             `
-              )
-              .join('')}
+        )
+        .join('')}
         </div>
     `;
 

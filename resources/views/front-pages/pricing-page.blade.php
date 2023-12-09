@@ -115,10 +115,10 @@ $configData = Helper::appClasses();
 
                         </div>
 
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <label class="form-label" for="from-city">{{__('City')}} ({{__('Optional')}})</label>
                             <input type="text" id="from-city" class="form-control" placeholder="{{__('Istanbule')}}" />
-                        </div>
+                        </div> -->
                         <div class="col-md-6">
                             <label class="form-label" for="goodType">{{__('Goods Type')}}</label>
                             <select id="goodType" required name="goodTypeId" class="select2 form-select"
@@ -130,11 +130,11 @@ $configData = Helper::appClasses();
 
                             </select>
                         </div>
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <label class="form-label" for="to-city">{{__('City')}} ({{__('Optional')}})</label>
                             <input type="text" id="to-city" name="to-city" class="form-control"
                                 placeholder="{{__('Tripoli')}}" />
-                        </div>
+                        </div> -->
 
                     </div>
                     <div style="text-align: center;"><button type="button" onclick="nextSection(2)"

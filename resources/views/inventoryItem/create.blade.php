@@ -1,6 +1,11 @@
+@php
+$customizerHidden = 'customizer-hide';
+$configData = Helper::appClasses();
+@endphp
+
 @extends('layouts/layoutMaster')
 
-@section('title', __('Add Product'))
+@section('title', __('Add Item'))
 
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/typography.css')}}" />
@@ -33,7 +38,7 @@
 
 @section('content')
 <h4 class="py-3 mb-0">
-    <span class="text-muted fw-light">{{__('Inventory')}} /</span><span class="fw-medium"> {{__('Add Product')}}</span>
+    <span class="text-muted fw-light">{{__('Inventory')}} /</span><span class="fw-medium"> {{__('Add Item')}}</span>
 </h4>
 
 <div class="app-ecommerce">
@@ -43,14 +48,15 @@
             class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
 
             <div class="d-flex flex-column justify-content-center">
-                <h4 class="mb-1 mt-3">{{__('Add a new Product')}}</h4>
+                <h4 class="mb-1 mt-3">{{__('Add a new item')}}</h4>
                 <!-- <p class="text-muted">Orders placed across your store</p> -->
             </div>
             <div class="d-flex align-content-center flex-wrap gap-3">
-                <div class="d-flex gap-3"><button class="btn btn-label-secondary">{{__('Discard')}}</button>
+                <div class="d-flex gap-3"><button
+                        class="btn btn-label-secondary cancelButtonAdd">{{__('Discard')}}</button>
                     <!-- <button class="btn btn-label-primary">Save draft</button> -->
                 </div>
-                <button type="submit" class="btn btn-primary">{{__('Publish product')}}</button>
+                <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
             </div>
 
         </div>
@@ -183,7 +189,7 @@
                             <select id="shipment" name="shipmentID" class="select2 form-select">
                                 <option value=''>{{__('Select')}}</option>
                                 @foreach ($shipments as $shipment)
-                                <option value='{{$shipment->id}}'>{{$shipment->name}}</option>
+                                <option value='{{$shipment->id}}'>{{$shipment->tracking_no}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -218,14 +224,13 @@
             <!-- /Second column -->
     </form>
     <!-- Inventory -->
-    <div class="col-12 col-lg-8">
+    <!-- <div class="col-12 col-lg-8">
         <div class="card mb-4">
             <div class="card-header">
                 <h5 class="card-title mb-0">Inventory</h5>
             </div>
             <div class="card-body">
                 <div class="row">
-                    <!-- Navigation -->
                     <div class="col-12 col-md-4 mx-auto card-separator">
                         <div class="d-flex justify-content-between flex-column mb-3 mb-md-0 pe-md-3">
                             <ul class="nav nav-align-left nav-pills flex-column">
@@ -252,11 +257,8 @@
                             </ul>
                         </div>
                     </div>
-                    <!-- /Navigation -->
-                    <!-- Options -->
                     <div class="col-12 col-md-8 pt-4 pt-md-0">
                         <div class="tab-content p-0 ps-md-3">
-                            <!-- Restock Tab -->
                             <div class="tab-pane fade show active" id="restock" role="tabpanel">
                                 <h5>Options</h5>
                                 <label class="form-label" for="ecommerce-product-stock">Add to Stock</label>
@@ -281,7 +283,6 @@
                                             lifetime: </span> <span>2430</span></p>
                                 </div>
                             </div>
-                            <!-- Shipping Tab -->
                             <div class="tab-pane fade" id="shipping" role="tabpanel">
                                 <h5 class="mb-4">Shipping Type</h5>
                                 <div>
@@ -310,10 +311,8 @@
                                             conditions</a> for details</p>
                                 </div>
                             </div>
-                            <!-- Global Delivery Tab -->
                             <div class="tab-pane fade" id="global-delivery" role="tabpanel">
                                 <h5 class="mb-4">Global Delivery</h5>
-                                <!-- Worldwide delivery -->
                                 <div class="form-check mb-3">
                                     <input class="form-check-input" type="radio" name="globalDel" id="worldwide">
                                     <label class="form-check-label" for="worldwide">
@@ -322,7 +321,6 @@
                                             <a href="javascript:void(0);">Fulfilled by Company name</a></small>
                                     </label>
                                 </div>
-                                <!-- Global delivery -->
                                 <div class="form-check mb-3">
                                     <input class="form-check-input" type="radio" name="globalDel" checked>
                                     <label class="form-check-label w-75 pe-5" for="country-selected">
@@ -331,7 +329,6 @@
                                             id="country-selected">
                                     </label>
                                 </div>
-                                <!-- Local delivery -->
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="globalDel" id="local">
                                     <label class="form-check-label" for="local">
@@ -346,11 +343,10 @@
 
                         </div>
                     </div>
-                    <!-- /Options-->
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- /Inventory -->
 </div>
 </div>

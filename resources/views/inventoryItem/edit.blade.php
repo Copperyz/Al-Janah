@@ -1,6 +1,11 @@
+@php
+$customizerHidden = 'customizer-hide';
+$configData = Helper::appClasses();
+@endphp
+
 @extends('layouts/layoutMaster')
 
-@section('title', __('Edit Product'))
+@section('title', __('Edit Item'))
 
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/typography.css')}}" />
@@ -28,7 +33,7 @@
 
 @section('content')
 <h4 class="py-3 mb-0">
-    <span class="text-muted fw-light">{{__('Inventory')}} /</span><span class="fw-medium"> {{__('Edit Product')}}</span>
+    <span class="text-muted fw-light">{{__('Inventory')}} /</span><span class="fw-medium"> {{__('Edit Item')}}</span>
 </h4>
 
 <div class="app-ecommerce">
@@ -38,14 +43,15 @@
             class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
 
             <div class="d-flex flex-column justify-content-center">
-                <h4 class="mb-1 mt-3">{{__('Edit Product')}}</h4>
+                <h4 class="mb-1 mt-3">{{__('Edit Item')}}</h4>
                 <!-- <p class="text-muted">shipments placed across your store</p> -->
             </div>
             <div class="d-flex align-content-center flex-wrap gap-3">
-                <div class="d-flex gap-3"><button class="btn btn-label-secondary">{{__('Discard')}}</button>
+                <div class="d-flex gap-3"><button
+                        class="btn btn-label-secondary cancelButton">{{__('Discard')}}</button>
                     <!-- <button class="btn btn-label-primary">Save draft</button> -->
                 </div>
-                <button type="submit" class="btn btn-primary">{{__('Edit Product')}}</button>
+                <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
             </div>
 
         </div>
@@ -57,7 +63,7 @@
                 <!-- Product Information -->
                 <div class="card mb-4">
                     <div class="card-header">
-                        <h5 class="card-tile mb-0">{{__('Product information')}}</h5>
+                        <h5 class="card-tile mb-0">{{__('Item Information')}}</h5>
                     </div>
                     <div class="card-body">
                         <div class="mb-3">

@@ -11,17 +11,17 @@
 
                 <form id="editInventoryForm" class="row">
                     <div class="col-sm-12">
-                        <label class="form-label" for="name">{{__('Name')}}</label>
+                        <label class="form-label" for="name">{{__('Description')}}</label>
                         <input type="text" id="name" name="name" class="form-control"
-                            placeholder="{{__('Enter inventory name')}}" tabindex="-1" />
+                            placeholder="{{__('Description')}}" tabindex="-1" />
                         <input type="hidden" name="id" id="id">
                     </div>
                     <div class="col-sm-12">
 
-                        <label class="form-label" for="inventory-branch">{{__('Branch')}}</label>
+                        <label class="form-label" for="inventory-branch">{{__('Address')}}</label>
                         <select id="inventory-branch" required class="select2 form-select" name="branchID"
                             data-placeholder="Select inventory branch">
-                            <option value=''>{{__('Select inventory branch')}}</option>
+                            <option value=''>{{__('Select')}}</option>
                             @foreach ($branches as $branch)
                             <option value='{{$branch->id}}'>{{$branch->name}}</option>
                             @endforeach

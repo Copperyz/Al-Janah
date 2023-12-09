@@ -13,6 +13,7 @@
                             <tr>
                                 <th></th>
                                 <th>{{__('Customer')}}</th>
+                                <th>{{__('Tracking Number')}}</th>
                                 <th>{{__('Date')}}</th>
                                 <th class="text-truncate">{{__('Amount')}}</th>
                             </tr>

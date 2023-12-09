@@ -119,7 +119,7 @@
   "Width": "العرض",
   "Items": "الأصناف",
   "Add Item": "إضافة صنف",
-  "Edit Item": "تعديل عنصر",
+  "Edit Item": "تعديل صنف",
   "Goods Type": "نوع البضاعة",
   "Items List": "قائمة الأصناف",
   "Select item": "اختر الصنف",
@@ -130,7 +130,7 @@
   "Shelf": "الرف",
   "Row": "الصف",
   "Price": "السعر",
-  "Item Information": "معلومات عن العنصر",
+  "Item Information": "معلومات عن صنف",
   "Notes": "ملاحظات",
   "Enter amount": "ادخل القيمة",
   "Customer": "الزبون",
@@ -145,7 +145,7 @@
   "Please enter inventory name": "من فضلك ادخل اسم المخزن",
   "Add Product": "إضافة منتج",
   "Edit Product": "تعديل المنتج",
-  "Add a new Product": "إضافة منتج جديد",
+  "Add a new item": "إضافة صنف جديد",
   "Product information": "معلومات المنتج",
   "Product Name": "إسم المنتج",
   "Publish product": "اضافة المنتج",
@@ -352,5 +352,6 @@
   "Changing Shipment status": "تغيير حالة الشحنة",
   "Please select a reason for changing shipment status": "الرجاء اختيار سبب تغيير حالة الشحنة",
   "Detour": "تغيير مسار",
-  "Complete": "إكتمال"
+  "Complete": "إكتمال",
+  "Description": "الوصف"
 }

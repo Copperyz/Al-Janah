@@ -17,6 +17,7 @@ $(function () {
         { data: '' },
         { data: 'id' },
         { data: 'customerName' },
+        { data: 'tracking_no' },
         { data: 'date' },
         { data: 'amount' },
         // { data: 'paymentStatus' },

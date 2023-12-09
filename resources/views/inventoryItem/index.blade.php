@@ -1,3 +1,8 @@
+@php
+$customizerHidden = 'customizer-hide';
+$configData = Helper::appClasses();
+@endphp
+
 @extends('layouts/layoutMaster')
 
 @section('title', __('Inventory Item List'))
@@ -121,6 +126,6 @@
     </div>
 </div>
 <script>
-var addInventoryItemTranslation = @json(__('Add Product'));
+var addInventoryItemTranslation = @json(__('Add Item'));
 </script>
 @endsection

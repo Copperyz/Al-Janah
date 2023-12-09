@@ -181,4 +181,3 @@ var areYouSureTextTranslation = @json(__('You will not be able to revert this!')
 @include('_partials/_modals/shipments/modal-edit-shipment-item')
 <!-- /Offcanvas -->
 @endsection
-[{"type":"Start","country":"Turkey"},{"type":"Transit","country":"China"},{"type":"End","country":"Libya"}]

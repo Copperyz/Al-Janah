@@ -103,4 +103,17 @@ $(function () {
   //     autoFocus: new FormValidation.plugins.AutoFocus()
   //   }
   // });
+
+
+  $(".cancelButton").on("click", function (event) {
+    // Trigger the form submission when the button is clicked
+    window.location.href = '../../inventoryItems/'
+  });
+
+  $(".cancelButtonAdd").on("click", function (event) {
+    // Trigger the form submission when the button is clicked
+    window.location.href = '../inventoryItems/'
+  });
+
+
 });

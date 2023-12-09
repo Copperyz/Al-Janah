@@ -95,6 +95,7 @@ $configData = Helper::appClasses();
                     <th></th>
                     <th>#ID</th>
                     <th>{{__('Customer')}}</th>
+                    <th>{{__('Tracking Number')}}</th>
                     <th>{{__('Date')}}</th>
                     <th class="text-truncate">{{__('Amount')}}</th>
                     <!-- <th>{{__('Status')}}</th> -->

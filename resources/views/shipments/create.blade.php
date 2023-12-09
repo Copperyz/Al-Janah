@@ -157,6 +157,10 @@ $configData = Helper::appClasses();
                                         <input name="weight" type="number" class="form-control invoice-item-price mb-3"
                                             placeholder="{{__('Weight')}}" />
                                         <label for="parcel_types_id"
+                                            class="form-label me-4 fw-medium">{{__('Length')}}</label>
+                                        <input name="length" type="number" class="form-control invoice-item-price mb-3"
+                                            placeholder="{{__('Length')}}" />
+                                        <label for="parcel_types_id"
                                             class="form-label me-4 fw-medium">{{__('Price')}}</label>
                                         <input name="price" type="number" class="form-control invoice-item-price mb-3"
                                             placeholder="{{__('Price')}}" />

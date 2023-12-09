@@ -6,7 +6,7 @@ $configData = Helper::appClasses();
 
 @extends('layouts/layoutMaster')
 
-@section('title', 'Track Shipment - Front Pages')
+@section('title', __('Track Shipment'))
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/mapbox-gl/mapbox-gl.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/animate-css/animate.css')}}" />
@@ -34,14 +34,14 @@ $configData = Helper::appClasses();
         </h3>
         <div class="input-wrapper my-3 input-group input-group-lg input-group-merge">
             <span class="input-group-text" id="basic-addon1"><i class="ti ti-search"></i></span>
-            <input type="text" id="trackingNumber" class="form-control" placeholder="Search" aria-label="Search"
-                aria-describedby="basic-addon1" />
+            <input type="text" id="trackingNumber" class="form-control" placeholder="{{__('Tracking Number')}}"
+                aria-label="Search" aria-describedby="basic-addon1" />
         </div>
 
         <div class="row mt-3">
             <div class="d-grid gap-2 col-lg-12 mx-auto">
                 <button class="btn btn-primary btn-lg waves-effect waves-light px-5"
-                    onclick="searchShipment()">Search</button>
+                    onclick="searchShipment()">{{__('Search')}}</button>
             </div>
         </div>
         <div class="animate__fadeInDown" id="searchResults" style="margin-top: 2em;">
@@ -74,5 +74,17 @@ function searchShipment() {
         }
     });
 }
+
+// Get the input element
+var trackingNumberInput = document.getElementById('trackingNumber');
+
+// Add an event listener for the 'keydown' event
+trackingNumberInput.addEventListener('keydown', function(event) {
+    // Check if the key pressed is 'Enter'
+    if (event.key === 'Enter') {
+        // Call the searchShipment function
+        searchShipment();
+    }
+});
 </script>
 @endsection

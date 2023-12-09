@@ -27,7 +27,6 @@ $configData = Helper::appClasses();
 @endsection
 
 @section('page-script')
-<script src="{{asset('assets/js/app-logistics-dashboard.js')}}"></script>
 @endsection
 
 @section('content')

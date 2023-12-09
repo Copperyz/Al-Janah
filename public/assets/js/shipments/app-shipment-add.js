@@ -162,6 +162,7 @@ $(function () {
       var height = $container.find('[name$="[height]"]').val();
       var width = $container.find('[name$="[width]"]').val();
       var weight = $container.find('[name$="[weight]"]').val();
+      var length = $container.find('[name$="[length]"]').val();
 
       // Get values of select elements within the current repeater item
       var parcelTypeId = $container.find('[name$="[parcel_types_id]"]').val();
@@ -170,7 +171,7 @@ $(function () {
       var trip_route_id = $('#addShipmentForm').find('[name="trip_route_id"]').val();
 
       // Check if all required inputs are filled
-      if (height && width && weight && parcelTypeId && goodTypeId && trip_route_id) {
+      if (height && width && weight && length && parcelTypeId && goodTypeId && trip_route_id) {
         // Call your function with these values
         $.ajax({
           url: "../get-price",
@@ -179,6 +180,7 @@ $(function () {
             weight: weight,
             height: height,
             width: width,
+            length: length,
             parcelTypeId: parcelTypeId,
             goodTypeId: goodTypeId,
             trip_route_id: trip_route_id

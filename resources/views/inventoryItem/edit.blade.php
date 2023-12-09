@@ -187,7 +187,7 @@
                                 @foreach ($shipments as $shipment)
                                 <option value='{{$shipment->id}}'
                                     {{$shipment->id == $inventoryItem->shipment_id ? 'selected': ''}}>
-                                    {{$shipment->name}}
+                                    {{$shipment->tracking_no}}
                                 </option>
                                 @endforeach
                             </select>
@@ -213,13 +213,19 @@
                             </label>
                             <select id="status-org" name="status" class="select2 form-select"
                                 data-placeholder="Published">
-                                <option value="inStock" {{"inStock" == $inventoryItem->status ? 'selected': ''}}>
-                                    {{__('In Stock')}}</option>
-                                <option value="returned" {{"returned" == $inventoryItem->status ? 'selected': ''}}>
-                                    {{__('returned')}}</option>
-                                <option value="inactive" {{"inactive" == $inventoryItem->status ? 'selected': ''}}>
-                                    {{__('Inactive')}}</option>
+                                @php
+                                $statusOptions = ['inStock' => __('In Stock'), 'returned' => __('Returned'),
+                                'leftInventory' => __('Left Inventory')];
+                                $selectedStatus = $inventoryItem->status ?? ''; // Assuming $inventoryItem is available
+                                @endphp
+
+                                @foreach($statusOptions as $value => $label)
+                                <option value="{{ $value }}" {{ $value == $selectedStatus ? 'selected' : '' }}>
+                                    {{ $label }}
+                                </option>
+                                @endforeach
                             </select>
+
                         </div>
 
                     </div>

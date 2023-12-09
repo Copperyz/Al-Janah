@@ -342,5 +342,9 @@
   "Track Your Shipment Status": "تتبع حالة الشحنة الخاصة بك",
   "Tracking Number": "رقم التتبع",
   "Track Shipment": "تتبع شحنة",
-  "No results were found.": "لم يتم العثور على نتائج."
+  "No results were found.": "لم يتم العثور على نتائج.",
+  "Add to Inventory": "إضافة الى المخزن",
+  "In Stock": "في المخزن",
+  "Returned": "مرجعة",
+  "Left Inventory": "غادرت المخزن"
 }

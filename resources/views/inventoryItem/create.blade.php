@@ -206,8 +206,8 @@
                             <select id="status-org" name="status" class="select2 form-select"
                                 data-placeholder="Published">
                                 <option value="inStock">{{__('In Stock')}}</option>
-                                <option value="returned">{{__('returned')}}</option>
-                                <option value="inactive">{{__('Inactive')}}</option>
+                                <option value="returned">{{__('Returned')}}</option>
+                                <option value="leftInventory">{{__('Left Inventory')}}</option>
                             </select>
                         </div>
 

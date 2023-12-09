@@ -140,7 +140,29 @@ $configData = Helper::appClasses();
                                                 class="btn btn-primary calculate-price-btn">{{__('Calculate Price')}}</button>
 
                                         </div>
-
+                                        <label class="switch switch-primary">
+                                            <input type="checkbox" name="addToInventory" class="switch-input" checked />
+                                            <span class="switch-toggle-slider">
+                                                <span class="switch-on">
+                                                    <i class="ti ti-check"></i>
+                                                </span>
+                                                <span class="switch-off">
+                                                    <i class="ti ti-x"></i>
+                                                </span>
+                                            </span>
+                                            <span class="switch-label">{{__('Add to Inventory')}}</span>
+                                        </label>
+                                        <div class="mb-3">
+                                            <label for="inventory_id"
+                                                class="form-label me-4 fw-medium">{{__('Inventory')}}</label>
+                                            <select id="inventory_id" class="select2 form-select"
+                                                data-allow-clear="true" name="inventory_id">
+                                                <option disabled selected>{{__('Select')}}</option>
+                                                @foreach($inventories as $inventory)
+                                                <option value="{{$inventory->id}}">{{$inventory->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="col-md-3 col-12 mb-md-0 mb-3">
                                         <p class="mb-2 repeater-title">{{__('Details')}}</p>

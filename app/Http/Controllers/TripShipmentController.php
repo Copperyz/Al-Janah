@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Shipment;
-use App\Models\ShipmentHistory;
 use App\Models\Trip;
+use App\Models\Shipment;
 use App\Models\TripShipment;
 use Illuminate\Http\Request;
+use App\Models\InventoryItem;
+use App\Models\ShipmentHistory;
 use Illuminate\Support\Facades\DB;
 
 class TripShipmentController extends Controller
@@ -60,9 +61,14 @@ class TripShipmentController extends Controller
     $selectedRows = $request->selectedRows;
     $deSelectedRows = $request->deSelectedRows;
 
-    // return $deSelectedRows;
+    $shipmentIds = collect($deSelectedRows)->pluck('id');
+    InventoryItem::whereIn('shipment_id', $shipmentIds)
+    ->update(['status' => 'returned']);
+
     // Extract the shipment IDs from the selected rows
     $shipmentIds = collect($selectedRows)->pluck('id');
+    InventoryItem::whereIn('shipment_id', $shipmentIds)
+    ->update(['status' => 'leftInventory']);
 
     // Sync the shipment IDs with the trip_shipments table
     DB::transaction(function () use ($request, $id, $shipmentIds, $deSelectedRows) {

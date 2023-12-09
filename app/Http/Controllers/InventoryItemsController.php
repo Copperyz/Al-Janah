@@ -25,18 +25,28 @@ class InventoryItemsController extends Controller
     $inventoryItems = InventoryItem::with('inventory')->get();
 
     return DataTables::of($inventoryItems)
-      ->addColumn('inventoryName', function ($inventoryItems) {
-        return $inventoryItems->inventory->name;
-      })
-      ->addColumn('actions', function ($inventoryItems) {
-        return '<a class="btn btn-sm btn-icon" href="' .
-          route('inventoryItems.edit', $inventoryItems->id) .
-          '"><i  class="ti ti-edit" > </i></a>' .
-          '<a class="btn btn-sm btn-icon delete-record" href="javascript:;">
-          <i class="ti ti-trash"></i></a>';
-      })
-      ->rawColumns(['inventoryName', 'actions'])
-      ->make(true);
+        ->addColumn('inventoryName', function ($inventoryItem) {
+            return $inventoryItem->inventory->name;
+        })
+        ->addColumn('status', function ($inventoryItem) {
+            $statusOptions = [
+                'inStock' => __('In Stock'),
+                'returned' => __('Returned'),
+                'leftInventory' => __('Left Inventory')
+            ];
+
+            return $statusOptions[$inventoryItem->status] ?? '';
+        })
+        ->addColumn('actions', function ($inventoryItem) {
+            return '<a class="btn btn-sm btn-icon" href="' .
+                route('inventoryItems.edit', $inventoryItem->id) .
+                '"><i  class="ti ti-edit" > </i></a>' .
+                '<a class="btn btn-sm btn-icon delete-record" href="javascript:;">
+                <i class="ti ti-trash"></i></a>';
+        })
+        ->rawColumns(['inventoryName', 'actions'])
+        ->make(true);
+
   }
   /**
    * Show the form for creating a new resource.

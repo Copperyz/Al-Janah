@@ -348,5 +348,9 @@
   "Add to Inventory": "إضافة الى المخزن",
   "In Stock": "في المخزن",
   "Returned": "مرجعة",
-  "Left Inventory": "غادرت المخزن"
+  "Left Inventory": "غادرت المخزن",
+  "Changing Shipment status": "تغيير حالة الشحنة",
+  "Please select a reason for changing shipment status": "الرجاء اختيار سبب تغيير حالة الشحنة",
+  "Detour": "تغيير مسار",
+  "Complete": "إكتمال"
 }

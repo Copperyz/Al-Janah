@@ -384,7 +384,7 @@ $(function () {
   dt_shipment.on('deselect', function (e, dt, type, indexes) {
     var deselectedData = dt_shipment.rows(indexes).data().toArray();
     // Display SweetAlert with a dropdown for choices
-    const choices = ['Detour', 'Cancel', 'Complete'];
+    const choices = [Detour, Complete];
 
     // Create a custom HTML content with radio buttons for choices
     const htmlContent = `
@@ -406,7 +406,7 @@ $(function () {
 
     // Display SweetAlert with custom HTML content
     Swal.fire({
-      title: '',
+      title: shipmentReasonTranslate,
       text: shipmentReasonTranslate,
       icon: 'warning',
       html: htmlContent,

@@ -71,10 +71,7 @@ $configData = Helper::appClasses();
                 <div class="step" data-target="#route{{$leg['country']}}">
                     <button type="button" class="step-trigger">
                         <span class="bs-stepper-icon">
-                            <svg viewBox="0 0 54 54">
-                                <use xlink:href="{{asset('assets/svg/icons/form-wizard-account.svg#wizardAccount')}}">
-                                </use>
-                            </svg>
+                            <img src="{{asset('assets/img/flags/'. $leg['country']. '.svg')}}" width="100" alt="">
                         </span>
                         <span class="bs-stepper-label">{{__($leg['type']) .' ('. __($leg['country']).')'}}</span>
                     </button>
@@ -115,7 +112,9 @@ $configData = Helper::appClasses();
                                                         <path d="M13 21v-9a1 1 0 0 0 -1 -1h-2a1 1 0 0 0 -1 1v3" />
                                                     </svg>
                                                     <span
-                                                        class="custom-option-title">{{__('At Warehouse') . ' (' . __($leg['country']) . ')'}}</span>
+                                                        class="custom-option-title">{{__('At Warehouse') . ' (' . __($leg['country']) . ')'}}
+
+                                                    </span>
                                                     <!-- <small> Delivery time (9am – 5pm) </small> -->
                                                 </span>
 

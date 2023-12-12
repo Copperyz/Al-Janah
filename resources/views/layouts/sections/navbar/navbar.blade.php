@@ -95,12 +95,12 @@ $navbarDetached = ($navbarDetached ?? '');
                                         class="align-middle">{{ app()->getLocale() == 'en' ? 'عربي' : 'English' }}</span></span>
 
                                 </a>
+
                             </li>
                             <li>
-                                <a class="dropdown-item" href="" id="changeMode">
-                                    <!-- Assuming you have a sun icon for light mode and a moon icon for dark mode -->
-                                    <i id="modeIcon"></i>
-                                    <span class="align-middle">{{ __('Change Mode') }}</span></span>
+                                <a class="dropdown-item changeMode" href="javascript:void(0);" data-theme="light">
+                                    <span class="align-middle"><i
+                                            class='ti ti-sun me-2'></i>{{ __('Change Mode') }}</span>
                                 </a>
                             </li>
                             {{-- @if (Auth::check() && Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -194,26 +194,46 @@ $navbarDetached = ($navbarDetached ?? '');
     $(document).ready(function() {
         // Get the elements that represent the buttons
         var changeLocaleButton = $('#changeLocale');
-        var changeModeButton = $('#changeMode');
-        var modeIcon = $('#modeIcon');
+        var changeModeButton = $('.changeMode');
+        // var modeIcon = $('#modeIcon');
 
         // Check local storage for the specified keys
-        var storageKeyLocale = 'templateCustomizer-vertical-menu-theme-default-light--Rtl';
-        var storageKeyMode = 'templateCustomizer-vertical-menu-theme-default-light--Style';
+        var storageKeyLocale = 'templateCustomizer-front-menu-theme-default-light--Rtl';
+        var storageKeyMode = 'templateCustomizer-front-menu-theme-default-light--Style';
+
+        var storageKeyLocaleVertical = 'templateCustomizer-vertical-menu-theme-default-light--Rtl';
+        var storageKeyModeVertical = 'templateCustomizer-vertical-menu-theme-default-light--Style';
 
         var isRtl = localStorage.getItem(storageKeyLocale) === 'true';
         var currentMode = localStorage.getItem(storageKeyMode) || 'light';
-        modeIcon.attr('class', (currentMode === 'light') ? 'ti ti-moon me-2 ti-sm' : 'ti ti-sun me-2 ti-sm');
 
+        var isRtlVertical = localStorage.getItem(storageKeyLocaleVertical) === 'true';
+        var currentModeVertical = localStorage.getItem(storageKeyModeVertical) || 'light';
+
+        createStorageKeyIfNotExist(storageKeyLocale, true);
+        createStorageKeyIfNotExist(storageKeyMode, 'light');
+        createStorageKeyIfNotExist(storageKeyLocaleVertical, true);
+        createStorageKeyIfNotExist(storageKeyModeVertical, 'light');
+
+        function createStorageKeyIfNotExist(key, defaultValue) {
+            if (localStorage.getItem(key) === null) {
+                localStorage.setItem(key, defaultValue.toString());
+            }
+        }
+        // modeIcon.attr('class', (currentMode === 'light') ? 'ti ti-moon me-2 ti-sm' : 'ti ti-sun me-2 ti-sm');
 
         // Function to toggle the value in local storage and navigate to the appropriate URL
         function toggleLocale() {
             isRtl = !isRtl;
             localStorage.setItem(storageKeyLocale, isRtl.toString());
 
+            isRtlVertical = !isRtlVertical;
+            localStorage.setItem(storageKeyLocaleVertical, isRtlVertical.toString());
+
             // Construct the URL based on the new value
-            var locale = isRtl ? 'ar' : 'en';
-            // var url = './change-locale/' + locale;
+            var locale = "{{ app()->getLocale() }}";
+            locale = locale == 'en' ? 'ar' : 'en';
+
             var url = '{{ route("changeLocale", ["locale" => ":locale"]) }}';
             url = url.replace(':locale', locale);
 
@@ -221,9 +241,7 @@ $navbarDetached = ($navbarDetached ?? '');
             changeLocaleButton.attr('href', url);
 
             // Navigate to the new URL
-            // window.location.href = url;
-            window.reload();
-
+            window.location.href = url;
         }
 
         // Function to toggle the mode and update the UI accordingly
@@ -231,10 +249,10 @@ $navbarDetached = ($navbarDetached ?? '');
             currentMode = (currentMode === 'light') ? 'dark' : 'light';
             localStorage.setItem(storageKeyMode, currentMode);
 
-            // Update the UI or perform any other actions based on the mode change
-            // Example: You can toggle CSS classes or update theme styles here
-            document.body.classList.toggle('dark-mode', currentMode === 'dark');
-            window.reload();
+            currentModeVertical = (currentModeVertical === 'light') ? 'dark' : 'light';
+            localStorage.setItem(storageKeyModeVertical, currentModeVertical);
+
+            location.reload();
         }
 
         // Attach click event handlers to the buttons
@@ -247,5 +265,7 @@ $navbarDetached = ($navbarDetached ?? '');
             toggleMode();
             event.preventDefault();
         });
+
+
     });
     </script>

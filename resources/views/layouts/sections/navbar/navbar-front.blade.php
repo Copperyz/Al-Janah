@@ -66,26 +66,9 @@ $activeClass = in_array($currentRouteName, $activeRoutes) ? 'active' : '';
                 <!-- Style Switcher -->
 
                 <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
-                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                        <i class='ti ti-sm'></i>
+                    <a class="nav-link me-2 me-xl-0 changeMode" href="javascript:void(0);" data-theme="light">
+                        <i class='me-2 ' id="modeIcon"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
-                        <li>
-                            <a class="dropdown-item changeMode" href="javascript:void(0);" data-theme="light">
-                                <span class="align-middle"><i class='ti ti-sun me-2'></i>{{__('Light')}}</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item changeMode" href="javascript:void(0);" data-theme="dark">
-                                <span class="align-middle"><i class="ti ti-moon me-2"></i>{{__('Dark')}}</span>
-                            </a>
-                        </li>
-                        <!-- <li>
-                            <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
-                                <span class="align-middle"><i class="ti ti-device-desktop me-2"></i>System</span>
-                            </a>
-                        </li> -->
-                    </ul>
                 </li>
                 <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0)" data-bs-toggle="dropdown">
@@ -141,19 +124,42 @@ $(document).ready(function() {
     var storageKeyLocale = 'templateCustomizer-front-menu-theme-default-light--Rtl';
     var storageKeyMode = 'templateCustomizer-front-menu-theme-default-light--Style';
 
+    var storageKeyLocaleVertical = 'templateCustomizer-vertical-menu-theme-default-light--Rtl';
+    var storageKeyModeVertical = 'templateCustomizer-vertical-menu-theme-default-light--Style';
+
     var isRtl = localStorage.getItem(storageKeyLocale) === 'true';
     var currentMode = localStorage.getItem(storageKeyMode) || 'light';
-    // modeIcon.attr('class', (currentMode === 'light') ? 'ti ti-moon me-2 ti-sm' : 'ti ti-sun me-2 ti-sm');
 
+    var iconElement = $('#modeIcon');
+    iconElement.attr('class', currentMode === 'dark' ? 'ti ti-sun me-2' : 'ti ti-moon me-2');
+
+    var isRtlVertical = localStorage.getItem(storageKeyLocaleVertical) === 'true';
+    var currentModeVertical = localStorage.getItem(storageKeyModeVertical) || 'light';
+
+    createStorageKeyIfNotExist(storageKeyLocale, true);
+    createStorageKeyIfNotExist(storageKeyMode, 'light');
+    createStorageKeyIfNotExist(storageKeyLocaleVertical, true);
+    createStorageKeyIfNotExist(storageKeyModeVertical, 'light');
+
+    function createStorageKeyIfNotExist(key, defaultValue) {
+        if (localStorage.getItem(key) === null) {
+            localStorage.setItem(key, defaultValue.toString());
+        }
+    }
+    // modeIcon.attr('class', (currentMode === 'light') ? 'ti ti-moon me-2 ti-sm' : 'ti ti-sun me-2 ti-sm');
 
     // Function to toggle the value in local storage and navigate to the appropriate URL
     function toggleLocale() {
         isRtl = !isRtl;
         localStorage.setItem(storageKeyLocale, isRtl.toString());
 
+        isRtlVertical = !isRtlVertical;
+        localStorage.setItem(storageKeyLocaleVertical, isRtlVertical.toString());
+
         // Construct the URL based on the new value
-        var locale = isRtl ? 'ar' : 'en';
-        // var url = './change-locale/' + locale;
+        var locale = "{{ app()->getLocale() }}";
+        locale = locale == 'en' ? 'ar' : 'en';
+
         var url = '{{ route("changeLocale", ["locale" => ":locale"]) }}';
         url = url.replace(':locale', locale);
 
@@ -161,9 +167,8 @@ $(document).ready(function() {
         changeLocaleButton.attr('href', url);
 
         // Navigate to the new URL
-        // window.location.href = url;
-        window.reload();
-
+        window.location.href = url;
+        // location.reload();
     }
 
     // Function to toggle the mode and update the UI accordingly
@@ -171,10 +176,10 @@ $(document).ready(function() {
         currentMode = (currentMode === 'light') ? 'dark' : 'light';
         localStorage.setItem(storageKeyMode, currentMode);
 
-        // Update the UI or perform any other actions based on the mode change
-        // Example: You can toggle CSS classes or update theme styles here
-        // document.body.classList.toggle('dark-mode', currentMode === 'dark');
-        window.reload();
+        currentModeVertical = (currentModeVertical === 'light') ? 'dark' : 'light';
+        localStorage.setItem(storageKeyModeVertical, currentModeVertical);
+
+        location.reload();
     }
 
     // Attach click event handlers to the buttons
@@ -187,5 +192,6 @@ $(document).ready(function() {
         toggleMode();
         event.preventDefault();
     });
+
 });
 </script>

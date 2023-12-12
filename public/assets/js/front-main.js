@@ -95,19 +95,19 @@ let isRtl = window.Helpers.isRtl(),
       localStorage.getItem('templateCustomizer-' + templateName + '--Style') ||
       window.templateCustomizer.settings.defaultStyle;
 
-    let styleSwitcherItems = [].slice.call(styleSwitcher.children[1].querySelectorAll('.dropdown-item'));
-    styleSwitcherItems.forEach(function (item) {
-      item.addEventListener('click', function () {
-        let currentStyle = this.getAttribute('data-theme');
-        if (currentStyle === 'light') {
-          window.templateCustomizer.setStyle('light');
-        } else if (currentStyle === 'dark') {
-          window.templateCustomizer.setStyle('dark');
-        } else {
-          window.templateCustomizer.setStyle('system');
-        }
-      });
-    });
+    // let styleSwitcherItems = [].slice.call(styleSwitcher.children[1].querySelectorAll('.dropdown-item'));
+    // styleSwitcherItems.forEach(function (item) {
+    //   item.addEventListener('click', function () {
+    //     let currentStyle = this.getAttribute('data-theme');
+    //     if (currentStyle === 'light') {
+    //       window.templateCustomizer.setStyle('light');
+    //     } else if (currentStyle === 'dark') {
+    //       window.templateCustomizer.setStyle('dark');
+    //     } else {
+    //       window.templateCustomizer.setStyle('system');
+    //     }
+    //   });
+    // });
 
     // Update style switcher icon based on the stored style
 

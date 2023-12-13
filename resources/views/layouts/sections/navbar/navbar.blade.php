@@ -204,16 +204,22 @@ $navbarDetached = ($navbarDetached ?? '');
         var storageKeyLocaleVertical = 'templateCustomizer-vertical-menu-theme-default-light--Rtl';
         var storageKeyModeVertical = 'templateCustomizer-vertical-menu-theme-default-light--Style';
 
+        var localeKey = 'locale';
+
         var isRtl = localStorage.getItem(storageKeyLocale) === 'true';
         var currentMode = localStorage.getItem(storageKeyMode) || 'light';
+
+        var iconElement = $('#modeIcon');
+        iconElement.attr('class', currentMode === 'dark' ? 'ti ti-sun me-2' : 'ti ti-moon me-2');
 
         var isRtlVertical = localStorage.getItem(storageKeyLocaleVertical) === 'true';
         var currentModeVertical = localStorage.getItem(storageKeyModeVertical) || 'light';
 
         createStorageKeyIfNotExist(storageKeyLocale, true);
-        createStorageKeyIfNotExist(storageKeyMode, 'light');
+        createStorageKeyIfNotExist(storageKeyMode, 'dark');
         createStorageKeyIfNotExist(storageKeyLocaleVertical, true);
-        createStorageKeyIfNotExist(storageKeyModeVertical, 'light');
+        createStorageKeyIfNotExist(storageKeyModeVertical, 'dark');
+        createStorageKeyIfNotExist(localeKey, 'ar');
 
         function createStorageKeyIfNotExist(key, defaultValue) {
             if (localStorage.getItem(key) === null) {
@@ -232,7 +238,10 @@ $navbarDetached = ($navbarDetached ?? '');
 
             // Construct the URL based on the new value
             var locale = "{{ app()->getLocale() }}";
+
             locale = locale == 'en' ? 'ar' : 'en';
+
+            localStorage.setItem(localeKey, locale.toString());
 
             var url = '{{ route("changeLocale", ["locale" => ":locale"]) }}';
             url = url.replace(':locale', locale);
@@ -242,6 +251,7 @@ $navbarDetached = ($navbarDetached ?? '');
 
             // Navigate to the new URL
             window.location.href = url;
+            // location.reload();
         }
 
         // Function to toggle the mode and update the UI accordingly
@@ -265,7 +275,6 @@ $navbarDetached = ($navbarDetached ?? '');
             toggleMode();
             event.preventDefault();
         });
-
 
     });
     </script>

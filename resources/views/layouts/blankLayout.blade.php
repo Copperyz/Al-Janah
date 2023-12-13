@@ -9,6 +9,7 @@ $customizerHidden = ($customizerHidden ?? '');
 
 @endphp
 
+
 @extends('layouts/commonMaster' )
 
 @section('layoutContent')
@@ -16,5 +17,6 @@ $customizerHidden = ($customizerHidden ?? '');
 <!-- Content -->
 @yield('content')
 <!--/ Content -->
+
 
 @endsection

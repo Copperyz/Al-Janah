@@ -127,6 +127,8 @@ $(document).ready(function() {
     var storageKeyLocaleVertical = 'templateCustomizer-vertical-menu-theme-default-light--Rtl';
     var storageKeyModeVertical = 'templateCustomizer-vertical-menu-theme-default-light--Style';
 
+    var localeKey = 'locale';
+
     var isRtl = localStorage.getItem(storageKeyLocale) === 'true';
     var currentMode = localStorage.getItem(storageKeyMode) || 'light';
 
@@ -137,9 +139,10 @@ $(document).ready(function() {
     var currentModeVertical = localStorage.getItem(storageKeyModeVertical) || 'light';
 
     createStorageKeyIfNotExist(storageKeyLocale, true);
-    createStorageKeyIfNotExist(storageKeyMode, 'light');
+    createStorageKeyIfNotExist(storageKeyMode, 'dark');
     createStorageKeyIfNotExist(storageKeyLocaleVertical, true);
-    createStorageKeyIfNotExist(storageKeyModeVertical, 'light');
+    createStorageKeyIfNotExist(storageKeyModeVertical, 'dark');
+    createStorageKeyIfNotExist(localeKey, 'ar');
 
     function createStorageKeyIfNotExist(key, defaultValue) {
         if (localStorage.getItem(key) === null) {
@@ -158,7 +161,10 @@ $(document).ready(function() {
 
         // Construct the URL based on the new value
         var locale = "{{ app()->getLocale() }}";
+
         locale = locale == 'en' ? 'ar' : 'en';
+
+        localStorage.setItem(localeKey, locale.toString());
 
         var url = '{{ route("changeLocale", ["locale" => ":locale"]) }}';
         url = url.replace(':locale', locale);

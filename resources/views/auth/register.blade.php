@@ -158,4 +158,23 @@ $configData = Helper::appClasses();
         <!-- /Register -->
     </div>
 </div>
+
+
+<script>
+// Get the current app locale
+var appLocale = "{{ app()->getLocale() }}";
+
+// Get the stored locale from localStorage
+var storedLocale = localStorage.getItem('locale');
+
+// Check if the stored locale is different from the current app locale
+if (storedLocale && storedLocale !== appLocale) {
+    // Update the app locale
+    var url = '{{ route("changeLocale", ["locale" => ":locale"]) }}';
+    url = url.replace(':locale', storedLocale);
+
+    // Navigate to the new URL
+    window.location.href = url;
+}
+</script>
 @endsection

@@ -1,4 +1,5 @@
 @php
+
 $customizerHidden = 'customizer-hide';
 $configData = Helper::appClasses();
 @endphp
@@ -26,6 +27,9 @@ $configData = Helper::appClasses();
 @section('page-script')
 <!-- <script src="{{asset('assets/js/pages-auth.js')}}"></script> -->
 @endsection
+
+
+
 
 @section('content')
 <div class="authentication-wrapper authentication-cover authentication-bg">
@@ -62,7 +66,7 @@ $configData = Helper::appClasses();
                 <form id="formAuthentication" class="mb-3" method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="mb-3">
-                        <label for="email" class="form-label">{{__('Email')}}</label>
+                        <label for="email" class="form-label">{{__('Email')}}</label>{{app()->getLocale()}}
                         <input type="text" class="form-control @error('email') is-invalid @enderror" id="email"
                             name="email" placeholder="{{__('Enter your email')}}" autofocus>
                         @error('email')
@@ -124,4 +128,23 @@ $configData = Helper::appClasses();
         <!-- /Login -->
     </div>
 </div>
+
+<script>
+// Get the current app locale
+var appLocale = "{{ app()->getLocale() }}";
+
+// Get the stored locale from localStorage
+var storedLocale = localStorage.getItem('locale');
+
+// Check if the stored locale is different from the current app locale
+if (storedLocale && storedLocale !== appLocale) {
+    // Update the app locale
+    var url = '{{ route("changeLocale", ["locale" => ":locale"]) }}';
+    url = url.replace(':locale', storedLocale);
+
+    // Navigate to the new URL
+    window.location.href = url;
+}
+</script>
+
 @endsection

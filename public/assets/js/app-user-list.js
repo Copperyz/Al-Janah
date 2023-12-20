@@ -402,71 +402,71 @@ $(function () {
 
 
   // If you have a submit button inside the form, you can bind the click event to it
-  $(".addNewUserForm :submit").on("click", function (event) {
-    // Trigger the form submission when the button is clicked
-    $(this).closest('form').submit();
-  });
+  // $(".addNewUserForm :submit").on("click", function (event) {
+  //   // Trigger the form submission when the button is clicked
+  //   $(this).closest('form').submit();
+  // });
 
   var offcanvasAddUser = new bootstrap.Offcanvas($('#offcanvasAddUser'));
 
-  $(".addNewUserForm").on("submit", function (event) {
-    event.preventDefault();
-    var form = $(this);
-    var url = form.attr('action');
-    var method = form.attr('method');
-    var formData = form.serialize();
+  // $(".addNewUserForm").on("submit", function (event) {
+  //   event.preventDefault();
+  //   var form = $(this);
+  //   var url = form.attr('action');
+  //   var method = form.attr('method');
+  //   var formData = form.serialize();
 
-    $.ajax({
-      url: url,
-      method: method,
-      data: formData,
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },
-      success: function (response, status, xhr) {
-        if (xhr.status === 200) {
-          // Handle a successful response
-          Swal.fire({
-            title: '',
-            text: response.message,
-            icon: 'success',
-            confirmButtonText: doneTranslation,
-            customClass: {
-              confirmButton: 'btn btn-success'
-            },
-          }).then((result) => {
-            if (result.isConfirmed) {
-              offcanvasAddUser.hide();
-              // location.reload();
-              $("#addNewUserForm").trigger('reset');
-              dt_user.ajax.url('get-users').load();
-            }
-          });
-        }
-        else {
-          // Handle other status codes
-        }
-      },
-      error: function (response, xhr, status, error) {
-        // Handle the error response here
-        var errorMessages = Object.values(response.responseJSON.errors).flat();
-        // Format error messages with line breaks
-        var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
-        // Create the Swal alert
-        Swal.fire({
-          title: response.responseJSON.message,
-          html: formattedErrorMessages,
-          icon: 'error',
-          confirmButtonText: doneTranslation,
-          customClass: {
-            confirmButton: 'btn btn-primary'
-          },
-          buttonsStyling: false
-        });
-      }
-    });
+  //   $.ajax({
+  //     url: url,
+  //     method: method,
+  //     data: formData,
+  //     headers: {
+  //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  //     },
+  //     success: function (response, status, xhr) {
+  //       if (xhr.status === 200) {
+  //         // Handle a successful response
+  //         Swal.fire({
+  //           title: '',
+  //           text: response.message,
+  //           icon: 'success',
+  //           confirmButtonText: doneTranslation,
+  //           customClass: {
+  //             confirmButton: 'btn btn-success'
+  //           },
+  //         }).then((result) => {
+  //           if (result.isConfirmed) {
+  //             offcanvasAddUser.hide();
+  //             // location.reload();
+  //             $("#addNewUserForm").trigger('reset');
+  //             dt_user.ajax.url('get-users').load();
+  //           }
+  //         });
+  //       }
+  //       else {
+  //         // Handle other status codes
+  //       }
+  //     },
+  //     error: function (response, xhr, status, error) {
+  //       // Handle the error response here
+  //       var errorMessages = Object.values(response.responseJSON.errors).flat();
+  //       // Format error messages with line breaks
+  //       var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
+  //       // Create the Swal alert
+  //       Swal.fire({
+  //         title: response.responseJSON.message,
+  //         html: formattedErrorMessages,
+  //         icon: 'error',
+  //         confirmButtonText: doneTranslation,
+  //         customClass: {
+  //           confirmButton: 'btn btn-primary'
+  //         },
+  //         buttonsStyling: false
+  //       });
+  //     }
+  //   });
 
-  });
+  // });
 
   $(document).on('click', 'a.editUser', function () {
     var data = dt_user.row($(this).closest('tr')).data();
@@ -586,13 +586,9 @@ $(function () {
     $('.dataTables_filter .form-control').removeClass('form-control-sm');
     $('.dataTables_length .form-select').removeClass('form-select-sm');
   }, 300);
-});
-
-// Validation & Phone mask
-(function () {
   const phoneMaskList = document.querySelectorAll('.phone-mask'),
     addNewUserForm = document.getElementById('addNewUserForm');
-
+  
   // Phone Number
   if (phoneMaskList) {
     phoneMaskList.forEach(function (phoneMask) {
@@ -602,32 +598,55 @@ $(function () {
       });
     });
   }
+  const submitButton = document.querySelector('button[type="submit"]');
+  
   // Add New User Form Validation
-  const fv = FormValidation.formValidation(addNewUserForm, {
+  FormValidation.formValidation(addNewUserForm, {
     fields: {
-      userFullname: {
+      name: {
         validators: {
           notEmpty: {
-            message: 'Please enter fullname '
+            message: window.translations.required.replace(':attribute', window.translations.attributes.name)
           }
         }
       },
-      userEmail: {
+      email: {
         validators: {
           notEmpty: {
-            message: 'Please enter your email'
+            message: window.translations.required.replace(':attribute', window.translations.attributes.email)
           },
           emailAddress: {
-            message: 'The value is not a valid email address'
+            message: window.translations.email.replace(':attribute', window.translations.attributes.email)
           }
         }
-      }
+      },
+  
+      password: {
+        validators: {
+          notEmpty: {
+            message: window.translations.required.replace(':attribute', window.translations.attributes.password)
+          },
+          
+          callback: {
+            message: window.translations.min.numeric.replace(':attribute', window.translations.attributes.password).replace(':min', '8'),
+            callback: function(input) {
+              // Implement your custom password validation logic here
+              // You can access the password value with input.value
+              // Return true if the password is valid, false otherwise
+              const password = input.value;
+              // Add your password validation logic here
+              // For example, checking if it has at least 8 characters
+              return password.length >= 8;
+            }
+        }
+        }
+      },
     },
     plugins: {
       trigger: new FormValidation.plugins.Trigger(),
       bootstrap5: new FormValidation.plugins.Bootstrap5({
         // Use this for enabling/changing valid/invalid class
-        eleValidClass: '',
+        eleValidClass: 'is-valid',
         rowSelector: function (field, ele) {
           // field is the field name & ele is the field element
           return '.mb-3';
@@ -638,5 +657,67 @@ $(function () {
       // defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
       autoFocus: new FormValidation.plugins.AutoFocus()
     }
+  }).on('core.form.valid', function () {
+    // Send the form data to back-end
+    // You need to grab the form data and create an Ajax request to send them
+    submitButton.setAttribute('disabled', true);
+    let form = $(addNewUserForm);
+    var url = form.attr('action');
+    var method = form.attr('method');
+    var formData = form.serialize();
+  
+    $.ajax({
+      url: url,
+      method: method,
+      data: formData,
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function (response, status, xhr) {
+        if (xhr.status === 200) {
+          // Handle a successful response
+          Swal.fire({
+            title: '',
+            text: response.message,
+            icon: 'success',
+            confirmButtonText: doneTranslation,
+            customClass: {
+              confirmButton: 'btn btn-success'
+            },
+          }).then((result) => {
+            if (result.isConfirmed) {
+              offcanvasAddUser.hide();
+              // location.reload();
+              $("#addNewUserForm").trigger('reset');
+              dt_user.ajax.url('get-users').load();
+            }
+          });
+        }
+        else {
+          // Handle other status codes
+        }
+      },
+      error: function (response, xhr, status, error) {
+        // Handle the error response here
+        var errorMessages = Object.values(response.responseJSON.errors).flat();
+        // Format error messages with line breaks
+        var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
+        // Create the Swal alert
+        Swal.fire({
+          title: response.responseJSON.message,
+          html: formattedErrorMessages,
+          icon: 'error',
+          confirmButtonText: doneTranslation,
+          customClass: {
+            confirmButton: 'btn btn-primary'
+          },
+          buttonsStyling: false
+        });
+        submitButton.removeAttribute('disabled');
+      }
+    });
   });
-})();
+});
+
+// Validation & Phone mask
+

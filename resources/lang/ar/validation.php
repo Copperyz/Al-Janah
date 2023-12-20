@@ -42,7 +42,7 @@ return [
   'digits_between' => 'The :attribute must be between :min and :max digits.',
   'dimensions' => 'The :attribute has invalid image dimensions.',
   'distinct' => 'The :attribute field has a duplicate value.',
-  'email' => 'The :attribute must be a valid email address.',
+  'email' => 'يجب أن يكون :attribute عنوان صحيح البُنية.',
   'ends_with' => 'The :attribute must end with one of the following: :values.',
   'enum' => 'The selected :attribute is invalid.',
   'exists' => 'الـ :attribute المحدد غير صالح.',
@@ -90,7 +90,7 @@ return [
   'mimes' => 'يجب أن تكون :attribute ملف من نوع: :values.',
   'mimetypes' => 'The :attribute must be a file of type: :values.',
   'min' => [
-    'numeric' => 'يجب أن يكون :attribute على الأقل :min.',
+    'numeric' => 'يجب أن تكون :attribute على الأقل :min.',
     'file' => 'يجب أن يكون حجم ملف :attribute على الأقل :min كيلوبايت.',
     'string' => 'يجب أن يكون طول :attribute على الأقل :min أحرف.',
     'array' => 'يجب أن يحتوي :attribute على الأقل :min عناصر.',
@@ -141,13 +141,7 @@ return [
     */
 
   'custom' => [
-    'inventoryName' => [
-      'required' => 'الرجاء إدخال اسم المخزن',
-      'unique' => 'إسم المخزن مستخدم مسبقاً',
-    ],
-    'branchID' => [
-      'required' => 'الرجاء اختيار الفرع',
-    ],
+    'required' => 'حقل :attribute مطلوب.',
   ],
 
   /*
@@ -235,5 +229,8 @@ return [
     'productAisle' => 'الممر',
     'productRow' => 'الصف',
     'inventoryID' => 'المخزن',
+    'productWeight' => __('Weight'),
+    'shipmentID' => __('Shipment'),
+    'parcelType' => __('Parcel Type'),
   ],
 ];

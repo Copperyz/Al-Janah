@@ -7,6 +7,8 @@
     rel="stylesheet">
 
 <link rel="stylesheet" href="{{ asset(mix('assets/vendor/fonts/tabler-icons.css')) }}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/libs/spinkit/spinkit.css')}}" />
+
 <!-- Core CSS -->
 <link rel="stylesheet" href="{{ asset(mix('assets/vendor/css' .$configData['rtlSupport'] .'/core.css')) }}"
     class="{{ $configData['hasCustomizer'] ? 'template-customizer-core-css' : '' }}" />

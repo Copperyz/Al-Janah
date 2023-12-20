@@ -140,14 +140,7 @@ return [
     |
     */
 
-  'custom' => [
-    'inventoryName' => [
-      'required' => 'Please enter inventory name',
-    ],
-    'branchID' => [
-      'required' => 'Please choose Branch',
-    ],
-  ],
+  'custom' => [],
 
   /*
     |--------------------------------------------------------------------------
@@ -160,5 +153,61 @@ return [
     |
     */
 
-  'attributes' => [],
+  'attributes' => [
+    'productName' => 'Product name',
+  ],
+  'attributes' => [
+    'title' => 'Title',
+    'image' => 'Image',
+    'body' => 'Body',
+    'phone' => 'Phone number',
+    'date' => 'Date',
+    'firstName' => 'First Name',
+    'fatherName' => 'Father Name',
+    'lastName' => 'Last Name',
+    'email' => 'Email',
+    'birth' => 'Birth',
+    'city' => 'City',
+    'from_date' => 'From Date',
+    'to_date' => 'To Date',
+    'time' => 'Time',
+    'address' => 'Address',
+    'price' => 'Price',
+    'currency' => 'Currency',
+    'userType' => 'User Type',
+    'location' => 'Location',
+    'password' => 'Password',
+    'cityId' => 'City',
+    'nid' => 'National ID',
+    'profileImage' => 'Image Profile',
+    'name' => 'Name',
+    'date' => __('Date'),
+    'amount' => __('Amount'),
+    'customer_id' => __('Customer'),
+    'orderItems.*.parcel_types_id' => __('Parcel Type'),
+    'orderItems.*.good_types_id' => __('Good Type'),
+    'orderItems.*.price' => __('Price'),
+    'orderItems.*.height' => __('Height'),
+    'orderItems.*.width' => __('Width'),
+    'orderItems.*.weight' => __('Weight'),
+    'orderItems.*.quantity' => __('Quantity'),
+    'parcel_types_id' => __('Parcel Type'),
+    'good_types_id' => __('Good Type'),
+    'price' => __('Price'),
+    'height' => __('Height'),
+    'width' => __('Width'),
+    'weight' => __('Weight'),
+    'quantity' => __('Quantity'),
+    'notes' => __('Notes'),
+    'productQty' => 'Product Quantity',
+    'productName' => 'Product Name',
+    'productBarcode' => 'Barcode',
+    'productSelf' => 'Shelf',
+    'productAisle' => 'Aisle',
+    'productRow' => 'Row',
+    'inventoryID' => 'Inventory',
+    'productWeight' => __('Weight'),
+    'shipmentID' => __('Shipment'),
+    'parcelType' => __('Parcel Type'),
+  ],
 ];

@@ -12,6 +12,8 @@
 @yield('vendor-script')
 <!-- END: Page Vendor JS-->
 <!-- BEGIN: Theme JS-->
+<script src="{{asset('assets/vendor/libs/block-ui/block-ui.js')}}"></script>
+<script src="{{asset('assets/js/extended-ui-blockui.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.js')}}"></script>
 <script src="{{ asset(mix('assets/js/main.js')) }}"></script>
 <script>
@@ -52,6 +54,40 @@ var shipmentChangeTitleTranslate = @json(__('Changing Shipment status'));
 var shipmentReasonTranslate = @json(__('Please select a reason for changing shipment status'));
 var Detour = @json(__('Detour'));
 var Complete = @json(__('Complete'));
+
+window.translations = @json(__('validation', [], app()->getLocale()), JSON_PRETTY_PRINT);
+
+function showSpinner(targetElement){
+        if(targetElement){
+            $(targetElement).block({
+            message:
+              '<div class="sk-wave mx-auto"><div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div></div>',
+            css: {
+              backgroundColor: 'transparent',
+              border: '0'
+            },
+            overlayCSS: {
+              opacity: 0.5
+            }
+          });
+        }else{
+            $.blockUI({
+            message:
+              '<div class="sk-wave mx-auto"><div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div></div>',
+            css: {
+              backgroundColor: 'transparent',
+              border: '0'
+            },
+            overlayCSS: {
+              opacity: 0.5
+            }
+          });
+        }
+    }
+    function hideSpinner(){
+        $.unblockUI();
+    }
+
 </script>
 <!-- END: Theme JS-->
 <!-- Pricing Modal JS-->

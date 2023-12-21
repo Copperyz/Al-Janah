@@ -23,9 +23,9 @@ return new class extends Migration {
       $table->integer('width')->nullable();
       $table->integer('size')->nullable();
       $table->integer('quantity');
-      $table->string('aisle');
-      $table->string('shelfNumber');
-      $table->string('row');
+      $table->tinyInteger('aisle')->default(1)->nullable();
+      $table->tinyInteger('shelfNumber')->default(0)->nullable();
+      $table->tinyInteger('row')->default(0)->nullable();
       $table->unsignedBigInteger('created_by')->nullable();
       $table->unsignedBigInteger('updated_by')->nullable();
       $table->unsignedBigInteger('deleted_by')->nullable();

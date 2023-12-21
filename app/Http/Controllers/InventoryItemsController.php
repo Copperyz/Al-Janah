@@ -73,9 +73,9 @@ class InventoryItemsController extends Controller
       'productHeight' => ['nullable', 'numeric', 'min:1'],
       'productWidth' => ['nullable', 'numeric', 'min:1'],
       'productWeight' => ['nullable', 'numeric', 'min:1'],
-      'productAisle' => ['required', 'numeric', 'min:1'],
-      'productRow' => ['required', 'numeric', 'min:1'],
-      'productSelf' => ['required', 'numeric', 'min:1'],
+      'productAisle' => ['nullable', 'numeric'],
+      'productRow' => ['nullable', 'numeric'],
+      'productSelf' => ['nullable', 'numeric'],
       'productQty' => ['required', 'numeric', 'min:1'],
     ]);
     if ($validator->fails()) {

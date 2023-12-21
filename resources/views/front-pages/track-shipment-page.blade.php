@@ -10,7 +10,6 @@ $configData = Helper::appClasses();
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/mapbox-gl/mapbox-gl.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/animate-css/animate.css')}}" />
-
 @endsection
 @section('page-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/css/pages/page-faq.css')}}" />
@@ -41,7 +40,9 @@ $configData = Helper::appClasses();
         <div class="row mt-3">
             <div class="d-grid gap-2 col-lg-12 mx-auto">
                 <button class="btn btn-primary btn-lg waves-effect waves-light px-5"
-                    onclick="searchShipment()">{{__('Search')}}</button>
+                    onclick="searchShipment(event)">
+                    <span id="btnSpinner" class="spinner-grow visually-hidden" role="status" aria-hidden="true"></span>
+                    {{__('Search')}}</button>
             </div>
         </div>
         <div class="animate__fadeInDown" id="searchResults" style="margin-top: 2em;">
@@ -57,7 +58,17 @@ $configData = Helper::appClasses();
 </div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-function searchShipment() {
+function searchShipment(evnet) {
+
+    showSpinner('#searchResults');
+
+    var button = event.target;
+    var spinner = document.getElementById('btnSpinner');
+
+        // Show the spinner
+        spinner.classList.remove('visually-hidden');
+        button.setAttribute('disabled', 'disabled');
+
     var trackingNumber = $('#trackingNumber').val();
 
     $.ajax({
@@ -71,6 +82,14 @@ function searchShipment() {
         },
         success: function(data) {
             $('#searchResults').html(data);
+            hideSpinner();
+            spinner.classList.add('visually-hidden');
+            button.removeAttribute('disabled');
+        },
+        error: function(error){
+            hideSpinner();
+            spinner.classList.add('visually-hidden');
+            button.removeAttribute('disabled');
         }
     });
 }
@@ -86,5 +105,6 @@ trackingNumberInput.addEventListener('keydown', function(event) {
         searchShipment();
     }
 });
+
 </script>
 @endsection

@@ -212,23 +212,6 @@ $configData = Helper::appClasses();
 </div>
 <script>
 var addNewUserTranslation = @json(__('Add User'));
-var exportTranslation = @json(__('Export'));
-var searchTranslation = @json(__('Search'));
-var showTranslation = @json(__('Show'));
-var showingTranslation = @json(__('Showing'));
-var toTranslation = @json(__('to'));
-var ofTranslation = @json(__('of'));
-var nextTranslation = @json(__('Next'));
-var previousTranslation = @json(__('Previous'));
-var noEntriesAvailableTranslation = @json(__('No entries available'));
-var entriesTranslation = @json(__('entries'));
-
-var submitTranslation = @json(__('Submit'));
-var cancelTranslation = @json(__('Cancel'));
-var doneTranslation = @json(__('Done'));
-
-var areYouSureTranslation = @json(__('Are you sure?'));
-var areYouSureTextTranslation = @json(__('You will not be able to revert this!'));
 </script>
 
 

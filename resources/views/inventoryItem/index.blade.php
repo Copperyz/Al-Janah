@@ -98,21 +98,21 @@ $configData = Helper::appClasses();
 
 <!-- Product List Table -->
 <div class="card">
-    <div class="card-header">
+    <!-- <div class="card-header">
         <h5 class="card-title mb-0">Filter</h5>
         <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
             <div class="col-md-4 product_status"></div>
             <div class="col-md-4 product_category"></div>
             <div class="col-md-4 product_stock"></div>
         </div>
-    </div>
+    </div> -->
     <div class="card-datatable table-responsive">
         <table class="datatables-products table">
             <thead class="border-top">
                 <tr>
                     <th></th>
                     <th>{{__('Name')}}</th>
-                    <th>{{__('Item Code')}}</th>
+                    <th>{{__('Product Code')}}</th>
                     <th>{{__('Inventory')}}</th>
                     <!-- <th>{{__('Quantity')}}</th> -->
                     <th>{{__('Aisle')}}</th>
@@ -126,6 +126,6 @@ $configData = Helper::appClasses();
     </div>
 </div>
 <script>
-var addInventoryItemTranslation = @json(__('Add Item'));
+var addInventoryItemTranslation = @json(__('Add Product'));
 </script>
 @endsection

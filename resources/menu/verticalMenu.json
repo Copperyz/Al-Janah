@@ -76,6 +76,12 @@
       "icon": "menu-icon ti ti-map-pin-dollar",
       "name": "Prices",
       "slug": "prices.index"
+    },
+    {
+      "url": "customers",
+      "icon": "menu-icon tf-icons ti ti-users",
+      "name": "Customers",
+      "slug": "customers.index"
     }
   ]
 }

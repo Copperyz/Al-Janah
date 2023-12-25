@@ -227,7 +227,7 @@
   margin-top: 0.25rem;
 }
 .bs-stepper .bs-stepper-header .step .step-trigger:hover {
-  background-color: transparent;
+  /* background-color: transparent; */
 }
 html:not([dir='rtl']) .bs-stepper .bs-stepper-header .step:first-child .step-trigger {
   padding-left: 0;

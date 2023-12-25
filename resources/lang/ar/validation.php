@@ -30,7 +30,7 @@ return [
     'array' => 'The :attribute must have between :min and :max items.',
   ],
   'boolean' => 'The :attribute field must be true or false.',
-  'confirmed' => 'تأكيد :attribute غير متطابق.',
+  'confirmed' => ':attribute غير متطابق.',
   'current_password' => 'The password is incorrect.',
   'date' => 'The :attribute is not a valid date.',
   'date_equals' => 'The :attribute must be a date equal to :date.',
@@ -232,5 +232,8 @@ return [
     'productWeight' => __('Weight'),
     'shipmentID' => __('Shipment'),
     'parcelType' => __('Parcel Type'),
+    'currentPassword' => 'كلمة المرور الحالية',
+    'new_password' => 'كلمة المرور الجديدة',
+    'new_password_confirmation' => "تأكيد كلمة المرور الجديدة",
   ],
 ];

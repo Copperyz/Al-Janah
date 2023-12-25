@@ -19,6 +19,7 @@ use App\Http\Controllers\TripRouteController;
 use App\Http\Controllers\TripShipmentController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\CustomerController;
+use Spatie\Permission\Contracts\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,5 +106,8 @@ Route::middleware(['auth'])->group(function () {
   Route::get('get-price', [PriceController::class, 'get_price'])->name('get-price');
   Route::resource('prices', PriceController::class);
   // Customers
+  Route::get('customers-all', [CustomerController::class, 'getCustomers'])->name('customers.all');
+  Route::get('customers-shipments/{id}', [CustomerController::class, 'getShipmetns'])->name('customers.shipments');
+  Route::post('customer-update', [CustomerController::class, 'updateCustomerData'])->name('customer.updateData');
   Route::resource('customers', CustomerController::class);
 });

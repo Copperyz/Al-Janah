@@ -626,19 +626,22 @@ $(function () {
           notEmpty: {
             message: window.translations.required.replace(':attribute', window.translations.attributes.password)
           },
-          
-          callback: {
+          stringLength: {
+            min: 8,
             message: window.translations.min.numeric.replace(':attribute', window.translations.attributes.password).replace(':min', '8'),
-            callback: function(input) {
-              // Implement your custom password validation logic here
-              // You can access the password value with input.value
-              // Return true if the password is valid, false otherwise
-              const password = input.value;
-              // Add your password validation logic here
-              // For example, checking if it has at least 8 characters
-              return password.length >= 8;
-            }
-        }
+          },
+        //   callback: {
+        //     message: window.translations.min.numeric.replace(':attribute', window.translations.attributes.password).replace(':min', '8'),
+        //     callback: function(input) {
+        //       // Implement your custom password validation logic here
+        //       // You can access the password value with input.value
+        //       // Return true if the password is valid, false otherwise
+        //       const password = input.value;
+        //       // Add your password validation logic here
+        //       // For example, checking if it has at least 8 characters
+        //       return password.length >= 8;
+        //     }
+        // }
         }
       },
     },

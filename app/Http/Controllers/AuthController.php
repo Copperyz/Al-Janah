@@ -10,10 +10,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Auth\Events\Registered;
-
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use App\Events\UserRegistered;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\UserConfirmationEmail;
 
 class AuthController extends Controller
 {
@@ -57,7 +60,7 @@ class AuthController extends Controller
     Validator::make($request->all(), [
       'name' => ['required', 'string', 'min:2', 'max:30'],
       'email' => ['required', 'email', Rule::unique(User::class)],
-      'password' => ['required', 'string', 'min:6', 'max:30', 'confirmed'],
+      'password' => ['required', 'string', 'min:8', 'max:30', 'confirmed'],
     ])->validate();
     // return $request;
 
@@ -65,15 +68,17 @@ class AuthController extends Controller
     try {
       // Hash the password
       $request['password'] = Hash::make($request['password']);
+      $request['confirmation_token'] = Str::uuid();
 
       $user = User::create($request->all());
 
-      event(new Registered($user));
+      Mail::to($user->email)->send(new UserConfirmationEmail($user));
+      
       DB::commit();
       // Login the user after registration
-      Auth::login($user);
+      // Auth::login($user);
       // Redirect or return a response as needed
-      return redirect('/dashboard');
+      return redirect()->route('login')->with('success', 'Registration successful. Check your email to confirm your account.');
     } catch (\Exception $e) {
       // Rollback the transaction in case of any errors
       DB::rollback();
@@ -83,7 +88,19 @@ class AuthController extends Controller
         ->with('error', 'Registration failed: ' . $e->getMessage());
     }
   }
+  public function confirmAccount($token){
+    $user = User::where('confirmation_token', $token)->first();
 
+    if (!$user) {
+        return redirect()->route('login')->with('error', 'Invalid confirmation token.');
+    }
+
+    $user->email_verified_at = now();
+    $user->confirmation_token = null;
+    $user->save();
+    Auth::login($user);
+    return redirect()->route('dashboard');
+  }
   public function Logout(Request $request)
   {
     $userLocale = app()->getLocale(); // Get current locale

@@ -22,6 +22,7 @@ return new class extends Migration {
       $table->unsignedBigInteger('city_id')->nullable();
       $table->unsignedBigInteger('country_id')->nullable();
       $table->string('status');
+      $table->unsignedBigInteger('user_id')->nullable();
       $table->unsignedBigInteger('created_by')->nullable();
       $table->unsignedBigInteger('updated_by')->nullable();
       $table->unsignedBigInteger('deleted_by')->nullable();
@@ -36,6 +37,10 @@ return new class extends Migration {
         ->foreign('country_id')
         ->references('id')
         ->on('countries');
+      $table
+        ->foreign('user_id')
+        ->references('id')
+        ->on('users');
       $table
         ->foreign('created_by')
         ->references('id')

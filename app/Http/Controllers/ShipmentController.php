@@ -92,6 +92,7 @@ class ShipmentController extends Controller
         $mysqlDate = $carbonDate->toDateTimeString();
         $shipment->date = $mysqlDate;
         $shipment->amount = $request->amount;
+        $shipment->shipmentPrice = $request->shipmentPrice;
         $shipment->customer_id = $request->customer_id;
         // $shipment->notes = $request->notes;
         $delivery_code = Str::random(12);

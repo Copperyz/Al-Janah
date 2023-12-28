@@ -101,6 +101,7 @@ $configData = Helper::appClasses();
                                 </select>
                             </div>
                         </div>
+                        <input type="hidden" name="shipmentPrice" id="shipmentPrice">
                     </div>
 
 
@@ -193,8 +194,8 @@ $configData = Helper::appClasses();
                                             placeholder="1" min="1" max="50" value="1" />
                                     </div>
                                 </div>
-                                <div class="d-flex flex-column align-items-center justify-content-between border-start p-2"
-                                    onclick="removeItem(this)">
+                                <div
+                                    class="d-flex flex-column align-items-center justify-content-between border-start p-2 deleteElement">
                                     <i class="ti ti-x cursor-pointer" data-repeater-delete></i>
                                 </div>
                             </div>
@@ -243,7 +244,7 @@ $configData = Helper::appClasses();
                                 <hr />
                                 <div class="d-flex justify-content-between">
                                     <span class="w-px-100">{{__('Total')}}</span>
-                                    <span class="fw-medium">$00.00</span>
+                                    <span id="totalValue" class="fw-medium">$00.00</span>
                                 </div>
                             </div>
                         </div>

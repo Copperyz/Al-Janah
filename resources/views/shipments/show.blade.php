@@ -93,7 +93,8 @@ $configData = Helper::appClasses();
                             <tbody>
                                 <tr>
                                     <td class="pe-4">{{__('Total')}}:</td>
-                                    <td class="fw-medium">{{$shipment->amount}} LYD</td>
+                                    <td class="fw-medium">{{$shipment->amount + $shipment->shipmentPrice}} {{__('LYD')}}
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -186,7 +187,7 @@ var areYouSureTextTranslation = @json(__('You will not be able to revert this!')
 
 <!-- Offcanvas -->
 @include('_partials/_offcanvas/offcanvas-send-invoice')
-@include('_partials/_offcanvas/offcanvas-add-payment')
+@include('_partials/_modals/shipments/offcanvas-add-payment')
 @include('_partials/_modals/shipments/modal-add-shipment-item')
 @include('_partials/_modals/shipments/modal-edit-shipment-item')
 <!-- /Offcanvas -->

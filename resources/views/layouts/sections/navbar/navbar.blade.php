@@ -215,11 +215,46 @@ $navbarDetached = ($navbarDetached ?? '');
         var isRtlVertical = localStorage.getItem(storageKeyLocaleVertical) === 'true';
         var currentModeVertical = localStorage.getItem(storageKeyModeVertical) || 'light';
 
-        createStorageKeyIfNotExist(storageKeyLocale, true);
+        // Get current mode and set icon
+        var modeCookie = localStorage.getItem(storageKeyMode);
+        var defaultValue = 'dark'; // Set your default mode value here
+
+        // Initialize refreshNeeded variable
+        var refreshNeeded = false;
+        var refreshLocaleNeeded = false;
+
+
+        // Check if mode is different from default
+        if (!modeCookie) {
+            refreshNeeded = true;
+        }
+
+        var localeCookie = localStorage.getItem(localeKey);
+        var locale = "{{ app()->getLocale() }}";
+
+        if (localeCookie && localeCookie !== locale) {
+            refreshLocaleNeeded = true;
+        }
+
+        createStorageKeyIfNotExist(storageKeyLocale, false);
         createStorageKeyIfNotExist(storageKeyMode, 'dark');
-        createStorageKeyIfNotExist(storageKeyLocaleVertical, true);
+        createStorageKeyIfNotExist(storageKeyLocaleVertical, false);
         createStorageKeyIfNotExist(storageKeyModeVertical, 'dark');
-        createStorageKeyIfNotExist(localeKey, 'ar');
+        createStorageKeyIfNotExist(localeKey, 'en');
+
+        // Perform refresh if needed and not on the initial page load
+
+        if (refreshLocaleNeeded) {
+            var localeCookie = localStorage.getItem(localeKey);
+            var url = '{{ route("changeLocale", ["locale" => ":locale"]) }}';
+            url = url.replace(':locale', localeCookie);
+            // Update the link's href attribute
+            changeLocaleButton.attr('href', url);
+            // Navigate to the new URL
+            window.location.href = url;
+        } else if (refreshNeeded) {
+            window.location.reload();
+        }
 
         function createStorageKeyIfNotExist(key, defaultValue) {
             if (localStorage.getItem(key) === null) {

@@ -150,7 +150,9 @@ $(function () {
   // Set the value of the input element to the formatted date
   $('#datePicker').val(formattedDate);
 
-  var price = 0;
+  var freightValue = 0;
+  var tripFareValue = 0;
+  var totalPrice = 0;
 
 
   $(document).on('click', '.calculate-price-btn', function () {
@@ -190,9 +192,21 @@ $(function () {
           },
           success: function (response) {
             // Update the UI with the calculated price
-            var value = response > 0 ? response : price;
-            $container.find('[name$="[price]"]').val(value)
+            console.log('freightValue: ' + freightValue)
+            console.log('totalPrice: ' + totalPrice)
+
+            var value = parseFloat(response) > 0 ? parseFloat(response) : freightValue;
+            totalPrice = totalPrice - freightValue;
+            freightValue = freightValue - parseFloat($container.find('[name$="[price]"]').val() ? $container.find('[name$="[price]"]').val() : 0) + parseFloat(value);
+            $('#freightValue').text('$' + parseFloat(freightValue).toFixed(2));
+            totalPrice = totalPrice + freightValue;
+            $('#totalValue').text('$' + parseFloat(totalPrice).toFixed(2));
+            $container.find('[name$="[price]"]').val(parseFloat(value).toFixed(2));
+
+            console.log('freightValue: ' + freightValue)
+            console.log('totalPrice: ' + totalPrice)
           },
+
           error: function (error) {
           }
         });
@@ -214,15 +228,25 @@ $(function () {
     }
   });
 
+  $(document).on('click', '.deleteElement', function () {
+    var $container = $(this).closest('.repeater-wrapper');
 
+    totalPrice = totalPrice - parseFloat($container.find('[name$="[price]"]').val() ? $container.find('[name$="[price]"]').val() : 0);;
 
+    freightValue = freightValue - parseFloat($container.find('[name$="[price]"]').val() ? $container.find('[name$="[price]"]').val() : 0);
+    $('#freightValue').text('$' + parseFloat(freightValue).toFixed(2));
+    $('#totalValue').text('$' + parseFloat(totalPrice).toFixed(2));
 
+    $container.find('[name$="[price]"]').val(0);
+    removeItem(this);
+
+  });
 
   // If you have a submit button inside the form, you can bind the click event to it
   $(".submitButton").on("click", function (event) {
     // Trigger the form submission when the button is clicked
     var formData = $("#addShipmentForm").serializeArray();
-    console.log(formData)
+    $('#addShipmentForm').find('[name="shipmentPrice"]').val(parseFloat(totalPrice).toFixed(2));
     $.ajax({
       url: '../shipments',
       method: 'POST',
@@ -344,12 +368,17 @@ $(function () {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
       success: function (response) {
-        $('#tripFareValue').text('$' + response.trip_price);
+        tripFareValue = response.trip_price;
+        $('#tripFareValue').text('$' + parseFloat(tripFareValue).toFixed(2));
+        totalPrice = totalPrice + tripFareValue;
+        $('#totalValue').text('$' + parseFloat(totalPrice).toFixed(2));
       },
       error: function (error) {
       }
     });
   });
+
+
 
 
 });

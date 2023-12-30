@@ -383,5 +383,10 @@
   "Confirm New Password":"تأكيد كلمة المرور الجديدة",
   "Current Password":"كلمة المرور الحالية",
   "The provided old password is incorrect":"كلمة المرور القديمة غير صحيحة",
-  "Password updated successfully":"تم تعديل كلمة المرور بنجاح"
+  "Password updated successfully":"تم تعديل كلمة المرور بنجاح",
+  "Verify your email": "تحقق من بريدك الإلكتروني",
+  "Account activation link sent to your email address: :email. Please follow the link inside to continue": "تم إرسال رابط تفعيل الحساب الى :email اضغط على الرابط للمتابعة",
+  "Go Back": "رجوع",
+  "Didn't get the mail?": "لم تتلقى البريد الإلكتروني؟",
+  "Resend":"اعادة ارسال"
 }

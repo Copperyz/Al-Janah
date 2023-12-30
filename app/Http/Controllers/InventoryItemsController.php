@@ -22,8 +22,8 @@ class InventoryItemsController extends Controller
 
   public function getInventoryItems()
   {
-    $inventoryItems = InventoryItem::with('inventory')->get();
-
+    $inventoryItems = InventoryItem::withTrashed('inventory')->get();
+    // return $inventoryItems;
     return DataTables::of($inventoryItems)
         ->addColumn('inventoryName', function ($inventoryItem) {
             return $inventoryItem->inventory->name;

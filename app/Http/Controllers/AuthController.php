@@ -54,7 +54,6 @@ class AuthController extends Controller
   {
     return view('auth.register');
   }
-
   public function Register(Request $request)
   {
     Validator::make($request->all(), [
@@ -63,25 +62,20 @@ class AuthController extends Controller
       'password' => ['required', 'string', 'min:8', 'max:30', 'confirmed'],
     ])->validate();
     // return $request;
-
-    DB::beginTransaction();
     try {
-      // Hash the password
-      $request['password'] = Hash::make($request['password']);
-      $request['confirmation_token'] = Str::uuid();
+      DB::transaction(function () use ($request) {
+        // Hash the password
+        $request['password'] = Hash::make($request['password']);
+        $request['confirmation_token'] = Str::uuid();
+  
+        $user = User::create($request->all());
 
-      $user = User::create($request->all());
+        Mail::to($user->email)->send(new UserConfirmationEmail($user));
+      });
+      return view('auth.verify-email')->with('email', $request->email);
 
-      Mail::to($user->email)->send(new UserConfirmationEmail($user));
-      
-      DB::commit();
-      // Login the user after registration
-      // Auth::login($user);
-      // Redirect or return a response as needed
-      return redirect()->route('login')->with('success', 'Registration successful. Check your email to confirm your account.');
     } catch (\Exception $e) {
       // Rollback the transaction in case of any errors
-      DB::rollback();
       // Handle the error or redirect back with an error message
       return redirect()
         ->back()

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
-
+use Spatie\Permission\Models\Role;
 
 class Users extends Controller
 {
@@ -19,7 +19,8 @@ class Users extends Controller
    */
   public function index()
   {
-    return view('users.index');
+    $roles = Role::all();
+    return view('users.index')->with('roles', $roles);
   }
 
   /**
@@ -39,6 +40,7 @@ class Users extends Controller
       'name' => ['required', 'string', 'min:2', 'max:30'],
       'email' => ['required', 'email', Rule::unique(User::class)],
       'password' => ['required', 'string', 'min:6', 'max:30'],
+      'role' => ['required'],
     ]);
      if ($validator->fails()) {
         return response()->json([
@@ -54,6 +56,9 @@ class Users extends Controller
 
       $user = User::create($request->all());
 
+      $role = Role::findOrFail($request->role);
+      $user->assignRole($role);
+      
       event(new Registered($user));
       DB::commit();
       // Redirect or return a response as needed

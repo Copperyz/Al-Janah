@@ -388,5 +388,8 @@
   "Account activation link sent to your email address: :email. Please follow the link inside to continue": "تم إرسال رابط تفعيل الحساب الى :email اضغط على الرابط للمتابعة",
   "Go Back": "رجوع",
   "Didn't get the mail?": "لم تتلقى البريد الإلكتروني؟",
-  "Resend":"اعادة ارسال"
+  "Resend":"اعادة ارسال",
+  "Thank you for confirming your email":"شكراً على تأكيد الإيميل",
+  "Kindly furnish additional details to initiate effective tracking of your shipments":"يُرجى تقديم تفاصيل إضافية لبدء التتبع الفعال لشحناتك",
+  "Phone No":"رقم الهاتف"
 }

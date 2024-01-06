@@ -17,7 +17,8 @@
       "url": "users",
       "icon": "menu-icon tf-icons ti ti-users",
       "name": "Users",
-      "slug": "users"
+      "slug": "users",
+      "permission": "user"
     },
     {
       "url": "roles",

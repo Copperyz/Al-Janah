@@ -167,6 +167,17 @@ $configData = Helper::appClasses();
                     </div>
 
                 </div>
+                <div class="mb-3">
+                    <label for="role"
+                        class="form-label me-4 fw-medium">{{__('Role')}}</label>
+                    <select id="role" class="select2 form-select"
+                        data-allow-clear="true" name="role">
+                        <option disabled selected>{{__('Select')}}</option>
+                        @foreach($roles as $role)
+                        <option value="{{$role->id}}">{{$role->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <button type="submit" class="btn btn-primary me-sm-3 me-1 data-sumbit">{{__('Submit')}}</button>
                 <button type="reset" class="btn btn-label-secondary"
                     data-bs-dismiss="offcanvas">{{__('Cancel')}}</button>

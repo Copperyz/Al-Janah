@@ -63,6 +63,7 @@ $configData = Helper::appClasses();
         @endphp
 
         {{-- main menu --}}
+        
         <li class="menu-item {{$activeClass}}">
             <a href="{{ isset($menu->url) ? url($menu->url) : 'javascript:void(0);' }}"
                 class="{{ isset($menu->submenu) ? 'menu-link menu-toggle' : 'menu-link' }}" @if (isset($menu->target)
@@ -82,6 +83,7 @@ $configData = Helper::appClasses();
             @include('layouts.sections.menu.submenu',['menu' => $menu->submenu])
             @endisset
         </li>
+        
         @endif
         @endforeach
     </ul>

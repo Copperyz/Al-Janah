@@ -138,6 +138,7 @@ class CustomerController extends Controller
     $customer->country_id = $request->country_id;
     $customer->city_id = $request->city_id;
     $customer->status = 1;
+    $customer->created_by = auth()->id();
     $customer->save();
 
     return response()->json(['message' => __('Customer added successfully')]);

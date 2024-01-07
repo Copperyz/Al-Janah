@@ -56,8 +56,7 @@ class Users extends Controller
 
       $user = User::create($request->all());
 
-      $role = Role::findOrFail($request->role);
-      $user->assignRole($role);
+      $user->assignRole($request->role);
       
       event(new Registered($user));
       DB::commit();
@@ -94,35 +93,37 @@ class Users extends Controller
   {
     try {
           $user = User::findOrFail($id);
+          $validator = Validator::make($request->all(), [
+              'name'     => 'required|string|min:3|max:30',
+              'email'    => [
+                  'nullable',
+                  'email',
+                  Rule::unique('users', 'email')->ignore($user->id, 'id'),
+              ],
+              'password' => 'nullable|string|min:6|max:30',
+          ]);
+          if ($validator->fails()) {
+              return response()->json([
+                  'message' => __('The given data was invalid'),
+                  'errors' => $validator->errors()
+              ], 422);
+          }
+          $user->name = $request->filled('name') ? $request->name : $user->name;
+          $user->email = $request->filled('email') ? $request->email : $user->email;
+          $user->password = $request->filled('password') ? Hash::make($request->password) : $user->password;
+          $user->save();
+          
+          $user->syncRoles($request->filled('role') ? $request->role : '');
+
+          return response()->json(['message' => __('User updated successfully')], 200);
         } catch (ModelNotFoundException $e) {
             return response()->json([
                 'message' => __('The given data was invalid'),
                 'errors' => [__('User not found')]
             ], 404);
         }
-        $validator = Validator::make($request->all(), [
-            'name'     => 'required|string|min:3|max:30',
-            'email'    => [
-                'nullable',
-                'email',
-                Rule::unique('users', 'email')->ignore($user->id, 'id'),
-            ],
-            'password' => 'nullable|string|min:6|max:30',
-        ]);
 
         
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => __('The given data was invalid'),
-                'errors' => $validator->errors()
-            ], 422);
-        }
-        $user->name = $request->filled('name') ? $request->name : $user->name;
-        $user->email = $request->filled('email') ? $request->email : $user->email;
-        $user->password = $request->filled('password') ? Hash::make($request->password) : $user->password;
-        $user->save();
-
-        return response()->json(['message' => __('User updated successfully')], 200);
   }
 
   /**
@@ -147,7 +148,7 @@ class Users extends Controller
 
   public function get_users()
   {
-    $users = User::orderBy('id', 'DESC')->get();
+    $users = User::with('roles:id,name')->orderBy('id', 'DESC')->get();
     return Datatables::of($users)
       ->rawColumns(['Options'])
       ->make(true);

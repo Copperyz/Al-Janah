@@ -11,7 +11,6 @@ class HomePage extends Controller
 {
   public function index()
   {
-    $data = [];
     $user = auth()->user();
     if($user->hasRole('customer')){
       $data = Customer::with('shipments', 'country')->where('user_id', $user->id)->first();

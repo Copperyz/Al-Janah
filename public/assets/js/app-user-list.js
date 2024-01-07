@@ -470,10 +470,23 @@ $(function () {
 
   $(document).on('click', 'a.editUser', function () {
     var data = dt_user.row($(this).closest('tr')).data();
+    console.log(data)
     $('#editUserForm').trigger("reset");
     $('#editUserForm').find('[name="name"]').val(data.name);
     $('#editUserForm').find('[name="email"]').val(data.email);
     $('#editUserForm').find('[name="id"]').val(data.id);
+    var permissionsValues = data.userPermissions;
+    $('#permission_edit option').prop('selected', false); // Deselect all options
+    permissionsValues.forEach(permissionValue => {
+      $('#permission_edit option[value="' + permissionValue + '"]').prop('selected', true);
+    });
+    $('#permission_edit').trigger('change');
+    var rolesValues = data.userRoles;
+    $('#role_edit option').prop('selected', false); // Deselect all options
+    rolesValues.forEach(roleValue => {
+      $('#role_edit option[value="' + roleValue + '"]').prop('selected', true);
+    });
+    $('#role_edit').trigger('change');
   });
 
   var offcanvasEditUser = new bootstrap.Offcanvas($('#offcanvasEditUser'));
@@ -588,7 +601,7 @@ $(function () {
   }, 300);
   const phoneMaskList = document.querySelectorAll('.phone-mask'),
     addNewUserForm = document.getElementById('addNewUserForm');
-  
+
   // Phone Number
   if (phoneMaskList) {
     phoneMaskList.forEach(function (phoneMask) {
@@ -599,7 +612,7 @@ $(function () {
     });
   }
   const submitButton = document.querySelector('button[type="submit"]');
-  
+
   // Add New User Form Validation
   FormValidation.formValidation(addNewUserForm, {
     fields: {
@@ -620,7 +633,7 @@ $(function () {
           }
         }
       },
-  
+
       password: {
         validators: {
           notEmpty: {
@@ -630,18 +643,18 @@ $(function () {
             min: 8,
             message: window.translations.min.numeric.replace(':attribute', window.translations.attributes.password).replace(':min', '8'),
           },
-        //   callback: {
-        //     message: window.translations.min.numeric.replace(':attribute', window.translations.attributes.password).replace(':min', '8'),
-        //     callback: function(input) {
-        //       // Implement your custom password validation logic here
-        //       // You can access the password value with input.value
-        //       // Return true if the password is valid, false otherwise
-        //       const password = input.value;
-        //       // Add your password validation logic here
-        //       // For example, checking if it has at least 8 characters
-        //       return password.length >= 8;
-        //     }
-        // }
+          //   callback: {
+          //     message: window.translations.min.numeric.replace(':attribute', window.translations.attributes.password).replace(':min', '8'),
+          //     callback: function(input) {
+          //       // Implement your custom password validation logic here
+          //       // You can access the password value with input.value
+          //       // Return true if the password is valid, false otherwise
+          //       const password = input.value;
+          //       // Add your password validation logic here
+          //       // For example, checking if it has at least 8 characters
+          //       return password.length >= 8;
+          //     }
+          // }
         }
       },
     },
@@ -668,7 +681,7 @@ $(function () {
     var url = form.attr('action');
     var method = form.attr('method');
     var formData = form.serialize();
-  
+
     $.ajax({
       url: url,
       method: method,

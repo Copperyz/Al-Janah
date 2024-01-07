@@ -115,5 +115,7 @@ Route::middleware(['auth'])->group(function () {
   Route::resource('customers', CustomerController::class);
 
   // Payments
+  Route::get('get-payments', [PaymentController::class, 'getPayments'])->name('get-payments');
+  Route::get('payments/refund/{id}', [PaymentController::class, 'refund'])->name('refund');
   Route::resource('payments', PaymentController::class);
 });

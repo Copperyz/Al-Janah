@@ -135,14 +135,14 @@ $configData = Helper::appClasses();
     <div class="col-xl-3 col-md-4 col-12 invoice-actions">
         <div class="card">
             <div class="card-body">
-                <button class="btn btn-primary d-grid w-100 mb-2" data-bs-toggle="offcanvas"
+                <!-- <button class="btn btn-primary d-grid w-100 mb-2" data-bs-toggle="offcanvas"
                     data-bs-target="#sendInvoiceOffcanvas">
                     <span class="d-flex align-items-center justify-content-center text-nowrap"><i
                             class="ti ti-send ti-xs me-2"></i>{{__('Send Order')}}</span>
-                </button>
-                <button class="btn btn-label-secondary d-grid w-100 mb-2">
+                </button> -->
+                <!-- <button class="btn btn-label-secondary d-grid w-100 mb-2">
                     {{__('Download')}}
-                </button>
+                </button> -->
                 <a class="btn btn-label-secondary d-grid w-100 mb-2" target="_blank"
                     href="{{url('app/invoice/print')}}">
                     {{__('Print')}}
@@ -151,11 +151,13 @@ $configData = Helper::appClasses();
                     class="btn btn-label-warning d-grid w-100 mb-2">
                     {{__('Edit Order')}}
                 </a>
+                @if(!isset($payment))
                 <button class="btn btn-label-success d-grid w-100" data-bs-toggle="offcanvas"
                     data-bs-target="#addPaymentOffcanvas">
                     <span class="d-flex align-items-center justify-content-center text-nowrap"><i
                             class="ti ti-currency-dollar ti-xs me-2"></i>{{__('Add Payment')}}</span>
                 </button>
+                @endif
             </div>
         </div>
     </div>

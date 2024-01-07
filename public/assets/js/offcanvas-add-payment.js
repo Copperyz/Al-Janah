@@ -5,6 +5,7 @@
 'use strict';
 
 (function () {
+
   // Invoice amount
   const paymentAmount = document.querySelector('.invoice-amount');
 

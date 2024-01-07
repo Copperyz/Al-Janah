@@ -80,7 +80,8 @@ $configData = Helper::appClasses();
                                     placeholder="{{__('Enter date')}}" name="date" />
                             </div>
                             <div class="mb-3">
-                                <label for="salesperson" class="form-label me-4 fw-medium">{{__('Amount')}}</label>
+                                <label for="salesperson"
+                                    class="form-label me-4 fw-medium">{{__('Packages cost')}}</label>
                                 <input type="text" class="form-control" id="salesperson"
                                     placeholder="{{__('Enter amount')}}" name="amount" />
                             </div>
@@ -142,7 +143,7 @@ $configData = Helper::appClasses();
 
                                         </div>
                                         <label class="switch switch-primary">
-                                            <input type="checkbox" name="addToInventory" class="switch-input" checked />
+                                            <input type="checkbox" name="addToInventory" class="switch-input" />
                                             <span class="switch-toggle-slider">
                                                 <span class="switch-on">
                                                     <i class="ti ti-check"></i>
@@ -153,16 +154,36 @@ $configData = Helper::appClasses();
                                             </span>
                                             <span class="switch-label">{{__('Add to Inventory')}}</span>
                                         </label>
-                                        <div class="mb-3">
-                                            <label for="inventory_id"
-                                                class="form-label me-4 fw-medium">{{__('Inventory')}}</label>
-                                            <select id="inventory_id" class="select2 form-select"
-                                                data-allow-clear="true" name="inventory_id">
-                                                <option disabled selected>{{__('Select')}}</option>
-                                                @foreach($inventories as $inventory)
-                                                <option value="{{$inventory->id}}">{{$inventory->name}}</option>
-                                                @endforeach
-                                            </select>
+                                        <div class="inventory-fields">
+                                            <div class="mb-3">
+                                                <label for="inventory_id"
+                                                    class="form-label me-4 fw-medium">{{__('Inventory')}}</label>
+                                                <select id="inventory_id" class="select2 form-select"
+                                                    data-allow-clear="true" name="inventory_id">
+                                                    <option disabled selected>{{__('Select')}}</option>
+                                                    @foreach($inventories as $inventory)
+                                                    <option value="{{$inventory->id}}">{{$inventory->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="form-aisle">{{__('Aisle')}}</label>
+                                                <input type="number" class="form-control" id="form-aisle"
+                                                    placeholder="{{__('Aisle')}}" value="1" required name="aisle"
+                                                    aria-label="Product Aisle">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="form-row">{{__('Row')}}</label>
+                                                <input type="number" class="form-control" id="form-row"
+                                                    placeholder="{{__('Row')}}" value="1" required name="row"
+                                                    aria-label="Product Row">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="form-self">{{__('Shelf')}}</label>
+                                                <input type="number" class="form-control" id="form-self"
+                                                    placeholder="{{__('Self')}}" value="1" required name="shelfNumber"
+                                                    aria-label="Product Self">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12 mb-md-0 mb-3">
@@ -275,6 +296,7 @@ $configData = Helper::appClasses();
     </div>
     <!-- /Invoice Actions -->
 </div>
+
 
 <script>
 var addOrderTranslation = @json(__('Add Order'));

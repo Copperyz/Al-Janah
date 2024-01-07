@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Payment;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
 
 class PaymentController extends Controller
 {
@@ -12,7 +16,8 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
+        $payments = Payment::with('shipment')->get();
+        return view('payments.index', compact('payments'));
     }
 
     /**
@@ -28,7 +33,43 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        $validator = Validator::make($request->all(), [
+        'date' => ['required', 'date'],
+        'shipment_id' => ['required', 'string', 'exists:shipments,id'],
+        'shipment_amount' => ['required', 'string'],
+        'order_amount' => ['required', 'string']
+        ]);
+        
+        if ($validator->fails()) {
+        return response()->json(
+            [
+            'message' => __('The given data was invalid'),
+            'errors' => $validator->errors(),
+            ],
+            422
+        );
+        }
+
+        // Generate random unique transaction_id
+        $transaction_id = Str::random(12);
+        while (Payment::where('transaction_id', $transaction_id)->exists()) {
+        // Regenerate if the generated tracking number already exists
+        $transaction_id = Str::random(12);
+        }
+
+        // Create the Payment
+        $payment = Payment::create([
+        'shipment_id' => $request->shipment_id,
+        // 'date' => $request->input('date'),
+        'payment_method' =>  'CASH',
+        'transaction_id' => $transaction_id,
+        'shipment_amount' =>  $request->shipment_amount,
+        'order_amount' =>  $request->order_amount,
+        'created_by' => auth()->user()->id,
+        ]);
+
+        // Return a response as needed
+        return response()->json(['message' => __('Payment created successfully')], 200);
     }
 
     /**
@@ -61,5 +102,39 @@ class PaymentController extends Controller
     public function destroy(Payment $payment)
     {
         //
+    }
+
+    public function refund($id)
+    {
+        $payment = Payment::where('id', $id)->first();
+        if ($payment->status == 'paid') {
+            $payment->status = 'refunded';
+            $payment->save();
+            return response()->json(['message' => __('Payment refunded successfully')]);
+        }
+        else {
+            $payment->status = 'paid';
+            $payment->save();
+            return response()->json(['message' => __('Payment paid successfully')]);
+        }
+    }
+
+    public function getPayments()
+    {
+        $payments = Payment::with('shipment')->get();
+        return Datatables::of($payments)
+        ->addColumn('delivery_code', function ($payment) {
+        // Access shipment data here, for example:
+        return $payment->shipment->delivery_code;
+        })
+        ->addColumn('date', function ($payment) {
+        // Access shipment data here, for example:
+        return Carbon::parse($payment->created_at)->format('Y-m-d g:i A');
+        })
+        ->addColumn('statusCapped', function ($payment) {
+        // Access shipment data here, for example:
+        return $payment->status == 'paid' ? __('Paid') : __('Refunded');
+        })
+        ->make(true);
     }
 }

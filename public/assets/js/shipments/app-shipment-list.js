@@ -20,7 +20,7 @@ $(function () {
         { data: 'tracking_no' },
         { data: 'date' },
         { data: 'amount' },
-        // { data: 'paymentStatus' },
+        { data: 'paymentStatus' },
         { data: 'action' }
       ],
       columnDefs: [

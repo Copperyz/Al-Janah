@@ -10,21 +10,22 @@ $configData = Helper::appClasses();
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}">
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css')}}">
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css')}}">
-<link rel="stylesheet" href="{{asset('assets/vendor/libs/select2/select2.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/@form-validation/umd/styles/index.min.css')}}" />
-
+<link rel="stylesheet" href="{{asset('assets/vendor/libs/select2/select2.css')}}" />
 @endsection
 
 @section('vendor-script')
 <script src="{{asset('assets/vendor/libs/moment/moment.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script>
-<script src="{{asset('assets/vendor/libs/select2/select2.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/@form-validation/umd/bundle/popular.min.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/cleavejs/cleave.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/cleavejs/cleave-phone.js')}}"></script>
+<script src="{{asset('assets/vendor/libs/select2/select2.js')}}"></script>
 @endsection
+
+
 
 
 @section('content')
@@ -167,6 +168,27 @@ $configData = Helper::appClasses();
                     </div>
 
                 </div>
+
+                <div class="mb-3">
+                    <label for="role" class="form-label me-4 fw-medium">{{__('Role')}}</label>
+                    <select id="role" class="select2 form-select form-select-lg" data-allow-clear="true" name="role">
+                        <option disabled selected>{{__('Select')}}</option>
+                        @foreach($roles as $role)
+                        <option value="{{$role->id}}">{{__($role->name)}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="permission" class="form-label me-4 fw-medium">{{__('Permissions')}}</label>
+                    <select id="permission" class="select2 form-select form-select-lg" data-allow-clear="true"
+                        name="permissions[]" multiple>
+                        @foreach($permissions as $permission)
+                        <option value="{{$permission->id}}">{{__($permission->name)}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <button type="submit" class="btn btn-primary me-sm-3 me-1 data-sumbit">{{__('Submit')}}</button>
                 <button type="reset" class="btn btn-label-secondary"
                     data-bs-dismiss="offcanvas">{{__('Cancel')}}</button>
@@ -202,6 +224,27 @@ $configData = Helper::appClasses();
                     </div>
 
                 </div>
+
+                <div class="mb-3">
+                    <label for="role" class="form-label me-4 fw-medium">{{__('Role')}}</label>
+                    <select id="role_edit" class="select2 form-select form-select-lg" data-allow-clear="true"
+                        name="role">
+                        <option disabled selected>{{__('Select')}}</option>
+                        @foreach($roles as $role)
+                        <option value="{{$role->name}}">{{__($role->name)}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="permission" class="form-label me-4 fw-medium">{{__('Permissions')}}</label>
+                    <select id="permission_edit" class="select2 form-select form-select-lg" data-allow-clear="true"
+                        name="permissions[]" multiple>
+                        @foreach($permissions as $permission)
+                        <option value="{{$permission->name}}">{{__($permission->name)}}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <input type="hidden" name="id" id="id">
                 <button type="submit" class="btn btn-primary me-sm-3 me-1 data-sumbit">{{__('Submit')}}</button>
                 <button type="reset" class="btn btn-label-secondary"
@@ -217,6 +260,8 @@ var addNewUserTranslation = @json(__('Add User'));
 
 @section('page-script')
 <script src="{{asset('assets/js/app-user-list.js')}}"></script>
+<script src="{{asset('assets/js/forms-selects.js')}}"></script>
+<script src="{{asset('assets/js/form-layouts.js')}}"></script>
 @endsection
 
 @endsection

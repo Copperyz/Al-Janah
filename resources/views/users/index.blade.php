@@ -133,6 +133,7 @@ $configData = Helper::appClasses();
                     <th>{{__('User')}}</th>
                     <th>{{__('Name')}}</th>
                     <th>{{__('Email')}}</th>
+                    <th>{{__('Role')}}</th>
                     <th>{{__('Actions')}}</th>
                 </tr>
             </thead>
@@ -174,7 +175,7 @@ $configData = Helper::appClasses();
                         data-allow-clear="true" name="role">
                         <option disabled selected>{{__('Select')}}</option>
                         @foreach($roles as $role)
-                        <option value="{{$role->id}}">{{$role->name}}</option>
+                        <option value="{{$role->name}}">{{$role->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -212,6 +213,16 @@ $configData = Helper::appClasses();
                         <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                     </div>
 
+                </div>
+                <div class="mb-3">
+                    <label for="role"
+                        class="form-label me-4 fw-medium">{{__('Role')}}</label>
+                    <select id="role" class="select2 form-select"
+                        data-allow-clear="true" name="role">
+                        @foreach($roles as $role)
+                        <option value="{{$role->name}}">{{$role->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <input type="hidden" name="id" id="id">
                 <button type="submit" class="btn btn-primary me-sm-3 me-1 data-sumbit">{{__('Submit')}}</button>

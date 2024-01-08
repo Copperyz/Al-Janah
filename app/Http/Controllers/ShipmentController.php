@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\Payment;
 use App\Models\Customer;
 use App\Models\GoodType;
 use App\Models\Shipment;
@@ -134,9 +135,9 @@ class ShipmentController extends Controller
                     $inventoryItems->width = $request->shipmentItems[$i]['width'];
                     $inventoryItems->size = $request->shipmentItems[$i]['weight'];
                     $inventoryItems->quantity = $request->shipmentItems[$i]['quantity'];
-                    $inventoryItems->aisle = 1;
-                    $inventoryItems->shelfNumber = 1;
-                    $inventoryItems->row = 1;
+                    $inventoryItems->aisle = $request->shipmentItems[$i]['aisle'];
+                    $inventoryItems->shelfNumber = $request->shipmentItems[$i]['shelfNumber'];
+                    $inventoryItems->row = $request->shipmentItems[$i]['row'];
                     $inventoryItems->created_by = auth()->id();
                     $inventoryItems->save();
                 }
@@ -156,7 +157,8 @@ class ShipmentController extends Controller
         $customers = Customer::all();
         $parcelTypes = ParcelType::all();
         $goodTypes = GoodType::all();
-        return view('shipments.show', compact('shipment', 'parcelTypes', 'goodTypes'));
+        $payment = Payment::where('shipment_id', $shipment->id)->first();
+        return view('shipments.show', compact('shipment', 'parcelTypes', 'goodTypes', 'payment'));
     }
 
     /**
@@ -226,7 +228,7 @@ class ShipmentController extends Controller
         $shipments = Shipment::orderBy('id', 'DESC')->get();
         foreach ($shipments as $shipment) {
             $shipment->customerName = $shipment->customer ? $shipment->customer->first_name.' '.$shipment->customer->last_name : 'N/A';
-            $shipment->paymentStatus = $shipment->payment ? $shipment->payment->status : 'N/A';
+            $shipment->paymentStatus = $shipment->payment ? __($shipment->payment->status) : __('Unpaid');
         }
         return Datatables::of($shipments)
         ->make(true);

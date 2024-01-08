@@ -11,6 +11,7 @@ use Illuminate\Auth\Events\Registered;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class Users extends Controller
 {
@@ -20,6 +21,7 @@ class Users extends Controller
   public function index()
   {
     $roles = Role::all();
+
     return view('users.index')->with('roles', $roles);
   }
 
@@ -66,7 +68,7 @@ class Users extends Controller
       // Rollback the transaction in case of any errors
       DB::rollback();
       // Handle the error or redirect back with an error message
-       return response()->json(['message' => __('Something went wrong')], 422);
+       return response()->json(['message' => __('Something went wrong').$e], 422);
     }
   }
 
@@ -123,7 +125,6 @@ class Users extends Controller
             ], 404);
         }
 
-        
   }
 
   /**
@@ -150,6 +151,12 @@ class Users extends Controller
   {
     $users = User::with('roles:id,name')->orderBy('id', 'DESC')->get();
     return Datatables::of($users)
+      ->addColumn('userPermissions', function ($user) {
+          return $user->getDirectPermissions()->pluck('name')->toArray();
+      })
+      ->addColumn('userRoles', function ($user) {
+          return $user->getRoleNames()->toArray();
+      })
       ->rawColumns(['Options'])
       ->make(true);
   }

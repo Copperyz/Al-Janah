@@ -43,6 +43,9 @@
                 <label class="form-label" for="payment-note">Internal Payment Note</label>
                 <textarea class="form-control" id="payment-note" rows="2"></textarea>
             </div> -->
+            <input type="hidden" name="shipment_amount" value="{{$shipment->shipmentPrice}}">
+            <input type="hidden" name="order_amount" value="{{$shipment->amount}}">
+            <input type="hidden" name="shipment_id" value="{{$shipment->id}}">
             <div class="mb-3 d-flex flex-wrap">
                 <button type="submit" class="btn btn-primary me-3">{{__('Submit')}}</button>
                 <button type="button" class="btn btn-label-secondary"

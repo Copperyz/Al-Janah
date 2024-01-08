@@ -389,8 +389,20 @@
   "Go Back": "رجوع",
   "Didn't get the mail?": "لم تتلقى البريد الإلكتروني؟",
   "Resend":"اعادة ارسال",
+  "Payment created successfully": "تم إضافة الدفع بنجاح",
+  "Payment updated successfully": "تم تعديل الدفع بنجاح",
+  "Payment deleted successfully": "تم إلغاء الدفع بنجاح",
+  "Payment refunded successfully": "تم استرداد الدفع بنجاح",
+  "Payment paid successfully": "تم الدفع بنجاح",
+  "Payments": "المدفوعات",
+  "Payment Method": "طريقة الدفع",
+  "Paid": "تم الدفع",
+  "Refunded": "تم استرداد الدفع",
+  "paid": "تم الدفع",
+  "refunded": "تم استرداد الدفع",
+  "Unpaid": "غير مدفوعة",
+  "Role": "الدور"
   "Thank you for confirming your email":"شكراً على تأكيد الإيميل",
   "Kindly furnish additional details to initiate effective tracking of your shipments":"يُرجى تقديم تفاصيل إضافية لبدء التتبع الفعال لشحناتك",
-  "Phone No":"رقم الهاتف",
-  "Role":"الدور"
+  "Phone No":"رقم الهاتف"
 }

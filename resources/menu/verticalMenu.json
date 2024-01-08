@@ -83,6 +83,12 @@
       "icon": "menu-icon tf-icons ti ti-users",
       "name": "Customers",
       "slug": "customers.index"
+    },
+    {
+      "url": "payments",
+      "icon": "menu-icon tf-icons ti ti-cash",
+      "name": "Payments",
+      "slug": "payments.index"
     }
   ]
 }

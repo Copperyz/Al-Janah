@@ -49,7 +49,7 @@
                             @endforeach
                         </select>
                     </div>
-
+                    <input type="hidden" name="addByAdmin">
                     <div class="col-12 text-center">
                         <button type="submit" class="btn btn-primary me-sm-3 me-1">{{__('Submit')}}</button>
                         <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal"

@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-
 class Users extends Controller
 {
   /**
@@ -22,8 +21,8 @@ class Users extends Controller
   public function index()
   {
     $roles = Role::all();
-    $permissions = Permission::all();
-    return view('users.index', compact('roles', 'permissions'));
+
+    return view('users.index')->with('roles', $roles);
   }
 
   /**
@@ -43,6 +42,7 @@ class Users extends Controller
       'name' => ['required', 'string', 'min:2', 'max:30'],
       'email' => ['required', 'email', Rule::unique(User::class)],
       'password' => ['required', 'string', 'min:6', 'max:30'],
+      'role' => ['required'],
     ]);
      if ($validator->fails()) {
         return response()->json([
@@ -58,9 +58,8 @@ class Users extends Controller
 
       $user = User::create($request->all());
 
-      (isset($request->role)) ? $user->syncRoles($request->role) : '';
-      (isset($request->permissions)) ? $user->syncPermissions($request->permissions) : '';
-
+      $user->assignRole($request->role);
+      
       event(new Registered($user));
       DB::commit();
       // Redirect or return a response as needed
@@ -96,39 +95,36 @@ class Users extends Controller
   {
     try {
           $user = User::findOrFail($id);
+          $validator = Validator::make($request->all(), [
+              'name'     => 'required|string|min:3|max:30',
+              'email'    => [
+                  'nullable',
+                  'email',
+                  Rule::unique('users', 'email')->ignore($user->id, 'id'),
+              ],
+              'password' => 'nullable|string|min:6|max:30',
+          ]);
+          if ($validator->fails()) {
+              return response()->json([
+                  'message' => __('The given data was invalid'),
+                  'errors' => $validator->errors()
+              ], 422);
+          }
+          $user->name = $request->filled('name') ? $request->name : $user->name;
+          $user->email = $request->filled('email') ? $request->email : $user->email;
+          $user->password = $request->filled('password') ? Hash::make($request->password) : $user->password;
+          $user->save();
+          
+          $user->syncRoles($request->filled('role') ? $request->role : '');
+
+          return response()->json(['message' => __('User updated successfully')], 200);
         } catch (ModelNotFoundException $e) {
             return response()->json([
                 'message' => __('The given data was invalid'),
                 'errors' => [__('User not found')]
             ], 404);
         }
-        $validator = Validator::make($request->all(), [
-            'name'     => 'required|string|min:3|max:30',
-            'email'    => [
-                'nullable',
-                'email',
-                Rule::unique('users', 'email')->ignore($user->id, 'id'),
-            ],
-            'password' => 'nullable|string|min:6|max:30',
-        ]);
 
-        
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => __('The given data was invalid'),
-                'errors' => $validator->errors()
-            ], 422);
-        }
-        $user->name = $request->filled('name') ? $request->name : $user->name;
-        $user->email = $request->filled('email') ? $request->email : $user->email;
-        $user->password = $request->filled('password') ? Hash::make($request->password) : $user->password;
-        $user->save();
-
-      (isset($request->role)) ? $user->syncRoles($request->role) : '';
-      (isset($request->permissions)) ? $user->syncPermissions($request->permissions) : $user->syncPermissions([]);
-
-
-        return response()->json(['message' => __('User updated successfully')], 200);
   }
 
   /**
@@ -153,7 +149,7 @@ class Users extends Controller
 
   public function get_users()
   {
-    $users = User::orderBy('id', 'DESC')->get();
+    $users = User::with('roles:id,name')->orderBy('id', 'DESC')->get();
     return Datatables::of($users)
       ->addColumn('userPermissions', function ($user) {
           return $user->getDirectPermissions()->pluck('name')->toArray();

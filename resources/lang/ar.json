@@ -402,5 +402,7 @@
   "refunded": "تم استرداد الدفع",
   "Unpaid": "غير مدفوعة",
   "Role": "الدور"
-  
+  "Thank you for confirming your email":"شكراً على تأكيد الإيميل",
+  "Kindly furnish additional details to initiate effective tracking of your shipments":"يُرجى تقديم تفاصيل إضافية لبدء التتبع الفعال لشحناتك",
+  "Phone No":"رقم الهاتف"
 }

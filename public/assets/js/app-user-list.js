@@ -46,6 +46,7 @@ $(function () {
         { data: 'name' },
         { data: 'name' },
         { data: 'email' },
+        { data: 'roles[0].name' },
         { data: '' }
       ],
       columnDefs: [
@@ -475,18 +476,21 @@ $(function () {
     $('#editUserForm').find('[name="name"]').val(data.name);
     $('#editUserForm').find('[name="email"]').val(data.email);
     $('#editUserForm').find('[name="id"]').val(data.id);
-    var permissionsValues = data.userPermissions;
-    $('#permission_edit option').prop('selected', false); // Deselect all options
-    permissionsValues.forEach(permissionValue => {
-      $('#permission_edit option[value="' + permissionValue + '"]').prop('selected', true);
-    });
-    $('#permission_edit').trigger('change');
-    var rolesValues = data.userRoles;
-    $('#role_edit option').prop('selected', false); // Deselect all options
-    rolesValues.forEach(roleValue => {
-      $('#role_edit option[value="' + roleValue + '"]').prop('selected', true);
-    });
-    $('#role_edit').trigger('change');
+
+//     var permissionsValues = data.userPermissions;
+//     $('#permission_edit option').prop('selected', false); // Deselect all options
+//     permissionsValues.forEach(permissionValue => {
+//       $('#permission_edit option[value="' + permissionValue + '"]').prop('selected', true);
+//     });
+//     $('#permission_edit').trigger('change');
+//     var rolesValues = data.userRoles;
+//     $('#role_edit option').prop('selected', false); // Deselect all options
+//     rolesValues.forEach(roleValue => {
+//       $('#role_edit option[value="' + roleValue + '"]').prop('selected', true);
+//     });
+//     $('#role_edit').trigger('change');
+
+    $('#editUserForm').find('[name="role"]').val(data.roles[0].name).prop('selected', true);
   });
 
   var offcanvasEditUser = new bootstrap.Offcanvas($('#offcanvasEditUser'));

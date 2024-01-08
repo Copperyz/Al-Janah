@@ -38,6 +38,7 @@ Route::get('/shipment-price', [FrontPagesController::class, 'showPriceSections']
 Route::post('/shipment/price-submit', [FrontPagesController::class, 'getPrice'])->name('shipment.get.price');
 Route::get('track-shipment', [FrontPagesController::class, 'trackShipmentPage'])->name('track-shipment');
 Route::post('track-shipment-data', [FrontPagesController::class, 'trackShipmentData'])->name('track-shipment-data');
+// Route::get('/test', [AuthController::class, 'test'])->name('test');
 
 Route::middleware(['guest'])->group(function () {
   Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -45,12 +46,11 @@ Route::middleware(['guest'])->group(function () {
   Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
   Route::post('/register', [AuthController::class, 'Register'])->name('register');
   Route::get('/confirm-account/{token}', [AuthController::class, 'confirmAccount'])->name('confirm-account');
-  // Route::get('/verify-email', [AuthController::class, 'verifyEmail'])->name('verify-email');
+  Route::post('store-account/{id}', [AuthController::class, 'storeAccount'])->name('store-account');
 });
 
 // Settings
 Route::get('/change-locale/{locale}', [Settings::class, 'setLocale'])->name('changeLocale');
-
 Route::middleware(['auth'])->group(function () {
   Route::get('dashboard', [HomePage::class, 'index'])->name('dashboard');
   Route::post('/logout', [AuthController::class, 'Logout'])->name('logout');

@@ -151,7 +151,7 @@ $(function () {
   $('#datePicker').val(formattedDate);
 
   var freightValue = 0;
-  var tripFareValue = 0;
+  var packageValue = 0;
   var totalPrice = 0;
 
 
@@ -192,8 +192,7 @@ $(function () {
           },
           success: function (response) {
             // Update the UI with the calculated price
-            console.log('freightValue: ' + freightValue)
-            console.log('totalPrice: ' + totalPrice)
+
 
             var value = parseFloat(response) > 0 ? parseFloat(response) : freightValue;
             totalPrice = totalPrice - freightValue;
@@ -203,8 +202,6 @@ $(function () {
             $('#totalValue').text('$' + parseFloat(totalPrice).toFixed(2));
             $container.find('[name$="[price]"]').val(parseFloat(value).toFixed(2));
 
-            console.log('freightValue: ' + freightValue)
-            console.log('totalPrice: ' + totalPrice)
           },
 
           error: function (error) {
@@ -360,22 +357,29 @@ $(function () {
 
   });
 
-  $('#trip_route_id').change(function () {
-    $.ajax({
-      url: "../trip_routes/" + $(this).val(),
-      method: 'GET',
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },
-      success: function (response) {
-        tripFareValue = response.trip_price;
-        $('#tripFareValue').text('$' + parseFloat(tripFareValue).toFixed(2));
-        totalPrice = totalPrice + tripFareValue;
+  // $('#trip_route_id').change(function () {
+  //   $.ajax({
+  //     url: "../trip_routes/" + $(this).val(),
+  //     method: 'GET',
+  //     headers: {
+  //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  //     },
+  //     success: function (response) {
+  //       tripFareValue = response.trip_price;
+  //       $('#tripFareValue').text('$' + parseFloat(tripFareValue).toFixed(2));
+  //       totalPrice = totalPrice + tripFareValue;
+  //       $('#totalValue').text('$' + parseFloat(totalPrice).toFixed(2));
+  //     },
+  //     error: function (error) {
+  //     }
+  //   });
+  // });
+  $('#packageCost').change(function () {
+    
+        packageValue = this.value;
+        $('#packageValue').text('$' + parseFloat(packageValue).toFixed(2));
+        totalPrice = totalPrice + packageValue;
         $('#totalValue').text('$' + parseFloat(totalPrice).toFixed(2));
-      },
-      error: function (error) {
-      }
-    });
   });
 
 

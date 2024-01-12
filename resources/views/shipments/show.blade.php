@@ -189,7 +189,7 @@ var areYouSureTextTranslation = @json(__('You will not be able to revert this!')
 
 <!-- Offcanvas -->
 @include('_partials/_offcanvas/offcanvas-send-invoice')
-@include('_partials/_modals/shipments/offcanvas-add-payment')
+@include('_partials/_offcanvas/offcanvas-add-payment')
 @include('_partials/_modals/shipments/modal-add-shipment-item')
 @include('_partials/_modals/shipments/modal-edit-shipment-item')
 <!-- /Offcanvas -->

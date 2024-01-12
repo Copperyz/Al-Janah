@@ -80,9 +80,9 @@ $configData = Helper::appClasses();
                                     placeholder="{{__('Enter date')}}" name="date" />
                             </div>
                             <div class="mb-3">
-                                <label for="salesperson"
+                                <label for="packageCost"
                                     class="form-label me-4 fw-medium">{{__('Packages cost')}}</label>
-                                <input type="text" class="form-control" id="salesperson"
+                                <input type="text" class="form-control" id="packageCost"
                                     placeholder="{{__('Enter amount')}}" name="amount" />
                             </div>
                         </div>
@@ -255,8 +255,8 @@ $configData = Helper::appClasses();
                         <div class="col-md-6 d-flex justify-content-end">
                             <div class="invoice-calculations">
                                 <div class="d-flex justify-content-between mb-2">
-                                    <span class="w-px-100 me-2">{{__('Trip fare')}}</span>
-                                    <span id="tripFareValue" class="fw-medium">$00.00</span>
+                                    <span class="w-px-100 me-2">{{__('Packages cost')}}</span>
+                                    <span id="packageValue" class="fw-medium">$00.00</span>
                                 </div>
                                 <div class="d-flex justify-content-between mb-2">
                                     <span class="w-px-100">{{__('Freight cost')}}</span>

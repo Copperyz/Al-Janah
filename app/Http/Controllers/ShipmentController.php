@@ -64,7 +64,7 @@ class ShipmentController extends Controller
      */
     public function store(Request $request)
     {
-         $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'date' => ['required', 'date_format:Y-m-d h:i A'],
             'amount' => ['required', 'numeric'],
             'customer_id' => ['required', 'exists:customers,id'],

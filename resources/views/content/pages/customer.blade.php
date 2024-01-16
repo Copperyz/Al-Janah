@@ -21,7 +21,8 @@
       <div class="card-body">
         <div class="customer-avatar-section">
           <div class="d-flex align-items-center flex-column">
-            <img class="img-fluid rounded my-3" src="{{asset('assets/img/avatars/15.png')}}" height="110" width="110" alt="User avatar" />
+            <!-- <img class="img-fluid rounded my-3" src="{{asset('assets/img/avatars/15.png')}}" height="110" width="110" alt="User avatar" /> -->
+            <div class="avatar-wrapper" width="900"><div class="avatar me-3"><span class="avatar-initial rounded-circle bg-label-primary">AA</span></div></div>
             <div class="customer-info text-center">
               <h4 class="mb-1">{{$customer->first_name.' '. $customer->last_name}}</h4>
               <small>{{__('Customer ID')}} #{{$customer->customer_code}}</small>

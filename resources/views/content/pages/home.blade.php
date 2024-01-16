@@ -48,6 +48,9 @@ $configData = Helper::appClasses();
 
 @section('content')
 
+@role('Super Admin')
+    @include('content/pages/admin')
+@endrole
 @role('customer')
     @include('content/pages/customer')
 @endrole

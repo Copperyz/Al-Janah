@@ -94,7 +94,7 @@ $configData = Helper::appClasses();
                     </div>
                     <h5 class="mb-3 text-center">{{__('Oil and Gas Transportation and Logistics')}}</h5>
                     <p class="features-icon-description" style="text-align: justify;">
-                        {{__('When it comes to managing the logistics of oil and gas, safety and efficiency are the greatest concerns. At MESC, we have extensive experience of providing specialized logistic services for this industry. We offer comprehensive management concepts and flexible solutions for all kinds of support needed')}}.
+                        {{__('When it comes to managing the logistics of oil and gas, safety and efficiency are the greatest concerns. At Al Janah Express, we have extensive experience of providing specialized logistic services for this industry. We offer comprehensive management concepts and flexible solutions for all kinds of support needed')}}.
                     </p>
                 </div>
                 <div class="col-lg-4 col-md-6 text-start features-icon-box">
@@ -113,7 +113,7 @@ $configData = Helper::appClasses();
                     <h5 class="mb-3 text-center">
                         {{__('Custom Clearance / Storage & Transport / Door to Door Delivery')}}</h5>
                     <p class="features-icon-description" style="text-align: justify;">
-                        {{__('In 2018 MESC Freight & Logistics Company began a venture with ( Alafdal Custom Clearance Services Company ).( Alafdal Company ) was established in 1990, and is one of the most renowned companies in the field')}}.
+                        {{__('Al Janah Express Shipping Company provides reliable, fast, and affordable door to door delivery services')}}.
                     </p>
                 </div>
                 <div class="col-lg-4 col-md-6 text-start features-icon-box">

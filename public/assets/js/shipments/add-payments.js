@@ -68,20 +68,33 @@
       },
       error: function (response, xhr, status, error) {
         // Handle the error response here
-        var errorMessages = Object.values(response.responseJSON.errors).flat();
-        // Format error messages with line breaks
-        var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
-        // Create the Swal alert
-        Swal.fire({
-          title: response.responseJSON.message,
-          html: formattedErrorMessages,
-          icon: 'error',
-          confirmButtonText: doneTranslation,
-          customClass: {
-            confirmButton: 'btn btn-primary'
-          },
-          buttonsStyling: false
-        });
+        if (response.responseJSON.message) {
+          Swal.fire({
+            title: response.responseJSON.message,
+            icon: 'error',
+            confirmButtonText: doneTranslation,
+            customClass: {
+              confirmButton: 'btn btn-primary'
+            },
+            buttonsStyling: false
+          });
+        }
+        else {
+          var errorMessages = Object.values(response.responseJSON.errors).flat();
+          // Format error messages with line breaks
+          var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
+          // Create the Swal alert
+          Swal.fire({
+            title: response.responseJSON.message,
+            html: formattedErrorMessages,
+            icon: 'error',
+            confirmButtonText: doneTranslation,
+            customClass: {
+              confirmButton: 'btn btn-primary'
+            },
+            buttonsStyling: false
+          });
+        }
       }
     });
   });

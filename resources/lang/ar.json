@@ -436,5 +436,6 @@
   "Cash Balance added successfully":"تم اضافة الرصيد النقدي بنجاح",
   "Coupon added successfully":"تم اضافة الكوبون بنجاح",
   "Payment Date":"تاريخ الدفع",
-  "Cash":"نقدي"
+  "Cash":"نقدي",
+  "Insufficient balance": "رصيد الزبون غير كافي"
 }

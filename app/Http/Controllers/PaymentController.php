@@ -69,8 +69,10 @@ class PaymentController extends Controller
                 if($shipment->customer->totalAmountDecrease($request->shipment_amount + $request->order_amount)){
                     $paymentMethod = 'Cash Balance';
                 }else{
-                    return response()->json(['error' => __('Insufficient balance')], 422); // 422 Unprocessable Entity
-                }
+                    return response()->json([
+                        'message' => __('Insufficient balance')
+                    ], 422);
+                    }
             } 
             // Create the Payment
             $payment = Payment::create([

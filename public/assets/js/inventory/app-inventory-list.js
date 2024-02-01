@@ -211,7 +211,6 @@ $(function () {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
       success: function (response, status, xhr) {
-        console.log(response);
         if (xhr.status === 200) {
           // Handle a successful response
           Swal.fire({

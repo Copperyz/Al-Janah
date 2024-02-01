@@ -6,7 +6,6 @@ use App\Models\Customer;
 use Carbon\Carbon;
 use App\Models\Payment;
 use App\Models\GoodType;
-use App\Models\Shipment;
 use App\Models\ParcelType;
 use App\Models\Shipment;
 use Illuminate\Support\Str;
@@ -84,6 +83,12 @@ class PaymentController extends Controller
             'created_by' => auth()->user()->id,
             ]);
 
+            if (isset($request->fulfilled)){
+                $shipmentId = $payment->shipment_id;
+                InventoryItem::where('shipment_id', $shipmentId)
+                ->update(['status' => 'fulfilled']);
+            }
+
             return response()->json(['message' => __('Payment created successfully')], 200);
         } catch (\Throwable $th) {
             return response()->json([
@@ -91,23 +96,6 @@ class PaymentController extends Controller
                 'errors' => __('The given data was invalid')
               ], 422);
         }
-        // Create the Payment
-        $payment = Payment::create([
-        'shipment_id' => $request->shipment_id,
-        // 'date' => $request->input('date'),
-        'payment_method' =>  'CASH',
-        'transaction_id' => $transaction_id,
-        'shipment_amount' =>  $request->shipment_amount,
-        'order_amount' =>  $request->order_amount,
-        'created_by' => auth()->user()->id,
-        ]);
-        
-        if (isset($request->fulfilled)){
-            $shipmentId = $payment->shipment_id;
-            InventoryItem::where('shipment_id', $shipmentId)
-            ->update(['status' => 'fulfilled']);
-        }
-        // Return a response as needed
     }
 
     /**

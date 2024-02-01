@@ -137,7 +137,6 @@ $(function () {
   $(".submitButton").on("click", function (event) {
     // Trigger the form submission when the button is clicked
     var formData = $("#editShipmentForm").serializeArray();
-    console.log(formData)
     $.ajax({
       url: '../../shipments/' + shipmentId,
       method: 'PUT',

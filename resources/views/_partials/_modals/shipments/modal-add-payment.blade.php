@@ -64,6 +64,18 @@
                                     </label>
                                 </div>
                             </div>
+                            <label class="switch switch-primary mt-4">
+                                <input type="checkbox" name="fulfilled" class="switch-input" checked />
+                                <span class="switch-toggle-slider">
+                                    <span class="switch-on">
+                                        <i class="ti ti-check"></i>
+                                    </span>
+                                    <span class="switch-off">
+                                        <i class="ti ti-x"></i>
+                                    </span>
+                                </span>
+                                <span class="switch-label">{{__('Fulfilled')}}</span>
+                            </label>
                         </div>
                         <input type="hidden" name="shipment_amount" value="{{$shipment->shipmentPrice}}">
                         <input type="hidden" name="order_amount" value="{{$shipment->amount}}">

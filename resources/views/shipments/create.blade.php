@@ -143,7 +143,7 @@ $configData = Helper::appClasses();
 
                                         </div>
                                         <label class="switch switch-primary">
-                                            <input type="checkbox" name="addToInventory" class="switch-input" />
+                                            <input type="checkbox" name="addToInventory" class="switch-input" checked />
                                             <span class="switch-toggle-slider">
                                                 <span class="switch-on">
                                                     <i class="ti ti-check"></i>
@@ -160,7 +160,7 @@ $configData = Helper::appClasses();
                                                     class="form-label me-4 fw-medium">{{__('Inventory')}}</label>
                                                 <select id="inventory_id" class="select2 form-select"
                                                     data-allow-clear="true" name="inventory_id">
-                                                    <option disabled selected>{{__('Select')}}</option>
+                                                    <option disabled>{{__('Select')}}</option>
                                                     @foreach($inventories as $inventory)
                                                     <option value="{{$inventory->id}}">{{$inventory->name}}</option>
                                                     @endforeach
@@ -300,7 +300,6 @@ $configData = Helper::appClasses();
 
 <script>
 var addOrderTranslation = @json(__('Add Order'));
-
 </script>
 
 <script>

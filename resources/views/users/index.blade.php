@@ -171,10 +171,8 @@ $configData = Helper::appClasses();
                 </div>
 
                 <div class="mb-3">
-                    <label for="role"
-                        class="form-label me-4 fw-medium">{{__('Role')}}</label>
-                    <select id="role" class="select2 form-select"
-                        data-allow-clear="true" name="role">
+                    <label for="role" class="form-label me-4 fw-medium">{{__('Role')}}</label>
+                    <select id="addrole" class="select2 form-select" data-allow-clear="true" name="role">
                         <option disabled selected>{{__('Select')}}</option>
                         @foreach($roles as $role)
                         <option value="{{$role->name}}">{{$role->name}}</option>
@@ -218,10 +216,8 @@ $configData = Helper::appClasses();
                 </div>
 
                 <div class="mb-3">
-                    <label for="role"
-                        class="form-label me-4 fw-medium">{{__('Role')}}</label>
-                    <select id="role" class="select2 form-select"
-                        data-allow-clear="true" name="role">
+                    <label for="role" class="form-label me-4 fw-medium">{{__('Role')}}</label>
+                    <select id="role" class="select2 form-select" data-allow-clear="true" name="role">
                         @foreach($roles as $role)
                         <option value="{{$role->name}}">{{$role->name}}</option>
                         @endforeach

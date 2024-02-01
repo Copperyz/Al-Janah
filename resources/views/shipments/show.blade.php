@@ -157,14 +157,8 @@ $configData = Helper::appClasses();
                     {{ __('Edit Order') }}
                 </a>
                 @if(!isset($payment))
-                <button class="btn btn-label-success d-grid w-100 mb-2" data-bs-toggle="offcanvas"
-                <button class="btn btn-label-success d-grid w-100" data-bs-toggle="offcanvas"
-                    data-bs-target="#addPaymentOffcanvas">
-                    <span class="d-flex align-items-center justify-content-center text-nowrap"><i
-                            class="ti ti-currency-dollar ti-xs me-2"></i>{{__('Add Payment')}}</span>
-                </button>
-                <button class="btn btn-label-success d-grid w-100" data-bs-toggle="modal" data-bs-target="#addPaymentModal"
-                    >
+                <button class="btn btn-label-success d-grid w-100" data-bs-toggle="modal"
+                    data-bs-target="#addPaymentModal">
                     <span class="d-flex align-items-center justify-content-center text-nowrap"><i
                             class="ti ti-currency-dollar ti-xs me-2"></i>{{__('Add Payment')}}</span>
                 </button>
@@ -179,7 +173,6 @@ $configData = Helper::appClasses();
 var shipmentId = '{{$shipment->id}}';
 var urlStart = '../';
 var addItemTranslation = @json(__('Add Item'));
-
 </script>
 
 <!-- Offcanvas -->

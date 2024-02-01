@@ -296,8 +296,9 @@ $(function () {
 
   $(".cancelButton").on("click", function (event) {
     // Trigger the form submission when the button is clicked
-    $("#addShipmentForm").trigger("reset");
-    $("#shipmentItems").empty();
+    // $("#addShipmentForm").trigger("reset");
+    // $("#shipmentItems").empty();
+    window.location.href = '../shipments/'
   });
 
   $("#addCustomerForm").on("submit", function (event) {
@@ -375,11 +376,11 @@ $(function () {
   //   });
   // });
   $('#packageCost').change(function () {
-    
-        packageValue = this.value;
-        $('#packageValue').text('$' + parseFloat(packageValue).toFixed(2));
-        totalPrice = totalPrice + packageValue;
-        $('#totalValue').text('$' + parseFloat(totalPrice).toFixed(2));
+
+    packageValue = this.value;
+    $('#packageValue').text('$' + parseFloat(packageValue).toFixed(2));
+    totalPrice = totalPrice + packageValue;
+    $('#totalValue').text('$' + parseFloat(totalPrice).toFixed(2));
   });
 
 

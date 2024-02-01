@@ -33,9 +33,10 @@ $configData = Helper::appClasses();
 
 @section('page-script')
 <script src="{{asset('assets/js/shipments/app-shipment-items.js')}}"></script>
-<script src="{{asset('assets/js/offcanvas-add-payment.js')}}"></script>
+<!-- <script src="{{asset('assets/js/offcanvas-add-payment.js')}}"></script> -->
 <script src="{{asset('assets/js/offcanvas-send-invoice.js')}}"></script>
 <script src="{{asset('assets/js/forms-selects.js')}}"></script>
+<script src="{{asset('assets/js/shipments/add-payments.js')}}"></script>
 @endsection
 
 @section('content')
@@ -157,7 +158,13 @@ $configData = Helper::appClasses();
                 </a>
                 @if(!isset($payment))
                 <button class="btn btn-label-success d-grid w-100 mb-2" data-bs-toggle="offcanvas"
+                <button class="btn btn-label-success d-grid w-100" data-bs-toggle="offcanvas"
                     data-bs-target="#addPaymentOffcanvas">
+                    <span class="d-flex align-items-center justify-content-center text-nowrap"><i
+                            class="ti ti-currency-dollar ti-xs me-2"></i>{{__('Add Payment')}}</span>
+                </button>
+                <button class="btn btn-label-success d-grid w-100" data-bs-toggle="modal" data-bs-target="#addPaymentModal"
+                    >
                     <span class="d-flex align-items-center justify-content-center text-nowrap"><i
                             class="ti ti-currency-dollar ti-xs me-2"></i>{{__('Add Payment')}}</span>
                 </button>
@@ -172,29 +179,14 @@ $configData = Helper::appClasses();
 var shipmentId = '{{$shipment->id}}';
 var urlStart = '../';
 var addItemTranslation = @json(__('Add Item'));
-var exportTranslation = @json(__('Export'));
-var searchTranslation = @json(__('Search'));
-var showTranslation = @json(__('Show'));
-var showingTranslation = @json(__('Showing'));
-var toTranslation = @json(__('to'));
-var ofTranslation = @json(__('of'));
-var nextTranslation = @json(__('Next'));
-var previousTranslation = @json(__('Previous'));
-var noEntriesAvailableTranslation = @json(__('No entries available'));
-var entriesTranslation = @json(__('entries'));
 
-var submitTranslation = @json(__('Submit'));
-var cancelTranslation = @json(__('Cancel'));
-var doneTranslation = @json(__('Done'));
-
-var areYouSureTranslation = @json(__('Are you sure?'));
-var areYouSureTextTranslation = @json(__('You will not be able to revert this!'));
 </script>
 
 <!-- Offcanvas -->
 @include('_partials/_offcanvas/offcanvas-send-invoice')
-@include('_partials/_offcanvas/offcanvas-add-payment')
+<!-- @include('_partials/_offcanvas/offcanvas-add-payment') -->
 @include('_partials/_modals/shipments/modal-add-shipment-item')
 @include('_partials/_modals/shipments/modal-edit-shipment-item')
+@include('_partials/_modals/shipments/modal-add-payment')
 <!-- /Offcanvas -->
 @endsection

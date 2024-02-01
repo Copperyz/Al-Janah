@@ -3,15 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Mail\UserLoginCredentials;
+use App\Models\CashBalance;
+use App\Models\Coupons;
 use App\Models\Customer;
 use App\Models\Shipment;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Str;
+
 
 class CustomerController extends Controller
 {
@@ -67,6 +72,72 @@ class CustomerController extends Controller
     return response()->json(['message' => __('Password updated successfully')]);
   }
 
+  public function addCashBalance(Request $request, $customerID)
+  {
+    $validator = Validator::make($request->all(), [
+      'balance' => ['required', 'numeric'],
+    ]);
+    if ($validator->fails()) {
+      return response()->json([
+        'message' => __('The given data was invalid'),
+        'errors' => $validator->errors()
+      ], 422);
+    }
+    try {
+      DB::transaction(function () use ($request, $customerID) {
+        $cashBalance = new CashBalance();
+        $cashBalance->customer_id =  $customerID;
+        $cashBalance->amount =  $request->balance;
+        $cashBalance->created_by = auth()->id();
+        $cashBalance->save();
+
+        $customer = Customer::findOrfail($customerID);
+        $customer->totalAmountIncrease($cashBalance->amount);
+        // $customer->total_amount = $customer->total_amount + $cashBalance->amount;
+        // $customer->updated_by = auth()->id();
+        // $customer->save();
+      });
+
+      return response()->json(['message' => __('Cash Balance added successfully')], 200);
+    } catch (\Throwable $th) {
+      return response()->json(['message' => __('Something went wrong')], 422);
+    }
+  }
+  public function addCoupon(Request $request, $customerID)
+  {
+    $validator = Validator::make($request->all(), [
+      'coupon' => ['required', 'numeric'],
+      'expired_date' => ['required', 'date'],
+    ]);
+    if ($validator->fails()) {
+      return response()->json([
+        'message' => __('The given data was invalid'),
+        'errors' => $validator->errors()
+      ], 422);
+    }
+    try {
+      DB::transaction(function () use ($request, $customerID) {
+        $couponCode = Str::random(8);
+        while (Coupons::where('code', $couponCode)->where('used', 0)->exists()) {
+          // Regenerate if the generated tracking number already exists
+          $couponCode = Str::random(8);
+        }
+        // Convert the date string to a Carbon instance
+        $date = Carbon::parse($request->expired_date);
+        $coupon = new Coupons();
+        $coupon->customer_id =  $customerID;
+        $coupon->amount =  $request->coupon;
+        $coupon->expiry_date =  $date;
+        $coupon->code = $couponCode;
+        $coupon->created_by = auth()->id();
+        $coupon->save();
+      });
+      return response()->json(['message' => __('Coupon added successfully')], 200);
+    } catch (\Throwable $th) {
+      return $th;
+      return response()->json(['message' => __('Something went wrong')], 422);
+    }
+  }
   public function index()
   {
     //
@@ -87,41 +158,41 @@ class CustomerController extends Controller
   public function store(Request $request)
   {
 
-  $validator = Validator::make($request->all(), [
-    'first_name' => ['required', 'string', 'max:255'],
-    'last_name' => ['required', 'string', 'max:255'],
-    'email' => ['required', 'email', 'max:255', 'unique:customers,email'],
-    'phone' => ['required', 'string', 'max:20', 'unique:customers,phone'],
-    'address' => ['required', 'string', 'max:255'],
-    'country_id' => ['required', 'exists:countries,id'],
-    'city_id' => ['required', 'exists:cities,id'],
-  ]);
+    $validator = Validator::make($request->all(), [
+      'first_name' => ['required', 'string', 'max:255'],
+      'last_name' => ['required', 'string', 'max:255'],
+      'email' => ['required', 'email', 'max:255', 'unique:customers,email'],
+      'phone' => ['required', 'string', 'max:20', 'unique:customers,phone'],
+      'address' => ['required', 'string', 'max:255'],
+      'country_id' => ['required', 'exists:countries,id'],
+      'city_id' => ['required', 'exists:cities,id'],
+    ]);
 
-  if ($validator->fails()) {
-    return response()->json(
-      [
-        'message' => __('The given data was invalid'),
-        'errors' => $validator->errors(),
-      ],
-      422
-    );
-  }
+    if ($validator->fails()) {
+      return response()->json(
+        [
+          'message' => __('The given data was invalid'),
+          'errors' => $validator->errors(),
+        ],
+        422
+      );
+    }
     try {
       //code...
       DB::transaction(function () use ($request) {
-          
+
         $customer = new Customer();
         $lastCustomer = Customer::latest()->first();
-    
+
         if ($lastCustomer) {
           $lastCode = $lastCustomer->customer_code;
-    
+
           // Extract the letter and number parts
           preg_match('/([A-Z]+)(\d+)/', $lastCode, $matches);
-    
+
           $letterPart = $matches[1];
           $numberPart = intval($matches[2]);
-    
+
           // Increment the number part or change the letter if needed
           if ($numberPart < 1000) {
             $numberPart++;
@@ -129,13 +200,13 @@ class CustomerController extends Controller
             $letterPart = chr(ord($letterPart) + 1);
             $numberPart = 1;
           }
-    
+
           $newCode = $letterPart . $numberPart;
         } else {
           // If no existing customers, start with A1
           $newCode = 'A1';
         }
-        if($request->has('addByAdmin')){
+        if ($request->has('addByAdmin')) {
           $user = new User();
           $user->name = $request->first_name;
           $user->email = $request->email;
@@ -143,7 +214,7 @@ class CustomerController extends Controller
           $user->confirmation_token = null;
           $user->save();
           $user->assignRole('customer');
-          
+
           $customer->customer_code = $newCode;
           $customer->type = 'Local';
           $customer->first_name = $request->first_name;
@@ -162,12 +233,10 @@ class CustomerController extends Controller
         }
       });
       return response()->json(['message' => __('Customer added successfully')]);
-
     } catch (\Throwable $th) {
       return $th;
-        return response()->json(['message' => __('Something went wrong')], 422);
+      return response()->json(['message' => __('Something went wrong')], 422);
     }
-
   }
 
   /**
@@ -176,7 +245,7 @@ class CustomerController extends Controller
   public function show(Customer $customer)
   {
     //
-    $customer = Customer::with('shipments')->findOrFail($customer->id);
+    $customer = Customer::with('shipments', 'cashBalance', 'coupons')->findOrFail($customer->id);
 
     return view('customers.show')->with('customer', $customer);
   }

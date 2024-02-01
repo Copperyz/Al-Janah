@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use Carbon\Carbon;
 use App\Models\Payment;
 use App\Models\GoodType;
 use App\Models\Shipment;
 use App\Models\ParcelType;
+use App\Models\Shipment;
 use Illuminate\Support\Str;
 use App\Models\ShipmentItem;
 use Illuminate\Http\Request;
@@ -38,11 +40,13 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $validator = Validator::make($request->all(), [
         'date' => ['required', 'date'],
         'shipment_id' => ['required', 'string', 'exists:shipments,id'],
         'shipment_amount' => ['required', 'string'],
-        'order_amount' => ['required', 'string']
+        'order_amount' => ['required', 'string'],
+        'paymentMethod' => ['required', 'string']
         ]);
         
         if ($validator->fails()) {
@@ -54,14 +58,39 @@ class PaymentController extends Controller
             422
         );
         }
+        try {
+            $transaction_id = Str::random(12);
+            while (Payment::where('transaction_id', $transaction_id)->exists()) {
+            // Regenerate if the generated tracking number already exists
+            $transaction_id = Str::random(12);
+            }
+            $paymentMethod = 'CASH';
+            if($request->paymentMethod == "cashBalance"){
+                $shipment = Shipment::with('customer')->findOrFail($request->shipment_id);
+                if($shipment->customer->totalAmountDecrease($request->shipment_amount + $request->order_amount)){
+                    $paymentMethod = 'Cash Balance';
+                }else{
+                    return response()->json(['error' => __('Insufficient balance')], 422); // 422 Unprocessable Entity
+                }
+            } 
+            // Create the Payment
+            $payment = Payment::create([
+            'shipment_id' => $request->shipment_id,
+            // 'date' => $request->input('date'),
+            'payment_method' =>  $paymentMethod,
+            'transaction_id' => $transaction_id,
+            'shipment_amount' =>  $request->shipment_amount,
+            'order_amount' =>  $request->order_amount,
+            'created_by' => auth()->user()->id,
+            ]);
 
-        // Generate random unique transaction_id
-        $transaction_id = Str::random(12);
-        while (Payment::where('transaction_id', $transaction_id)->exists()) {
-        // Regenerate if the generated tracking number already exists
-        $transaction_id = Str::random(12);
+            return response()->json(['message' => __('Payment created successfully')], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => __('The given data was invalid'),
+                'errors' => __('The given data was invalid')
+              ], 422);
         }
-
         // Create the Payment
         $payment = Payment::create([
         'shipment_id' => $request->shipment_id,
@@ -78,9 +107,7 @@ class PaymentController extends Controller
             InventoryItem::where('shipment_id', $shipmentId)
             ->update(['status' => 'fulfilled']);
         }
-
         // Return a response as needed
-        return response()->json(['message' => __('Payment created successfully')], 200);
     }
 
     /**

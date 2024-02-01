@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use Carbon\Carbon;
 use App\Models\Payment;
+use App\Models\GoodType;
+use App\Models\Shipment;
+use App\Models\ParcelType;
 use App\Models\Shipment;
 use Illuminate\Support\Str;
+use App\Models\ShipmentItem;
 use Illuminate\Http\Request;
+use App\Models\InventoryItem;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -86,8 +91,22 @@ class PaymentController extends Controller
                 'errors' => __('The given data was invalid')
               ], 422);
         }
-        // Generate random unique transaction_id
-
+        // Create the Payment
+        $payment = Payment::create([
+        'shipment_id' => $request->shipment_id,
+        // 'date' => $request->input('date'),
+        'payment_method' =>  'CASH',
+        'transaction_id' => $transaction_id,
+        'shipment_amount' =>  $request->shipment_amount,
+        'order_amount' =>  $request->order_amount,
+        'created_by' => auth()->user()->id,
+        ]);
+        
+        if (isset($request->fulfilled)){
+            $shipmentId = $payment->shipment_id;
+            InventoryItem::where('shipment_id', $shipmentId)
+            ->update(['status' => 'fulfilled']);
+        }
         // Return a response as needed
     }
 
@@ -155,5 +174,16 @@ class PaymentController extends Controller
         return $payment->status == 'paid' ? __('Paid') : __('Refunded');
         })
         ->make(true);
+    }
+
+    public function print($id)
+    {
+        $pageConfigs = ['myLayout' => 'blank'];
+        $shipment = Shipment::where('id', $id)->first();
+        $parcelTypes = ParcelType::all();
+        $goodTypes = GoodType::all();
+        $payment = Payment::where('shipment_id', $id)->first();
+        $shipmentItems = ShipmentItem::where('shipment_id', $shipment->id)->get();
+        return view('payments.print', compact('shipment', 'parcelTypes', 'goodTypes', 'payment', 'shipmentItems'), ['pageConfigs' => $pageConfigs]);
     }
 }

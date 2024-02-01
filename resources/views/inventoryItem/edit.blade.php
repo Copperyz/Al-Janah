@@ -221,7 +221,8 @@ $configData = Helper::appClasses();
                                 data-placeholder="Published">
                                 @php
                                 $statusOptions = ['inStock' => __('In Stock'), 'returned' => __('Returned'),
-                                'leftInventory' => __('Left Inventory')];
+                                'leftInventory' => __('Left Inventory'), 'fulfilled'
+                                => __('Fulfilled')];
                                 $selectedStatus = $inventoryItem->status ?? ''; // Assuming $inventoryItem is available
                                 @endphp
 

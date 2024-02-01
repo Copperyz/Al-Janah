@@ -18,9 +18,11 @@ $(function () {
         { data: 'id' },
         { data: 'customerName' },
         { data: 'tracking_no' },
+        { data: 'delivery_code' },
         { data: 'date' },
-        { data: 'amount' },
+        { data: 'totalAmount' },
         { data: 'paymentStatus' },
+        { data: 'inventoryStatus' },
         { data: 'action' }
       ],
       columnDefs: [

@@ -318,18 +318,18 @@ $(function () {
             var data = $.map(columns, function (col, i) {
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
                 ? '<tr data-dt-row="' +
-                    col.rowIndex +
-                    '" data-dt-column="' +
-                    col.columnIndex +
-                    '">' +
-                    '<td>' +
-                    col.title +
-                    ':' +
-                    '</td> ' +
-                    '<td>' +
-                    col.data +
-                    '</td>' +
-                    '</tr>'
+                col.rowIndex +
+                '" data-dt-column="' +
+                col.columnIndex +
+                '">' +
+                '<td>' +
+                col.title +
+                ':' +
+                '</td> ' +
+                '<td>' +
+                col.data +
+                '</td>' +
+                '</tr>'
                 : '';
             }).join('');
 
@@ -388,10 +388,10 @@ const fv = FormValidation.formValidation(updateCustomerForm, {
           message: window.translations.min.numeric.replace(':attribute', window.translations.attributes.new_password_confirmation).replace(':min', '8'),
         },
         identical: {
-            compare: function () {
-                return document.getElementById('new_password').value;
-            },
-            message: window.translations.confirmed.replace(':attribute', window.translations.attributes.new_password)
+          compare: function () {
+            return document.getElementById('new_password').value;
+          },
+          message: window.translations.confirmed.replace(':attribute', window.translations.attributes.new_password)
         }
       }
     },

@@ -20,6 +20,7 @@ use App\Http\Controllers\TripShipmentController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\CustomerDeliveries;
 use Spatie\Permission\Contracts\Role;
 
 /*
@@ -119,5 +120,7 @@ Route::middleware(['auth'])->group(function () {
   // Payments
   Route::get('get-payments', [PaymentController::class, 'getPayments'])->name('get-payments');
   Route::get('payments/refund/{id}', [PaymentController::class, 'refund'])->name('refund');
+  Route::get('/payments/{id}/print', [PaymentController::class, 'print'])->name('print');
   Route::resource('payments', PaymentController::class);
+
 });

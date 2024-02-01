@@ -28,6 +28,18 @@
                 <label class="form-label" for="payment-date">{{__('Date')}}</label>
                 <input id="payment-date" name="date" class="form-control invoice-date" type="text" />
             </div>
+            <label class="switch switch-primary">
+                <input type="checkbox" name="fulfilled" class="switch-input" checked />
+                <span class="switch-toggle-slider">
+                    <span class="switch-on">
+                        <i class="ti ti-check"></i>
+                    </span>
+                    <span class="switch-off">
+                        <i class="ti ti-x"></i>
+                    </span>
+                </span>
+                <span class="switch-label">{{__('Fulfilled')}}</span>
+            </label>
             <!-- <div class="mb-3">
                 <label class="form-label" for="payment-method">Payment Method</label>
                 <select class="form-select" id="payment-method">

@@ -94,7 +94,9 @@ $configData = Helper::appClasses();
                             <tbody>
                                 <tr>
                                     <td class="pe-4">{{__('Total')}}:</td>
-                                    <td class="fw-medium">{{$shipment->amount + $shipment->shipmentPrice}} {{__('LYD')}}
+                                    <td class="fw-medium">
+                                        {{ number_format($shipment->amount + $shipment->shipmentPrice, 2) }}
+                                        {{__('LYD')}}
                                     </td>
                                 </tr>
                             </tbody>
@@ -144,20 +146,23 @@ $configData = Helper::appClasses();
                 <!-- <button class="btn btn-label-secondary d-grid w-100 mb-2">
                     {{__('Download')}}
                 </button> -->
-                <a class="btn btn-label-secondary d-grid w-100 mb-2" target="_blank"
-                    href="{{url('app/invoice/print')}}">
-                    {{__('Print')}}
+                <a class="btn btn-label-secondary d-flex align-items-center w-100 mb-2" target="_blank"
+                    href="{{ url('payments/' . $shipment->id . '/print') }}">
+                    <i class="ti ti-printer ti-xs me-2"></i>
+                    {{ __('Print') }}
                 </a>
                 <a href="{{ route('shipments.edit', ['shipment' => $shipment->id]) }}"
-                    class="btn btn-label-warning d-grid w-100 mb-2">
-                    {{__('Edit Order')}}
+                    class="btn btn-label-warning d-flex align-items-center w-100 mb-2">
+                    <i class="ti ti-pencil ti-xs me-2"></i>
+                    {{ __('Edit Order') }}
                 </a>
                 @if(!isset($payment))
-                <!-- <button class="btn btn-label-success d-grid w-100" data-bs-toggle="offcanvas"
+                <button class="btn btn-label-success d-grid w-100 mb-2" data-bs-toggle="offcanvas"
+                <button class="btn btn-label-success d-grid w-100" data-bs-toggle="offcanvas"
                     data-bs-target="#addPaymentOffcanvas">
                     <span class="d-flex align-items-center justify-content-center text-nowrap"><i
                             class="ti ti-currency-dollar ti-xs me-2"></i>{{__('Add Payment')}}</span>
-                </button> -->
+                </button>
                 <button class="btn btn-label-success d-grid w-100" data-bs-toggle="modal" data-bs-target="#addPaymentModal"
                     >
                     <span class="d-flex align-items-center justify-content-center text-nowrap"><i

@@ -96,16 +96,16 @@ class ShipmentController extends Controller
         $shipment->shipmentPrice = $request->shipmentPrice;
         $shipment->customer_id = $request->customer_id;
         // $shipment->notes = $request->notes;
-        $delivery_code = Str::random(12);
+        $delivery_code = strtoupper(substr(Str::random(1), 0, 1) . rand(10, 99) . substr(Str::random(1), 0, 1));
         while (Shipment::where('delivery_code', $delivery_code)->exists()) {
-        // Regenerate if the generated tracking number already exists
-        $delivery_code = Str::random(12);
+            // Regenerate if the generated tracking number already exists
+            $delivery_code = strtoupper(substr(Str::random(1), 0, 1) . rand(10, 99) . substr(Str::random(1), 0, 1));
         }
         $shipment->delivery_code = $delivery_code;
-        $tracking_no = Str::random(12);
+        $tracking_no = str_pad(mt_rand(1, 99999999), 8, '0', STR_PAD_LEFT);
         while (Shipment::where('tracking_no', $tracking_no)->exists()) {
-        // Regenerate if the generated tracking number already exists
-        $tracking_no = Str::random(12);
+            // Regenerate if the generated tracking number already exists
+            $tracking_no = str_pad(mt_rand(1, 99999999), 8, '0', STR_PAD_LEFT);
         }
         $shipment->tracking_no = $tracking_no;
         $shipment->save();
@@ -228,7 +228,9 @@ class ShipmentController extends Controller
         $shipments = Shipment::orderBy('id', 'DESC')->get();
         foreach ($shipments as $shipment) {
             $shipment->customerName = $shipment->customer ? $shipment->customer->first_name.' '.$shipment->customer->last_name : 'N/A';
+            $shipment->totalAmount = number_format($shipment->amount + $shipment->shipmentPrice, 2);
             $shipment->paymentStatus = $shipment->payment ? __($shipment->payment->status) : __('Unpaid');
+            $shipment->inventoryStatus =  InventoryItem::where('shipment_id', $shipment->id)->pluck('status')->first() ? __(InventoryItem::where('shipment_id', $shipment->id)->pluck('status')->first()) : __('Unallocated');
         }
         return Datatables::of($shipments)
         ->make(true);

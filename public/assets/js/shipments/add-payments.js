@@ -28,10 +28,7 @@
     });
   }
 
-  $('#addPaymentForm :submit').on('click', function (event) {
-    // Trigger the form submission when the button is clicked
-    $(this).closest('form').submit();
-  });
+
 
   $("#addPaymentForm").on("submit", function (e) {
     e.preventDefault();
@@ -39,8 +36,6 @@
     var url = form.attr('action');
     var method = form.attr('method');
     var formData = form.serialize();
-
-  
 
     $.ajax({
       url: url,
@@ -62,8 +57,8 @@
             },
           }).then((result) => {
             if (result.isConfirmed) {
-                location.reload();
-                $("#addPaymentForm").trigger('reset');
+              location.reload();
+              $("#addPaymentForm").trigger('reset');
             }
           });
         }

@@ -22,6 +22,7 @@ return new class extends Migration {
       $table->unsignedBigInteger('city_id')->nullable();
       $table->unsignedBigInteger('country_id')->nullable();
       $table->string('status');
+      $table->decimal('total_amount', 10, 2)->default(0);
       $table->unsignedBigInteger('user_id')->nullable();
       $table->unsignedBigInteger('created_by')->nullable();
       $table->unsignedBigInteger('updated_by')->nullable();

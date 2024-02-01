@@ -8,15 +8,15 @@ document.addEventListener('DOMContentLoaded', function (e) {
   (function () {
     // add role form validation
     FormValidation.formValidation(document.getElementById('addRoleForm'), {
-      // fields: {
-      //   modalRoleName: {
-      //     validators: {
-      //       notEmpty: {
-      //         message: 'Please enter role name'
-      //       }
-      //     }
-      //   }
-      // },
+      fields: {
+        balance: {
+          validators: {
+            notEmpty: {
+              message: 'Please enter role name'
+            }
+          }
+        }
+      },
       plugins: {
         trigger: new FormValidation.plugins.Trigger(),
         bootstrap5: new FormValidation.plugins.Bootstrap5({

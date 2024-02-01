@@ -6,6 +6,16 @@
 
 // Datatable (jquery)
 $(function () {
+
+  const numeralMask = document.querySelector('.numeral-mask')
+    //Numeral
+    // if (numeralMask) {
+    //     new Cleave(numeralMask, {
+    //     numeral: true,
+    //     numeralThousandsGroupStyle: 'thousand',
+    // });
+    // }
+
   const wizardIcons = document.querySelector('.wizard-modern-icons-example');
 
   if (typeof wizardIcons !== undefined && wizardIcons !== null) {

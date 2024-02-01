@@ -32,7 +32,8 @@ class InventoryItemsController extends Controller
             $statusOptions = [
                 'inStock' => __('In Stock'),
                 'returned' => __('Returned'),
-                'leftInventory' => __('Left Inventory')
+                'leftInventory' => __('Left Inventory'),
+                'fulfilled' => __('Fulfilled'),
             ];
 
             return $statusOptions[$inventoryItem->status] ?? '';

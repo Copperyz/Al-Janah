@@ -139,11 +139,11 @@ $configData = Helper::appClasses();
                     <button type="button" class="btn btn-label-danger w-100 cancelButton me-2">{{__('Cancel')}}</button>
                     <button type="button" class="btn btn-label-primary w-100 submitButton">{{__('Submit')}}</button>
                 </div>
-                <button class="btn btn-label-success d-grid w-100" data-bs-toggle="offcanvas"
+                <!-- <button class="btn btn-label-success d-grid w-100" data-bs-toggle="offcanvas"
                     data-bs-target="#addPaymentOffcanvas">
                     <span class="d-flex align-items-center justify-content-center text-nowrap"><i
                             class="ti ti-currency-dollar ti-xs me-2"></i>{{__('Add Payment')}}</span>
-                </button>
+                </button> -->
             </div>
         </div>
     </div>

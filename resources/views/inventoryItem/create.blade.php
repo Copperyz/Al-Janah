@@ -175,7 +175,8 @@ $configData = Helper::appClasses();
                             <label class="form-label mb-1" for="inv">
                                 {{__('Inventory')}}
                             </label>
-                            <select id="inv" required name="inventoryID" class="select2 form-select" data-allow-clear="true">
+                            <select id="inv" required name="inventoryID" class="select2 form-select"
+                                data-allow-clear="true">
                                 <option disabled selected>{{__('Select')}}</option>
                                 @foreach ($inventories as $inventory)
                                 <option value='{{$inventory->id}}'>{{$inventory->name}}</option>
@@ -215,6 +216,7 @@ $configData = Helper::appClasses();
                                 <option value="inStock">{{__('In Stock')}}</option>
                                 <option value="returned">{{__('Returned')}}</option>
                                 <option value="leftInventory">{{__('Left Inventory')}}</option>
+                                <option value="fulfilled">{{__('Fulfilled')}}</option>
                             </select>
                         </div>
 
@@ -225,7 +227,7 @@ $configData = Helper::appClasses();
             <!-- /Second column -->
     </form>
     <!-- Inventory -->
-   
+
     <!-- /Inventory -->
 </div>
 </div>

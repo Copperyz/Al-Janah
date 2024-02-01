@@ -13,7 +13,7 @@
             <p class="mb-0">{{__('Packages cost')}}:</p>
             <p class="fw-medium mb-0">{{$shipment->amount}} {{__('LYD')}}</p>
         </div>
-        <form id="addPaymentForm" class="row g-3" onsubmit="return false" action="{{ route('payments.store') }}"
+        <form id="addPaymentFormx" class="row g-3" onsubmit="return false" action="{{ route('payments.store') }}"
             method="POST">
             <div class="mb-3">
                 <label class="form-label" for="invoiceAmount">{{__('Total Amount')}}</label>
@@ -43,6 +43,40 @@
                 <label class="form-label" for="payment-note">Internal Payment Note</label>
                 <textarea class="form-control" id="payment-note" rows="2"></textarea>
             </div> -->
+            <div class="row py-4 my-2">
+                <div class="col-md mb-md-0 mb-2">
+                    <div class="form-check custom-option custom-option-basic checked">
+                        <label
+                            class="form-check-label custom-option-content form-check-input-payment d-flex gap-3 align-items-center"
+                            for="customRadioVisa">
+                            <input name="customRadioTemp" class="form-check-input" type="radio" value="credit-card"
+                                id="customRadioVisa" checked />
+                            <span class="custom-option-body">
+                                <img src="{{ asset('assets/img/icons/payments/visa-'.$configData['style'].'.png') }}"
+                                    alt="visa-card" width="58" data-app-light-img="icons/payments/visa-light.png"
+                                    data-app-dark-img="icons/payments/visa-dark.png">
+                                <span class="ms-3">Credit Card</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md mb-md-0 mb-2">
+                    <div class="form-check custom-option custom-option-basic">
+                        <label
+                            class="form-check-label custom-option-content form-check-input-payment d-flex gap-3 align-items-center"
+                            for="customRadioPaypal">
+                            <input name="customRadioTemp" class="form-check-input" type="radio" value="paypal"
+                                id="customRadioPaypal" />
+                            <span class="custom-option-body">
+                                <img src="{{ asset('assets/img/icons/payments/paypal-'.$configData['style'].'.png') }}"
+                                    alt="paypal" width="58" data-app-light-img="icons/payments/paypal-light.png"
+                                    data-app-dark-img="icons/payments/paypal-dark.png">
+                                <span class="ms-3">Paypal</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
             <input type="hidden" name="shipment_amount" value="{{$shipment->shipmentPrice}}">
             <input type="hidden" name="order_amount" value="{{$shipment->amount}}">
             <input type="hidden" name="shipment_id" value="{{$shipment->id}}">

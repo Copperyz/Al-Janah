@@ -9,12 +9,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
-use App\Events\UserRegistered;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\UserConfirmationEmail;
 use App\Models\City;
@@ -61,6 +59,7 @@ class AuthController extends Controller
   }
   public function Register(Request $request)
   {
+    
     Validator::make($request->all(), [
       'name' => ['required', 'string', 'min:2', 'max:30'],
       'email' => ['required', 'email', Rule::unique(User::class)],
@@ -74,14 +73,12 @@ class AuthController extends Controller
         $request['confirmation_token'] = Str::uuid();
   
         $user = User::create($request->all());
-
         Mail::to($user->email)->send(new UserConfirmationEmail($user));
       });
       return view('auth.verify-email')->with('email', $request->email);
 
     } catch (\Exception $e) {
-      // Rollback the transaction in case of any errors
-      // Handle the error or redirect back with an error message
+
       return redirect()
         ->back()
         ->with('error', 'Registration failed: ' . $e->getMessage());

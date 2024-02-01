@@ -12,9 +12,10 @@ $configData = Helper::appClasses();
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
-<link rel="stylesheet" href="{{asset('assets/vendor/libs/select2/select2.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/@form-validation/umd/styles/index.min.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/libs/select2/select2.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/bs-stepper/bs-stepper.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/libs/flatpickr/flatpickr.css')}}" />
 
 @endsection
 
@@ -25,16 +26,20 @@ $configData = Helper::appClasses();
 <script src="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/cleavejs/cleave.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/cleavejs/cleave-phone.js')}}"></script>
-<script src="{{asset('assets/vendor/libs/select2/select2.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/@form-validation/umd/bundle/popular.min.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js')}}"></script>
+<script src="{{asset('assets/vendor/libs/select2/select2.js')}}"></script>
+<script src="{{asset('assets/vendor/libs/flatpickr/flatpickr.js')}}"></script>
+
 @endsection
 
 @section('page-script')
 <!-- <script src="{{asset('assets/js/modal-edit-user.js')}}"></script> -->
 <!-- <script src="{{asset('assets/js/app-ecommerce-customer-detail.js')}}"></script> -->
+<script src="{{asset('assets/js/form-layouts.js')}}"></script>
 <script src="{{asset('assets/js/customers/customer-overview.js')}}"></script>
+<script src="{{asset('assets/js/customers/customer-add-cash-and-coupons.js')}}"></script>
 @endsection
 
 @section('content')
@@ -128,7 +133,7 @@ $configData = Helper::appClasses();
       </div>
     </div>
     <!-- /Customer-detail Card -->
-    
+
   </div>
   <!--/ Customer Sidebar -->
 
@@ -136,20 +141,22 @@ $configData = Helper::appClasses();
   <!-- Customer Content -->
   <div class="col-xl-8 col-lg-7 col-md-7 order-0 order-md-1 bs-stepper wizard-icons wizard-modern wizard-modern-icons-example">
     <!-- Customer Pills -->
-        <ul style="padding: 0;" class="nav nav-pills flex-column flex-md-row mb-3 bs-stepper-header">
-          <li class="nav-item step" data-target="#Overview"><a style="flex-direction: row" class="step-trigger nav-link active py-2" href="javascript:void(0);"><i class="ti ti-user me-1"></i>{{__('Overview')}}</a></li>
-          <li class="nav-item step" data-target="#Security"><a style="flex-direction: row" class="step-trigger nav-link py-2" href="javascript:void(0);"><i class="ti ti-lock me-1"></i>{{__('Security')}}</a></li>
-          <li class="nav-item step" data-target="#Billing"><a style="flex-direction: row" class="step-trigger nav-link py-" href="javascript:void(0);"><i class="ti ti-file-invoice me-1"></i>{{__('Address & Billing')}}</a></li>
-        </ul>
+    <ul style="padding: 0;" class="nav nav-pills flex-column flex-md-row mb-3 bs-stepper-header">
+      <li class="nav-item step" data-target="#Overview"><a style="flex-direction: row" class="step-trigger nav-link active py-2" href="javascript:void(0);"><i class="ti ti-user me-1"></i>{{__('Overview')}}</a></li>
+      <li class="nav-item step" data-target="#Security"><a style="flex-direction: row" class="step-trigger nav-link py-2" href="javascript:void(0);"><i class="ti ti-lock me-1"></i>{{__('Security')}}</a></li>
+      <li class="nav-item step" data-target="#Billing"><a style="flex-direction: row" class="step-trigger nav-link py-" href="javascript:void(0);"><i class="ti ti-file-invoice me-1"></i>{{__('Address & Billing')}}</a></li>
+    </ul>
     <!--/ Customer Pills -->
 
     <!-- / Customer cards -->
     <div class="bs-stepper-content" style="padding: 0; background: none">
-        <div class="content" id="Overview">
-            <div class="row text-nowrap">
-              <div class="col-md-6 mb-4">
-                <div class="card h-100">
-                  <div class="card-body">
+      <div class="content" id="Overview">
+        <div class="row text-nowrap">
+          <div class="col-md-6 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6">
                     <div class="card-icon mb-3">
                       <div class="avatar">
                         <div class="avatar-initial rounded bg-label-primary">
@@ -157,21 +164,30 @@ $configData = Helper::appClasses();
                         </div>
                       </div>
                     </div>
-                    <div class="card-info">
-                      <h4 class="card-title mb-3">{{__('Cash Balance')}}</h4>
-                      <div class="d-flex align-items-baseline mb-1 gap-1">
-                          <p class="mb-0"> {{__('Credit Left')}}</p>
-                        <h4 class="text-primary mb-0">$2345</h4>
-                      </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="text-sm-end text-center ps-sm-0">
+                      <button data-bs-target="#addCashModal" data-bs-toggle="modal" class="btn bg-label-success mb-2 text-nowrap add-new-role">{{__('Add Cash')}}</button>
                     </div>
                   </div>
                 </div>
+                <div class="card-info">
+                  <h4 class="card-title mb-3">{{__('Cash Balance')}}</h4>
+                  <div class="d-flex align-items-baseline mb-1 gap-1">
+                    <p class="mb-0"> {{__('Credit Left')}}</p>
+                    <h4 class="text-primary mb-0">${{$customer->total_amount}}</h4>
+                  </div>
+                </div>
               </div>
-        
-        
-              <div class="col-md-6 mb-4">
-                <div class="card">
-                  <div class="card-body">
+            </div>
+          </div>
+
+
+          <div class="col-md-6 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6">
                     <div class="card-icon mb-3">
                       <div class="avatar">
                         <div class="avatar-initial rounded bg-label-info">
@@ -179,42 +195,49 @@ $configData = Helper::appClasses();
                         </div>
                       </div>
                     </div>
-                    <div class="card-info">
-                      <h4 class="card-title mb-3">{{__('Coupons')}}</h4>
-                      <div class="d-flex align-items-baseline mb-1 gap-1">
-                          <p class="mb-0">{{__('Coupons you win')}}</p>
-                        <h4 class="text-info mb-0">21</h4>
-                      </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="text-sm-end text-center ps-sm-0">
+                      <button data-bs-target="#addCouponModal" data-bs-toggle="modal" class="btn bg-label-warning mb-2 text-nowrap add-new-role">{{__('Add Coupon')}}</button>
                     </div>
+                  </div>
+                </div>
+                <div class="card-info">
+                  <h4 class="card-title mb-3">{{__('Coupons')}}</h4>
+                  <div class="d-flex align-items-baseline mb-1 gap-1">
+                    <p class="mb-0">{{__('Coupons you win')}}</p>
+                    <h4 class="text-info mb-0">{{$customer->coupons->count()}}</h4>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- / customer cards -->
-            <!-- Invoice table -->
-            <div class="card mb-4">
-                <div class="table-responsive mb-3">
-                    <table class="table datatables-customer-shipments border-top" data-customer="{{$customer->id}}">
-                    <thead>
-                        <tr>
-                        <th></th>
-                        <th>{{__('Tracking Number')}}</th>
-                        <th>{{__('Status')}}</th>
-                        <th>{{__('Amount')}}</th>
-                        <th>{{__('Date')}}</th>
-                        <th class="text-md-center">{{__('Actions')}}</th>
-                        </tr>
-                    </thead>
-                    </table>
-                </div>
-            </div>
+          </div>
         </div>
-        <div class="content" id="Security">  
-          <div class="card mb-4">
+        <!-- / customer cards -->
+        <!-- Invoice table -->
+        <div class="card mb-4">
+          <div class="table-responsive mb-3">
+            <table class="table datatables-customer-shipments border-top" data-customer="{{$customer->id}}">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>{{__('Tracking Number')}}</th>
+                  <th>{{__('Status')}}</th>
+                  <th>{{__('Amount')}}</th>
+                  <th>{{__('Date')}}</th>
+                  <th class="text-md-center">{{__('Actions')}}</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="content" id="Security">
+        <div class="card mb-4">
           <h5 class="card-header">{{__('Change Password')}}</h5>
           <div class="card-body">
             <form id="updateCustomerForm" method="POST" action="{{route('customer.updateData')}}">
-                @csrf
+              @csrf
               <div class="alert alert-warning" role="alert">
                 <h6 class="alert-heading mb-1">{{__('Ensure that these requirements are met')}}</h6>
                 <span>{{__('Minimum 8 characters long, uppercase & symbol')}}</span>
@@ -249,10 +272,10 @@ $configData = Helper::appClasses();
           </div>
         </div>
         <!--/ Change Password -->
-        </div>
-        <div class="content" id="Billing">
-            <!-- Address accordion -->
-            <div class="card card-action mb-4">
+      </div>
+      <div class="content" id="Billing">
+        <!-- Address accordion -->
+        <div class="card card-action mb-4">
           <div class="card-header align-items-center py-4">
             <h5 class="card-action-title mb-0">Address Book</h5>
             <div class="card-action-element">
@@ -347,8 +370,8 @@ $configData = Helper::appClasses();
             </div>
           </div>
         </div>
-    </div>
-    <!-- Address accordion -->
+      </div>
+      <!-- Address accordion -->
 
     </div>
     <!-- /Invoice table -->
@@ -358,5 +381,8 @@ $configData = Helper::appClasses();
 
 <!-- Modal -->
 @include('_partials/_modals/customers/modal-edit-user')
+@include('_partials/_modals/cashBalance/modal-add-cash')
+@include('_partials/_modals/coupons/modal-add-coupons')
 <!-- /Modal -->
 @endsection
+

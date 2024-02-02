@@ -37,6 +37,20 @@
     var method = form.attr('method');
     var formData = form.serialize();
 
+    Swal.fire({
+      title: areYouSureTranslation,
+      text: areYouSureTextTranslation,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: submitTranslation,
+      cancelButtonText: cancelTranslation,
+      customClass: {
+        confirmButton: 'btn btn-primary me-3',
+        cancelButton: 'btn btn-label-secondary'
+      },
+      buttonsStyling: false
+    }).then(result => {
+    if (result.isConfirmed) {
     $.ajax({
       url: url,
       method: method,
@@ -97,5 +111,8 @@
         }
       }
     });
+ 
+  }
+});
   });
 })();

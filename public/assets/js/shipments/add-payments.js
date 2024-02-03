@@ -28,9 +28,22 @@
     });
   }
 
+  //show coupon form
+  $('.switch-input').on('change', function () {
+    toggleCouponInput();
+  });
 
+  function toggleCouponInput() {
+    // Check if the switch is on
+    var switchIsOn = $('#switchCoupon').prop('checked');
 
-  $("#addPaymentForm").on("submit", function (e) {
+    // Show or hide the couponInput div based on switch state
+    // Use Bootstrap utility classes to show or hide the couponInput div based on switch state
+    $('#couponInput').toggleClass('d-none', !switchIsOn);
+    $('#couponInput').toggleClass('d-block', switchIsOn);
+  }
+
+  $('#addPaymentForm').on('submit', function (e) {
     e.preventDefault();
     var form = $(this);
     var url = form.attr('action');
@@ -50,34 +63,100 @@
       },
       buttonsStyling: false
     }).then(result => {
-    if (result.isConfirmed) {
+      if (result.isConfirmed) {
+        $.ajax({
+          url: url,
+          method: method,
+          data: formData,
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          success: function (response, status, xhr) {
+            if (xhr.status === 200) {
+              // Handle a successful response
+              Swal.fire({
+                title: '',
+                text: response.message,
+                icon: 'success',
+                confirmButtonText: doneTranslation,
+                customClass: {
+                  confirmButton: 'btn btn-success'
+                }
+              }).then(result => {
+                if (result.isConfirmed) {
+                  location.reload();
+                  $('#addPaymentForm').trigger('reset');
+                }
+              });
+            } else {
+              // Handle other status codes
+            }
+          },
+          error: function (response, xhr, status, error) {
+            // Handle the error response here
+            if (response.responseJSON.message) {
+              Swal.fire({
+                title: response.responseJSON.message,
+                icon: 'error',
+                confirmButtonText: doneTranslation,
+                customClass: {
+                  confirmButton: 'btn btn-primary'
+                },
+                buttonsStyling: false
+              });
+            } else {
+              var errorMessages = Object.values(response.responseJSON.errors).flat();
+              // Format error messages with line breaks
+              var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
+              // Create the Swal alert
+              Swal.fire({
+                title: response.responseJSON.message,
+                html: formattedErrorMessages,
+                icon: 'error',
+                confirmButtonText: doneTranslation,
+                customClass: {
+                  confirmButton: 'btn btn-primary'
+                },
+                buttonsStyling: false
+              });
+            }
+          }
+        });
+      }
+    });
+  });
+  $('#applyCoupon').on('click', function() {
+    var couponCode = $('input[name="couponCode"]').val();
+    var shipmentAmount = $('input[name="shipment_amount"]').val();
+
     $.ajax({
-      url: url,
-      method: method,
-      data: formData,
+      url: '../coupon-verified/' + couponCode,
+      method: "GET",
+      data: {'shipmentAmount': shipmentAmount},
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
       success: function (response, status, xhr) {
         if (xhr.status === 200) {
-          // Handle a successful response
+          // Handle a successful response  
+          // console.log(response)
+          var shipmentElement = $('input[name="shipment_amount"]');
+          
+          shipmentElement.val(response.shipmentDiscount) 
+          $('#shipmentPrice').text(response.shipmentDiscount);
+
+          $('#applyCoupon').prop('disabled', true);
+
+        } else {
           Swal.fire({
-            title: '',
-            text: response.message,
-            icon: 'success',
+            title: 'dkdjfkjdfk',
+            icon: 'error',
             confirmButtonText: doneTranslation,
             customClass: {
-              confirmButton: 'btn btn-success'
+              confirmButton: 'btn btn-primary'
             },
-          }).then((result) => {
-            if (result.isConfirmed) {
-              location.reload();
-              $("#addPaymentForm").trigger('reset');
-            }
+            buttonsStyling: false
           });
-        }
-        else {
-          // Handle other status codes
         }
       },
       error: function (response, xhr, status, error) {
@@ -92,8 +171,7 @@
             },
             buttonsStyling: false
           });
-        }
-        else {
+        } else {
           var errorMessages = Object.values(response.responseJSON.errors).flat();
           // Format error messages with line breaks
           var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
@@ -111,8 +189,5 @@
         }
       }
     });
- 
-  }
-});
-  });
+  })
 })();

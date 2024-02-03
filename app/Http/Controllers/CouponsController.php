@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Coupons;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\FuncCall;
 
 class CouponsController extends Controller
 {
@@ -61,5 +63,23 @@ class CouponsController extends Controller
     public function destroy(Coupons $coupons)
     {
         //
+    }
+    public function checkCoupon(Request $request, $couponCode)
+    {
+        $currentDate = Carbon::now();
+        
+        $coupon = Coupons::where('code', $couponCode)
+        ->where('used', 0)
+        ->where('expiry_date', '>', $currentDate)
+        ->first('amount');
+        
+        if ($coupon) {
+            // Coupon exists
+            $shipmentDiscount = ($request->shipmentAmount - $coupon->amount);
+            return response()->json(['shipmentDiscount' => $shipmentDiscount], 200);
+        } else {
+            // Coupon does not exist
+            return response()->json(['error' => __('Coupon not found')], 404);
+        }
     }
 }

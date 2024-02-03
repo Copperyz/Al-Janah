@@ -117,10 +117,10 @@ class CustomerController extends Controller
     }
     try {
       DB::transaction(function () use ($request, $customerID) {
-        $couponCode = Str::random(8);
+        $couponCode = Str::random(6);
         while (Coupons::where('code', $couponCode)->where('used', 0)->exists()) {
           // Regenerate if the generated tracking number already exists
-          $couponCode = Str::random(8);
+          $couponCode = Str::random(6);
         }
         // Convert the date string to a Carbon instance
         $date = Carbon::parse($request->expired_date);

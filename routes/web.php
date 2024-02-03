@@ -4,6 +4,7 @@ use App\Http\Controllers\Users;
 use App\Http\Controllers\Settings;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CouponsController;
 use App\Http\Controllers\FrontPagesController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\InventoryItemsController;
@@ -123,4 +124,6 @@ Route::middleware(['auth'])->group(function () {
   Route::get('/payments/{id}/print', [PaymentController::class, 'print'])->name('print');
   Route::resource('payments', PaymentController::class);
 
+  //Coupon
+  Route::get('coupon-verified/{id}', [CouponsController::class, 'checkCoupon'])->name('coupon.verified');
 });

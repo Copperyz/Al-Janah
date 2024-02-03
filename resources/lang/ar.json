@@ -437,5 +437,6 @@
   "Coupon added successfully":"تم اضافة الكوبون بنجاح",
   "Payment Date":"تاريخ الدفع",
   "Cash":"نقدي",
-  "Insufficient balance": "رصيد الزبون غير كافي"
+  "Insufficient balance": "رصيد الزبون غير كافي",
+  "Coupon Code":"كود الكوبون"
 }

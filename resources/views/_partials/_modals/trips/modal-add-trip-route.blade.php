@@ -103,11 +103,11 @@
                         </button>
                     </div>
                     <hr>
-                    <div class="mb-3 col-12 mb-3">
+                    {{-- <div class="mb-3 col-12 mb-3">
                         <label class="form-label" for="form-repeater-1-3">{{__('Trip Price')}}</label>
                         <input type="number" id="trip_price" name="trip_price" class="form-control"
                             placeholder="{{__('Trip Price')}}" required />
-                    </div>
+                    </div> --}}
                     <div class="col-12 text-center">
                         <button type="submit" class="btn btn-primary me-sm-3 me-1">{{__('Submit')}}</button>
                         <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal"

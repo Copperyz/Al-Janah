@@ -21,7 +21,7 @@ use App\Http\Controllers\TripShipmentController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\CustomerDeliveries;
+use App\Http\Controllers\ShipmentOnlineController;
 use Spatie\Permission\Contracts\Role;
 
 /*
@@ -126,4 +126,10 @@ Route::middleware(['auth'])->group(function () {
 
   //Coupon
   Route::get('coupon-verified/{id}', [CouponsController::class, 'checkCoupon'])->name('coupon.verified');
+
+  // TTurk
+  Route::post('/handle-redirection', [ShipmentOnlineController::class, 'handleRedirection'])->name('handle.redirection');
+  Route::get('/test-form', [ShipmentOnlineController::class, 'testForm'])->name('test-form');
+
+
 });

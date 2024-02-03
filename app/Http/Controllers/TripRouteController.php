@@ -36,14 +36,14 @@ class TripRouteController extends Controller
         $request->validate([
             'type' => 'required|string',
             'points' => 'required|array',
-            'trip_price' => 'required|numeric',
+            // 'trip_price' => 'required|numeric',
         ]);
 
         // Create a new TripRoute instance
         $tripRoute = new TripRoute([
             'type' => $request->input('type'),
             'legs' => $request->input('points'),
-            'trip_price' => $request->input('trip_price'),
+            // 'trip_price' => $request->input('trip_price'),
             'created_by' => auth()->user()->id,
         ]);
 
@@ -86,7 +86,7 @@ class TripRouteController extends Controller
         $request->validate([
             'type' => 'required|string',
             'points' => 'required|array',
-            'trip_price' => 'required|numeric', // Use numeric for number validation
+            // 'trip_price' => 'required|numeric', // Use numeric for number validation
         ]);
 
         // Find the existing TripRoute by ID
@@ -95,7 +95,7 @@ class TripRouteController extends Controller
         // Update the attributes
         $tripRoute->type = $request->input('type');
         $tripRoute->legs = $request->input('points');
-        $tripRoute->trip_price = $request->input('trip_price');
+        // $tripRoute->trip_price = $request->input('trip_price');
         $tripRoute->updated_by = auth()->user()->id;
 
         // Save the updated instance to the database

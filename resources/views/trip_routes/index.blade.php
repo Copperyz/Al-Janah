@@ -49,7 +49,7 @@ $configData = Helper::appClasses();
                     <th></th>
                     <th>{{__('Type')}}</th>
                     <th>{{__('Legs')}}</th>
-                    <th>{{__('Trip Price')}}</th>
+                    {{-- <th>{{__('Trip Price')}}</th> --}}
                     <th class="cell-fit">{{__('Actions')}}</th>
                 </tr>
             </thead>

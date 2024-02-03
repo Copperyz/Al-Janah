@@ -17,7 +17,7 @@ $(function () {
                 { data: '' },
                 { data: 'typeLocale' },
                 { data: 'legs_combined' },
-                { data: 'trip_price' },
+                // { data: 'trip_price' },
                 { data: 'action' }
             ],
             columnDefs: [

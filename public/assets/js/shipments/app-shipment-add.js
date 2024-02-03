@@ -197,9 +197,9 @@ $(function () {
             var value = parseFloat(response) > 0 ? parseFloat(response) : freightValue;
             totalPrice = totalPrice - freightValue;
             freightValue = freightValue - parseFloat($container.find('[name$="[price]"]').val() ? $container.find('[name$="[price]"]').val() : 0) + parseFloat(value);
-            $('#freightValue').text('$' + parseFloat(freightValue).toFixed(2));
+            $('#freightValue').text(parseFloat(freightValue).toFixed(2) + lydTranslation);
             totalPrice = totalPrice + freightValue;
-            $('#totalValue').text('$' + parseFloat(totalPrice).toFixed(2));
+            $('#totalValue').text(parseFloat(totalPrice).toFixed(2) + lydTranslation);
             $container.find('[name$="[price]"]').val(parseFloat(value).toFixed(2));
 
           },
@@ -231,8 +231,8 @@ $(function () {
     totalPrice = totalPrice - parseFloat($container.find('[name$="[price]"]').val() ? $container.find('[name$="[price]"]').val() : 0);;
 
     freightValue = freightValue - parseFloat($container.find('[name$="[price]"]').val() ? $container.find('[name$="[price]"]').val() : 0);
-    $('#freightValue').text('$' + parseFloat(freightValue).toFixed(2));
-    $('#totalValue').text('$' + parseFloat(totalPrice).toFixed(2));
+    $('#freightValue').text(parseFloat(freightValue).toFixed(2) + lydTranslation);
+    $('#totalValue').text(parseFloat(totalPrice).toFixed(2) + lydTranslation);
 
     $container.find('[name$="[price]"]').val(0);
     removeItem(this);
@@ -243,7 +243,7 @@ $(function () {
   $(".submitButton").on("click", function (event) {
     // Trigger the form submission when the button is clicked
     var formData = $("#addShipmentForm").serializeArray();
-    $('#addShipmentForm').find('[name="shipmentPrice"]').val(parseFloat(totalPrice).toFixed(2));
+    $('#addShipmentForm').find('[name="shipmentPrice"]').val(parseFloat(freightValue).toFixed(2));
     $.ajax({
       url: '../shipments',
       method: 'POST',
@@ -367,21 +367,29 @@ $(function () {
   //     },
   //     success: function (response) {
   //       tripFareValue = response.trip_price;
-  //       $('#tripFareValue').text('$' + parseFloat(tripFareValue).toFixed(2));
+  //       $('#tripFareValue').text('LYD ' + parseFloat(tripFareValue).toFixed(2));
   //       totalPrice = totalPrice + tripFareValue;
-  //       $('#totalValue').text('$' + parseFloat(totalPrice).toFixed(2));
+  //       $('#totalValue').text('LYD ' + parseFloat(totalPrice).toFixed(2));
   //     },
   //     error: function (error) {
   //     }
   //   });
   // });
-  $('#packageCost').change(function () {
 
-    packageValue = this.value;
-    $('#packageValue').text('$' + parseFloat(packageValue).toFixed(2));
-    totalPrice = totalPrice + packageValue;
-    $('#totalValue').text('$' + parseFloat(totalPrice).toFixed(2));
+  $('#packageCost').keyup(function () {
+    var packageValue = parseFloat(this.value) || 0; // Ensure packageValue is a valid number
+    var freightV = parseFloat(freightValue) || 0; // Ensure packageValue is a valid number
+
+    // Update packageValue display
+    $('#packageValue').text(packageValue.toFixed(2) + lydTranslation);
+
+    // Update totalPrice
+    totalPrice = packageValue + freightV; // Set totalPrice to the current packageValue
+
+    // Update totalValue display
+    $('#totalValue').text(totalPrice.toFixed(2) + lydTranslation);
   });
+
 
 
 

@@ -197,15 +197,15 @@ $configData = Helper::appClasses();
                                         <input name="width" type="number" class="form-control invoice-item-price mb-3"
                                             placeholder="{{__('Width')}}" />
                                         <label for="parcel_types_id"
+                                            class="form-label me-4 fw-medium">{{__('Length')}}</label>
+                                        <input name="length" type="number" class="form-control invoice-item-price mb-3"
+                                            placeholder="{{__('Length')}}" />
+                                             <label for="parcel_types_id"
                                             class="form-label me-4 fw-medium">{{__('Weight')}}</label>
                                         <input name="weight" type="number" class="form-control invoice-item-price mb-3"
                                             placeholder="{{__('Weight')}}" />
                                         <label for="parcel_types_id"
-                                            class="form-label me-4 fw-medium">{{__('Length')}}</label>
-                                        <input name="length" type="number" class="form-control invoice-item-price mb-3"
-                                            placeholder="{{__('Length')}}" />
-                                        <label for="parcel_types_id"
-                                            class="form-label me-4 fw-medium">{{__('Price')}}</label>
+                                            class="form-label me-4 fw-medium">{{__('Shipping Price')}}</label>
                                         <input name="price" type="number" class="form-control invoice-item-price mb-3"
                                             placeholder="{{__('Price')}}" />
                                     </div>
@@ -256,16 +256,16 @@ $configData = Helper::appClasses();
                             <div class="invoice-calculations">
                                 <div class="d-flex justify-content-between mb-2">
                                     <span class="w-px-100 me-2">{{__('Packages cost')}}</span>
-                                    <span id="packageValue" class="fw-medium">$00.00</span>
+                                    <span id="packageValue" class="fw-medium">00.00 {{__('LYD')}}</span>
                                 </div>
                                 <div class="d-flex justify-content-between mb-2">
                                     <span class="w-px-100">{{__('Freight cost')}}</span>
-                                    <span id="freightValue" class="fw-medium">$00.00</span>
+                                    <span id="freightValue" class="fw-medium">00.00 {{__('LYD')}}</span>
                                 </div>
                                 <hr />
                                 <div class="d-flex justify-content-between">
                                     <span class="w-px-100">{{__('Total')}}</span>
-                                    <span id="totalValue" class="fw-medium">$00.00</span>
+                                    <span id="totalValue" class="fw-medium">00.00 {{__('LYD')}}</span>
                                 </div>
                             </div>
                         </div>
@@ -300,6 +300,8 @@ $configData = Helper::appClasses();
 
 <script>
 var addOrderTranslation = @json(__('Add Order'));
+var lydTranslation = @json(__('LYD'));
+
 </script>
 
 <script>

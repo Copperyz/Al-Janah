@@ -29,9 +29,19 @@
                         </select>
                     </div>
                     <div class="col-12 col-md-6">
-                        <label class="form-label">{{__('Price')}}</label>
-                        <input name="price" type="number" class="form-control invoice-item-price mb-3"
-                            placeholder="{{__('Price')}}" min="0" />
+                        <label for="trip_route_id" class="form-label me-4 fw-medium">{{__('Trip Route')}}</label>
+                        <select id="trip_route_id" class="select2 form-select form-select-lg" data-allow-clear="true"
+                            name="trip_route_id">
+                            <option disabled selected>{{__('Select')}}</option>
+                            @foreach($tripRoutes as $tripRoute)
+                            <option value="{{$tripRoute->id}}">{{__($tripRoute->legs_combined)}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label class="form-label">{{__('Quantity')}}</label>
+                        <input name="quantity" type="number" class="form-control invoice-item-price mb-3"
+                            placeholder="{{__('Quantity')}}" min="0" />
                     </div>
                     <div class="col-12 col-md-6">
                         <label class="form-label">{{__('Height')}}</label>
@@ -54,10 +64,17 @@
                         <input name="length" type="number" class="form-control invoice-item-price mb-3"
                             placeholder="{{__('Length')}}" min="0" />
                     </div>
-                    <div class="col-12 col-md-6">
-                        <label class="form-label">{{__('Quantity')}}</label>
-                        <input name="quantity" type="number" class="form-control invoice-item-price mb-3"
-                            placeholder="{{__('Quantity')}}" min="0" />
+                    <div class="col-md-12 row">
+                        <div class="col-md-4">
+                            <label class="form-label">{{__('Freight cost')}}</label>
+                            <input name="price" type="number" class="form-control invoice-item-price mb-3"
+                                placeholder="{{__('Price')}}" min="0" />
+                        </div>
+                        <div class="col-md-5">
+                            <button type="button" class="btn btn-primary calculate-price-btn mt-4">
+                                {{__('Calculate Price')}}
+                            </button>
+                        </div>
                     </div>
                     <div class="col-12 text-center">
                         <input type="hidden" name="id" id="id">

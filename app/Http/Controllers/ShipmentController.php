@@ -158,7 +158,18 @@ class ShipmentController extends Controller
         $parcelTypes = ParcelType::all();
         $goodTypes = GoodType::all();
         $payment = Payment::where('shipment_id', $shipment->id)->first();
-        return view('shipments.show', compact('shipment', 'parcelTypes', 'goodTypes', 'payment'));
+        $tripRoutes = TripRoute::all();
+        foreach ($tripRoutes as $tripRoute) {
+            $legsCombined = '';
+            foreach ($tripRoute->legs as $leg) {
+                if (!empty($leg['country'])) {
+                    $legsCombined .= ($legsCombined ? '. ' : '') . ' ' . __($leg['type']) . ' (' . __($leg['country']) . ') ';
+                }
+            }
+            $tripRoute->legs_combined = $legsCombined;    
+            $tripRoute->typeLocale = __($tripRoute->type); 
+        }
+        return view('shipments.show', compact('shipment', 'parcelTypes', 'goodTypes', 'payment','tripRoutes'));
     }
 
     /**
@@ -171,7 +182,18 @@ class ShipmentController extends Controller
         $goodTypes = GoodType::all();
         $shipment = Shipment::where('id', $shipment->id)->first();
         $shipment->orderDate = Carbon::parse($shipment->date)->format('Y-m-d\Th:i');
-        return view('shipments.edit', compact('shipment', 'customers', 'parcelTypes', 'goodTypes'));
+        $tripRoutes = TripRoute::all();
+        foreach ($tripRoutes as $tripRoute) {
+            $legsCombined = '';
+            foreach ($tripRoute->legs as $leg) {
+                if (!empty($leg['country'])) {
+                    $legsCombined .= ($legsCombined ? '. ' : '') . ' ' . __($leg['type']) . ' (' . __($leg['country']) . ') ';
+                }
+            }
+            $tripRoute->legs_combined = $legsCombined;    
+            $tripRoute->typeLocale = __($tripRoute->type); 
+        }
+        return view('shipments.edit', compact('shipment', 'customers', 'parcelTypes', 'goodTypes', 'tripRoutes'));
     }
 
     /**

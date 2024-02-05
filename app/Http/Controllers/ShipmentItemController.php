@@ -35,6 +35,7 @@ class ShipmentItemController extends Controller
     }
 
     public function add_shipment_item(Request $request, string $id){
+        return 1;
         $validator = Validator::make($request->all(), [
             'good_types_id' => ['required', 'exists:good_types,id'],
             'parcel_types_id' => ['required', 'exists:parcel_types,id'],
@@ -85,6 +86,8 @@ class ShipmentItemController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        return 2;
+
         $validator = Validator::make($request->all(), [
             'good_types_id' => ['required', 'exists:good_types,id'],
             'parcel_types_id' => ['required', 'exists:parcel_types,id'],

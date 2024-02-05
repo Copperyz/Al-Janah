@@ -93,6 +93,20 @@ $configData = Helper::appClasses();
                         <table>
                             <tbody>
                                 <tr>
+                                    <td class="pe-4">{{__('Shipment Price')}}:</td>
+                                    <td class="fw-medium">
+                                        {{ number_format($shipment->shipmentPrice, 2) }}
+                                        {{__('LYD')}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="pe-4">{{__('Packages cost')}}:</td>
+                                    <td class="fw-medium">
+                                        {{ number_format($shipment->amount, 2) }}
+                                        {{__('LYD')}}
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td class="pe-4">{{__('Total')}}:</td>
                                     <td class="fw-medium">
                                         {{ number_format($shipment->amount + $shipment->shipmentPrice, 2) }}

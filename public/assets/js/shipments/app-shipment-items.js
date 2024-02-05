@@ -155,6 +155,7 @@ $(function () {
         $('#editShipmentItemForm').find('[name="name"]').val(data.name);
         $('#editShipmentItemForm').find('[name="price"]').val(data.price);
         $('#editShipmentItemForm').find('[name="height"]').val(data.height);
+        $('#editShipmentItemForm').find('[name="length"]').val(data.length);
         $('#editShipmentItemForm').find('[name="width"]').val(data.width);
         $('#editShipmentItemForm').find('[name="weight"]').val(data.weight);
         $('#editShipmentItemForm').find('[name="quantity"]').val(data.quantity);
@@ -162,6 +163,62 @@ $(function () {
         $('#editShipmentItemForm').find('[name="parcel_types_id"]').val(data.parcel_types_id).trigger('change');
         $('#editShipmentItemForm').find('[name="id"]').val(data.id);
 
+    });
+
+    $(document).on('click', '.calculate-price-btn', function () {
+        // Now try to get the values of input fields
+        var height = $('#editShipmentItemForm').find('[name="height"]').val();
+        var width = $('#editShipmentItemForm').find('[name="width"]').val();
+        var weight = $('#editShipmentItemForm').find('[name="weight"]').val();
+        var length = $('#editShipmentItemForm').find('[name="height"]').val();
+
+
+        // Get values of select elements within the current repeater item
+        var parcelTypeId = $('#editShipmentItemForm').find('[name="parcel_types_id"]').val();
+        var goodTypeId = $('#editShipmentItemForm').find('[name="good_types_id"]').val();
+
+        var trip_route_id = $('#editShipmentItemForm').find('[name="trip_route_id"]').val();
+
+        // Check if all required inputs are filled
+        if (height && width && weight && length && parcelTypeId && goodTypeId && trip_route_id) {
+            // Call your function with these values
+            $.ajax({
+                url: "../get-price",
+                method: 'GET',
+                data: {
+                    weight: weight,
+                    height: height,
+                    width: width,
+                    length: length,
+                    parcelTypeId: parcelTypeId,
+                    goodTypeId: goodTypeId,
+                    trip_route_id: trip_route_id
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    // Update the UI with the calculated price
+                    var value = parseFloat(response) > 0 ? parseFloat(response) : $('#editShipmentItemForm').find('[name="price"]').val();
+                    $('#editShipmentItemForm').find('[name="price"]').val(parseFloat(value).toFixed(2));
+                },
+
+                error: function (error) {
+                }
+            });
+        } else {
+            // Show error message using Swal.fire
+            Swal.fire({
+                title: 'Error',
+                text: 'Please fill in all required fields.',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                customClass: {
+                    confirmButton: 'btn btn-primary'
+                },
+                buttonsStyling: false
+            });
+        }
     });
 
     $('#editShipmentItemForm').submit(function (event) {

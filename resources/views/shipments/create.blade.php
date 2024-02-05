@@ -139,8 +139,8 @@ $configData = Helper::appClasses();
                                         </div>
                                         <div class="mb-3">
                                             <button type="button"
-                                                class="btn btn-primary calculate-price-btn">{{__('Calculate Price')}}</button>
-
+                                                class="btn btn-primary calculate-price-btn">{{__('Calculate Price')}}
+                                            </button>
                                         </div>
                                         <label class="switch switch-primary">
                                             <input type="checkbox" name="addToInventory" class="switch-input" checked />
@@ -200,7 +200,7 @@ $configData = Helper::appClasses();
                                             class="form-label me-4 fw-medium">{{__('Length')}}</label>
                                         <input name="length" type="number" class="form-control invoice-item-price mb-3"
                                             placeholder="{{__('Length')}}" />
-                                             <label for="parcel_types_id"
+                                        <label for="parcel_types_id"
                                             class="form-label me-4 fw-medium">{{__('Weight')}}</label>
                                         <input name="weight" type="number" class="form-control invoice-item-price mb-3"
                                             placeholder="{{__('Weight')}}" />
@@ -301,7 +301,6 @@ $configData = Helper::appClasses();
 <script>
 var addOrderTranslation = @json(__('Add Order'));
 var lydTranslation = @json(__('LYD'));
-
 </script>
 
 <script>

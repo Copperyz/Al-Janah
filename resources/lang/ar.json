@@ -56,7 +56,7 @@
   "User": "المستخدم",
   "Roles": "الأدوار",
   "A role provided access to predefined menus and features so that depending on assigned role an administrator can have access to what the user needs.": "يوفر الدور إمكانية الوصول إلى القوائم والميزات المحددة مسبقًا بحيث يعتمد ذلك على الدور المعين يمكن للمسؤول الوصول إلى ما يحتاجه المستخدم.",
-  "Total": "إجمالي",
+  "Total": "الإجمالي",
   "Add a role, if it does not exist": "أضف دورًا إذا لم يكن موجودًا",
   "Add Role": "إضافة دور",
   "Edit Role": "تعديل دور",
@@ -438,5 +438,16 @@
   "Payment Date":"تاريخ الدفع",
   "Cash":"نقدي",
   "Insufficient balance": "رصيد الزبون غير كافي",
-  "Coupon Code":"كود الكوبون"
+  "Coupon Code":"كود الكوبون",
+  "Delivery Method":"طريقة التوصيل",
+  "Deliver to":"التوصيل الى",
+  "Delivery Charges":"قيمة التوصيل",
+  "Order Total":"إجمالي الطلب",
+  "Price Details":"تفاصيل الأسعار",
+  "Coupon Discount":"كوبون التخفيض",
+  "Place Order":"ارسل الطلب",
+  "Door-to-Door":"التوصيل عند الباب",
+  "In-Store Pickup":"الإستلام من المخزن",
+  "Cash On Delivery":"الدفع عند الاستلام",
+  "Cart":"السلة"
 }

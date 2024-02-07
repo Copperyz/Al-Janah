@@ -75,7 +75,8 @@ class CouponsController extends Controller
         
         if ($coupon) {
             // Coupon exists
-            $shipmentDiscount = ($request->shipmentAmount - $coupon->amount);
+            $shipmentDiscount = $request->shipmentAmount - (($coupon->amount / 100) * $request->shipmentAmount);
+            session(['newDeliveryCost' => $shipmentDiscount]);
             return response()->json(['shipmentDiscount' => $shipmentDiscount], 200);
         } else {
             // Coupon does not exist

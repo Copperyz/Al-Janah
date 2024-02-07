@@ -13,23 +13,38 @@ class ShipmentOnlineController extends Controller
 
         // Extract values
         $items = $dataArray['items'];
+        // return $items;
+        $totalItemsPrice = collect($items)->sum(function ($item) {
+            return $item['price'] * $item['quantity'];
+        });
+        $deliveryCharges = 20.00;
         $packagingType = $dataArray['packagingType'];
         $receiverFullName = $dataArray['receiverFullName'];
         $receiverEmail = $dataArray['receiverEmail'];
         $receiverPhoneNumber = $dataArray['receiverPhoneNumber'];
         $shippingAddress = $dataArray['shippingAddress'];
 
-
-        return $items;
+        session(['items' => $items]);
+        session(['deliveryCharges' => $deliveryCharges]);
+        session(['packagingType' => $packagingType]);
+        session(['receiverFullName' => $receiverFullName]);
+        session(['receiverEmail' => $receiverEmail]);
+        session(['receiverPhoneNumber' => $receiverPhoneNumber]);
+        session(['shippingAddress' => $shippingAddress]);
 
         // Pass the extracted values to the view
-        return view('checkout', compact(
+        $pageConfigs = ['myLayout' => 'front'];
+
+        return view('front-pages.checkout-page', compact(
             'items',
             'packagingType',
             'receiverFullName',
             'receiverEmail',
             'receiverPhoneNumber',
-            'shippingAddress'
+            'shippingAddress',
+            'totalItemsPrice',
+            'deliveryCharges',
+            'pageConfigs'
         ));
     }
 
@@ -40,7 +55,8 @@ class ShipmentOnlineController extends Controller
             {
                 "name": "Example Item #1 Name",
                 "description": "Description of the item #1.",
-                "quantity": 10,
+                "quantity": 2,
+                "price": 10,
                 "weight": "2 kg",
                 "dimensions": "30x20x10 cm",
                 "image": "http://example.com/item-image.jpg",
@@ -49,7 +65,8 @@ class ShipmentOnlineController extends Controller
             {
                 "name": "Example Item #2 Name",
                 "description": "Description of the item #2.",
-                "quantity": 10,
+                "quantity": 3,
+                "price": 12,
                 "weight": "2 kg",
                 "dimensions": "30x20x10 cm",
                 "image": "http://example.com/item-image.jpg",
@@ -64,5 +81,18 @@ class ShipmentOnlineController extends Controller
     }';
 
         return view('checkout.testForm', compact('json_data'));
+    }
+    public function store(Request $request)
+    {
+        return [
+            session('items'),
+            session('deliveryCharges'),
+            session('packagingType'),
+            session('receiverFullName'),
+            session('receiverEmail'),
+            session('receiverPhoneNumber'),
+            session('shippingAddress'),
+            session('newDeliveryCost')
+    ];
     }
 }

@@ -40,6 +40,10 @@ Route::get('/shipment-price', [FrontPagesController::class, 'showPriceSections']
 Route::post('/shipment/price-submit', [FrontPagesController::class, 'getPrice'])->name('shipment.get.price');
 Route::get('track-shipment', [FrontPagesController::class, 'trackShipmentPage'])->name('track-shipment');
 Route::post('track-shipment-data', [FrontPagesController::class, 'trackShipmentData'])->name('track-shipment-data');
+// TTurk
+Route::post('/handle-redirection', [ShipmentOnlineController::class, 'handleRedirection'])->name('handle.redirection');
+Route::get('/test-form', [ShipmentOnlineController::class, 'testForm'])->name('test-form');
+Route::post('/shipment-online', [ShipmentOnlineController::class, 'store'])->name('shipmentOnline.store');
 // Route::get('/test', [AuthController::class, 'test'])->name('test');
 
 Route::middleware(['guest'])->group(function () {
@@ -127,9 +131,6 @@ Route::middleware(['auth'])->group(function () {
   //Coupon
   Route::get('coupon-verified/{id}', [CouponsController::class, 'checkCoupon'])->name('coupon.verified');
 
-  // TTurk
-  Route::post('/handle-redirection', [ShipmentOnlineController::class, 'handleRedirection'])->name('handle.redirection');
-  Route::get('/test-form', [ShipmentOnlineController::class, 'testForm'])->name('test-form');
-
+  
 
 });

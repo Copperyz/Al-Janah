@@ -26,8 +26,7 @@
 @endsection
 
 @section('page-script')
-<script src="{{asset('assets/js/modal-add-new-address.js')}}"></script>
-<script src="{{asset('assets/js/wizard-ex-checkout.js')}}"></script>
+<script src="{{asset('assets/js/shipment-online-checkout.js')}}"></script>
 @endsection
 
 
@@ -35,10 +34,13 @@
 <section class="section-py bg-body first-section-pt">
   <div class="container">
      <!--/ Checkout Wizard -->
-     @include('_partials/wizard-ex-checkout')
+     @include('_partials/shipment-online-checkout')
 
      <!-- Add new address modal -->
-     @include('_partials/_modals/modal-add-new-address')
   </div>
 </section>
+<script>
+  const deliveryCost =  @json($deliveryCharges);
+  const totalItemsPrice =  @json($totalItemsPrice);
+</script>
 @endsection

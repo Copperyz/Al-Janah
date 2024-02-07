@@ -15,36 +15,40 @@
 <script src="{{ asset(mix('assets/js/front-main.js')) }}"></script>
 <!-- END: Theme JS-->
 <script>
-    function showSpinner(targetElement){
-        if(targetElement){
-            $(targetElement).block({
-            message:
-              '<div class="sk-wave mx-auto"><div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div></div>',
-            css: {
-              backgroundColor: 'transparent',
-              border: '0'
-            },
-            overlayCSS: {
-              opacity: 0.5
-            }
-          });
-        }else{
-            $.blockUI({
-            message:
-              '<div class="sk-wave mx-auto"><div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div></div>',
-            css: {
-              backgroundColor: 'transparent',
-              border: '0'
-            },
-            overlayCSS: {
-              opacity: 0.5
-            }
-          });
+  function showSpinner(targetElement) {
+    if (targetElement) {
+      $(targetElement).block({
+        message: '<div class="sk-wave mx-auto"><div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div></div>',
+        css: {
+          backgroundColor: 'transparent',
+          border: '0'
+        },
+        overlayCSS: {
+          opacity: 0.5
         }
+      });
+    } else {
+      $.blockUI({
+        message: '<div class="sk-wave mx-auto"><div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div></div>',
+        css: {
+          backgroundColor: 'transparent',
+          border: '0'
+        },
+        overlayCSS: {
+          opacity: 0.5
+        }
+      });
     }
-    function hideSpinner(){
-        $.unblockUI();
-    }
+  }
+
+  function hideSpinner() {
+    $.unblockUI();
+  }
+  var areYouSureTranslation = @json(__('Are you sure?'));
+  var areYouSureTextTranslation = @json(__('You will not be able to revert this!'));
+  var submitTranslation = @json(__('Submit'));
+  var cancelTranslation = @json(__('Cancel'));
+  var doneTranslation = @json(__('Done'));
 </script>
 <!-- Pricing Modal JS-->
 @stack('pricing-script')

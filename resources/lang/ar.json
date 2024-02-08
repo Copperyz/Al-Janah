@@ -279,8 +279,8 @@
   "(Peace of mind, wherever you are...)": "( راحة البال ، أينما كنتم .. )",
   "(Your goods, our responsibility...)": " ( بضائعكم ، أمانتنا .. )",
   "Elevate Your Cargo Experience": "إرفع مستوى تجربة الشحن",
-  "Explore Our Competitive Shipping Prices": "اكتشف أسعار الشحن التنافسية لدينا",
-  "Embark on a journey of convenience and cost transparency. Click below to unveil our competitive shipment prices and experience hassle-free logistics tailored just for you": ".انطلق في رحلة من الراحة وشفافية التكلفة. انقر أدناه للكشف عن أسعار الشحن التنافسية لدينا وتجربة الخدمات اللوجستية الخالية من المتاعب والمصممة خصيصًا لك",
+  "Get Shipping Rates": "إحصل على تكاليف الشحن",
+  "Fast delivery, unbeatable prices. Your go-to for express shipping that won't break the bank. Get your package there on time, every time": "توصيل سريع ، و بأسعار منافسة . مكانك المفضل للشحن السريع . احصل على طردك في الوقت المحدد ، في كل مرة دون تعب",
   "Seamless Air Cargo Solutions for Swift and Reliable Shipments": "حلول شحن جوي سلسة لشحنات سريعة وموثوقة",
   "Track your shipment": "تتبع شحنتك",
   "Join us": "انظم إلينا",
@@ -314,7 +314,7 @@
   "Full Name": "الإسم بالكامل",
   "Message": "رسالة",
   "Send now": "ارسل الأن",
-  "Frequently asked questions": "الأسئلة الشائعة",
+  "Frequently asked questions": "معلومات قد تهمك",
   "What are the characteristics of ( roll on / roll off ) ships?": "؟(roll on / roll off) ما هي خصائص السفن ",
   "Ro-Ro ships are vessels designed to transport vehicles on wheels, i.e. cars, trucks or industrial vehicles. Sometimes they have built-in ramps for the loading and unloading of vehicles. The fact that the cargo can access the ship under its own steam removes the need for a crane, thus reducing the intermediary costs related to loading, unloading and stowage. These ships can only carry wheeled vehicles and mustn’t be confused with Ro-Pax vessels, like ferries, which combine the transport of vehicles and passengers": "سفن الدحرجة هي سفن مصممة لنقل المركبات على عجلات، أي السيارات أو الشاحنات أو المركبات الصناعية. في بعض الأحيان يكون لديهم منحدرات مدمجة لتحميل وتفريغ المركبات. إن حقيقة أن البضائع يمكنها الوصول إلى السفينة بقوة البخار الخاصة بها تلغي الحاجة إلى رافعة، وبالتالي تقلل التكاليف الوسيطة المتعلقة بالتحميل والتفريغ والتستيف. يمكن لهذه السفن أن تحمل فقط المركبات ذات العجلات ويجب عدم الخلط بينها وبين سفن ، مثل العبارات، التي تجمع بين نقل المركبات والركاب",
   "What is the purpose of a ( roll on / roll off ) ship?": "ما هو الغرض من السفينة (المتدحرجة/المتدحرجة)؟",
@@ -449,5 +449,7 @@
   "Door-to-Door":"التوصيل عند الباب",
   "In-Store Pickup":"الإستلام من المخزن",
   "Cash On Delivery":"الدفع عند الاستلام",
-  "Cart":"السلة"
+  "Cart":"السلة",
+  "Coupon discount percentage":"نسبة تخفيض الكوبون",
+  "Enter only a number without %":"ادخل رقم فقط بدون علامة %"
 }

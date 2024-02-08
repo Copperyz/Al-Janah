@@ -538,7 +538,6 @@ $configData = Helper::appClasses();
         </div>
     </section>
     <!-- Fun facts: End -->
-
     <!-- FAQ: Start -->
     <section id="landingFAQ" class="section-py bg-body landing-faq">
         <div class="container">
@@ -547,6 +546,7 @@ $configData = Helper::appClasses();
             </div>
             <h3 class="text-center mb-1"><span class="section-title">{{__('Frequently asked questions')}}</span></h3>
             <!-- <p class="text-center mb-5 pb-3">Browse through these FAQs to find answers to commonly asked questions.</p> -->
+            <br>
             <div class="row gy-5">
                 <div class="col-lg-5">
                     <div class="text-center">
@@ -736,9 +736,9 @@ $configData = Helper::appClasses();
         <div class="container">
             <div class="row align-items-center gy-5 gy-lg-0 py-5">
                 <div class="col-lg-6 text-center text-lg-start">
-                    <h6 class="h2 fw-bold mb-1">{{__('Explore Our Competitive Shipping Prices')}}!</h6>
+                    <h6 class="h2 fw-bold mb-1">{{__('Get Shipping Rates')}}</h6>
                     <p class="fw-medium mb-4">
-                        {{__('Embark on a journey of convenience and cost transparency. Click below to unveil our competitive shipment prices and experience hassle-free logistics tailored just for you')}}.
+                        {{__("Fast delivery, unbeatable prices. Your go-to for express shipping that won't break the bank. Get your package there on time, every time")}}.
                     </p>
                     <a href="{{route('shipment-price')}}" class="btn btn-lg btn-primary">{{__('Shipping Price')}}</a>
                 </div>

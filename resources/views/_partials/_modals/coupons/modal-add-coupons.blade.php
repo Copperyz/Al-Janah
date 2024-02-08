@@ -11,9 +11,9 @@
                 <!-- Add cash form -->
                 <form id="addCouponForm" class="row g-3" action="{{ route('customer.add-coupon', $customer->id) }}" method="POST">
                     <div class="col-6 mb-4">
-                        <label class="form-label" for="coupon">{{__('Coupon Value')}}</label>
+                        <label class="form-label" for="coupon">{{__('Coupon discount percentage')}}</label>
                         <input type="number" id="coupon" name="coupon" value="1" class="form-control" placeholder='{{ __("Enter the value") }}' min="1" max="100" />
-                        <div id="floatingInputHelp" class="form-text">{{__("Enter coupon value in dollar")}}.</div>
+                        <div id="floatingInputHelp" class="form-text">{{__("Enter only a number without %")}}.</div>
 
                     </div>
                     <div class="col-6 mb-4">

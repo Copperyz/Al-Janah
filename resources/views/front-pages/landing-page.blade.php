@@ -25,7 +25,42 @@ $configData = Helper::appClasses();
 @section('page-script')
 <script src="{{asset('assets/js/front-page-landing.js')}}"></script>
 @endsection
+<style>
+    .grid-border {
+        overflow: hidden;
+    }
 
+    .grid-border [class^=col-]:before,
+    .grid-border [class^=col-]:after {
+        content: '';
+        position: absolute;
+    }
+
+    .grid-border [class^=col-]:before {
+        height: 100%;
+        top: 0;
+        left: -1px;
+        border-left: 1px solid #0000000d;
+    }
+
+    .grid-border [class^=col-]:after {
+        width: 100%;
+        height: 0;
+        top: auto;
+        left: 0;
+        bottom: -1px;
+        border-bottom: 1px solid #0000000d;
+    }
+
+    .col-padding {
+        padding: 4rem 3.5rem !important;
+    }
+
+    .fbox-icon {
+        margin-bottom: 1.5rem;
+    }
+    
+</style>
 @section('content')
 <div data-bs-spy="scroll" class="scrollspy-example">
     <!-- Hero: Start -->
@@ -39,24 +74,15 @@ $configData = Helper::appClasses();
                     </h2>
                     <div class="landing-hero-btn d-inline-block position-relative">
                         <span class="hero-btn-item position-absolute d-none d-md-flex text-heading">{{__('Join us')}}
-                            <img src="{{asset('assets/img/front-pages/icons/Join-community-arrow.png')}}"
-                                alt="Join us arrow" class="scaleX-n1-rtl" /></span>
-                        <a href="{{route('track-shipment')}}"
-                            class="btn btn-primary btn-lg">{{__('Track your shipment')}}</a>
+                            <img src="{{asset('assets/img/front-pages/icons/Join-community-arrow.png')}}" alt="Join us arrow" class="scaleX-n1-rtl" /></span>
+                        <a href="{{route('track-shipment')}}" class="btn btn-primary btn-lg">{{__('Track your shipment')}}</a>
                     </div>
                 </div>
                 <div id="heroDashboardAnimation" class="hero-animation-img">
                     <a href="{{url('/')}}" target="_blank">
                         <div id="heroAnimationImg" class="position-relative hero-dashboard-img">
-                            <img src="{{asset('assets/img/front-pages/landing-page/hero-dashboard-'.$configData['style'].'.png') }}"
-                                alt="hero dashboard" class="animation-img"
-                                data-app-light-img="front-pages/landing-page/hero-dashboard-light.png"
-                                data-app-dark-img="front-pages/landing-page/hero-dashboard-dark.png" />
-                            <img src="{{asset('assets/img/front-pages/landing-page/hero-elements-'.$configData['style'].'.png') }}"
-                                alt="hero elements"
-                                class="position-absolute hero-elements-img animation-img top-0 start-0"
-                                data-app-light-img="front-pages/landing-page/hero-elements-light.png"
-                                data-app-dark-img="front-pages/landing-page/hero-elements-dark.png" />
+                            <img src="{{asset('assets/img/front-pages/landing-page/hero-dashboard-'.$configData['style'].'.png') }}" alt="hero dashboard" class="animation-img" data-app-light-img="front-pages/landing-page/hero-dashboard-light.png" data-app-dark-img="front-pages/landing-page/hero-dashboard-dark.png" />
+                            <img src="{{asset('assets/img/front-pages/landing-page/hero-elements-'.$configData['style'].'.png') }}" alt="hero elements" class="position-absolute hero-elements-img animation-img top-0 start-0" data-app-light-img="front-pages/landing-page/hero-elements-light.png" data-app-dark-img="front-pages/landing-page/hero-elements-dark.png" />
 
                         </div>
                     </a>
@@ -67,7 +93,7 @@ $configData = Helper::appClasses();
     <!-- Hero: End -->
 
     <!-- Useful features: Start -->
-    <section id="landingFeatures" class="section-py landing-features">
+    <!-- <section id="landingFeatures" class="section-py landing-features">
         <div class="container">
             <div class="text-center mb-3 pb-1">
                 <span class="badge bg-label-primary">{{__('Our Services')}}</span>
@@ -75,9 +101,7 @@ $configData = Helper::appClasses();
             <h3 class="text-center mb-1">
                 <span class="section-title">{{__('Retailer Services for All Shipments')}}</span>
             </h3>
-            <!-- <p class="text-center mb-3 mb-md-5 pb-3">
-                Not just a set of tools, the package includes ready-to-deploy conceptual application.
-            </p> -->
+           
             <div class="features-icon-wrapper row gx-0 gy-4 g-sm-5">
                 <div class="col-lg-4 col-md-6 text-start features-icon-box">
                     <div class="text-center mb-3">
@@ -111,7 +135,8 @@ $configData = Helper::appClasses();
                         <img src="{{asset('assets/img/front-pages/icons/check.png')}}" alt="3d select solid" />
                     </div>
                     <h5 class="mb-3 text-center">
-                        {{__('Custom Clearance / Storage & Transport / Door to Door Delivery')}}</h5>
+                        {{__('Custom Clearance / Storage & Transport / Door to Door Delivery')}}
+                    </h5>
                     <p class="features-icon-description" style="text-align: justify;">
                         {{__('Al Janah Express Shipping Company provides reliable, fast, and affordable door to door delivery services')}}.
                     </p>
@@ -130,287 +155,99 @@ $configData = Helper::appClasses();
 
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- Useful features: End -->
-
-    <!-- Real customers reviews: Start -->
-    <section id="landingReviews" class="section-py bg-body landing-reviews pb-0">
-        <!-- What people say slider: Start -->
-        <div class="container">
-            <!-- <div class="row align-items-center gx-0 gy-4 g-lg-5">
-                <div class="col-md-6 col-lg-5 col-xl-3">
-                    <div class="mb-3 pb-1">
-                        <span class="badge bg-label-primary">Real Customers Reviews</span>
-                    </div>
-                    <h3 class="mb-1"><span class="section-title">What people say</span></h3>
-                    <p class="mb-3 mb-md-5">
-                        See what our customers have to<br class="d-none d-xl-block" />
-                        say about their experience.
-                    </p>
-                    <div class="landing-reviews-btns">
-                        <button id="reviews-previous-btn" class="btn btn-label-primary reviews-btn me-3 scaleX-n1-rtl"
-                            type="button">
-                            <i class="ti ti-chevron-left ti-sm"></i>
-                        </button>
-                        <button id="reviews-next-btn" class="btn btn-label-primary reviews-btn scaleX-n1-rtl"
-                            type="button">
-                            <i class="ti ti-chevron-right ti-sm"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-7 col-xl-9">
-                    <div class="swiper-reviews-carousel overflow-hidden mb-5 pb-md-2 pb-md-3">
-                        <div class="swiper" id="swiper-reviews">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="card h-100">
-                                        <div
-                                            class="card-body text-body d-flex flex-column justify-content-between h-100">
-                                            <div class="mb-3">
-                                                <img src="{{asset('assets/img/front-pages/branding/logo-1.png')}}"
-                                                    alt="client logo" class="client-logo img-fluid" />
-                                            </div>
-                                            <p>
-                                                “Vuexy is hands down the most useful front end Bootstrap theme I've ever
-                                                used. I can't wait
-                                                to use it again for my next project.”
-                                            </p>
-                                            <div class="text-warning mb-3">
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar me-2 avatar-sm">
-                                                    <img src="{{asset('assets/img/avatars/1.png')}}" alt="Avatar"
-                                                        class="rounded-circle" />
-                                                </div>
-                                                <div>
-                                                    <h6 class="mb-0">Cecilia Payne</h6>
-                                                    <p class="small text-muted mb-0">CEO of Airbnb</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="card h-100">
-                                        <div
-                                            class="card-body text-body d-flex flex-column justify-content-between h-100">
-                                            <div class="mb-3">
-                                                <img src="{{asset('assets/img/front-pages/branding/logo-2.png')}}"
-                                                    alt="client logo" class="client-logo img-fluid" />
-                                            </div>
-                                            <p>
-                                                “I've never used a theme as versatile and flexible as Vuexy. It's my go
-                                                to for building
-                                                dashboard sites on almost any project.”
-                                            </p>
-                                            <div class="text-warning mb-3">
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar me-2 avatar-sm">
-                                                    <img src="{{asset('assets/img/avatars/2.png')}}" alt="Avatar"
-                                                        class="rounded-circle" />
-                                                </div>
-                                                <div>
-                                                    <h6 class="mb-0">Eugenia Moore</h6>
-                                                    <p class="small text-muted mb-0">Founder of Hubspot</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="card h-100">
-                                        <div
-                                            class="card-body text-body d-flex flex-column justify-content-between h-100">
-                                            <div class="mb-3">
-                                                <img src="{{asset('assets/img/front-pages/branding/logo-3.png')}}"
-                                                    alt="client logo" class="client-logo img-fluid" />
-                                            </div>
-                                            <p>
-                                                This template is really clean & well documented. The docs are really
-                                                easy to understand and
-                                                it's always easy to find a screenshot from their website.
-                                            </p>
-                                            <div class="text-warning mb-3">
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar me-2 avatar-sm">
-                                                    <img src="{{asset('assets/img/avatars/3.png')}}" alt="Avatar"
-                                                        class="rounded-circle" />
-                                                </div>
-                                                <div>
-                                                    <h6 class="mb-0">Curtis Fletcher</h6>
-                                                    <p class="small text-muted mb-0">Design Lead at Dribbble</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="card h-100">
-                                        <div
-                                            class="card-body text-body d-flex flex-column justify-content-between h-100">
-                                            <div class="mb-3">
-                                                <img src="{{asset('assets/img/front-pages/branding/logo-4.png')}}"
-                                                    alt="client logo" class="client-logo img-fluid" />
-                                            </div>
-                                            <p>
-                                                All the requirements for developers have been taken into consideration,
-                                                so I’m able to build
-                                                any interface I want.
-                                            </p>
-                                            <div class="text-warning mb-3">
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star ti-sm"></i>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar me-2 avatar-sm">
-                                                    <img src="{{asset('assets/img/avatars/4.png')}}" alt="Avatar"
-                                                        class="rounded-circle" />
-                                                </div>
-                                                <div>
-                                                    <h6 class="mb-0">Sara Smith</h6>
-                                                    <p class="small text-muted mb-0">Founder of Continental</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="card h-100">
-                                        <div
-                                            class="card-body text-body d-flex flex-column justify-content-between h-100">
-                                            <div class="mb-3">
-                                                <img src="{{asset('assets/img/front-pages/branding/logo-5.png')}}"
-                                                    alt="client logo" class="client-logo img-fluid" />
-                                            </div>
-                                            <p>
-                                                “I've never used a theme as versatile and flexible as Vuexy. It's my go
-                                                to for building
-                                                dashboard sites on almost any project.”
-                                            </p>
-                                            <div class="text-warning mb-3">
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar me-2 avatar-sm">
-                                                    <img src="{{asset('assets/img/avatars/5.png')}}" alt="Avatar"
-                                                        class="rounded-circle" />
-                                                </div>
-                                                <div>
-                                                    <h6 class="mb-0">Eugenia Moore</h6>
-                                                    <p class="small text-muted mb-0">Founder of Hubspot</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="card h-100">
-                                        <div
-                                            class="card-body text-body d-flex flex-column justify-content-between h-100">
-                                            <div class="mb-3">
-                                                <img src="{{asset('assets/img/front-pages/branding/logo-6.png')}}"
-                                                    alt="client logo" class="client-logo img-fluid" />
-                                            </div>
-                                            <p>
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam nemo
-                                                mollitia, ad eum
-                                                officia numquam nostrum repellendus consequuntur!
-                                            </p>
-                                            <div class="text-warning mb-3">
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star-filled ti-sm"></i>
-                                                <i class="ti ti-star ti-sm"></i>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar me-2 avatar-sm">
-                                                    <img src="{{asset('assets/img/avatars/1.png')}}" alt="Avatar"
-                                                        class="rounded-circle" />
-                                                </div>
-                                                <div>
-                                                    <h6 class="mb-0">Sara Smith</h6>
-                                                    <p class="small text-muted mb-0">Founder of Continental</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-        </div>
-        <!-- What people say slider: End -->
-        <hr class="m-0" />
-        <!-- Logo slider: Start -->
-        <!-- <div class="container">
-            <div class="swiper-logo-carousel py-4 my-lg-2">
-                <div class="swiper" id="swiper-clients-logos">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <img src="{{asset('assets/img/front-pages/branding/logo_1-'.$configData['style'].'.png') }}"
-                                alt="client logo" class="client-logo"
-                                data-app-light-img="front-pages/branding/logo_1-light.png"
-                                data-app-dark-img="front-pages/branding/logo_1-dark.png" />
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="{{asset('assets/img/front-pages/branding/logo_2-'.$configData['style'].'.png') }}"
-                                alt="client logo" class="client-logo"
-                                data-app-light-img="front-pages/branding/logo_2-light.png"
-                                data-app-dark-img="front-pages/branding/logo_2-dark.png" />
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="{{asset('assets/img/front-pages/branding/logo_3-'.$configData['style'].'.png') }}"
-                                alt="client logo" class="client-logo"
-                                data-app-light-img="front-pages/branding/logo_3-light.png"
-                                data-app-dark-img="front-pages/branding/logo_3-dark.png" />
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="{{asset('assets/img/front-pages/branding/logo_4-'.$configData['style'].'.png') }}"
-                                alt="client logo" class="client-logo"
-                                data-app-light-img="front-pages/branding/logo_4-light.png"
-                                data-app-dark-img="front-pages/branding/logo_4-dark.png" />
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="{{asset('assets/img/front-pages/branding/logo_5-'.$configData['style'].'.png') }}"
-                                alt="client logo" class="client-logo"
-                                data-app-light-img="front-pages/branding/logo_5-light.png"
-                                data-app-dark-img="front-pages/branding/logo_5-dark.png" />
-                        </div>
+    <section class="section bg-body">
+        <div class="mt-5" style="overflow: hidden;">
+            <div class="section m-0 text-center" style="padding: 60px 0;">
+                <div class="container clearfix">
+                    <div class="mx-auto center" style="max-width: 900px;">
+                        <h2 class="mb-0 fw-light ls1">We enjoy working on the Services &amp; Products we provide as much as you need them. This help us in delivering your Goals easily. Browse through the wide range of services we provide.</h2>
                     </div>
                 </div>
             </div>
-        </div> -->
-        <!-- Logo slider: End -->
+            <div class="row align-items-stretch">
+
+                <div class="col-lg-4 d-none d-md-block" style="background: url('assets/img/front-pages/landing-page/main-bg.jpg') center center no-repeat; background-size: cover;">
+                </div>
+
+                <div class="col-lg-8 mt-lg-0 card aljanah-services">
+                    <div class="row align-items-stretch grid-border">
+
+                        <div class="col-lg-4 col-md-6 col-padding border-left-bottom">
+                            <div class="">
+                                <div class="text-center fbox-icon">
+                                    <img src="{{asset('assets/img/front-pages/icons/laptop.png')}}" alt="laptop charging" />
+                                </div>
+                                <div class=" text-center" style="padding: 0 0.75rem">
+                                    <h5 class="card-title">{{__('Retailer Services for All Shipments')}}</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 col-padding border-left-bottom">
+                            <div class="">
+                                <div class="text-center fbox-icon">
+                                    <img src="{{asset('assets/img/front-pages/icons/laptop.png')}}" alt="laptop charging" />
+                                </div>
+                                <div class=" text-center" style="padding: 0 0.75rem">
+                                    <h5 class="card-title">{{__('General Cargo Shipments and Containers')}}</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 col-padding border-left-bottom">
+                            <div class="">
+                                <div class="text-center fbox-icon">
+                                    <img src="{{asset('assets/img/front-pages/icons/laptop.png')}}" alt="laptop charging" />
+                                </div>
+                                <div class="text-center" style="padding: 0 0.75rem">
+                                    <h5 class="card-title">{{__('Oil and Gas Transportation and Logistics')}}</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 col-padding border-left-bottom">
+                            <div class="">
+                                <div class="text-center fbox-icon">
+                                    <img src="{{asset('assets/img/front-pages/icons/laptop.png')}}" alt="laptop charging" />
+                                </div>
+                                <div class="text-center" style="padding: 0 0.75rem">
+                                    <h5 class="card-title">{{__('Dry Masonry / Cattle Transport')}}</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 col-padding border-left-bottom">
+                            <div class="">
+                                <div class="text-center fbox-icon">
+                                    <img src="{{asset('assets/img/front-pages/icons/laptop.png')}}" alt="laptop charging" />
+                                </div>
+                                <div class="text-center" style="padding: 0 0.75rem">
+                                    <h5 class="card-title">{{__('Custom Clearance / Storage & Transport / Door to Door Delivery')}}</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 col-padding border-left-bottom">
+                            <div class="">
+                                <div class="text-center fbox-icon">
+                                    <img src="{{asset('assets/img/front-pages/icons/laptop.png')}}" alt="laptop charging" />
+                                </div>
+                                <div class=" text-center" style="padding: 0 0.75rem">
+                                    <h5 class="card-title">{{__('Ship Supply Services')}}</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </d>
+        </div>
     </section>
+    <!-- Real customers reviews: Start -->
+
     <!-- Real customers reviews: End -->
 
     <!-- Our great team: Start -->
@@ -498,8 +335,7 @@ $configData = Helper::appClasses();
                 <div class="col-sm-6 col-lg-3">
                     <div class="card border border-label-success shadow-none">
                         <div class="card-body text-center">
-                            <img src="{{asset('assets/img/front-pages/icons/user-success.png')}}" alt="laptop"
-                                class="mb-2" />
+                            <img src="{{asset('assets/img/front-pages/icons/user-success.png')}}" alt="laptop" class="mb-2" />
                             <h5 class="h2 mb-1">50k+</h5>
                             <p class="fw-medium mb-0">
                                 Join creatives<br />
@@ -511,8 +347,7 @@ $configData = Helper::appClasses();
                 <div class="col-sm-6 col-lg-3">
                     <div class="card border border-label-info shadow-none">
                         <div class="card-body text-center">
-                            <img src="{{asset('assets/img/front-pages/icons/diamond-info.png')}}" alt="laptop"
-                                class="mb-2" />
+                            <img src="{{asset('assets/img/front-pages/icons/diamond-info.png')}}" alt="laptop" class="mb-2" />
                             <h5 class="h2 mb-1">4.8/5</h5>
                             <p class="fw-medium mb-0">
                                 Highly Rated<br />
@@ -524,8 +359,7 @@ $configData = Helper::appClasses();
                 <div class="col-sm-6 col-lg-3">
                     <div class="card border border-label-warning shadow-none">
                         <div class="card-body text-center">
-                            <img src="{{asset('assets/img/front-pages/icons/check-warning.png')}}" alt="laptop"
-                                class="mb-2" />
+                            <img src="{{asset('assets/img/front-pages/icons/check-warning.png')}}" alt="laptop" class="mb-2" />
                             <h5 class="h2 mb-1">100%</h5>
                             <p class="fw-medium mb-0">
                                 Money Back<br />
@@ -550,22 +384,19 @@ $configData = Helper::appClasses();
             <div class="row gy-5">
                 <div class="col-lg-5">
                     <div class="text-center">
-                        <img src="{{asset('assets/img/front-pages/landing-page/faq-boy-with-logos.png')}}"
-                            alt="faq boy with logos" class="faq-image" />
+                        <img src="{{asset('assets/img/front-pages/landing-page/faq-boy-with-logos.png')}}" alt="faq boy with logos" class="faq-image" />
                     </div>
                 </div>
                 <div class="col-lg-7">
                     <div class="accordion" id="accordionExample">
                         <div class="card accordion-item active">
                             <h2 class="accordion-header" id="headingOne">
-                                <button type="button" class="accordion-button" data-bs-toggle="collapse"
-                                    data-bs-target="#accordionOne" aria-expanded="true" aria-controls="accordionOne">
+                                <button type="button" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordionOne" aria-expanded="true" aria-controls="accordionOne">
                                     {{__('What are the characteristics of ( roll on / roll off ) ships?')}}
                                 </button>
                             </h2>
 
-                            <div id="accordionOne" class="accordion-collapse collapse show"
-                                data-bs-parent="#accordionExample">
+                            <div id="accordionOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     {{__('Ro-Ro ships are vessels designed to transport vehicles on wheels, i.e. cars, trucks or industrial vehicles. Sometimes they have built-in ramps for the loading and unloading of vehicles. The fact that the cargo can access the ship under its own steam removes the need for a crane, thus reducing the intermediary costs related to loading, unloading and stowage. These ships can only carry wheeled vehicles and mustn’t be confused with Ro-Pax vessels, like ferries, which combine the transport of vehicles and passengers')}}
                                 </div>
@@ -573,13 +404,11 @@ $configData = Helper::appClasses();
                         </div>
                         <div class="card accordion-item">
                             <h2 class="accordion-header" id="headingTwo">
-                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#accordionTwo" aria-expanded="false" aria-controls="accordionTwo">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionTwo" aria-expanded="false" aria-controls="accordionTwo">
                                     {{__('What is the purpose of a ( roll on / roll off ) ship?')}}
                                 </button>
                             </h2>
-                            <div id="accordionTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                                data-bs-parent="#accordionExample">
+                            <div id="accordionTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     {{__('To transport wheeled cargo, such as all kinds of vehicles and machinary with wheels. The cargo can be loaded using the ramp, with no need for cranes or intermediaries, thereby making for lower costs and risks')}}
                                 </div>
@@ -587,14 +416,11 @@ $configData = Helper::appClasses();
                         </div>
                         <div class="card accordion-item">
                             <h2 class="accordion-header" id="headingThree">
-                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#accordionThree" aria-expanded="false"
-                                    aria-controls="accordionThree">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionThree" aria-expanded="false" aria-controls="accordionThree">
                                     {{__('What are container ships?')}}
                                 </button>
                             </h2>
-                            <div id="accordionThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                                data-bs-parent="#accordionExample">
+                            <div id="accordionThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     {{__('Vessels designed to transport freight in containers. They monopolize the majority of international dry cargo transport and represent more than half of all maritime trade. They are intended to transport standard containers according to ISO regulations')}}.
                                 </div>
@@ -602,13 +428,11 @@ $configData = Helper::appClasses();
                         </div>
                         <div class="card accordion-item">
                             <h2 class="accordion-header" id="headingFour">
-                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#accordionFour" aria-expanded="false" aria-controls="accordionFour">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionFour" aria-expanded="false" aria-controls="accordionFour">
                                     {{__('What is a ship agent?')}}
                                 </button>
                             </h2>
-                            <div id="accordionFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
-                                data-bs-parent="#accordionExample">
+                            <div id="accordionFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     {{__('A ship agent is an independent shipping agent who acts on behalf of the ship owner. Ship agents are responsible for a ship when it comes into port and conduct all of the procedures required to streamline its dock time in order to reduce the cost of the operation')}}.
                                 </div>
@@ -616,13 +440,11 @@ $configData = Helper::appClasses();
                         </div>
                         <div class="card accordion-item">
                             <h2 class="accordion-header" id="headingFive">
-                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#accordionFive" aria-expanded="false" aria-controls="accordionFive">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionFive" aria-expanded="false" aria-controls="accordionFive">
                                     {{__('What is multimodal freight transport?')}}
                                 </button>
                             </h2>
-                            <div id="accordionFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
-                                data-bs-parent="#accordionExample">
+                            <div id="accordionFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     {{__('Multimodal transport consists of carrying a single cargo by different modes of transport (air, land, ocean…) using Intermodal Transport Units (ITU) such as containers, semi-trailers or swap bodies (interchangeable containers)')}}
                                 </div>
@@ -630,13 +452,11 @@ $configData = Helper::appClasses();
                         </div>
                         <div class="card accordion-item">
                             <h2 class="accordion-header" id="headingSix">
-                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#accordionSix" aria-expanded="false" aria-controls="accordionSix">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionSix" aria-expanded="false" aria-controls="accordionSix">
                                     {{__('What is the difference between a forwarding and a customs agent?')}}
                                 </button>
                             </h2>
-                            <div id="accordionSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
-                                data-bs-parent="#accordionExample">
+                            <div id="accordionSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     {{__('A forwarding agent or forwarder is a transport operator. They act on behalf and in favour of importers and exporters, organising safe, efficient and economical goods transport. In other words, a professional expert at your disposal for the purposes of hiring transport, selecting the most efficient route, taking out insurance policies, choosing the appropriate packaging and taking care of storage where required. A customs agent is responsible for managing all customs duties and documents required by the tax administration in every country for the traffic of goods between states. Their importance lies in knowing the legal regulations in order to satisfy the tax authorities and avoid last-minute surprises such as tax duties or surcharges')}}.
                                 </div>
@@ -644,14 +464,11 @@ $configData = Helper::appClasses();
                         </div>
                         <div class="card accordion-item">
                             <h2 class="accordion-header" id="headingSeven">
-                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#accordionSeven" aria-expanded="false"
-                                    aria-controls="accordionSeven">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionSeven" aria-expanded="false" aria-controls="accordionSeven">
                                     {{__('How do customs controls work?')}}
                                 </button>
                             </h2>
-                            <div id="accordionSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
-                                data-bs-parent="#accordionExample">
+                            <div id="accordionSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <ol>
                                         <li>{{__('Customs declaration: Must be presented to the customs authority in order to identify the goods to be transported and their destination')}}.
@@ -667,14 +484,11 @@ $configData = Helper::appClasses();
                         </div>
                         <div class="card accordion-item">
                             <h2 class="accordion-header" id="headingEight">
-                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#accordionEight" aria-expanded="false"
-                                    aria-controls="accordionEight">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionEight" aria-expanded="false" aria-controls="accordionEight">
                                     {{__('What is the purpose of international customs?')}}
                                 </button>
                             </h2>
-                            <div id="accordionEight" class="accordion-collapse collapse" aria-labelledby="headingEight"
-                                data-bs-parent="#accordionExample">
+                            <div id="accordionEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     {{__('The role of customs control is to regulate and inspect shipments in order to guarantee that commercial exchanges between different countries proceed legally, that they comply with all tax and duty obligations and with all other requirements related to their entry or exit. As well as guaranteeing compliance with international trade rules, collecting taxes and duties due where appropriate, customs controls are a fundamental mechanism for preventing money laundering, tax fraud and drug trafficking')}}
                                 </div>
@@ -682,13 +496,11 @@ $configData = Helper::appClasses();
                         </div>
                         <div class="card accordion-item">
                             <h2 class="accordion-header" id="headingNine">
-                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#accordionNine" aria-expanded="false" aria-controls="accordionNine">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionNine" aria-expanded="false" aria-controls="accordionNine">
                                     {{__('What is customs management?')}}
                                 </button>
                             </h2>
-                            <div id="accordionNine" class="accordion-collapse collapse" aria-labelledby="headingNine"
-                                data-bs-parent="#accordionExample">
+                            <div id="accordionNine" class="accordion-collapse collapse" aria-labelledby="headingNine" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     {{__('The management of all formalities required by the customs authorities. It is important for these formalities to run smoothly and trouble-free in order to prevent delays due to bureaucratic issues. These formalities are therefore usually entrusted to a customs agent who will carry them out on behalf of the freight owner')}}.
                                 </div>
@@ -696,13 +508,11 @@ $configData = Helper::appClasses();
                         </div>
                         <div class="card accordion-item">
                             <h2 class="accordion-header" id="headingTen">
-                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#accordionTen" aria-expanded="false" aria-controls="accordionTen">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionTen" aria-expanded="false" aria-controls="accordionTen">
                                     {{__('What is customs clearance?')}}
                                 </button>
                             </h2>
-                            <div id="accordionTen" class="accordion-collapse collapse" aria-labelledby="headingTen"
-                                data-bs-parent="#accordionExample">
+                            <div id="accordionTen" class="accordion-collapse collapse" aria-labelledby="headingTen" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     {{__('All formalities and requirements to be completed for goods entering and leaving a specific national territory in order to control and approve their transportation. The customs agent is responsible for completing these formalities on behalf of the importer or exporter, and for submitting a declaration of information to the competent customs authority in each case')}}.
                                 </div>
@@ -710,14 +520,11 @@ $configData = Helper::appClasses();
                         </div>
                         <div class="card accordion-item">
                             <h2 class="accordion-header" id="headingEleven">
-                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#accordionEleven" aria-expanded="false"
-                                    aria-controls="accordionEleven">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionEleven" aria-expanded="false" aria-controls="accordionEleven">
                                     {{__('What is completed customs clearance?')}}
                                 </button>
                             </h2>
-                            <div id="accordionEleven" class="accordion-collapse collapse"
-                                aria-labelledby="headingEleven" data-bs-parent="#accordionExample">
+                            <div id="accordionEleven" class="accordion-collapse collapse" aria-labelledby="headingEleven" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     {{__('Customs clearance means that the customs procedure has been completed, i.e. that all of the paperwork has been submitted and that the shipment can continue on its way')}}.
                                 </div>
@@ -762,19 +569,16 @@ $configData = Helper::appClasses();
             <div class="row gy-4">
                 <div class="col-lg-5">
                     <div class="contact-img-box position-relative border p-2 h-100">
-                        <img src="{{asset('assets/img/front-pages/landing-page/contact-customer-service.png')}}"
-                            alt="contact customer service" class="contact-img w-100 scaleX-n1-rtl" />
+                        <img src="{{asset('assets/img/front-pages/landing-page/contact-customer-service.png')}}" alt="contact customer service" class="contact-img w-100 scaleX-n1-rtl" />
                         <div class="pt-3 px-4 pb-1">
                             <div class="row gy-3 gx-md-4">
                                 <div class="col-md-6 col-lg-12 col-xl-6">
                                     <div class="d-flex align-items-center">
-                                        <div class="badge bg-label-primary rounded p-2 me-2"><i
-                                                class="ti ti-mail ti-sm"></i></div>
+                                        <div class="badge bg-label-primary rounded p-2 me-2"><i class="ti ti-mail ti-sm"></i></div>
                                         <div>
                                             <p class="mb-0">{{__('Email')}}</p>
                                             <h5 class="mb-0">
-                                                <a href="mailto:example@gmail.com"
-                                                    class="text-heading">example@gmail.com</a>
+                                                <a href="mailto:example@gmail.com" class="text-heading">example@gmail.com</a>
                                             </h5>
                                         </div>
                                     </div>
@@ -800,27 +604,22 @@ $configData = Helper::appClasses();
                         <div class="card-body">
                             <h4 class="mb-1">{{__('Send a message')}}</h4>
                             <p class="mb-4">
-                                {{__('If you would like to discuss anything related to shipping, prices, tracking, partnerships,')}}<br
-                                    class="d-none d-lg-block" />
+                                {{__('If you would like to discuss anything related to shipping, prices, tracking, partnerships,')}}<br class="d-none d-lg-block" />
                                 {{__('or have pre-shipping questions, you’re at the right place')}}.
                             </p>
                             <form>
                                 <div class="row g-3">
                                     <div class="col-md-6">
-                                        <label class="form-label"
-                                            for="contact-form-fullname">{{__('Full Name')}}</label>
-                                        <input type="text" class="form-control" id="contact-form-fullname"
-                                            placeholder="john" />
+                                        <label class="form-label" for="contact-form-fullname">{{__('Full Name')}}</label>
+                                        <input type="text" class="form-control" id="contact-form-fullname" placeholder="john" />
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label" for="contact-form-email">{{__('Email')}}</label>
-                                        <input type="text" id="contact-form-email" class="form-control"
-                                            placeholder="johndoe@gmail.com" />
+                                        <input type="text" id="contact-form-email" class="form-control" placeholder="johndoe@gmail.com" />
                                     </div>
                                     <div class="col-12">
                                         <label class="form-label" for="contact-form-message">{{__('Message')}}</label>
-                                        <textarea id="contact-form-message" class="form-control" rows="8"
-                                            placeholder="Write a message"></textarea>
+                                        <textarea id="contact-form-message" class="form-control" rows="8" placeholder="Write a message"></textarea>
                                     </div>
                                     <div class="col-12">
                                         <button type="submit" class="btn btn-primary">{{__('Send now')}}</button>

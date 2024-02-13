@@ -451,5 +451,8 @@
   "Cash On Delivery":"الدفع عند الاستلام",
   "Cart":"السلة",
   "Coupon discount percentage":"نسبة تخفيض الكوبون",
-  "Enter only a number without %":"ادخل رقم فقط بدون علامة %"
+  "Enter only a number without %":"ادخل رقم فقط بدون علامة %",
+  "Enter Coupon Code": "أدخل رمز القسيمة",
+  "Apply": "تطبيق",
+  "Category": "الفئة"
 }

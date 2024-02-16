@@ -60,7 +60,7 @@ $(function () {
           // Plans
           targets: 3,
           render: function (data, type, full, meta) {
-            var $plan = full['customerName'];
+            var $plan = full['country'].name;
             var $code = full['country'].country_code;
 
             if ($code) {

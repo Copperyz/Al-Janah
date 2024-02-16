@@ -30,12 +30,6 @@ class CustomerController extends Controller
       ->addColumn('customerName', function ($customer) {
         return $customer->first_name . ' ' . $customer->last_name;
       })
-      ->addColumn('countryName', function ($customer) {
-        return $customer->country ? $customer->country->name : '';
-      })
-      ->addColumn('countryCode', function ($customer) {
-        return $customer->country ? $customer->country->id : '';
-      })
       ->addColumn('shipments', function ($customer) {
         return $customer->shipments->count();
       })

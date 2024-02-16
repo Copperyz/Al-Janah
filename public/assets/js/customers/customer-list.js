@@ -39,7 +39,7 @@ $(function () {
         { data: '' },
         { data: 'customerName' },
         { data: 'customer_code' },
-        { data: 'countryName' },
+        { data: 'country.name' },
         { data: 'shipments' },
         { data: '' }
       ],
@@ -61,7 +61,7 @@ $(function () {
           targets: 3,
           render: function (data, type, full, meta) {
             var $plan = full['customerName'];
-            var $code = full['countryCode'];
+            var $code = full['country'].country_code;
 
             if ($code) {
               var $output_code = `<i class ="fis fi fi-${$code} rounded-circle me-2 fs-3"></i>`;

@@ -25,6 +25,13 @@ class FrontPagesController extends Controller
     return view('front-pages.track-shipment-page', ['pageConfigs' => $pageConfigs]);
   }
 
+  public function ourBranches($branch){
+    // return $branch;
+
+    $pageConfigs = ['myLayout' => 'blank'];
+    return view('front-pages.branches-page', compact('pageConfigs'));
+  }
+
   public function trackShipmentData(Request $request)
   {
     try {

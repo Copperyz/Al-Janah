@@ -59,15 +59,24 @@ $configData = Helper::appClasses();
     .fbox-icon {
         margin-bottom: 1.5rem;
     }
-    
+    #landingHero{
+        background-image: url("./assets/img/front-pages/landing-page/pexels-daniel-frese-569417.jpg");
+        object-fit: cover;
+    background-size: cover;
+    }
+    /* .landing-hero-blank{
+        background-image: url("./assets/img/front-pages/landing-page/pexels-daniel-frese-569417.jpg");
+        object-fit: cover;
+    background-size: cover;
+    } */
 </style>
 @section('content')
 <div data-bs-spy="scroll" class="scrollspy-example">
     <!-- Hero: Start -->
     <section id="hero-animation">
         <div id="landingHero" class="section-py landing-hero position-relative">
-            <div class="container">
-                <div class="hero-text-box text-center">
+            <!-- <div class="container">
+                 <div class="hero-text-box text-center">
                     <h1 class="text-primary hero-title display-6 fw-bold">{{__('Elevate Your Cargo Experience')}}</h1>
                     <h2 class="hero-sub-title h6 mb-4 pb-1 fw-medium">
                         {{__('Seamless Air Cargo Solutions for Swift and Reliable Shipments')}}.
@@ -77,18 +86,22 @@ $configData = Helper::appClasses();
                             <img src="{{asset('assets/img/front-pages/icons/Join-community-arrow.png')}}" alt="Join us arrow" class="scaleX-n1-rtl" /></span>
                         <a href="{{route('track-shipment')}}" class="btn btn-primary btn-lg">{{__('Track your shipment')}}</a>
                     </div>
-                </div>
-                <div id="heroDashboardAnimation" class="hero-animation-img">
-                    <a href="{{url('/')}}" target="_blank">
+                </div> -->
+                <!-- <div id="heroDashboardAnimation" class="hero-animation-img">
+                     <a href="{{url('/')}}" target="_blank">
                         <div id="heroAnimationImg" class="position-relative hero-dashboard-img">
                             <img src="{{asset('assets/img/front-pages/landing-page/hero-dashboard-'.$configData['style'].'.png') }}" alt="hero dashboard" class="animation-img" data-app-light-img="front-pages/landing-page/hero-dashboard-light.png" data-app-dark-img="front-pages/landing-page/hero-dashboard-dark.png" />
                             <img src="{{asset('assets/img/front-pages/landing-page/hero-elements-'.$configData['style'].'.png') }}" alt="hero elements" class="position-absolute hero-elements-img animation-img top-0 start-0" data-app-light-img="front-pages/landing-page/hero-elements-light.png" data-app-dark-img="front-pages/landing-page/hero-elements-dark.png" />
 
                         </div>
-                    </a>
-                </div>
-
-                <div class="landing-hero-blank"></div>
+                    </a> 
+                </div> 
+            </div> -->
+            <div id="heroDashboardAnimation" class="hero-animation-img">
+                    @include('front-pages/hero-section')
+            </div>
+        </div> 
+        <!-- <div class="landing-hero-blank"></div> -->
     </section>
     <!-- Hero: End -->
 
@@ -177,10 +190,10 @@ $configData = Helper::appClasses();
                         <div class="col-lg-4 col-md-6 col-padding border-left-bottom">
                             <div class="">
                                 <div class="text-center fbox-icon">
-                                    <img src="{{asset('assets/img/front-pages/icons/laptop.png')}}" alt="laptop charging" />
+                                    <img src="{{asset('assets/img/front-pages/icons/ExpressAirFreight.png')}}" alt="Express Air Freight charging" width="65" />
                                 </div>
                                 <div class=" text-center" style="padding: 0 0.75rem">
-                                    <h5 class="card-title">{{__('Retailer Services for All Shipments')}}</h5>
+                                    <h5 class="card-title">{{__('Express Air Freight')}}</h5>
                                 </div>
                             </div>
                         </div>
@@ -188,10 +201,10 @@ $configData = Helper::appClasses();
                         <div class="col-lg-4 col-md-6 col-padding border-left-bottom">
                             <div class="">
                                 <div class="text-center fbox-icon">
-                                    <img src="{{asset('assets/img/front-pages/icons/laptop.png')}}" alt="laptop charging" />
+                                    <img src="{{asset('assets/img/front-pages/icons/InternationalShipping.png')}}" alt="InternationalShipping" width="65" />
                                 </div>
                                 <div class=" text-center" style="padding: 0 0.75rem">
-                                    <h5 class="card-title">{{__('General Cargo Shipments and Containers')}}</h5>
+                                    <h5 class="card-title">{{__('International Shipping')}}</h5>
                                 </div>
                             </div>
                         </div>
@@ -199,10 +212,10 @@ $configData = Helper::appClasses();
                         <div class="col-lg-4 col-md-6 col-padding border-left-bottom">
                             <div class="">
                                 <div class="text-center fbox-icon">
-                                    <img src="{{asset('assets/img/front-pages/icons/laptop.png')}}" alt="laptop charging" />
+                                    <img src="{{asset('assets/img/front-pages/icons/FreightForwarding.png')}}" alt="FreightForwarding.png" width="65" />
                                 </div>
                                 <div class="text-center" style="padding: 0 0.75rem">
-                                    <h5 class="card-title">{{__('Oil and Gas Transportation and Logistics')}}</h5>
+                                    <h5 class="card-title">{{__('Freight Forwarding')}}</h5>
                                 </div>
                             </div>
                         </div>
@@ -210,10 +223,10 @@ $configData = Helper::appClasses();
                         <div class="col-lg-4 col-md-6 col-padding border-left-bottom">
                             <div class="">
                                 <div class="text-center fbox-icon">
-                                    <img src="{{asset('assets/img/front-pages/icons/laptop.png')}}" alt="laptop charging" />
+                                    <img src="{{asset('assets/img/front-pages/icons/WarehousingandDistribution.png')}}" alt="WarehousingandDistribution.png charging" width="65" />
                                 </div>
                                 <div class="text-center" style="padding: 0 0.75rem">
-                                    <h5 class="card-title">{{__('Dry Masonry / Cattle Transport')}}</h5>
+                                    <h5 class="card-title">{{__('Warehousing and Distribution')}}</h5>
                                 </div>
                             </div>
                         </div>
@@ -221,10 +234,10 @@ $configData = Helper::appClasses();
                         <div class="col-lg-4 col-md-6 col-padding border-left-bottom">
                             <div class="">
                                 <div class="text-center fbox-icon">
-                                    <img src="{{asset('assets/img/front-pages/icons/laptop.png')}}" alt="laptop charging" />
+                                    <img src="{{asset('assets/img/front-pages/icons/CustomizedLogisticsSolutions.png')}}" alt="CustomizedLogisticsSolutions.png" width="65" />
                                 </div>
                                 <div class="text-center" style="padding: 0 0.75rem">
-                                    <h5 class="card-title">{{__('Custom Clearance / Storage & Transport / Door to Door Delivery')}}</h5>
+                                    <h5 class="card-title">{{__('Customized Logistics Solutions')}}</h5>
                                 </div>
                             </div>
                         </div>
@@ -232,10 +245,10 @@ $configData = Helper::appClasses();
                         <div class="col-lg-4 col-md-6 col-padding border-left-bottom">
                             <div class="">
                                 <div class="text-center fbox-icon">
-                                    <img src="{{asset('assets/img/front-pages/icons/laptop.png')}}" alt="laptop charging" />
+                                    <img src="{{asset('assets/img/front-pages/icons/TrackandTrace.png')}}" alt="TrackandTrace" width="65" />
                                 </div>
                                 <div class=" text-center" style="padding: 0 0.75rem">
-                                    <h5 class="card-title">{{__('Ship Supply Services')}}</h5>
+                                    <h5 class="card-title">{{__('Track and Trace')}}</h5>
                                 </div>
                             </div>
                         </div>
@@ -243,79 +256,105 @@ $configData = Helper::appClasses();
                     </div>
                 </div>
 
-            </d>
-        </div>
+                </d>
+            </div>
     </section>
     <!-- Real customers reviews: Start -->
 
     <!-- Real customers reviews: End -->
 
-    <!-- Our great team: Start -->
-    <!-- <section id="landingTeam" class="section-py landing-team">
-        <div class="container">
-            <div class="text-center mb-3 pb-1">
-                <span class="badge bg-label-primary">Our Great Team</span>
-            </div>
-            <h3 class="text-center mb-1"><span class="section-title">Supported</span> by Real People</h3>
-            <p class="text-center mb-md-5 pb-3">Who is behind these great-looking interfaces?</p>
-            <div class="row gy-5 mt-2">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="card mt-3 mt-lg-0 shadow-none">
-                        <div class="bg-label-primary position-relative team-image-box">
-                            <img src="{{asset('assets/img/front-pages/landing-page/team-member-1.png')}}"
-                                class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl"
-                                alt="human image" />
-                        </div>
-                        <div class="card-body border border-top-0 border-label-primary text-center">
-                            <h5 class="card-title mb-0">Sophie Gilbert</h5>
-                            <p class="text-muted mb-0">Project Manager</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="card mt-3 mt-lg-0 shadow-none">
-                        <div class="bg-label-info position-relative team-image-box">
-                            <img src="{{asset('assets/img/front-pages/landing-page/team-member-2.png')}}"
-                                class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl"
-                                alt="human image" />
-                        </div>
-                        <div class="card-body border border-top-0 border-label-info text-center">
-                            <h5 class="card-title mb-0">Paul Miles</h5>
-                            <p class="text-muted mb-0">UI Designer</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="card mt-3 mt-lg-0 shadow-none">
-                        <div class="bg-label-danger position-relative team-image-box">
-                            <img src="{{asset('assets/img/front-pages/landing-page/team-member-3.png')}}"
-                                class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl"
-                                alt="human image" />
-                        </div>
-                        <div class="card-body border border-top-0 border-label-danger text-center">
-                            <h5 class="card-title mb-0">Nannie Ford</h5>
-                            <p class="text-muted mb-0">Development Lead</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="card mt-3 mt-lg-0 shadow-none">
-                        <div class="bg-label-success position-relative team-image-box">
-                            <img src="{{asset('assets/img/front-pages/landing-page/team-member-4.png')}}"
-                                class="position-absolute card-img-position bottom-0 start-50 scaleX-n1-rtl"
-                                alt="human image" />
-                        </div>
-                        <div class="card-body border border-top-0 border-label-success text-center">
-                            <h5 class="card-title mb-0">Chris Watkins</h5>
-                            <p class="text-muted mb-0">Marketing Manager</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
     <!-- Our great team: End -->
 
+    <section class="section">
+        <div class="mt-5" style="overflow: hidden;">
+            <div class="section m-0 text-center aljanah-services" style="padding: 60px 0;">
+                <div class="clearfix">
+                    <div class="mx-auto center" style="max-width: 900px;">
+                        <h2 class="mb-0 fw-light ls1">Our branches</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div style="padding: 60px 0;">
+                <div class="container mx-auto">
+                    <div class="row posts-md mt-5 mb-0">
+                        <div class="entry branches-padding-bottom col-md-6">
+                            <div class="grid-inner row align-items-center">
+                                <div class="col-lg-6">
+                                    <div class="entry-image">
+                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/1.jpg')}}" alt="Paris"></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
+                                    <span class="before-heading fst-normal">Press &amp; Media</span>
+                                    <div class="entry-title nott">
+                                        <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
+                                    </div>
+                                    <div class="entry-content">
+                                        <a href="{{route('branches-page', 'Italy')}}" class="more-link">Read more <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="entry branches-padding-bottom col-md-6">
+                            <div class="grid-inner row align-items-center">
+                                <div class="col-lg-6">
+                                    <div class="entry-image">
+                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/1.jpg')}}" alt="Paris"></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
+                                    <span class="before-heading fst-normal">Press &amp; Media</span>
+                                    <div class="entry-title nott">
+                                        <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
+                                    </div>
+                                    <div class="entry-content">
+                                        <a href="#" class="more-link">Read more <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="entry branches-padding-bottom col-md-6">
+                            <div class="grid-inner row align-items-center">
+                                <div class="col-lg-6">
+                                    <div class="entry-image">
+                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/1.jpg')}}" alt="Paris"></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
+                                    <span class="before-heading fst-normal">Press &amp; Media</span>
+                                    <div class="entry-title nott">
+                                        <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
+                                    </div>
+                                    <div class="entry-content">
+                                        <a href="#" class="more-link">Read more <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="entry branches-padding-bottom col-md-6">
+                            <div class="grid-inner row align-items-center">
+                                <div class="col-lg-6">
+                                    <div class="entry-image">
+                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/1.jpg')}}" alt="Paris"></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
+                                    <span class="before-heading fst-normal">Press &amp; Media</span>
+                                    <div class="entry-title nott">
+                                        <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
+                                    </div>
+                                    <div class="entry-content">
+                                        <a href="#" class="more-link">Read more <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </d>
+                </div>
+            </div>
+    </section>
     <!-- Fun facts: Start -->
     <section id="landingFunFacts" class="section-py landing-fun-facts">
         <div class="container">
@@ -384,7 +423,7 @@ $configData = Helper::appClasses();
             <div class="row gy-5">
                 <div class="col-lg-5">
                     <div class="text-center">
-                        <img src="{{asset('assets/img/front-pages/landing-page/faq-boy-with-logos.png')}}" alt="faq boy with logos" class="faq-image" />
+                        <img src="{{asset('assets/img/front-pages/landing-page/faq-boy-with-logos.avif')}}" alt="faq boy with logos" class="faq-image" />
                     </div>
                 </div>
                 <div class="col-lg-7">
@@ -402,7 +441,7 @@ $configData = Helper::appClasses();
                                 </div>
                             </div>
                         </div>
-                        <div class="card accordion-item">
+                        <!-- <div class="card accordion-item">
                             <h2 class="accordion-header" id="headingTwo">
                                 <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionTwo" aria-expanded="false" aria-controls="accordionTwo">
                                     {{__('What is the purpose of a ( roll on / roll off ) ship?')}}
@@ -449,8 +488,8 @@ $configData = Helper::appClasses();
                                     {{__('Multimodal transport consists of carrying a single cargo by different modes of transport (air, land, ocean…) using Intermodal Transport Units (ITU) such as containers, semi-trailers or swap bodies (interchangeable containers)')}}
                                 </div>
                             </div>
-                        </div>
-                        <div class="card accordion-item">
+                        </div> -->
+                        <!-- <div class="card accordion-item">
                             <h2 class="accordion-header" id="headingSix">
                                 <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionSix" aria-expanded="false" aria-controls="accordionSix">
                                     {{__('What is the difference between a forwarding and a customs agent?')}}
@@ -481,7 +520,7 @@ $configData = Helper::appClasses();
 
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="card accordion-item">
                             <h2 class="accordion-header" id="headingEight">
                                 <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionEight" aria-expanded="false" aria-controls="accordionEight">
@@ -569,7 +608,7 @@ $configData = Helper::appClasses();
             <div class="row gy-4">
                 <div class="col-lg-5">
                     <div class="contact-img-box position-relative border p-2 h-100">
-                        <img src="{{asset('assets/img/front-pages/landing-page/contact-customer-service.png')}}" alt="contact customer service" class="contact-img w-100 scaleX-n1-rtl" />
+                        <img src="{{asset('assets/img/front-pages/landing-page/contact-customer-service.avif')}}" alt="contact customer service" class="contact-img w-100 scaleX-n1-rtl" />
                         <div class="pt-3 px-4 pb-1">
                             <div class="row gy-3 gx-md-4">
                                 <div class="col-md-6 col-lg-12 col-xl-6">

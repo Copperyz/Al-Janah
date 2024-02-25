@@ -1,4 +1,8 @@
-<!-- checkout.blade.php -->
+@php
+    $customizerHidden = 'customizer-hide';
+    $configData = Helper::appClasses();
+@endphp
+
 
 @extends('layouts.blankLayout')
 

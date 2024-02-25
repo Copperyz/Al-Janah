@@ -147,7 +147,7 @@ $(function () {
     const wizardCheckoutNext = [].slice.call(wizardCheckoutForm.querySelectorAll('.btn-next'));
     const wizardCheckoutPrev = [].slice.call(wizardCheckoutForm.querySelectorAll('.btn-prev'));
     const wizardCheckoutSubmit = wizardCheckoutForm.querySelector('.btn-submit');
-    console.log(wizardCheckoutSubmit);
+    // console.log(wizardCheckoutSubmit);
     let validationStepper = new Stepper(wizardCheckout, {
       linear: false
     });
@@ -214,11 +214,10 @@ $(function () {
                       customClass: {
                         confirmButton: 'btn btn-success'
                       }
-                    // }).then(result => {
-                    //   if (result.isConfirmed) {
-                    //     location.reload();
-                    //     // $('#addPaymentForm').trigger('reset');
-                    //   }
+                    }).then(result => {
+                      if (result.isConfirmed) {
+                        window.location.href = response.data.referrerUrl;
+                      }
                     });
                   } else {
                     // Handle other status codes

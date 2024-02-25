@@ -46,12 +46,12 @@ $activeClass = in_array($currentRouteName, $activeRoutes) ? 'active' : '';
                         <a class="nav-link fw-medium" href="#landingFAQ">{{__('FAQ')}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fw-medium" href="#landingContact">{{__('Contact us')}}
+                        <a class="nav-link fw-medium" href="#landingContact">{{__('Contact')}}
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link fw-medium" href="{{route('shipment-price')}}">{{__('Shipping Price')}}</a>
+                        <a class="nav-link fw-medium" href="{{route('shipment-price')}}">{{__('Rates')}}</a>
                     </li>
                     <!-- <li class="nav-item">
                         <a class="nav-link fw-medium" href="{{url('/dashboard')}}" target="_blank">Admin</a>
@@ -88,7 +88,7 @@ $activeClass = in_array($currentRouteName, $activeRoutes) ? 'active' : '';
                 <li>
                     <a href="{{route('login')}}" class="btn btn-primary"><span
                             class="tf-icons ti ti-login scaleX-n1-rtl me-md-1"></span><span
-                            class="d-none d-md-block">{{__('Login/Register')}}</span></a>
+                            class="d-none d-md-block">{{__('Sign In')}}</span></a>
                 </li>
                 @else
                 <li>

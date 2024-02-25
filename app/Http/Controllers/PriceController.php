@@ -150,12 +150,13 @@ class PriceController extends Controller
                 ->pluck('price')
                 ->first();
         }
+        $price = $price * $request->input('weight');
         if ($request->filled('parcelTypeId') && $request->input('parcelTypeId') == 1) {
             $newPrice = $request->input('weight') * $request->input('height') * $request->input('width') / 5000;
-            if($newPrice > $price * $request->input('weight'))
+            if($newPrice > $price)
             $price = $newPrice;
         }
 
-        return $price * $request->input('weight');
+        return $price;
     }
 }

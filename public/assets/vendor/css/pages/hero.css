@@ -1,0 +1,133 @@
+.hero {
+    height: 100%;
+    background: var(--color-2);
+    background-image: url("./img/front-pages/landing-page/pexels-daniel-frese-569417.jpg");
+    object-fit: cover;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--size-3);
+  }
+  /* .hero-frame {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: green;
+  } */
+  .hero-title,
+  .hero-desc,
+  .btn {
+    z-index: 1;
+  }
+  .hero-title {
+    color: white;
+    /* color: var(--color-3); */
+    text-transform: uppercase;
+  }
+  .hero-title > span {
+    /* color: white; */
+    color: var(--color-3);
+  }
+  .hero-desc {
+    color: white;
+    /* color: var(--color-3); */
+  }
+
+  .globe,
+  .plane,
+  .map {
+    position: absolute;
+    /* max-height: 25vw; */
+    z-index: 0;
+  }
+  .globe {
+    transform: rotate(0);
+    max-height: clamp(45vw, 300px, 65vw);
+    /* filter: drop-shadow(25); */
+    /* filter: ; */
+    animation: globeRotation 90s infinite 0.2s, fadeIn .8s forwards .2s;
+    opacity: 1;
+    scale: 0;
+    }
+  .map {
+    transform: rotate(0);
+    max-height: clamp(25vw, 170px, 38vw);
+    animation: globeRotation 25s infinite reverse, fadeIn .8s forwards .1s;
+    opacity: 0;
+    scale: 0;
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      scale: 0.5;
+    }
+    100% {
+      opacity: 0.8;
+      scale: 1;
+    }
+  }
+  @keyframes globeRotation {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .plane {
+    max-height: clamp(28vw, 195px, 38vw);
+    animation: planeFly 2s forwards;
+    opacity: 0;
+    transition: opacity 0.3s ease-out 0.3s;
+  }
+  @keyframes planeFly {
+    0% {
+      translate: -160px -120px;
+      opacity: 0;
+    }
+    30% {
+      opacity: 0;
+    }
+    100% {
+      translate: 220px 120px;
+      opacity: 1;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .globe {
+        transform: rotate(0);
+        max-height: 167vw;
+        filter: drop-shadow(25);
+        animation: globeRotation 90s infinite 0.2s, fadeInGlobe .8s forwards .2s;
+        opacity: 1;
+        scale: 0;
+        right: 134px
+    }
+    .map {
+        transform: rotate(0);
+        max-height: 100vw;
+        animation: globeRotation 25s infinite reverse, fadeIn .8s forwards .1s;
+        opacity: 0;
+        scale: 0;
+        right: 280px;
+    }
+    @keyframes planeFly {
+      0% {
+        translate: -70px -40px;
+        opacity: 0;
+      }
+      30% {
+        opacity: 0;
+      }
+      100% {
+        translate: 100px 180px;
+        opacity: 1;
+      }
+    }
+  }
+  

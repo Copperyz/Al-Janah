@@ -454,5 +454,8 @@
   "Enter only a number without %":"ادخل رقم فقط بدون علامة %",
   "Enter Coupon Code": "أدخل رمز القسيمة",
   "Apply": "تطبيق",
-  "Category": "الفئة"
+  "Category": "الفئة",
+  "Item Details": "تفاصيل العنصر",
+  "Please fill in all required fields": "يرجى ملء جميع الحقول المطلوبة",
+  "Receipt Summary": "ملخص الفاتورة"
 }

@@ -466,5 +466,8 @@
   "Providing real-time tracking and tracing capabilities for shipments, offering visibility and transparency throughout the shipping process, allowing customers to monitor their cargo's progress from pickup to final delivery":"توفير إمكانيات تتبع مراحل الشحن المختلفة بشكل متكامل ، ما من شأنه إعطاء رؤية واضحة طوال عملية الشحن، و إتاحة الفرصة لمراقبة تقدم شحنات زبائننا من مرحلة الاستلام  و حتى التسليم النهائي",
   "Enter Coupon Code": "أدخل رمز القسيمة",
   "Apply": "تطبيق",
-  "Category": "الفئة"
+  "Category": "الفئة",
+  "Item Details": "تفاصيل العنصر",
+  "Please fill in all required fields": "يرجى ملء جميع الحقول المطلوبة",
+  "Receipt Summary": "ملخص الفاتورة"
 }

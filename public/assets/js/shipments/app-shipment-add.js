@@ -110,7 +110,8 @@ $(function () {
         var goodSelect = $(this).find('select[name="good_types_id"]');
         parcelSelect.attr('id', 'parcel_types_id_' + counter).addClass('select2');
         goodSelect.attr('id', 'good_types_id_' + counter).addClass('select2');
-
+        $(this).closest(".repeater-wrapper").find(".Height, .Width, .Length").hide();
+        $(this).closest(".repeater-wrapper").find(".Inventory, .Aisle, .Row, .Shelf").hide();
         $(this).slideDown();
 
         // Manually initialize Select2 for both old and new selects
@@ -210,10 +211,10 @@ $(function () {
       } else {
         // Show error message using Swal.fire
         Swal.fire({
-          title: 'Error',
-          text: 'Please fill in all required fields.',
+          title: errorTranslation,
+          text: requiredFieldsTranslation,
           icon: 'error',
-          confirmButtonText: 'OK',
+          confirmButtonText: doneTranslation,
           customClass: {
             confirmButton: 'btn btn-primary'
           },
@@ -390,7 +391,83 @@ $(function () {
     $('#totalValue').text(totalPrice.toFixed(2) + lydTranslation);
   });
 
+  // Initially hide the dimensions fields
+  $(".Height").hide();
+  $(".Width").hide();
+  $(".Length").hide();
 
+
+
+  $(document).on("change", "#parcel_types_id", function (event) {
+    // Get the selected value
+    var selectedParcelTypeId = $(this).val();
+
+    // Find the closest repeater-wrapper (parent container for the current repeated item)
+    var repeaterWrapper = $(this).closest(".repeater-wrapper");
+
+    // Find dimensions fields within the current repeated item
+    var heightField = repeaterWrapper.find(".Height");
+    var widthField = repeaterWrapper.find(".Width");
+    var lengthField = repeaterWrapper.find(".Length");
+
+    // Toggle the visibility of the dimensions fields based on the condition
+    if (selectedParcelTypeId == 1) {
+        // Show the dimensions fields
+        heightField.show();
+        widthField.show();
+        lengthField.show();
+    } else {
+        // Hide the dimensions fields
+        heightField.hide();
+        widthField.hide();
+        lengthField.hide();
+    }
+});
+
+// Additional handling for initial state of dynamically added items
+$(document).on("click", "#add-item-btn", function () {
+    // When a new item is added, hide dimensions fields by default
+    $(this).closest(".repeater-wrapper").find(".Height, .Width, .Length").hide();
+});
+
+// Initially hide the inventory fields
+$(".Inventory, .Aisle, .Row, .Shelf").hide();
+
+// Event handler for change in addToInventory checkbox
+$(document).on("change", '.switch-input', function () {
+    // Get the state of the checkbox
+    var addToInventoryChecked = $(this).is(":checked");
+
+    // Find the closest repeater-wrapper (parent container for the current repeated item)
+    var repeaterWrapper = $(this).closest(".repeater-wrapper");
+
+    // Find inventory fields within the current repeated item
+    var inventoryField = repeaterWrapper.find(".Inventory");
+    var aisleField = repeaterWrapper.find(".Aisle");
+    var rowField = repeaterWrapper.find(".Row");
+    var shelfField = repeaterWrapper.find(".Shelf");
+
+    // Toggle the visibility of the inventory fields based on the state of the checkbox
+    if (addToInventoryChecked) {
+        // Show the inventory fields
+        inventoryField.show();
+        aisleField.show();
+        rowField.show();
+        shelfField.show();
+    } else {
+        // Hide the inventory fields
+        inventoryField.hide();
+        aisleField.hide();
+        rowField.hide();
+        shelfField.hide();
+    }
+});
+
+// Additional handling for initial state of dynamically added items
+$(document).on("click", "#add-item-btn", function () {
+    // When a new item is added, hide inventory fields by default
+    $(this).closest(".repeater-wrapper").find(".Inventory, .Aisle, .Row, .Shelf").hide();
+});
 
 
 

@@ -15,7 +15,7 @@ return new class extends Migration {
       $table->unsignedBigInteger('customer_id')->nullable();
       $table->string('tracking_no', 50);
       $table->string('delivery_code', 50);
-      $table->string('current_status', 50);
+      $table->string('current_status', 50)->nullable();
       $table->decimal('amount', 10, 2);
       $table->decimal('shipmentPrice', 10, 2);
       $table->date('date');

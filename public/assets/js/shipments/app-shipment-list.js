@@ -15,7 +15,7 @@ $(function () {
       columns: [
         // columns according to JSON
         { data: '' },
-        { data: 'id' },
+        // { data: 'id' },
         { data: 'customerName' },
         { data: 'tracking_no' },
         { data: 'delivery_code' },

@@ -251,10 +251,11 @@ class ShipmentController extends Controller
         foreach ($shipments as $shipment) {
             $shipment->customerName = $shipment->customer ? $shipment->customer->first_name.' '.$shipment->customer->last_name : 'N/A';
             $shipment->totalAmount = number_format($shipment->amount + $shipment->shipmentPrice, 2);
-            $shipment->paymentStatus = $shipment->payment ? __($shipment->payment->status) : __('Unpaid');
-            $shipment->inventoryStatus =  InventoryItem::where('shipment_id', $shipment->id)->pluck('status')->first() ? __(InventoryItem::where('shipment_id', $shipment->id)->pluck('status')->first()) : __('Unallocated');
+            $shipment->paymentStatus = $shipment->payment ? '<span class="badge bg-label-success">'.__($shipment->payment->status).'</span>' :  '<span class="badge bg-label-warning">'.__('Unpaid').'</span>';
+            $shipment->inventoryStatus =  InventoryItem::where('shipment_id', $shipment->id)->pluck('status')->first() ? '<span class="badge bg-label-info">'.__(InventoryItem::where('shipment_id', $shipment->id)->pluck('status')->first()).'</span>' :'<span class="badge bg-label-danger">'. __('Unallocated').'</span>';
         }
         return Datatables::of($shipments)
+        ->rawColumns(['paymentStatus', 'inventoryStatus'])
         ->make(true);
     }
 }

@@ -14,9 +14,9 @@ class TripRouteController extends Controller
      */
     public function index()
     {
-        $countries = Country::all();
+        $countriesList = Country::all();
         $tripRoutes = TripRoute::all();
-        return view('trip_routes.index', compact('tripRoutes', 'countries'));
+        return view('trip_routes.index', compact('tripRoutes', 'countriesList'));
     }
 
     /**

@@ -471,5 +471,8 @@
   "Add Country": "إضافة دولة",
   "Add New Country": "إضافة دولة جديدة",
   "Add a country if it does not exist":"اضف دولة اذا لم تكن موجودة",
-  "Country added successfully":"تم اضافة الدولة بنجاح"
+  "Country added successfully":"تم اضافة الدولة بنجاح",
+  "Item Details": "تفاصيل العنصر",
+  "Please fill in all required fields": "يرجى ملء جميع الحقول المطلوبة",
+  "Receipt Summary": "ملخص الفاتورة"
 }

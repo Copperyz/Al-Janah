@@ -4,6 +4,7 @@ use App\Http\Controllers\Users;
 use App\Http\Controllers\Settings;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CouponsController;
 use App\Http\Controllers\FrontPagesController;
 use App\Http\Controllers\InventoryController;
@@ -132,6 +133,7 @@ Route::middleware(['auth'])->group(function () {
   //Coupon
   Route::get('coupon-verified/{id}', [CouponsController::class, 'checkCoupon'])->name('coupon.verified');
 
+  //Countries
+  Route::resource('countries', CountryController::class);
   
-
 });

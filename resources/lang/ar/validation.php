@@ -235,5 +235,6 @@ return [
     'currentPassword' => 'كلمة المرور الحالية',
     'new_password' => 'كلمة المرور الجديدة',
     'new_password_confirmation' => "تأكيد كلمة المرور الجديدة",
+    'country' => "الدولة"
   ],
 ];

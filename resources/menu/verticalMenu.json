@@ -33,6 +33,12 @@
       "slug": "permissions"
     },
     {
+      "url": "countries",
+      "icon": "menu-icon tf-icons ti ti-flag",
+      "name": "Countries",
+      "slug": "countries"
+    },
+    {
       "name": "Inventory",
       "icon": "menu-icon ti ti-building-warehouse",
       "slug": "inventory",

@@ -80,11 +80,9 @@
                                     <select id="form-repeater-1-4" class="select2 form-select" data-allow-clear="true"
                                         name="country">
                                         <option selected disabled>{{__('Select')}}</option>
-                                        <option value="Turkey">{{__('Turkey')}}</option>
-                                        <option value="China">{{__('China')}}</option>
-                                        <option value="Tunis">{{__('Tunis')}}</option>
-                                        <option value="Dubai">{{__('Dubai')}}</option>
-                                        <option value="Libya">{{__('Libya')}}</option>
+                                        @foreach($countriesList as $country)
+                                         <option value="{{$country->name}}"><i class="fis fi fi-{{$country->country_code}} rounded-circle me-2 fs-3"></i> {{$country->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">

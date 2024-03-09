@@ -7,7 +7,6 @@
 $(function () {
   // Variable declaration for table
   var dt_shipments_table = $('.shipment-list-table');
-
   // shipments datatable
   if (dt_shipments_table.length) {
     var dt_shipments = dt_shipments_table.DataTable({

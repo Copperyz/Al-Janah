@@ -20,7 +20,7 @@
                     <span class="app-brand-logo demo">@include('_partials.macros', [
                         'height' => 20,
                         'withbg' => "fill:
-                                                                #fff;",
+                                                                                    #fff;",
                     ])</span>
                     <span
                         class="app-brand-text demo menu-text fw-bold ms-2 ps-1">{{ config('variables.templateName') }}</span>
@@ -93,7 +93,7 @@
                     <li>
                         <a href="{{ route('login') }}" class="btn btn-primary"><span
                                 class="tf-icons ti ti-login scaleX-n1-rtl me-md-1"></span><span
-                                class="d-none d-md-block">{{ __('Sign In') }}</span></a>
+                                class="d-none d-md-block">{{ __('Sign in') }}</span></a>
                     </li>
                 @else
                     <li>

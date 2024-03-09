@@ -4,6 +4,7 @@ use App\Http\Controllers\Users;
 use App\Http\Controllers\Settings;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CouponsController;
 use App\Http\Controllers\FrontPagesController;
@@ -135,5 +136,8 @@ Route::middleware(['auth'])->group(function () {
 
   //Countries
   Route::resource('countries', CountryController::class);
+
+  //Cities
+  Route::resource('cities', CityController::class);
   
 });

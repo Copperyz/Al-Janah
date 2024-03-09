@@ -1,56 +1,23 @@
-/**
- * App eCommerce Add Product Script
- */
+
 'use strict';
-
-//Javascript to handle the e-commerce product add page
-
-//Jquery to handle the e-commerce product add page
 
 $(function () {
   // Select2
-
-  
-  //For form validation
-  const addCountryForm = document.getElementById('addCountryForm');
+  // add new city
   const submitButton = document.querySelector('button[type="submit"]');
-  let form = $(addCountryForm);
-  // Add New customer Form Validation
-  FormValidation.formValidation(addCountryForm, {
-    fields: {
-      countryd: {
-        validators: {
-          notEmpty: {
-            message: window.translations.required.replace(':attribute', window.translations.attributes.country)
-          },
-          
-        }
-      },
-      
-    },
-    plugins: {
-      trigger: new FormValidation.plugins.Trigger(),
-      bootstrap5: new FormValidation.plugins.Bootstrap5({
-        // Use this for enabling/changing valid/invalid class
-        eleValidClass: 'is-valid',
-        rowSelector: function (field, ele) {
-          // field is the field name & ele is the field element
-          return '.mb-3';
-        }
-      }),
-      submitButton: new FormValidation.plugins.SubmitButton(),
-      // Submit the form when all fields are valid
-      // defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
-      autoFocus: new FormValidation.plugins.AutoFocus()
-    }
-  }).on('core.form.valid', function () {
-    // Send the form data to back-end
-    // You need to grab the form data and create an Ajax request to send them
+
+  $('#addCityForm :submit').on('click', function (event) {
+    // Trigger the form submission when the button is clicked
+    $(this).closest('form').submit();
+  });
+
+  $('#addCityForm').on('submit', function (event) {
+    event.preventDefault();
     submitButton.setAttribute('disabled', true);
+    var form = $(this);
     var url = form.attr('action');
     var method = form.attr('method');
     var formData = form.serialize();
-
     $.ajax({
       url: url,
       method: method,
@@ -98,4 +65,5 @@ $(function () {
       }
     });
   });
+  
 });

@@ -39,6 +39,12 @@
       "slug": "countries"
     },
     {
+      "url": "cities",
+      "icon": "menu-icon tf-icons ti ti-city",
+      "name": "Cities",
+      "slug": "cities"
+    },
+    {
       "name": "Inventory",
       "icon": "menu-icon ti ti-building-warehouse",
       "slug": "inventory",

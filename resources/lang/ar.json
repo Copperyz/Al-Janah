@@ -476,5 +476,10 @@
   "Please fill in all required fields": "يرجى ملء جميع الحقول المطلوبة",
   "Receipt Summary": "ملخص الفاتورة",
   "Contact": "تواصل معنا",
-  "Rates": "سعر الشحن"
+  "Rates": "سعر الشحن",
+  "Add City":"إضافة مدينة",
+  "Add New City":"إضافة مدينة جديدة",
+  "Add a city if it does not exist":"اضف المدينة اذا لم تكن موجودة",
+  "Cities":"المدن",
+  "City added successfully":"تم إضافة المدينة بنجاح"
 }

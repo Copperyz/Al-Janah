@@ -270,7 +270,7 @@ $configData = Helper::appClasses();
             <div class="section m-0 text-center aljanah-services" style="padding: 60px 0;">
                 <div class="clearfix">
                     <div class="mx-auto center" style="max-width: 900px;">
-                        <h2 class="mb-0 fw-light ls1">Our branches</h2>
+                        <h2 class="mb-0 fw-light ls1">__('Our Warehouses')</h2>
                     </div>
                 </div>
             </div>
@@ -431,7 +431,7 @@ $configData = Helper::appClasses();
                         <div class="card accordion-item active">
                             <h2 class="accordion-header" id="headingOne">
                                 <button type="button" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordionOne" aria-expanded="true" aria-controls="accordionOne">
-                                    {{__('What are the characteristics of ( roll on / roll off ) ships?')}}
+                                    {{__('Express Air Freight')}}
                                 </button>
                             </h2>
 

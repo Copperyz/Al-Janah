@@ -282,7 +282,7 @@ $configData = Helper::appClasses();
                             <div class="grid-inner row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="entry-image">
-                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/1.jpg')}}" alt="Paris"></a>
+                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/2.png')}}" alt="Paris"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
@@ -300,7 +300,7 @@ $configData = Helper::appClasses();
                             <div class="grid-inner row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="entry-image">
-                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/1.jpg')}}" alt="Paris"></a>
+                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/4.png')}}" alt="Paris"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
@@ -318,7 +318,7 @@ $configData = Helper::appClasses();
                             <div class="grid-inner row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="entry-image">
-                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/1.jpg')}}" alt="Paris"></a>
+                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/w3-2.png')}}" alt="Paris"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
@@ -336,7 +336,7 @@ $configData = Helper::appClasses();
                             <div class="grid-inner row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="entry-image">
-                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/1.jpg')}}" alt="Paris"></a>
+                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/w4-1.png')}}" alt="Paris"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">

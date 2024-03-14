@@ -1,14 +1,14 @@
 <?php
 // Variables
 return [
-  'creatorName' => 'Pixinvent',
-  'creatorUrl' => 'https://pixinvent.com',
+  'creatorName' => 'Alajanh',
+  'creatorUrl' => 'https://janahx.com',
   'templateName' => 'ALJANAH',
   'templateSuffix' => 'Dashboard',
   'templateVersion' => '1.0.0',
   'templateFree' => false,
-  'templateDescription' => 'Start your development with a Dashboard for Bootstrap 5',
-  'templateKeyword' => 'dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5',
+  'templateDescription' => 'Aljanah Express Cargo System',
+  'templateKeyword' => 'Aljanah, Cargo, Express, Tracking, Shipment, fast, libya, turkey',
   'licenseUrl' => 'https://themeforest.net/licenses/standard',
   'livePreview' => 'https://demos.pixinvent.com/vuexy-html-admin-template/landing/',
   'productPage' => 'https://1.envato.market/vuexy_admin',

@@ -198,11 +198,11 @@
     color: #171a2a;
     border: 2px solid transparent;
   } */
-.btn-cta {
+/* .btn-cta {
   position: relative;
   padding: 10px 20px;
   border-radius: 7px;
-  /* border: 1px solid rgb(61, 106, 255); */
+  border: 1px solid rgb(61, 106, 255);
   border: 1px solid #8C271E;
   font-size: 14px;
   text-transform: uppercase;
@@ -219,7 +219,7 @@
 
 .btn-cta:hover {
   background: #8C271E;
-  /* background: rgb(61, 106, 255); */
+  background: rgb(61, 106, 255);
   box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815);
   -webkit-transition: all 0.2s ease-out;
   -moz-transition: all 0.2s ease-out;
@@ -248,6 +248,45 @@
   -ms-transform: skewX(-20deg);
   -o-transform: skewX(-20deg);
   transform: skewX(-20deg);
+} */
+.btn-cta {
+  padding: 1em 2em;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: #fff;
+  transition: all 1000ms;
+  font-size: 15px;
+  position: relative;
+  overflow: hidden;
+  outline: 2px solid #8C271E;
+}
+
+.btn-cta:hover {
+  color: #ffffff;
+  transform: scale(1.05);
+  outline: 2px solid #8C271E;
+  box-shadow: 4px 5px 17px -4px #8C271E;
+}
+
+.btn-cta::before {
+  content: "";
+  position: absolute;
+  left: -50px;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background-color: #8C271E;
+  transform: skewX(45deg);
+  z-index: -1;
+  transition: width 1000ms;
+}
+
+.btn-cta:hover::before {
+  width: 250%;
 }
 
 @keyframes sh02 {
@@ -290,7 +329,7 @@
         </div>
         <h2 class="hero-title">Your Goods,<br><span style="padding-left: 3em"> Our Mission</span>.</h2>
         <div class="hero-desc text-center">
-            <h4>Track Your Cargo From Anywhere</h4>
+            <h4 style="color:#fff !important">Track Your Cargo From Anywhere</h4>
             <a href="#" class="btn-cta">Track Shipment</a>
         </div>
         <!-- <img class="plane" src="/assets/0-plane-dark@2x.png" alt="jplane" /> -->

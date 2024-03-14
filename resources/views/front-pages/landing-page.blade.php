@@ -356,7 +356,7 @@ $configData = Helper::appClasses();
             </div>
     </section>
     <!-- Fun facts: Start -->
-    <section id="landingFunFacts" class="section-py landing-fun-facts">
+    <!-- <section id="landingFunFacts" class="section-py landing-fun-facts">
         <div class="container">
             <div class="row gy-3">
                 <div class="col-sm-6 col-lg-3">
@@ -409,7 +409,7 @@ $configData = Helper::appClasses();
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- Fun facts: End -->
     <!-- FAQ: Start -->
     <section id="landingFAQ" class="section-py bg-body landing-faq">

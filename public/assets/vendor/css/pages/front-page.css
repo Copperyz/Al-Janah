@@ -188,7 +188,8 @@ nav.layout-navbar.navbar-active::after {
   background: rgba(255, 255, 255, 0.38);
 }
 .dark-style .layout-navbar .navbar.landing-navbar .navbar-nav .nav-link {
-  color: #cfd3ec;
+  /* color: #cfd3ec; */
+  color: #171a2a;
 }
 .dark-style .layout-navbar .navbar.landing-navbar .navbar-nav .show > .nav-link,
 .dark-style .layout-navbar .navbar.landing-navbar .navbar-nav .active > .nav-link,

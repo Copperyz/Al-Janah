@@ -330,7 +330,7 @@
         <h2 class="hero-title">Your Goods,<br><span style="padding-left: 3em"> Our Mission</span>.</h2>
         <div class="hero-desc text-center">
             <h4 style="color:#fff !important">Track Your Cargo From Anywhere</h4>
-            <a href="#" class="btn-cta">Track Shipment</a>
+            <a href="{{route('track-shipment')}}" class="btn-cta">Track Shipment</a>
         </div>
         <!-- <img class="plane" src="/assets/0-plane-dark@2x.png" alt="jplane" /> -->
         <!-- <img class="plane" src="/assets/0-plane-dark@2x.png" alt="jplane" /> -->

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\UserConfirmationEmail;
+use App\Mail\TestMail;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Customer;
@@ -59,7 +60,13 @@ class AuthController extends Controller
   }
   public function Register(Request $request)
   {
-    
+  //   try {
+  //     Mail::to('henryalabed30@gmail.com')->send(new TestMail());
+  //     // Email sent successfully
+  // } catch (\Exception $e) {
+  //     // Error occurred while sending email
+  //     dd($e->getMessage());
+  // }
     Validator::make($request->all(), [
       'name' => ['required', 'string', 'min:2', 'max:30'],
       'email' => ['required', 'email', Rule::unique(User::class)],

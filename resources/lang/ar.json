@@ -482,5 +482,17 @@
   "Add a city if it does not exist":"اضف المدينة اذا لم تكن موجودة",
   "Cities":"المدن",
   "City added successfully":"تم إضافة المدينة بنجاح",
-  "Our Warehouses":"مخازننا"
+  "Our Warehouses":"مخازننا",
+  "What items are prohibited from express air freight?":"ما المواد المحظورة على الشحن الجوي السريع؟",
+  "For safety reasons, we prohibit the shipment of hazardous materials, illegal substances, batteries, perishable goods without proper packaging, and live animals. Please refer to our full list of prohibited items for more details.":"لأسباب تتعلق بالسلامة، نمنع شحن المواد الخطرة والمواد غير القانونية والبطاريات والسلع سريعة التلف بدون تغليف مناسب والحيوانات الحية. يُرجى الرجوع إلى قائمتنا الكاملة بالمواد المحظورة لمزيد من التفاصيل.",
+  "Is insurance available for my shipments?":"هل يتوفر تأمين لشحناتي؟",
+  "Yes, we offer a range of insurance options to protect your shipment against loss or damage during transit. Contact our customer service for more information on coverage and costs.":"نعم، نحن نقدم مجموعة من خيارات التأمين لحماية شحناتك من الفقدان أو التلف أثناء النقل. اتصل بخدمة العملاء للحصول على مزيد من المعلومات حول التغطية والتكاليف.",
+  "How do you ensure the security of my shipment?":"كيف تضمنون أمن شحناتي؟",
+  "We prioritize the security of your shipments with measures like 24/7 surveillance at our facilities, background checks for our staff, and secure transportation methods.":"نضع أمن شحناتك على رأس أولوياتنا من خلال إجراءات مثل المراقبة على مدار الساعة طوال أيام الأسبوع في منشآتنا، والتحقق من سجلات الموظفين لدينا، ووسائل النقل الآمنة.",
+  "Can I ship oversized or heavy items?":"هل يمكنني شحن البضائع كبيرة الحجم أو الثقيلة؟",
+  "Absolutely. We have special services for oversized and heavy items, including custom crating and handling equipment to ensure safe and efficient transport.":"بالتأكيد. لدينا خدمات خاصة للسلع كبيرة الحجم والثقيلة، بما في ذلك التغليف المخصص ومعدات المناولة لضمان نقل آمن وفعّال.",
+  "What is the maximum weight for express air freight?":"ما هو الحد الأقصى لوزن الشحنات الجوية السريعة؟",
+  "The maximum weight for express air freight varies by destination and aircraft. Please contact us with the specifics of your shipment for an accurate assessment.":"يختلف الحد الأقصى لوزن الشحن الجوي السريع حسب الوجهة والطائرة. يُرجى الاتصال بنا بمواصفات شحنتك للحصول على تقييم دقيق.",
+  "How are shipping costs calculated?":"كيف يتم حساب تكاليف الشحن؟",
+  "Shipping costs are based on the weight, dimensions, destination, and speed of delivery of your shipment. Additional services like insurance or special handling may affect the final cost.":"تُحسب تكاليف الشحن بناءً على وزن وأبعاد ووجهة وسرعة توصيل شحنتك. قد تؤثر الخدمات الإضافية مثل التأمين أو المناولة الخاصة على التكلفة النهائية."
 }

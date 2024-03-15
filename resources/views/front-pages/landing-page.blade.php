@@ -270,7 +270,7 @@ $configData = Helper::appClasses();
             <div class="section m-0 text-center aljanah-services" style="padding: 60px 0;">
                 <div class="clearfix">
                     <div class="mx-auto center" style="max-width: 900px;">
-                        <h2 class="mb-0 fw-light ls1">__('Our Warehouses')</h2>
+                        <h2 class="mb-0 fw-light ls1">{{__('Our Warehouses')}}</h2>
                     </div>
                 </div>
             </div>
@@ -431,141 +431,75 @@ $configData = Helper::appClasses();
                         <div class="card accordion-item active">
                             <h2 class="accordion-header" id="headingOne">
                                 <button type="button" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordionOne" aria-expanded="true" aria-controls="accordionOne">
-                                    {{__('Express Air Freight')}}
+                                    {{__('What items are prohibited from express air freight?')}}
                                 </button>
                             </h2>
 
                             <div id="accordionOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    {{__('Ro-Ro ships are vessels designed to transport vehicles on wheels, i.e. cars, trucks or industrial vehicles. Sometimes they have built-in ramps for the loading and unloading of vehicles. The fact that the cargo can access the ship under its own steam removes the need for a crane, thus reducing the intermediary costs related to loading, unloading and stowage. These ships can only carry wheeled vehicles and mustn’t be confused with Ro-Pax vessels, like ferries, which combine the transport of vehicles and passengers')}}
+                                    {{__('For safety reasons, we prohibit the shipment of hazardous materials, illegal substances, batteries, perishable goods without proper packaging, and live animals. Please refer to our full list of prohibited items for more details.')}}
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="card accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionTwo" aria-expanded="false" aria-controls="accordionTwo">
-                                    {{__('What is the purpose of a ( roll on / roll off ) ship?')}}
-                                </button>
-                            </h2>
-                            <div id="accordionTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    {{__('To transport wheeled cargo, such as all kinds of vehicles and machinary with wheels. The cargo can be loaded using the ramp, with no need for cranes or intermediaries, thereby making for lower costs and risks')}}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionThree" aria-expanded="false" aria-controls="accordionThree">
-                                    {{__('What are container ships?')}}
-                                </button>
-                            </h2>
-                            <div id="accordionThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    {{__('Vessels designed to transport freight in containers. They monopolize the majority of international dry cargo transport and represent more than half of all maritime trade. They are intended to transport standard containers according to ISO regulations')}}.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card accordion-item">
-                            <h2 class="accordion-header" id="headingFour">
-                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionFour" aria-expanded="false" aria-controls="accordionFour">
-                                    {{__('What is a ship agent?')}}
-                                </button>
-                            </h2>
-                            <div id="accordionFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    {{__('A ship agent is an independent shipping agent who acts on behalf of the ship owner. Ship agents are responsible for a ship when it comes into port and conduct all of the procedures required to streamline its dock time in order to reduce the cost of the operation')}}.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card accordion-item">
-                            <h2 class="accordion-header" id="headingFive">
-                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionFive" aria-expanded="false" aria-controls="accordionFive">
-                                    {{__('What is multimodal freight transport?')}}
-                                </button>
-                            </h2>
-                            <div id="accordionFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    {{__('Multimodal transport consists of carrying a single cargo by different modes of transport (air, land, ocean…) using Intermodal Transport Units (ITU) such as containers, semi-trailers or swap bodies (interchangeable containers)')}}
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- <div class="card accordion-item">
-                            <h2 class="accordion-header" id="headingSix">
-                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionSix" aria-expanded="false" aria-controls="accordionSix">
-                                    {{__('What is the difference between a forwarding and a customs agent?')}}
-                                </button>
-                            </h2>
-                            <div id="accordionSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    {{__('A forwarding agent or forwarder is a transport operator. They act on behalf and in favour of importers and exporters, organising safe, efficient and economical goods transport. In other words, a professional expert at your disposal for the purposes of hiring transport, selecting the most efficient route, taking out insurance policies, choosing the appropriate packaging and taking care of storage where required. A customs agent is responsible for managing all customs duties and documents required by the tax administration in every country for the traffic of goods between states. Their importance lies in knowing the legal regulations in order to satisfy the tax authorities and avoid last-minute surprises such as tax duties or surcharges')}}.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card accordion-item">
-                            <h2 class="accordion-header" id="headingSeven">
-                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionSeven" aria-expanded="false" aria-controls="accordionSeven">
-                                    {{__('How do customs controls work?')}}
-                                </button>
-                            </h2>
-                            <div id="accordionSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <ol>
-                                        <li>{{__('Customs declaration: Must be presented to the customs authority in order to identify the goods to be transported and their destination')}}.
-                                        </li>
-                                        <li>{{__('Goods inspection by the customs agents, to check that they match the declaration')}}.
-                                        </li>
-                                        <li>{{__('Verification that trade policy norms have been met and amounts due have been paid (import and export duties)')}}
-                                        </li>
-                                    </ol>
-
-                                </div>
-                            </div>
-                        </div> -->
+                       
+                        
                         <div class="card accordion-item">
                             <h2 class="accordion-header" id="headingEight">
                                 <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionEight" aria-expanded="false" aria-controls="accordionEight">
-                                    {{__('What is the purpose of international customs?')}}
+                                    {{__('Is insurance available for my shipments?')}}
                                 </button>
                             </h2>
                             <div id="accordionEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    {{__('The role of customs control is to regulate and inspect shipments in order to guarantee that commercial exchanges between different countries proceed legally, that they comply with all tax and duty obligations and with all other requirements related to their entry or exit. As well as guaranteeing compliance with international trade rules, collecting taxes and duties due where appropriate, customs controls are a fundamental mechanism for preventing money laundering, tax fraud and drug trafficking')}}
+                                    {{__('Yes, we offer a range of insurance options to protect your shipment against loss or damage during transit. Contact our customer service for more information on coverage and costs.')}}
                                 </div>
                             </div>
                         </div>
                         <div class="card accordion-item">
                             <h2 class="accordion-header" id="headingNine">
                                 <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionNine" aria-expanded="false" aria-controls="accordionNine">
-                                    {{__('What is customs management?')}}
+                                    {{__('How do you ensure the security of my shipment?')}}
                                 </button>
                             </h2>
                             <div id="accordionNine" class="accordion-collapse collapse" aria-labelledby="headingNine" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    {{__('The management of all formalities required by the customs authorities. It is important for these formalities to run smoothly and trouble-free in order to prevent delays due to bureaucratic issues. These formalities are therefore usually entrusted to a customs agent who will carry them out on behalf of the freight owner')}}.
+                                    {{__('We prioritize the security of your shipments with measures like 24/7 surveillance at our facilities, background checks for our staff, and secure transportation methods.')}}.
                                 </div>
                             </div>
                         </div>
                         <div class="card accordion-item">
                             <h2 class="accordion-header" id="headingTen">
                                 <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionTen" aria-expanded="false" aria-controls="accordionTen">
-                                    {{__('What is customs clearance?')}}
+                                    {{__('Can I ship oversized or heavy items?')}}
                                 </button>
                             </h2>
                             <div id="accordionTen" class="accordion-collapse collapse" aria-labelledby="headingTen" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    {{__('All formalities and requirements to be completed for goods entering and leaving a specific national territory in order to control and approve their transportation. The customs agent is responsible for completing these formalities on behalf of the importer or exporter, and for submitting a declaration of information to the competent customs authority in each case')}}.
+                                    {{__('Absolutely. We have special services for oversized and heavy items, including custom crating and handling equipment to ensure safe and efficient transport.')}}
                                 </div>
                             </div>
                         </div>
                         <div class="card accordion-item">
                             <h2 class="accordion-header" id="headingEleven">
                                 <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionEleven" aria-expanded="false" aria-controls="accordionEleven">
-                                    {{__('What is completed customs clearance?')}}
+                                    {{__('What is the maximum weight for express air freight?')}}
                                 </button>
                             </h2>
                             <div id="accordionEleven" class="accordion-collapse collapse" aria-labelledby="headingEleven" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    {{__('Customs clearance means that the customs procedure has been completed, i.e. that all of the paperwork has been submitted and that the shipment can continue on its way')}}.
+                                    {{__('The maximum weight for express air freight varies by destination and aircraft. Please contact us with the specifics of your shipment for an accurate assessment.')}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card accordion-item">
+                            <h2 class="accordion-header" id="headingTwelve">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionTwelve" aria-expanded="false" aria-controls="accordionTwelve">
+                                    {{__('How are shipping costs calculated?')}}
+                                </button>
+                            </h2>
+                            <div id="accordionTwelve" class="accordion-collapse collapse" aria-labelledby="headingTwelve" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    {{__('Shipping costs are based on the weight, dimensions, destination, and speed of delivery of your shipment. Additional services like insurance or special handling may affect the final cost.')}}
                                 </div>
                             </div>
                         </div>

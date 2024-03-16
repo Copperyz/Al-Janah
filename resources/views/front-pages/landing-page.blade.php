@@ -286,12 +286,12 @@ $configData = Helper::appClasses();
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
-                                    <span class="before-heading fst-normal">Press &amp; Media</span>
+                                    <span class="before-heading fst-normal">China</span>
                                     <div class="entry-title nott">
                                         <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
                                     </div>
                                     <div class="entry-content">
-                                        <a href="{{route('branches-page', 'Italy')}}" class="more-link">Read more <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                        <a href="{{route('branches-page', 'China')}}" class="more-link">Read more <i class="ti ti-chevron-right" style="width: 12px"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -304,12 +304,12 @@ $configData = Helper::appClasses();
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
-                                    <span class="before-heading fst-normal">Press &amp; Media</span>
+                                    <span class="before-heading fst-normal">Libya</span>
                                     <div class="entry-title nott">
                                         <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
                                     </div>
                                     <div class="entry-content">
-                                        <a href="#" class="more-link">Read more <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                        <a href="{{route('branches-page', 'Libya')}}" class="more-link">Read more <i class="ti ti-chevron-right" style="width: 12px"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -322,12 +322,12 @@ $configData = Helper::appClasses();
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
-                                    <span class="before-heading fst-normal">Press &amp; Media</span>
+                                    <span class="before-heading fst-normal">Dubai</span>
                                     <div class="entry-title nott">
                                         <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
                                     </div>
                                     <div class="entry-content">
-                                        <a href="#" class="more-link">Read more <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                        <a href="{{route('branches-page', 'Dubai')}}" class="more-link">Read more <i class="ti ti-chevron-right" style="width: 12px"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -340,12 +340,12 @@ $configData = Helper::appClasses();
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
-                                    <span class="before-heading fst-normal">Press &amp; Media</span>
+                                    <span class="before-heading fst-normal">Italy</span>
                                     <div class="entry-title nott">
                                         <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
                                     </div>
                                     <div class="entry-content">
-                                        <a href="#" class="more-link">Read more <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                        <a href="{{route('branches-page', 'Italy')}}" class="more-link">Read more <i class="ti ti-chevron-right" style="width: 12px"></i></a>
                                     </div>
                                 </div>
                             </div>

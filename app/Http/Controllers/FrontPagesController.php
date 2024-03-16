@@ -26,10 +26,30 @@ class FrontPagesController extends Controller
   }
 
   public function ourBranches($branch){
-    // return $branch;
 
     $pageConfigs = ['myLayout' => 'blank'];
-    return view('front-pages.branches-page', compact('pageConfigs'));
+    $numberOfImage = 0;
+     switch ($branch) {
+      case 'Italy':
+        $numberOfImage = 5;
+        break;
+      case 'China':
+        $numberOfImage = 5;
+        break;
+      case 'Libya':
+        $numberOfImage = 5;
+        break;
+      case 'Dubai':
+        $numberOfImage = 5;
+        break;
+      case 'Turkey':
+        $numberOfImage = 6;
+        break;
+      default:
+        # code...
+        break;
+    }
+    return view('front-pages.branches-page', compact('pageConfigs', 'branch', 'numberOfImage'));
   }
 
   public function trackShipmentData(Request $request)

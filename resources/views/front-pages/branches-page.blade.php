@@ -76,22 +76,11 @@ $configData = Helper::appClasses();
         <section id="slider" class="slider-element swiper_wrapper customjs h-auto">
             <div class="swiper-container swiper-parent slider-top">
                 <div class="swiper-wrapper h-auto">
-                    <div class="swiper-slide" style="background-image: url({{asset('assets/img/backgrounds/2.jpg')}})">
+                    @for($i = 1; $i <= $numberOfImage; $i++)
+                    <div class="swiper-slide" 
+                        style="background-image: url({{asset('assets/img/front-pages/landing-page/' .$branch. '/' .$i. '.jpg')}})">
                     </div>
-                    <div class="swiper-slide" style="background-image: url({{asset('assets/img/backgrounds/3.jpg')}})">
-                    </div>
-                    <div class="swiper-slide" style="background-image: url({{asset('assets/img/backgrounds/1.jpg')}})">
-                    </div>
-                    <div class="swiper-slide" style="background-image: url({{asset('assets/img/backgrounds/5.jpg')}})">
-                    </div>
-                    <div class="swiper-slide" style="background-image: url({{asset('assets/img/backgrounds/2.jpg')}})">
-                    </div>
-                    <div class="swiper-slide" style="background-image: url({{asset('assets/img/backgrounds/3.jpg')}})">
-                    </div>
-                    <div class="swiper-slide" style="background-image: url({{asset('assets/img/backgrounds/1.jpg')}})">
-                    </div>
-                    <div class="swiper-slide" style="background-image: url({{asset('assets/img/backgrounds/5.jpg')}})">
-                    </div>
+                    @endfor
                 </div>
                 <!-- Add Arrows -->
                 <div class="slider-arrow-left"><i class="ti ti-chevron-left"></i></div>
@@ -99,14 +88,9 @@ $configData = Helper::appClasses();
             </div>
             <div class="swiper-container slider-thumbs">
                 <div class="swiper-wrapper h-auto">
-                    <div class="swiper-slide"> <img src="{{asset('assets/img/backgrounds/2.jpg')}}" alt="image"></div>
-                    <div class="swiper-slide"> <img src="{{asset('assets/img/backgrounds/3.jpg')}}" alt="image"></div>
-                    <div class="swiper-slide"> <img src="{{asset('assets/img/backgrounds/1.jpg')}}" alt="image"></div>
-                    <div class="swiper-slide"> <img src="{{asset('assets/img/backgrounds/5.jpg')}}" alt="image"></div>
-                    <div class="swiper-slide"> <img src="{{asset('assets/img/backgrounds/2.jpg')}}" alt="image"></div>
-                    <div class="swiper-slide"> <img src="{{asset('assets/img/backgrounds/3.jpg')}}" alt="image"></div>
-                    <div class="swiper-slide"> <img src="{{asset('assets/img/backgrounds/1.jpg')}}" alt="image"></div>
-                    <div class="swiper-slide"> <img src="{{asset('assets/img/backgrounds/5.jpg')}}" alt="image"></div>
+                    @for($i = 1; $i <= $numberOfImage; $i++)
+                        <div class="swiper-slide"> <img src="{{asset('assets/img/front-pages/landing-page/' .$branch. '/' .$branch. '/' .$i. '.jpg')}}" alt="image"></div>
+                    @endfor
                 </div>
             </div>
         </section>

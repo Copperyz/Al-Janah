@@ -42,7 +42,10 @@ class FrontPagesController extends Controller
       case 'Dubai':
         $numberOfImage = 5;
         break;
-      case 'Turkey':
+      case 'Turkey1':
+        $numberOfImage = 5;
+        break;
+      case 'Turkey2':
         $numberOfImage = 6;
         break;
       default:

@@ -327,10 +327,11 @@
           <!-- <img class="map" src="/assets/map-centered.png" alt="jmap" /> -->
           <img class="map" src="{{asset('assets/img/front-pages/landing-page/map.avif')}}" alt="jmap" />
         </div>
-        <h2 class="hero-title">Your Goods,<br><span style="padding-left: 3em"> Our Mission</span>.</h2>
+        <h2 class="hero-title">{{__('Your Goods,')}}<br><span style="padding-left: 3em"> {{__('Our Mission')}}</span>.</h2>
         <div class="hero-desc text-center">
-            <h4 style="color:#fff !important">Track Your Cargo From Anywhere</h4>
-            <a href="{{route('track-shipment')}}" class="btn-cta">Track Shipment</a>
+            <h4 style="color:#fff !important">{{__('Track Your Cargo From Anywhere')}}</h4>
+            <!-- <a href="{{route('track-shipment')}}" class="btn-cta">{{__('Track Shipment')}}</a> -->
+            <a href="{{route('track-shipment')}}" class="btn-cta">{{__('Tracking')}}</a>
         </div>
         <!-- <img class="plane" src="/assets/0-plane-dark@2x.png" alt="jplane" /> -->
         <!-- <img class="plane" src="/assets/0-plane-dark@2x.png" alt="jplane" /> -->

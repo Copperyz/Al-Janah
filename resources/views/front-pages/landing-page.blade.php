@@ -175,7 +175,7 @@ $configData = Helper::appClasses();
             <div class="section m-0 text-center" style="padding: 60px 0;">
                 <div class="container clearfix">
                     <div class="mx-auto center" style="max-width: 900px;">
-                        <h2 class="mb-0 fw-light ls1">We enjoy working on the Services &amp; Products we provide as much as you need them. This help us in delivering your Goals easily. Browse through the wide range of services we provide.</h2>
+                        <h2 class="mb-0 fw-light ls1">{{__('Skip the slow lane with our express shipping. Get your stuff there lightning fast - explore and see!')}}</h2>
                     </div>
                 </div>
             </div>
@@ -291,7 +291,7 @@ $configData = Helper::appClasses();
                                         <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
                                     </div>
                                     <div class="entry-content">
-                                        <a href="{{route('branches-page', 'China')}}" class="more-link">Read more <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                        <a href="{{route('branches-page', 'China')}}" class="more-link">Details <i class="ti ti-chevron-right" style="width: 12px"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -309,7 +309,7 @@ $configData = Helper::appClasses();
                                         <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
                                     </div>
                                     <div class="entry-content">
-                                        <a href="{{route('branches-page', 'Libya')}}" class="more-link">Read more <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                        <a href="{{route('branches-page', 'Libya')}}" class="more-link">Details <i class="ti ti-chevron-right" style="width: 12px"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -327,7 +327,7 @@ $configData = Helper::appClasses();
                                         <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
                                     </div>
                                     <div class="entry-content">
-                                        <a href="{{route('branches-page', 'Dubai')}}" class="more-link">Read more <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                        <a href="{{route('branches-page', 'Dubai')}}" class="more-link">Details <i class="ti ti-chevron-right" style="width: 12px"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -345,7 +345,43 @@ $configData = Helper::appClasses();
                                         <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
                                     </div>
                                     <div class="entry-content">
-                                        <a href="{{route('branches-page', 'Italy')}}" class="more-link">Read more <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                        <a href="{{route('branches-page', 'Italy')}}" class="more-link">Details <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="entry branches-padding-bottom col-md-6">
+                            <div class="grid-inner row align-items-center">
+                                <div class="col-lg-6">
+                                    <div class="entry-image">
+                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/w4-1.png')}}" alt="Paris"></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
+                                    <span class="before-heading fst-normal">Turkey</span>
+                                    <div class="entry-title nott">
+                                        <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
+                                    </div>
+                                    <div class="entry-content">
+                                        <a href="{{route('branches-page', 'Turkey1')}}" class="more-link">Details <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="entry branches-padding-bottom col-md-6">
+                            <div class="grid-inner row align-items-center">
+                                <div class="col-lg-6">
+                                    <div class="entry-image">
+                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/w4-1.png')}}" alt="Paris"></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
+                                    <span class="before-heading fst-normal">Turkey</span>
+                                    <div class="entry-title nott">
+                                        <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
+                                    </div>
+                                    <div class="entry-content">
+                                        <a href="{{route('branches-page', 'Turkey2')}}" class="more-link">Details <i class="ti ti-chevron-right" style="width: 12px"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -537,8 +573,8 @@ $configData = Helper::appClasses();
             <div class="text-center mb-3 pb-1">
                 <span class="badge bg-label-primary">{{__('Contact US')}}</span>
             </div>
-            <h3 class="text-center mb-1"><span class="section-title">{{__("Let's work")}}</span> {{__('together')}}</h3>
-            <p class="text-center mb-4 mb-lg-5 pb-md-3">{{__('Any question or remark? just write us a message')}}</p>
+            <h3 class="text-center mb-1"><span class="section-title">{{__("Get in touch")}}</span></h3>
+            <p class="text-center mb-4 mb-lg-5 pb-md-3">{{__('We read every message')}}</p>
             <div class="row gy-4">
                 <div class="col-lg-5">
                     <div class="contact-img-box position-relative border p-2 h-100">
@@ -551,7 +587,7 @@ $configData = Helper::appClasses();
                                         <div>
                                             <p class="mb-0">{{__('Email')}}</p>
                                             <h5 class="mb-0">
-                                                <a href="mailto:example@gmail.com" class="text-heading">example@gmail.com</a>
+                                                <a href="mailto:info@janahx.com<" class="text-heading">info@janahx.com</a>
                                             </h5>
                                         </div>
                                     </div>
@@ -563,8 +599,7 @@ $configData = Helper::appClasses();
                                         </div>
                                         <div>
                                             <p class="mb-0">{{__('Phone')}}</p>
-                                            <h5 class="mb-0"><a href="tel:+1234-568-963" class="text-heading">+1234 568
-                                                    963</a></h5>
+                                            <h5 class="mb-0"><a href="tel:+905538093793" class="text-heading">{{__('+90-553-809-3793')}}</a></h5>
                                         </div>
                                     </div>
                                 </div>
@@ -575,10 +610,9 @@ $configData = Helper::appClasses();
                 <div class="col-lg-7">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="mb-1">{{__('Send a message')}}</h4>
+                            <h4 class="mb-1">{{__('Info panel')}}</h4>
                             <p class="mb-4">
-                                {{__('If you would like to discuss anything related to shipping, prices, tracking, partnerships,')}}<br class="d-none d-lg-block" />
-                                {{__('or have pre-shipping questions, you’re at the right place')}}.
+                                {{__("You're in the right place for everything related to shipping.")}}<br class="d-none d-lg-block" />
                             </p>
                             <form>
                                 <div class="row g-3">
@@ -595,7 +629,7 @@ $configData = Helper::appClasses();
                                         <textarea id="contact-form-message" class="form-control" rows="8" placeholder="Write a message"></textarea>
                                     </div>
                                     <div class="col-12">
-                                        <button type="submit" class="btn btn-primary">{{__('Send now')}}</button>
+                                        <button type="submit" class="btn btn-primary">{{__('Send')}}</button>
                                     </div>
                                 </div>
                             </form>

@@ -29,11 +29,11 @@ $configData = Helper::appClasses();
     <div class="faq-header d-flex flex-column landing-hero justify-content-center align-items-center rounded"
         style="min-height: 100vh !important;">
         <h3 class="text-center text-primary hero-title display-6 fw-bold">
-            {{__('Track Your Shipment Status')}}
+            {{__('Track your shipment')}}
         </h3>
         <div class="input-wrapper my-3 input-group input-group-lg input-group-merge">
             <span class="input-group-text" id="basic-addon1"><i class="ti ti-search"></i></span>
-            <input type="text" id="trackingNumber" class="form-control" placeholder="{{__('Tracking Number')}}"
+            <input type="text" id="trackingNumber" class="form-control" placeholder="{{__('enter tracking code')}}"
                 aria-label="Search" aria-describedby="basic-addon1" />
         </div>
 
@@ -42,7 +42,7 @@ $configData = Helper::appClasses();
                 <button class="btn btn-primary btn-lg waves-effect waves-light px-5"
                     onclick="searchShipment(event)">
                     <span id="btnSpinner" class="spinner-grow visually-hidden" role="status" aria-hidden="true"></span>
-                    {{__('Search')}}</button>
+                    {{__('Where's my cargo')}}</button>
             </div>
         </div>
         <div class="animate__fadeInDown" id="searchResults" style="margin-top: 2em;">

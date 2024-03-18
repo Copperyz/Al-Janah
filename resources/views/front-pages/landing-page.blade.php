@@ -175,7 +175,7 @@ $configData = Helper::appClasses();
             <div class="section m-0 text-center" style="padding: 60px 0;">
                 <div class="container clearfix">
                     <div class="mx-auto center" style="max-width: 900px;">
-                        <h2 class="mb-0 fw-light ls1">{{__('Skip the slow lane with our express shipping. Get your stuff there lightning fast - explore and see!')}}</h2>
+                        <h2 class="mb-0 fw-normal ls1">{{__('Skip the slow lane with our express shipping. Get your stuff there lightning fast - explore and see!')}}</h2>
                     </div>
                 </div>
             </div>
@@ -267,10 +267,10 @@ $configData = Helper::appClasses();
 
     <section class="section">
         <div class="mt-5" style="overflow: hidden;">
-            <div class="section m-0 text-center aljanah-services" style="padding: 60px 0;">
+            <div class="section m-0 text-center bg-body" style="padding: 60px 0;">
                 <div class="clearfix">
                     <div class="mx-auto center" style="max-width: 900px;">
-                        <h2 class="mb-0 fw-light ls1">{{__('Our Warehouses')}}</h2>
+                        <h2 class="mb-0 fw-normal ls1">{{__('Our Warehouses')}}</h2>
                     </div>
                 </div>
             </div>
@@ -288,10 +288,10 @@ $configData = Helper::appClasses();
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
                                     <span class="before-heading fst-normal">China</span>
                                     <div class="entry-title nott">
-                                        <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
+                                        <h3 class="fw-normal"><a href="#">{{__('Guangdong - Shanghai')}}</a></h3>
                                     </div>
                                     <div class="entry-content">
-                                        <a href="{{route('branches-page', 'China')}}" class="more-link">Details <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                        <a href="{{route('branches-page', 'China')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -306,10 +306,10 @@ $configData = Helper::appClasses();
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
                                     <span class="before-heading fst-normal">Libya</span>
                                     <div class="entry-title nott">
-                                        <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
+                                        <h3 class="fw-normal"><a href="#">{{__('Tripoli - Misurata - Benghazi')}}</a></h3>
                                     </div>
                                     <div class="entry-content">
-                                        <a href="{{route('branches-page', 'Libya')}}" class="more-link">Details <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                        <a href="{{route('branches-page', 'Libya')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -324,10 +324,10 @@ $configData = Helper::appClasses();
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
                                     <span class="before-heading fst-normal">Dubai</span>
                                     <div class="entry-title nott">
-                                        <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
+                                        <h3 class="fw-normal"><a href="#">{{__('Al Hamriya - Jebel Ali - Fujairah - Mina Zayed - Khor Fakkan')}}</a></h3>
                                     </div>
                                     <div class="entry-content">
-                                        <a href="{{route('branches-page', 'Dubai')}}" class="more-link">Details <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                        <a href="{{route('branches-page', 'Dubai')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -345,7 +345,7 @@ $configData = Helper::appClasses();
                                         <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
                                     </div>
                                     <div class="entry-content">
-                                        <a href="{{route('branches-page', 'Italy')}}" class="more-link">Details <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                        <a href="{{route('branches-page', 'Italy')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -360,10 +360,10 @@ $configData = Helper::appClasses();
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
                                     <span class="before-heading fst-normal">Turkey</span>
                                     <div class="entry-title nott">
-                                        <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
+                                        <h3 class="fw-normal"><a href="#">{{__('Başakşehir - Fatih - Eyüpsultan - Sultangazi')}}</a></h3>
                                     </div>
                                     <div class="entry-content">
-                                        <a href="{{route('branches-page', 'Turkey1')}}" class="more-link">Details <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                        <a href="{{route('branches-page', 'Turkey1')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -378,10 +378,10 @@ $configData = Helper::appClasses();
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
                                     <span class="before-heading fst-normal">Turkey</span>
                                     <div class="entry-title nott">
-                                        <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
+                                        <h3 class="fw-normal"><a href="#">{{__('Eskişehir - Laleli')}}</a></h3>
                                     </div>
                                     <div class="entry-content">
-                                        <a href="{{route('branches-page', 'Turkey2')}}" class="more-link">Details <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                        <a href="{{route('branches-page', 'Turkey2')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
                                     </div>
                                 </div>
                             </div>

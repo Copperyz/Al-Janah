@@ -60,13 +60,13 @@ class AuthController extends Controller
   }
   public function Register(Request $request)
   {
-  //   try {
-  //     Mail::to('henryalabed30@gmail.com')->send(new TestMail());
-  //     // Email sent successfully
-  // } catch (\Exception $e) {
-  //     // Error occurred while sending email
-  //     dd($e->getMessage());
-  // }
+    try {
+      Mail::to('henryalabed30@gmail.com')->send(new TestMail());
+      // Email sent successfully
+  } catch (\Exception $e) {
+      // Error occurred while sending email
+      dd($e->getMessage());
+  }
     Validator::make($request->all(), [
       'name' => ['required', 'string', 'min:2', 'max:30'],
       'email' => ['required', 'email', Rule::unique(User::class)],

@@ -286,7 +286,7 @@ $configData = Helper::appClasses();
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
-                                    <span class="before-heading fst-normal">China</span>
+                                    <span class="before-heading fst-normal">{{__('China')}}</span>
                                     <div class="entry-title nott">
                                         <h3 class="fw-normal">{{__('Guangdong - Shanghai')}}</h3>
                                     </div>
@@ -304,7 +304,7 @@ $configData = Helper::appClasses();
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
-                                    <span class="before-heading fst-normal">Libya</span>
+                                    <span class="before-heading fst-normal">{{__('Libya')}}</span>
                                     <div class="entry-title nott">
                                         <h3 class="fw-normal"><a href="#">{{__('Tripoli - Misurata - Benghazi')}}</a></h3>
                                     </div>
@@ -314,7 +314,7 @@ $configData = Helper::appClasses();
                                 </div>
                             </div>
                         </div>
-                        <div class="entry branches-padding-bottom col-md-6">
+                        <!-- <div class="entry branches-padding-bottom col-md-6">
                             <div class="grid-inner row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="entry-image">
@@ -331,7 +331,7 @@ $configData = Helper::appClasses();
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="entry branches-padding-bottom col-md-6">
                             <div class="grid-inner row align-items-center">
                                 <div class="col-lg-6">
@@ -340,7 +340,7 @@ $configData = Helper::appClasses();
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
-                                    <span class="before-heading fst-normal">Italy</span>
+                                    <span class="before-heading fst-normal">{{__('Italy')}}</span>
                                     <div class="entry-title nott">
                                         <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
                                     </div>
@@ -358,7 +358,7 @@ $configData = Helper::appClasses();
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
-                                    <span class="before-heading fst-normal">Turkey</span>
+                                    <span class="before-heading fst-normal">{{__('Turkey')}}</span>
                                     <div class="entry-title nott">
                                         <h3 class="fw-normal"><a href="#">{{__('Başakşehir - Fatih - Eyüpsultan - Sultangazi')}}</a></h3>
                                     </div>
@@ -376,7 +376,7 @@ $configData = Helper::appClasses();
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
-                                    <span class="before-heading fst-normal">Turkey</span>
+                                    <span class="before-heading fst-normal">{{__('Turkey')}}</span>
                                     <div class="entry-title nott">
                                         <h3 class="fw-normal"><a href="#">{{__('Eskişehir - Laleli')}}</a></h3>
                                     </div>
@@ -392,61 +392,7 @@ $configData = Helper::appClasses();
             </div>
     </section>
     <!-- Fun facts: Start -->
-    <!-- <section id="landingFunFacts" class="section-py landing-fun-facts">
-        <div class="container">
-            <div class="row gy-3">
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card border border-label-primary shadow-none">
-                        <div class="card-body text-center">
-                            <img src="{{asset('assets/img/front-pages/icons/laptop.png')}}" alt="laptop" class="mb-2" />
-                            <h5 class="h2 mb-1">7.1k+</h5>
-                            <p class="fw-medium mb-0">
-                                Support Tickets<br />
-                                Resolved
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card border border-label-success shadow-none">
-                        <div class="card-body text-center">
-                            <img src="{{asset('assets/img/front-pages/icons/user-success.png')}}" alt="laptop" class="mb-2" />
-                            <h5 class="h2 mb-1">50k+</h5>
-                            <p class="fw-medium mb-0">
-                                Join creatives<br />
-                                community
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card border border-label-info shadow-none">
-                        <div class="card-body text-center">
-                            <img src="{{asset('assets/img/front-pages/icons/diamond-info.png')}}" alt="laptop" class="mb-2" />
-                            <h5 class="h2 mb-1">4.8/5</h5>
-                            <p class="fw-medium mb-0">
-                                Highly Rated<br />
-                                Products
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card border border-label-warning shadow-none">
-                        <div class="card-body text-center">
-                            <img src="{{asset('assets/img/front-pages/icons/check-warning.png')}}" alt="laptop" class="mb-2" />
-                            <h5 class="h2 mb-1">100%</h5>
-                            <p class="fw-medium mb-0">
-                                Money Back<br />
-                                Guarantee
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-    <!-- Fun facts: End -->
+
     <!-- FAQ: Start -->
     <section id="landingFAQ" class="section-py bg-body landing-faq">
         <div class="container">

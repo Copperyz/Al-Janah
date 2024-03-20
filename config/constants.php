@@ -320,5 +320,33 @@ return [
         'gb' => 'London',
         'us' => 'Washington, D.C.',
         'ye' => "Sana'a",
-    ]
+    ],
+    'Italy' => [
+        'title' => 'Rome, Italy',
+        'description' => "Rome's warehouse lies close to the ancient city, yet is thoroughly modern in its operations. Near Leonardo da Vinci Airport and the Port of Civitavecchia, it's well-placed for Mediterranean trade routes, with excellent road links ensuring swift distribution across Europe."
+    ],
+    'Turkey1' => [
+        'title' => 'Başakşehir, Turkey',
+        'description' => "Nestled in Istanbul's modern district, the Başakşehir warehouse stands as a hub of logistics efficiency. Surrounded by the city's expansive road network, it offers swift access to both Atatürk Airport and the Trans-European Motorway. The facility is equipped with state-of-the-art technology, ensuring rapid processing and distribution."
+    ],
+    'Turkey2' => [
+        'title' => 'Laleli, Turkey',
+        'description' => "In the heart of Istanbul's bustling trade center, Laleli's warehouse serves a myriad of businesses from textiles to electronics. Its proximity to the Golden Horn provides seamless maritime connectivity, while nearby tram and metro stations facilitate easy urban access."
+    ],
+    'China' => [
+        'title' => 'Hong Kong, China',
+        'description' => "Overlooking the South China Sea, this warehouse in Hong Kong is a cornerstone of international trade. Adjacent to the container port, it benefits from Hong Kong's status as a free port, with no cumbersome customs procedures, making it highly accessible for global shipping."
+    ],
+    'Libya' => [
+        'title' => 'Misurata, Libya',
+        'description' => "Misurata's warehouse is a lifeline in a city known for its resilience. Located near the port, it's a gateway for goods entering Libya, supported by the city's extensive maritime and desert trade routes. Despite regional challenges, it remains a beacon of commerce"
+    ],
+    'Palestine' => [
+        'title' => 'Jericho, Palestine',
+        'description' => "In the historical landscape of Jericho, the warehouse stands as a testament to enduring trade. It's a vital node in Palestine's logistics, leveraging its location near the Jordan River crossing for access to Middle Eastern markets, amidst ancient agricultural lands"
+    ],
+    'Algeria' => [
+        'title' => 'Algiers, Algeria',
+        'description' => "Algiers hosts a warehouse that mirrors the city's blend of history and modernity. Positioned strategically along the Mediterranean, it's part of Algeria's largest port, with a robust infrastructure that includes railways and highways extending into the Sahara and beyond"
+    ],
 ];

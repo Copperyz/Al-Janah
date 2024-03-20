@@ -29,6 +29,8 @@ class FrontPagesController extends Controller
 
     $pageConfigs = ['myLayout' => 'blank'];
     $numberOfImage = 0;
+    $warehouse = config('constants.'.$branch);
+    // return $warehouse['title'];
      switch ($branch) {
       case 'Italy':
         $numberOfImage = 5;
@@ -52,7 +54,7 @@ class FrontPagesController extends Controller
         # code...
         break;
     }
-    return view('front-pages.branches-page', compact('pageConfigs', 'branch', 'numberOfImage'));
+    return view('front-pages.branches-page', compact('pageConfigs', 'branch', 'numberOfImage', 'warehouse'));
   }
 
   public function trackShipmentData(Request $request)

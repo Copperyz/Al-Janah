@@ -107,25 +107,15 @@ $configData = Helper::appClasses();
                     <div class="portfolio-single-content">
 
                         <div class="row gutter-50 justify-content-between">
-                            <div class="col-md-6">
+                            <div class="col-md-6" style="margin: 4em 0;">
                                 <!-- Portfolio Single - Description
                         ============================================= -->
-                                <h2>Your Portfolio Title</h2>
-                                <p class="op-07 fw-normal lead font-primary">Illum molestias cupiditate eveniet dolore
-                                    obcaecati voluptatibus est quos eos id recusandae officia.</p>
-                                <p class="op-07">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur voluptas,
-                                    omnis libero nesciunt quia, vero mollitia dolorum sint quae at dignissimos, et
-                                    architecto est aperiam repellendus reprehenderit. Eveniet accusamus aperiam ut illo
-                                    animi officia. Voluptatibus nemo atque voluptas illum sed suscipit perferendis fuga
-                                    similique nam debitis, labore iste molestiae quas asperiores. Et commodi alias est odio
-                                    magnam, ab reprehenderit. Beatae, soluta placeat repellat sunt facere iste ipsa,
-                                    similique. Recusandae accusantium ullam consequatur quae a nihil magnam est sunt
-                                    blanditiis explicabo? Aliquid corrupti, officiis blanditiis corporis deserunt quibusdam,
-                                    ea asperiores a excepturi odit obcaecati natus. Possimus expedita libero animi
-                                    cupiditate autem.</p>
+                                <h2>{{__($warehouse['title'])}}</h2>
+                                <p class="op-07 fw-normal lead font-primary">{{__($warehouse['description'])}}</p>
+                                
                                 <!-- Portfolio Single - Description End -->
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-5" style="margin: 4em 0;">
                                 <!-- Portfolio Single - Meta
                         ============================================= -->
                                 <ul class="portfolio-meta">

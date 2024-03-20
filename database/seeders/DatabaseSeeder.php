@@ -3,7 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +16,38 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory(10)->create();
+        // Seed roles
+        $superAdminRole = Role::create(['name' => 'Super Admin']);
 
-        \App\Models\User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // Seed permissions
+        $permissions = [
+            ['name' => 'dashboard', 'guard_name' => 'web'],
+            ['name' => 'landing-page', 'guard_name' => 'web'],
+            ['name' => 'users', 'guard_name' => 'web'],
+            ['name' => 'roles', 'guard_name' => 'web'],
+            ['name' => 'permissions', 'guard_name' => 'web'],
+            ['name' => 'inventory', 'guard_name' => 'web'],
+            ['name' => 'shipments', 'guard_name' => 'web'],
+            ['name' => 'trips.index', 'guard_name' => 'web'],
+            ['name' => 'trip_routes.index', 'guard_name' => 'web'],
+            ['name' => 'prices.index', 'guard_name' => 'web'],
+            ['name' => 'customers.index', 'guard_name' => 'web'],
+        ];
+
+        $permissionModels = collect($permissions)->map(function ($permission) {
+            return Permission::create($permission);
+        });
+
+        // Assign all permissions to the Super Admin role
+        $superAdminRole->permissions()->attach($permissionModels->pluck('id'));
+
+        // Seed a Super Admin user
+        $admin = User::create([
+            'name' => 'Admin',
+            'email' => 'admin@aljanahx.com',
+            'password' => bcrypt('NahaisiHenry'),
         ]);
+
+        $admin->assignRole($superAdminRole);
     }
 }

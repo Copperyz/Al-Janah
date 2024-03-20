@@ -1,109 +1,106 @@
 @php
-$containerNav = ($configData['contentLayout'] === 'compact') ? 'container-xxl' : 'container-fluid';
-$navbarDetached = ($navbarDetached ?? '');
+    $containerNav = $configData['contentLayout'] === 'compact' ? 'container-xxl' : 'container-fluid';
+    $navbarDetached = $navbarDetached ?? '';
 @endphp
 
 <!-- Navbar -->
-@if(isset($navbarDetached) && $navbarDetached == 'navbar-detached')
-<nav class="layout-navbar {{$containerNav}} navbar navbar-expand-xl {{$navbarDetached}} align-items-center bg-navbar-theme"
-    id="layout-navbar">
-    @endif
-    @if(isset($navbarDetached) && $navbarDetached == '')
+@if (isset($navbarDetached) && $navbarDetached == 'navbar-detached')
+    <nav class="layout-navbar {{ $containerNav }} navbar navbar-expand-xl {{ $navbarDetached }} align-items-center bg-navbar-theme"
+        id="layout-navbar">
+@endif
+@if (isset($navbarDetached) && $navbarDetached == '')
     <nav class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme" id="layout-navbar">
-        <div class="{{$containerNav}}">
-            @endif
+        <div class="{{ $containerNav }}">
+@endif
 
-            <!--  Brand demo (display only for navbar-full and hide on below xl) -->
-            @if(isset($navbarFull))
-            <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
-                <a href="{{url('/dashboard')}}" class="app-brand-link gap-2">
-                    <span class="app-brand-logo demo">
-                        @include('_partials.macros',["height"=>20])
-                    </span>
-                    <span class="app-brand-text demo menu-text fw-bold">{{config('variables.templateName')}}</span>
-                </a>
-            </div>
-            @endif
+<!--  Brand demo (display only for navbar-full and hide on below xl) -->
+@if (isset($navbarFull))
+    <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
+        <a href="{{ url('/dashboard') }}" class="app-brand-link gap-2">
+            <span class="app-brand-logo demo">
+                @include('_partials.macros', ['height' => 20])
+            </span>
+            <span class="app-brand-text demo menu-text fw-bold">{{ config('variables.templateName') }}</span>
+        </a>
+    </div>
+@endif
 
-            <!-- ! Not required for layout-without-menu -->
-            @if(!isset($navbarHideToggle))
-            <div
-                class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0{{ isset($menuHorizontal) ? ' d-xl-none ' : '' }} {{ isset($contentNavbar) ?' d-xl-none ' : '' }}">
-                <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                    <i class="ti ti-menu-2 ti-sm"></i>
-                </a>
-            </div>
-            @endif
+<!-- ! Not required for layout-without-menu -->
+@if (!isset($navbarHideToggle))
+    <div
+        class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0{{ isset($menuHorizontal) ? ' d-xl-none ' : '' }} {{ isset($contentNavbar) ? ' d-xl-none ' : '' }}">
+        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+            <i class="ti ti-menu-2 ti-sm"></i>
+        </a>
+    </div>
+@endif
 
-            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+<div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
 
-                @if($configData['hasCustomizer'] == true)
-                <!-- Style Switcher -->
+    @if ($configData['hasCustomizer'] == true)
+        <!-- Style Switcher -->
 
-                <!--/ Style Switcher -->
-                @endif
+        <!--/ Style Switcher -->
+    @endif
 
-                <ul class="navbar-nav flex-row align-items-center ms-auto">
+    <ul class="navbar-nav flex-row align-items-center ms-auto">
 
-                    <!-- User -->
-                    <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                        <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                            data-bs-toggle="dropdown">
-                            <div class="avatar avatar-online">
-                                <img src="{{ isset(Auth::user()->profile_photo_url) ? Auth::user()->profile_photo_url : asset('assets/img/avatars/3.png') }}"
-                                    alt class="h-auto rounded-circle">
+        <!-- User -->
+        <li class="nav-item navbar-dropdown dropdown-user dropdown">
+            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                <div class="avatar avatar-online">
+                    <img src="{{ isset(Auth::user()->profile_photo_url) ? Auth::user()->profile_photo_url : asset('assets/img/avatars/3.png') }}"
+                        alt class="h-auto rounded-circle">
+                </div>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                    <a class="dropdown-item"
+                        href="{{ Route::has('profile.show') ? route('profile.show') : 'javascript:void(0);' }}">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 me-3">
+                                <div class="avatar avatar-online">
+                                    <img src="{{ isset(Auth::user()->profile_photo_url) ? Auth::user()->profile_photo_url : asset('assets/img/avatars/3.png') }}"
+                                        alt class="h-auto rounded-circle">
+                                </div>
                             </div>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li>
-                                <a class="dropdown-item"
-                                    href="{{ Route::has('profile.show') ? route('profile.show') : 'javascript:void(0);' }}">
-                                    <div class="d-flex">
-                                        <div class="flex-shrink-0 me-3">
-                                            <div class="avatar avatar-online">
-                                                <img src="{{ isset(Auth::user()->profile_photo_url) ? Auth::user()->profile_photo_url : asset('assets/img/avatars/3.png') }}"
-                                                    alt class="h-auto rounded-circle">
-                                            </div>
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <span class="fw-medium d-block">
-                                                @if (Auth::check())
-                                                {{ Auth::user()->name }}
-                                                @else
-                                                John Doe
-                                                @endif
-                                            </span>
-                                            <small class="text-muted">{{Auth::user()->email}}</small>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <div class="dropdown-divider"></div>
-                            </li>
-                            <li>
-                                <a class="dropdown-item"
-                                    href="{{ Route::has('profile.show') ? route('profile.show') : 'javascript:void(0);' }}">
-                                    <i class="ti ti-user-check me-2 ti-sm"></i>
-                                    <span class="align-middle">{{ __('My Profile') }}</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="" id="changeLocale">
-                                    <i class="ti ti-language me-2 ti-sm"></i>
-                                    <span
-                                        class="align-middle">{{ app()->getLocale() == 'en' ? 'عربي' : 'English' }}</span></span>
+                            <div class="flex-grow-1">
+                                <span class="fw-medium d-block">
+                                    @if (Auth::check())
+                                        {{ Auth::user()->name }}
+                                    @else
+                                        John Doe
+                                    @endif
+                                </span>
+                                <small class="text-muted">{{ Auth::user() }}</small>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                    <a class="dropdown-item"
+                        href="{{ Route::has('profile.show') ? route('profile.show') : 'javascript:void(0);' }}">
+                        <i class="ti ti-user-check me-2 ti-sm"></i>
+                        <span class="align-middle">{{ __('My Profile') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="" id="changeLocale">
+                        <i class="ti ti-language me-2 ti-sm"></i>
+                        <span class="align-middle">{{ app()->getLocale() == 'en' ? 'عربي' : 'English' }}</span></span>
 
-                                </a>
+                    </a>
 
-                            </li>
-                            <li>
-                                <a class="dropdown-item changeMode" href="javascript:void(0);" data-theme="light">
-                                    <span class="align-middle"><i
-                                            class='ti ti-sun me-2'></i>{{ __('Change Mode') }}</span>
-                                </a>
-                            </li>
-                            {{-- @if (Auth::check() && Laravel\Jetstream\Jetstream::hasApiFeatures())
+                </li>
+                <li>
+                    <a class="dropdown-item changeMode" href="javascript:void(0);" data-theme="light">
+                        <span class="align-middle"><i class='ti ti-sun me-2'></i>{{ __('Change Mode') }}</span>
+                    </a>
+                </li>
+                {{-- @if (Auth::check() && Laravel\Jetstream\Jetstream::hasApiFeatures())
               <li>
                 <a class="dropdown-item" href="{{ route('api-tokens.index') }}">
                             <i class='ti ti-key me-2 ti-sm'></i>
@@ -111,7 +108,7 @@ $navbarDetached = ($navbarDetached ?? '');
                             </a>
                     </li>
                     @endif --}}
-                    {{-- @if (Auth::User() && Laravel\Jetstream\Jetstream::hasTeamFeatures())
+                {{-- @if (Auth::User() && Laravel\Jetstream\Jetstream::hasTeamFeatures())
               <li>
                 <div class="dropdown-divider"></div>
               </li>
@@ -127,7 +124,7 @@ $navbarDetached = ($navbarDetached ?? '');
                     <span class="align-middle">Team Settings</span>
                     </a>
                     </li> --}}
-                    {{-- @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
+                {{-- @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
               <li>
                 <a class="dropdown-item" href="{{ route('teams.create') }}">
                     <i class='ti ti-user me-2'></i>
@@ -135,7 +132,7 @@ $navbarDetached = ($navbarDetached ?? '');
                     </a>
                     </li>
                     @endcan --}}
-                    {{-- @if (Auth::user()->allTeams()->count() > 1)
+                {{-- @if (Auth::user()->allTeams()->count() > 1)
               <li>
                 <div class="dropdown-divider"></div>
               </li>
@@ -150,25 +147,25 @@ $navbarDetached = ($navbarDetached ?? '');
               @foreach (Auth::user()->allTeams() as $team)
               {{-- Below commented code read by artisan command while installing jetstream. !! Do not remove if you want to use jetstream. --}}
 
-                    {{-- <x-switchable-team :team="$team" /> --}}
-                    {{-- @endforeach
+                {{-- <x-switchable-team :team="$team" /> --}}
+                {{-- @endforeach
               @endif
               @endif --}}
-                    <li>
-                        <div class="dropdown-divider"></div>
-                    </li>
-                    @if (Auth::check())
+                <li>
+                    <div class="dropdown-divider"></div>
+                </li>
+                @if (Auth::check())
                     <li>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class='ti ti-logout me-2'></i>
-                            <span class="align-middle">{{__('Logout')}}</span>
+                            <span class="align-middle">{{ __('Logout') }}</span>
                         </a>
                     </li>
                     <form method="POST" id="logout-form" action="{{ route('logout') }}">
                         @csrf
                     </form>
-                    @else
+                @else
                     <li>
                         <a class="dropdown-item"
                             href="{{ Route::has('login') ? route('login') : url('auth/login-basic') }}">
@@ -176,21 +173,21 @@ $navbarDetached = ($navbarDetached ?? '');
                             <span class="align-middle">{{ __('Login') }}</span>
                         </a>
                     </li>
-                    @endif
-                </ul>
-                </li>
-                <!--/ User -->
-                </ul>
-            </div>
+                @endif
+            </ul>
+        </li>
+        <!--/ User -->
+    </ul>
+</div>
 
-            @if(!isset($navbarDetached))
-        </div>
-        @endif
-    </nav>
-    <!-- / Navbar -->
+@if (!isset($navbarDetached))
+    </div>
+@endif
+</nav>
+<!-- / Navbar -->
 
-    <script src="{{ asset(mix('assets/vendor/libs/jquery/jquery.js')) }}"></script>
-    <script>
+<script src="{{ asset(mix('assets/vendor/libs/jquery/jquery.js')) }}"></script>
+<script>
     $(document).ready(function() {
         // Get the elements that represent the buttons
         var changeLocaleButton = $('#changeLocale');
@@ -246,7 +243,7 @@ $navbarDetached = ($navbarDetached ?? '');
 
         if (refreshLocaleNeeded) {
             var localeCookie = localStorage.getItem(localeKey);
-            var url = '{{ route("changeLocale", ["locale" => ":locale"]) }}';
+            var url = '{{ route('changeLocale', ['locale' => ':locale']) }}';
             url = url.replace(':locale', localeCookie);
             // Update the link's href attribute
             changeLocaleButton.attr('href', url);
@@ -278,7 +275,7 @@ $navbarDetached = ($navbarDetached ?? '');
 
             localStorage.setItem(localeKey, locale.toString());
 
-            var url = '{{ route("changeLocale", ["locale" => ":locale"]) }}';
+            var url = '{{ route('changeLocale', ['locale' => ':locale']) }}';
             url = url.replace(':locale', locale);
 
             // Update the link's href attribute
@@ -312,4 +309,4 @@ $navbarDetached = ($navbarDetached ?? '');
         });
 
     });
-    </script>
+</script>

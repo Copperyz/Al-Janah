@@ -282,13 +282,13 @@ $configData = Helper::appClasses();
                             <div class="grid-inner row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="entry-image">
-                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/2.png')}}" alt="Paris"></a>
+                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/china800x600.jpg')}}" alt="China warehouse"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
                                     <span class="before-heading fst-normal">China</span>
                                     <div class="entry-title nott">
-                                        <h3 class="fw-normal"><a href="#">{{__('Guangdong - Shanghai')}}</a></h3>
+                                        <h3 class="fw-normal">{{__('Guangdong - Shanghai')}}</h3>
                                     </div>
                                     <div class="entry-content">
                                         <a href="{{route('branches-page', 'China')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
@@ -300,7 +300,7 @@ $configData = Helper::appClasses();
                             <div class="grid-inner row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="entry-image">
-                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/4.png')}}" alt="Paris"></a>
+                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/libya800x600.jpg')}}" alt="Libya warehouse"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
@@ -318,7 +318,7 @@ $configData = Helper::appClasses();
                             <div class="grid-inner row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="entry-image">
-                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/w3-2.png')}}" alt="Paris"></a>
+                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/dubai800x600.jpg')}}" alt="Dubai warehouse"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
@@ -336,7 +336,7 @@ $configData = Helper::appClasses();
                             <div class="grid-inner row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="entry-image">
-                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/w4-1.png')}}" alt="Paris"></a>
+                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/italy800x600.jpg')}}" alt="italy warhouse"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
@@ -354,7 +354,7 @@ $configData = Helper::appClasses();
                             <div class="grid-inner row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="entry-image">
-                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/w4-1.png')}}" alt="Paris"></a>
+                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/turkey800x600.jpg')}}" alt="Turkey 1 warhouse"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
@@ -372,7 +372,7 @@ $configData = Helper::appClasses();
                             <div class="grid-inner row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="entry-image">
-                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/w4-1.png')}}" alt="Paris"></a>
+                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/turkey2800x600.jpg')}}" alt="Turkey 2 warhouse"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
@@ -556,7 +556,7 @@ $configData = Helper::appClasses();
                     <p class="fw-medium mb-4">
                         {{__("Fast delivery, unbeatable prices. Your go-to for express shipping that won't break the bank. Get your package there on time, every time")}}.
                     </p>
-                    <a href="{{route('shipment-price')}}" class="btn btn-lg btn-primary">{{__('Shipping Price')}}</a>
+                    <a href="{{route('shipment-price')}}" class="btn btn-lg btn-primary">{{__('Calculate')}}</a>
                 </div>
                 <div class="col-lg-6 pt-lg-5 text-center text-lg-end">
                     <!-- <img src="{{asset('assets/img/front-pages/landing-page/cta-dashboard.png')}}" alt="cta dashboard"

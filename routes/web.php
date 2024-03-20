@@ -38,7 +38,7 @@ use Spatie\Permission\Contracts\Role;
 */
 // Front Pages
 Route::get('/', [FrontPagesController::class, 'index'])->name('landing-page');
-Route::get('/our-branches/{id}', [FrontPagesController::class, 'ourBranches'])->name('branches-page');
+Route::get('/warehouses/{id}', [FrontPagesController::class, 'ourBranches'])->name('branches-page');
 Route::get('/shipment-price', [FrontPagesController::class, 'showPriceSections'])->name('shipment-price');
 Route::post('/shipment/price-submit', [FrontPagesController::class, 'getPrice'])->name('shipment.get.price');
 Route::get('track-shipment', [FrontPagesController::class, 'trackShipmentPage'])->name('track-shipment');

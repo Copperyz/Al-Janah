@@ -22,13 +22,13 @@
     },
     {
       "url": "roles",
-      "icon": "menu-icon tf-icons ti ti-users",
+      "icon": "menu-icon tf-icons ti ti-user-check",
       "name": "Roles",
       "slug": "roles"
     },
     {
       "url": "permissions",
-      "icon": "menu-icon tf-icons ti ti-users",
+      "icon": "menu-icon tf-icons ti ti-user-check",
       "name": "Permissions",
       "slug": "permissions"
     },
@@ -40,7 +40,7 @@
     },
     {
       "url": "cities",
-      "icon": "menu-icon tf-icons ti ti-city",
+      "icon": "menu-icon tf-icons ti ti-building-skyscraper",
       "name": "Cities",
       "slug": "cities"
     },
@@ -68,31 +68,31 @@
     },
     {
       "url": "shipments",
-      "icon": "menu-icon tf-icons ti ti-users",
+      "icon": "menu-icon tf-icons ti ti-box",
       "name": "Shipments List",
       "slug": "shipments"
     },
     {
       "url": "trips",
-      "icon": "menu-icon tf-icons ti ti-users",
+      "icon": "menu-icon tf-icons ti ti-plane",
       "name": "Trips List",
       "slug": "trips.index"
     },
     {
       "url": "trip_routes",
-      "icon": "menu-icon tf-icons ti ti-users",
+      "icon": "menu-icon tf-icons ti ti-plane-arrival",
       "name": "Trip Routes",
       "slug": "trip_routes.index"
     },
     {
       "url": "prices",
-      "icon": "menu-icon ti ti-map-pin-dollar",
+      "icon": "menu-icon tf-icons ti ti-currency-dollar",
       "name": "Prices",
       "slug": "prices.index"
     },
     {
       "url": "customers",
-      "icon": "menu-icon tf-icons ti ti-users",
+      "icon": "menu-icon tf-icons ti ti-users-group",
       "name": "Customers",
       "slug": "customers.index"
     },

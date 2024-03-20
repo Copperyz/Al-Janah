@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         // Seed roles
         $superAdminRole = Role::create(['name' => 'Super Admin']);
+        $customerRole = Role::create(['name' => 'Customer']);
 
         // Seed permissions
         $permissions = [

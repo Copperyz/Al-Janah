@@ -4,11 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\ShipmentHistory;
 use App\Models\Trip;
+use App\Models\Shipment;
+use App\Models\User;
+use App\Models\Customer;
 use App\Models\TripHistory;
+use App\Models\TripRoute;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ShipmentUpdated;
 
 class TripHistoryController extends Controller
 {
@@ -84,12 +90,29 @@ class TripHistoryController extends Controller
           $shipmentHistory->note = $request->note;
           $shipmentHistory->created_by = auth()->user()->id;
           $shipmentHistory->save();
+          $shipment = Shipment::where('id', $shipment->id)->first();
+          $customer = Customer::where('id', $shipment->customer_id)->first();
+          $user = User::where('id', $customer->user_id)->first();
+          $tripRoute = TripRoute::where('id', $trip->trip_route_id)->first();
+          $tripRoute->legs;
+          $leg = $tripRoute->legs[$request->currentLeg];
+          $country = $leg['country'];
+          if ($request->status == 'Enroute') {
+            $To_leg = $tripRoute->legs[$request->currentLeg + 1];
+            $To_country = $To_leg['country'];
+            $status = $request->status . ' From '. $country. ' To '.$To_country. ($request->note ? ' (' . $request->note . ')' : '');
+          }
+          else{
+            $status = $request->status . ' In '. $country. ($request->note ? ' (' . $request->note . ')' : '');
+          }
+          
+          Mail::to($user->email)->send(new ShipmentUpdated($status, $user));
         }
       });
 
       return response()->json(['message' => __('Trip Status Changed successfully')], 200);
     } catch (\Throwable $th) {
-      return response()->json(['message' => $th], 422);
+      return response()->json(['message' => $th->getMessage()], 422);
     }
   }
 

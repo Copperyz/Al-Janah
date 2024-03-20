@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\Payment;
 use App\Models\Customer;
+use App\Models\User;
 use App\Models\GoodType;
 use App\Models\Shipment;
 use App\Models\Inventory;
@@ -18,7 +19,8 @@ use Illuminate\Http\Request;
 use App\Models\InventoryItem;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ShipmentCreated;
 
 class ShipmentController extends Controller
 {
@@ -142,6 +144,9 @@ class ShipmentController extends Controller
                     $inventoryItems->save();
                 }
         }
+        $customer = Customer::where('id', $shipment->customer_id)->first();
+        $user = User::where('id', $customer->user_id)->first();
+        Mail::to($user->email)->send(new ShipmentCreated($user));
         return response()->json([
             'message' => __('Shipment added successfully'),
             'shipment_id' => $shipment->id,

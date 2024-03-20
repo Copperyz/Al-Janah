@@ -62,22 +62,21 @@
                         <a class="nav-link fw-medium" href="{{ url('/dashboard') }}" target="_blank">Admin</a>
                     </li> -->
                 </ul>
-            </div>
-            <div class="landing-menu-overlay d-lg-none"></div>
-            <!-- Menu wrapper: End -->
-            <!-- Toolbar: Start -->
-            <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Toolbar: Start -->
+            <ul class="navbar-nav  ms-auto">
                 <!-- $configData['hasCustomizer'] -->
                 <!-- Style Switcher -->
 
                 <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
                     <a class="nav-link me-2 me-xl-0 changeMode" href="javascript:void(0);" data-theme="light">
-                        <i class='me-2 ' id="modeIcon"></i>
+                        <i class='me-2' id="modeIcon"></i>
+                        <span class="d-sm-none" id="themeToggleText"></span>
                     </a>
                 </li>
                 <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0)" data-bs-toggle="dropdown">
                         <i class='ti ti-language me-2 ti-sm'></i>
+                        <span class="align-middle d-sm-none">{{ app()->getLocale() == 'en' ? 'عربي' : 'English' }}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
                         <li>
@@ -89,7 +88,14 @@
                 </li>
                 <!-- / Style Switcher-->
                 <!-- navbar button: Start -->
-                @guest
+                
+
+                <!-- navbar button: End -->
+            </ul>
+            <!-- Toolbar: End -->
+            </div>
+            <ul class="navbar-nav flex-row align-items-center ms-auto">
+            @guest
                     <li>
                         <a href="{{ route('login') }}" class="btn btn-primary"><span
                                 class="tf-icons ti ti-login scaleX-n1-rtl me-md-1"></span><span
@@ -108,10 +114,10 @@
                     </li>
 
                 @endguest
-
-                <!-- navbar button: End -->
             </ul>
-            <!-- Toolbar: End -->
+            <div class="landing-menu-overlay d-lg-none"></div>
+            <!-- Menu wrapper: End -->
+            
         </div>
     </div>
 </nav>
@@ -123,6 +129,7 @@
         // Get the elements that represent the buttons
         var changeLocaleButton = $('#changeLocale');
         var changeModeButton = $('.changeMode');
+        var themeToggleText = document.getElementById('themeToggleText');
         // var modeIcon = $('#modeIcon');
 
         // Check local storage for the specified keys
@@ -136,7 +143,11 @@
 
         var isRtl = localStorage.getItem(storageKeyLocale) === 'true';
         var currentMode = localStorage.getItem(storageKeyMode) || 'light';
-
+        if (currentMode === 'light') {
+            themeToggleText.textContent = 'Dark';
+        } else {
+            themeToggleText.textContent = 'Light';
+        }
         var iconElement = $('#modeIcon');
         iconElement.attr('class', currentMode === 'dark' ? 'ti ti-sun me-2' : 'ti ti-moon me-2');
 

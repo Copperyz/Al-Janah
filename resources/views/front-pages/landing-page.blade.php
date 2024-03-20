@@ -63,6 +63,7 @@ $configData = Helper::appClasses();
         background-image: url("./assets/img/front-pages/landing-page/pexels-daniel-frese-569417.jpg");
         object-fit: cover;
     background-size: cover;
+    overflow: hidden;
     }
     /* .landing-hero-blank{
         background-image: url("./assets/img/front-pages/landing-page/pexels-daniel-frese-569417.jpg");

@@ -1,51 +1,23 @@
-/**
- * App user list
- */
 
 'use strict';
 
-// Datatable (jquery)
 $(function () {
+  // Select2
+  // add new city
+  const submitButton = document.querySelector('button[type="submit"]');
 
-  // Filter form control to default size
-  // ? setTimeout used for multilingual table initialization
-  setTimeout(() => {
-    $('.dataTables_filter .form-control').removeClass('form-control-sm');
-    $('.dataTables_length .form-select').removeClass('form-select-sm');
-  }, 300);
-});
-
-(function () {
-  // On edit role click, update text
-  var roleEditList = document.querySelectorAll('.role-edit-modal'),
-    roleAdd = document.querySelector('.add-new-role'),
-    roleTitle = document.querySelector('.role-title');
-
-  roleAdd.onclick = function () {
-    // roleTitle.innerHTML = 'Add Role'; // reset text
-  };
-  if (roleEditList) {
-    roleEditList.forEach(function (roleEditEl) {
-      roleEditEl.onclick = function () {
-        // roleTitle.innerHTML = 'Edit Role'; // reset text
-      };
-    });
-  }
-
-  // If you have a submit button inside the form, you can bind the click event to it
-  $("#addRoleForm :submit").on("click", function (event) {
+  $('#addAddressForm :submit').on('click', function (event) {
     // Trigger the form submission when the button is clicked
     $(this).closest('form').submit();
   });
 
-
-  $("#addRoleForm").on("submit", function (event) {
+  $('#addAddressForm').on('submit', function (event) {
     event.preventDefault();
+    submitButton.setAttribute('disabled', true);
     var form = $(this);
     var url = form.attr('action');
     var method = form.attr('method');
     var formData = form.serialize();
-
     $.ajax({
       url: url,
       method: method,
@@ -63,15 +35,14 @@ $(function () {
             confirmButtonText: doneTranslation,
             customClass: {
               confirmButton: 'btn btn-success'
-            },
-          }).then((result) => {
+            }
+          }).then(result => {
             if (result.isConfirmed) {
+              // location.reload();
+              form.trigger('reset');
               location.reload();
             }
           });
-        }
-        else {
-          // Handle other status codes
         }
       },
       error: function (response, xhr, status, error) {
@@ -90,35 +61,28 @@ $(function () {
           },
           buttonsStyling: false
         });
+        submitButton.removeAttribute('disabled');
       }
     });
-
   });
 
-  $(document).on('click', 'a.editRole', function () {
-    $("#editRoleForm").trigger('reset');
+  $(document).on('click', 'a.editAddress', function () {
+    $("#editAddressForm").trigger('reset');
 
-    var roleId = $(this).data('role-id');
-    // AJAX call to get role details including permissions
+    var addressId = $(this).data('address-id');
     // Reference to the modal
-    var editRoleModal = $('#editRoleModal');
+    var editAddressModal = $('#editAddressModal');
 
     // Uncheck all checkboxes before updating
-    editRoleModal.find('input[type="checkbox"]').prop('checked', false);
+    editAddressModal.find('input[type="checkbox"]').prop('checked', false);
     $.ajax({
-      url: './roles/' + roleId,
+      url: './addresses/' + addressId,
       method: 'GET',
       success: function (response) {
 
-        // Fill the role name input
-        editRoleModal.find('#name').val(response.role.name);
-
-        // Iterate over permissions and check corresponding checkboxes
-        $.each(response.role.permissions, function (index, permission) {
-          var checkboxId = '#permission_' + permission.id;
-          editRoleModal.find(checkboxId).prop('checked', true);
-        });
-        editRoleModal.find('[name="id"]').val(response.role.id);
+        editAddressModal.find('#edit_name').val(response.address.name);
+        editAddressModal.find('#edit_city_id').val(response.address.city_id).trigger('change');;
+        editAddressModal.find('[name="id"]').val(response.address.id);
 
       },
       error: function (error) {
@@ -133,11 +97,11 @@ $(function () {
     // $('#editUserForm').find('[name="id"]').val(data.id);
   });
 
-  $('#editRoleForm').submit(function (event) {
+  $('#editAddressForm').submit(function (event) {
     event.preventDefault(); // Prevent default form submission
     // Make an AJAX request
     $.ajax({
-      url: 'roles/' + $('#editRoleForm').find('[name="id"]').val(),
+      url: 'addresses/' + $('#editAddressForm').find('[name="id"]').val(),
       method: 'PUT',
       data: $(this).serialize(),
       headers: {
@@ -149,9 +113,9 @@ $(function () {
         if (xhr.status === 200) {
           // Handle a successful response
           // offcanvasEditUser.hide();
-          $("#editRoleForm").trigger('reset');
+          $("#editAddressForm").trigger('reset');
           // dt_user.ajax.url('get-users').load();
-          $('#editRoleModal').modal('hide');
+          $('#editAddressModal').modal('hide');
 
           Swal.fire({
             icon: 'success',
@@ -161,12 +125,15 @@ $(function () {
             customClass: {
                 confirmButton: 'btn btn-success'
             },
-            allowOutsideClick: false
+            allowOutsideClick: false  // This prevents the user from clicking outside the modal
         }).then((result) => {
             if (result.isConfirmed) {
                 location.reload(); // Reload the page
             }
         });
+        
+        
+
         } else {
           // Handle other status codes
         }
@@ -189,4 +156,5 @@ $(function () {
       }
     });
   });
-})();
+  
+});

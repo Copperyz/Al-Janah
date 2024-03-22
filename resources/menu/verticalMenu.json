@@ -45,6 +45,12 @@
       "slug": "cities"
     },
     {
+      "url": "addresses",
+      "icon": "menu-icon tf-icons ti ti-location",
+      "name": "Addresses",
+      "slug": "addresses"
+    },
+    {
       "name": "Inventory",
       "icon": "menu-icon ti ti-building-warehouse",
       "slug": "inventory",

@@ -10,8 +10,21 @@ class Branch extends Model
 {
   use HasFactory, SoftDeletes;
 
+  protected $fillable = [
+    'name',
+    'city_id',
+    'created_by',
+    'updated_by',
+    'deleted_by',
+  ];
+
   public function inventory()
   {
     return $this->hasMany(Inventory::class);
   }
+
+  public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
 }

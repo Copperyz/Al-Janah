@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CouponsController;
 use App\Http\Controllers\FrontPagesController;
 use App\Http\Controllers\InventoryController;
@@ -139,5 +140,8 @@ Route::middleware(['auth'])->group(function () {
 
   //Cities
   Route::resource('cities', CityController::class);
+
+  //Addresses
+  Route::resource('addresses', AddressController::class);
   
 });

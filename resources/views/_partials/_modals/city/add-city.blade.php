@@ -22,17 +22,17 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                    <label for="addCountry" class="form-label me-4 fw-medium">{{ __('Country') }}</label>
-                    <select id="addCountry" class="select2 form-select" data-allow-clear="true" name="country">
-                        <option disabled selected>{{ __('Select') }}</option>
-                        @foreach ($countries as $country)
-                            <option value="{{ $country->id }}"><i
-                                    class="fis fi fi-{{ $country->country_code }} rounded-circle me-2 fs-3"></i>
-                                {{ $country->name }}</option>
-                        @endforeach
-                    </select>
+                        <label for="addCountry" class="form-label me-4 fw-medium">{{ __('Country') }}</label>
+                        <select id="addCountry" class="select2 form-select" data-allow-clear="true" name="country">
+                            <option disabled selected>{{ __('Select') }}</option>
+                            @foreach ($countries as $country)
+                                <option value="{{ $country->id }}"><i
+                                        class="fis fi fi-{{ $country->country_code }} rounded-circle me-2 fs-3"></i>
+                                    {{ $country->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    
+
                     <div class="col-12 text-center mt-4">
                         <button type="submit" class="btn btn-primary me-sm-3 me-1">{{ __('Submit') }}</button>
                         <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal"

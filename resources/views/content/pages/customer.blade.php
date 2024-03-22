@@ -9,7 +9,7 @@
       Aug 17, 2020, 5:48 (ET)
     </p>
   </div>
-  <button type="button" class="btn btn-label-danger delete-customer">{{__('Delete Customer')}}</button>
+  <!-- <button type="button" class="btn btn-label-danger delete-customer">{{__('Delete Customer')}}</button> -->
 </div>
 
 

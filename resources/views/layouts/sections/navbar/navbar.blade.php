@@ -72,7 +72,7 @@
                                         John Doe
                                     @endif
                                 </span>
-                                <small class="text-muted">{{ Auth::user()->email }}</small>
+                                <small class="text-muted">{{ Auth::user()?->email }}</small>
                             </div>
                         </div>
                     </a>

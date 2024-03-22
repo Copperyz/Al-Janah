@@ -24,7 +24,7 @@ $configData = Helper::appClasses();
 @endsection
 
 @section('page-script')
-<script src="{{asset('assets/js/pages-auth.js')}}"></script>
+<script src="{{asset('assets/js/auth/register.js')}}"></script>
 @endsection
 
 @section('content')
@@ -50,8 +50,7 @@ $configData = Helper::appClasses();
                 <div class="onboarding-content mb-0">
                   <h4 class="onboarding-title text-body">{{__('Thank you for confirming your email')}}</h4>
                   <div class="onboarding-info">{{__('Kindly furnish additional details to initiate effective tracking of your shipments')}}.</div>
-                  <form method="POST" action="{{route('store-account', $user->id)}}">
-                    @csrf
+                  <form method="POST" action="{{route('store-account', $user->id)}}" id="completeRegisterForm">
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
@@ -111,7 +110,7 @@ $configData = Helper::appClasses();
                         </div>
                     </div>
                     <div class="modal-footer border-0">
-                      <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">{{__('Close')}}</button>
+                      <!-- <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">{{__('Close')}}</button> -->
                       <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
                     </div>
                 </form>

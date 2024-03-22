@@ -60,13 +60,13 @@ class AuthController extends Controller
   }
   public function Register(Request $request)
   {
-    try {
-      Mail::to('henryalabed30@gmail.com')->send(new TestMail());
-      // Email sent successfully
-  } catch (\Exception $e) {
-      // Error occurred while sending email
-      dd($e->getMessage());
-  }
+  //   try {
+  //     Mail::to('henryalabed30@gmail.com')->send(new TestMail());
+  //     // Email sent successfully
+  // } catch (\Exception $e) {
+  //     // Error occurred while sending email
+  //     dd($e->getMessage());
+  // }
     Validator::make($request->all(), [
       'name' => ['required', 'string', 'min:2', 'max:30'],
       'email' => ['required', 'email', Rule::unique(User::class)],
@@ -102,7 +102,7 @@ class AuthController extends Controller
       $user->confirmation_token = null;
       $user->save();
       
-      $role = Role::where('name', 'customer')->first();
+      $role = Role::where('name', 'Customer')->first();
       $user->assignRole($role);
 
       $countries = Country::all();
@@ -131,53 +131,75 @@ class AuthController extends Controller
         return redirect()->route('login')->with('error', 'Invalid confirmation token.');
     }
 
-    DB::transaction(function() use ($request, $user){
-      $customer = new Customer();
-      $lastCustomer = Customer::latest()->first();
+    $validator = Validator::make($request->all(), [
+      'first_name' => ['required', 'string', 'max:255'],
+      'last_name' => ['required', 'string', 'max:255'],
+      'phone' => ['required', 'string', 'max:20', 'unique:customers,phone'],
+      'address' => ['required', 'string', 'max:255'],
+      'country' => ['required', 'exists:countries,id'],
+      'city' => ['required', 'exists:cities,id'],
+    ]);
 
-      if ($lastCustomer) {
-        $lastCode = $lastCustomer->customer_code;
-
-        // Extract the letter and number parts
-        preg_match('/([A-Z]+)(\d+)/', $lastCode, $matches);
-
-        $letterPart = $matches[1];
-        $numberPart = intval($matches[2]);
-
-        // Increment the number part or change the letter if needed
-        if ($numberPart < 1000) {
-          $numberPart++;
+    if ($validator->fails()) {
+      return response()->json(
+        [
+          'message' => __('The given data was invalid'),
+          'errors' => $validator->errors(),
+        ],
+        422
+      );
+    }
+    try{
+      DB::transaction(function() use ($request, $user){
+        $customer = new Customer();
+        $lastCustomer = Customer::latest()->first();
+  
+        if ($lastCustomer) {
+          $lastCode = $lastCustomer->customer_code;
+  
+          // Extract the letter and number parts
+          preg_match('/([A-Z]+)(\d+)/', $lastCode, $matches);
+  
+          $letterPart = $matches[1];
+          $numberPart = intval($matches[2]);
+  
+          // Increment the number part or change the letter if needed
+          if ($numberPart < 1000) {
+            $numberPart++;
+          } else {
+            $letterPart = chr(ord($letterPart) + 1);
+            $numberPart = 1;
+          }
+  
+          $newCode = $letterPart . $numberPart;
         } else {
-          $letterPart = chr(ord($letterPart) + 1);
-          $numberPart = 1;
+          // If no existing customers, start with A1
+          $newCode = 'A1';
         }
-
-        $newCode = $letterPart . $numberPart;
-      } else {
-        // If no existing customers, start with A1
-        $newCode = 'A1';
-      }
-      // save user;
-      $user->status = 1;
-      $user->save();
-      //save customers;
-      $customer->customer_code = $newCode;
-      $customer->type = 'website';
-      $customer->first_name = $request->first_name;
-      $customer->last_name = $request->last_name;
-      $customer->email = $user->email;
-      $customer->phone = $request->phone;
-      $customer->address = $request->address;
-      $customer->country_id = $request->country;
-      $customer->city_id = $request->city;
-      $customer->status = 1;
-      $customer->user_id = $user->id;
-      $customer->save();
-
-    });
+        // save user;
+        $user->status = 1;
+        $user->save();
+        //save customers;
+        $customer->customer_code = $newCode;
+        $customer->type = 'website';
+        $customer->first_name = $request->first_name;
+        $customer->last_name = $request->last_name;
+        $customer->email = $user->email;
+        $customer->phone = $request->phone;
+        $customer->address = $request->address;
+        $customer->country_id = $request->country;
+        $customer->city_id = $request->city;
+        $customer->status = 1;
+        $customer->user_id = $user->id;
+        $customer->save();
+  
+      });
+      Auth::login($user);
+      return response()->json(['message' => __('You successfully Register')]);
+    } catch (\Throwable $th) {
+      return response()->json(['message' => __('Something went wrong')], 422);
+    }
     
-    Auth::login($user);
-    return redirect()->route('dashboard');
   }
   public function Logout(Request $request)
   {

@@ -28,7 +28,7 @@
     <script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/swiper/swiper.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
-    @if (auth()->user()->hasRole('customer'))
+    @if (auth()->user()->hasRole('Customer'))
         <script src="{{ asset('assets/vendor/libs/moment/moment.js') }}"></script>
         <script src="{{ asset('assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
         <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
@@ -51,7 +51,7 @@
     @role('Super Admin')
         @include('content/pages/admin')
     @endrole
-    @role('customer')
+    @role('Customer')
         @include('content/pages/customer')
     @endrole
 @endsection

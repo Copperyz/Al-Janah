@@ -13,7 +13,7 @@
                             class="app-brand-text demo footer-link fw-bold ms-2 ps-1">{{ config('variables.templateName') }}</span>
                     </a>
                     <p class="footer-text mb-6" style="text-align: justify;">
-                        {{__('ALJANAH Company is a specialized firm in the field of shipping and express logistics services, providing comprehensive and tailored solutions for all your shipping needs. ALJANAH Company boasts a professional team of experts in air freight who work efficiently and precisely to ensure the timely arrival of your shipment at its destination at the lowest cost. Additionally, ALJANAH Company possesses an extensive network of relationships with global shipping and transportation companies and institutions, enabling it to offer diverse and flexible services to its clients. ALJANAH Shipping Company is the company that meets and exceeds your expectations if you are looking for fast, premium, and competitively priced air freight services.')}}<br>
+                        {{__("ALJANAH Company stands out in the shipping and logistics landscape, delivering personalized and efficient solutions for your shipping demands. Our air freight specialists are committed to ensuring your shipments arrive swiftly and cost-effectively. Leveraging our broad network of global partners, we offer versatile services that cater to our clients' varied needs. For reliable, high-quality air freight at competitive prices, ALJANAH is your ideal choice.")}}<br>
 
                     </p>
                     <!-- <form class="footer-form">
@@ -103,26 +103,18 @@
                     {{config('variables.templateName')}}.</span>
             </div>
             <div>
-                <a href="{{config('variables.githubFreeUrl')}}" class="footer-link me-3" target="_blank">
-                    <img src="{{asset('assets/img/front-pages/icons/github-'.$configData['style'].'.png') }}"
-                        alt="github icon" data-app-light-img="front-pages/icons/github-light.png"
-                        data-app-dark-img="front-pages/icons/github-dark.png" />
-                </a>
+               
                 <a href="{{config('variables.facebookUrl')}}" class="footer-link me-3" target="_blank">
                     <img src="{{asset('assets/img/front-pages/icons/facebook-'.$configData['style'].'.png') }}"
                         alt="facebook icon" data-app-light-img="front-pages/icons/facebook-light.png"
                         data-app-dark-img="front-pages/icons/facebook-dark.png" />
                 </a>
-                <a href="{{config('variables.twitterUrl')}}" class="footer-link me-3" target="_blank">
-                    <img src="{{asset('assets/img/front-pages/icons/twitter-'.$configData['style'].'.png') }}"
-                        alt="twitter icon" data-app-light-img="front-pages/icons/twitter-light.png"
-                        data-app-dark-img="front-pages/icons/twitter-dark.png" />
-                </a>
-                <a href="{{config('variables.instagramUrl')}}" class="footer-link" target="_blank">
+                
+                <!-- <a href="{{config('variables.instagramUrl')}}" class="footer-link" target="_blank">
                     <img src="{{asset('assets/img/front-pages/icons/instagram-'.$configData['style'].'.png') }}"
                         alt="google icon" data-app-light-img="front-pages/icons/instagram-light.png"
                         data-app-dark-img="front-pages/icons/instagram-dark.png" />
-                </a>
+                </a> -->
             </div>
         </div>
     </div>

@@ -558,9 +558,11 @@ $("#shipmentPriceForm").on("submit", function(event) {
                             <div class="d-flex align-items-center text-center row">
                                 <div class="col-12">
                                     <div class="card-body text-nowrap">
-                                        <h4 class="card-title mb-0">{{__('Thank You for your time')}} 🎉</h4>
-                                        <p class="mb-2">{{__('Your Shipment Price is')}} :</p>
+                                        <h4 class="card-title mb-0">{{__('Calculate shipping costs')}} </h4>
+                                        <p class="mb-2">{{__('your shipping rates are ')}} :</p>
                                         <h4 class="text-success mb-1">${response.data} LYD</h4>
+                                        <p class="mb-2">{{__('as of this date  ')}} :</p>
+                                        <h5 class="text-dark mb-1">${new Date().toLocaleString()}</h5>
                                     </div>
                                 </div>
                             </div>

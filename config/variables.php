@@ -21,7 +21,7 @@ return [
   'gitRepo' => 'pixinvent',
   'gitRepoAccess' => 'vuexy-html-admin-template',
   'githubFreeUrl' => 'https://tools.pixinvent.com/github/github-access',
-  'facebookUrl' => 'https://www.facebook.com/pixinvents/',
+  'facebookUrl' => 'https://www.facebook.com/janahcargo',
   'twitterUrl' => 'https://twitter.com/pixinvents',
   'githubUrl' => 'https://github.com/pixinvent',
   'dribbbleUrl' => 'https://dribbble.com/pixinvent',

@@ -98,21 +98,23 @@ class AuthController extends Controller
         return redirect()->route('register')->with('error', 'Invalid confirmation token.');
     }
     try {
-      $user->email_verified_at = now();
-      $user->confirmation_token = null;
-      $user->save();
+      // $user->email_verified_at = now();
+      // $user->confirmation_token = null;
+      // $user->save();
       
       $role = Role::where('name', 'Customer')->first();
       $user->assignRole($role);
 
       $countries = Country::all();
       $cities = City::all();
+
       return view('auth.complete-register')
       ->with('countries', $countries)
       ->with('cities', $cities)
       ->with('user', $user);
       
     } catch (\Throwable $th) {
+      return $th;
       return redirect()->back()->with('error', 'Invalid data.');
     }
   }
@@ -151,6 +153,9 @@ class AuthController extends Controller
     }
     try{
       DB::transaction(function() use ($request, $user){
+        $user->email_verified_at = now();
+        $user->confirmation_token = null;
+        $user->save();
         $customer = new Customer();
         $lastCustomer = Customer::latest()->first();
   

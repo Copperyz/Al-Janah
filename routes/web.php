@@ -61,9 +61,14 @@ Route::middleware(['guest'])->group(function () {
 
 // Settings
 Route::get('/change-locale/{locale}', [Settings::class, 'setLocale'])->name('changeLocale');
+
+// Auth
+Route::middleware(['auth'])->group(function () {
+  Route::post('/logout', [AuthController::class, 'Logout'])->name('logout');
+});
+
 Route::middleware(['auth'])->group(function () {
   Route::get('dashboard', [HomePage::class, 'index'])->name('dashboard');
-  Route::post('/logout', [AuthController::class, 'Logout'])->name('logout');
 
   // Users
   Route::get('get-users', [Users::class, 'get_users'])->name('get-users');

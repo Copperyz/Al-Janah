@@ -56,7 +56,9 @@ $configData = Helper::appClasses();
       Aug 17, 2020, 5:48 (ET)
     </p>
   </div>
+  @can('delete-customer')
   <button type="button" class="btn btn-label-danger delete-customer">{{__('Delete Customer')}}</button>
+  @endcan
 </div>
 
 
@@ -68,7 +70,8 @@ $configData = Helper::appClasses();
       <div class="card-body">
         <div class="customer-avatar-section">
           <div class="d-flex align-items-center flex-column">
-            <img class="img-fluid rounded my-3" src="{{asset('assets/img/avatars/15.png')}}" height="110" width="110" alt="User avatar" />
+            <!-- <img class="img-fluid rounded my-3" src="{{asset('assets/img/avatars/15.png')}}" height="110" width="110" alt="User avatar" /> -->
+            <div class="avatar me-3"><span class="avatar-initial rounded-circle bg-label-primary">{{$customer->first_name}}</span></div>
             <div class="customer-info text-center">
               <h4 class="mb-1">{{$customer->first_name.' '. $customer->last_name}}</h4>
               <small>{{__('Customer ID')}} #{{$customer->customer_code}}</small>
@@ -165,11 +168,13 @@ $configData = Helper::appClasses();
                       </div>
                     </div>
                   </div>
+                  @can('add-cash')
                   <div class="col-md-6">
                     <div class="text-sm-end text-center ps-sm-0">
                       <button data-bs-target="#addCashModal" data-bs-toggle="modal" class="btn bg-label-success mb-2 text-nowrap add-new-role">{{__('Add Cash')}}</button>
                     </div>
                   </div>
+                  @endcan
                 </div>
                 <div class="card-info">
                   <h4 class="card-title mb-3">{{__('Cash Balance')}}</h4>
@@ -196,11 +201,13 @@ $configData = Helper::appClasses();
                       </div>
                     </div>
                   </div>
+                  @can('add-coupon')
                   <div class="col-md-6">
                     <div class="text-sm-end text-center ps-sm-0">
                       <button data-bs-target="#addCouponModal" data-bs-toggle="modal" class="btn bg-label-warning mb-2 text-nowrap add-new-role">{{__('Add Coupon')}}</button>
                     </div>
                   </div>
+                  @endcan
                 </div>
                 <div class="card-info">
                   <h4 class="card-title mb-3">{{__('Coupons')}}</h4>

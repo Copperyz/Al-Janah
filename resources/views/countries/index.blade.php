@@ -75,7 +75,7 @@
                             </a> -->
                             </div>
                             <div class="text-sm-end text-center ps-sm-0">
-                                <button data-bs-target="#addCountryModal" data-bs-toggle="modal"
+                                <button data-bs-target="#" data-bs-toggle="modal"
                                     class="btn btn-outline-dark text-nowrap add-new-country">{{__('Add City')}}</button>
                             </div>
                         </div>

@@ -206,7 +206,7 @@ class CustomerController extends Controller
           // If no existing customers, start with A1
           $newCode = 'A1';
         }
-        if ($request->has('addByAdmin')) {
+        
           $user = new User();
           $user->name = $request->first_name;
           $user->email = $request->email;
@@ -230,7 +230,7 @@ class CustomerController extends Controller
           $customer->save();
 
           Mail::to($user->email)->send(new UserLoginCredentials($user));
-        }
+        
       });
       return response()->json(['message' => __('Customer added successfully')]);
     } catch (\Throwable $th) {

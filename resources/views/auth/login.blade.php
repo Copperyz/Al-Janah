@@ -53,14 +53,15 @@ $configData = Helper::appClasses();
         <div class="d-flex col-12 col-lg-5 align-items-center p-sm-5 p-4">
             <div class="w-px-400 mx-auto">
                 <!-- Logo -->
-                <div class="app-brand mb-4">
-                    <a href="{{url('/')}}" class="app-brand-link gap-2">
+                <div class="app-brand demo mb-4">
+                    <a href="{{url('/')}}" class="app-brand-link gap-2" dir="ltr">
                         <span class="app-brand-logo demo">@include('_partials.macros',["height"=>20,"withbg"=>'fill:
                             #fff;'])</span>
+                            <span class="app-brand-text demo menu-text fw-bold">{{__(config('variables.templateName'))}}</span>
                     </a>
                 </div>
                 <!-- /Logo -->
-                <h3 class="mb-1">{{__('Welcome to')}} {{config('variables.templateName')}}! 👋</h3>
+                <h3 class="mb-1">{{__('Welcome to')}} {{config('variables.templateName')}}</h3>
                 <p class="mb-4">{{__('Please sign-in to your account')}}</p>
                 <form id="formAuthentication" class="mb-3" method="POST" action="{{ route('login') }}">
                     @csrf

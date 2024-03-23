@@ -343,10 +343,28 @@ $configData = Helper::appClasses();
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
                                     <span class="before-heading fst-normal">{{__('Italy')}}</span>
                                     <div class="entry-title nott">
-                                        <h3 class="fw-normal"><a href="#">Global Meetup Program is Launching!</a></h3>
+                                        <h3 class="fw-normal"><a href="#">{{__('Roma, Prato, Venezia, Milano, Gioia Tauro Port')}}</a></h3>
                                     </div>
                                     <div class="entry-content">
                                         <a href="{{route('branches-page', 'Italy')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="entry branches-padding-bottom col-md-6">
+                            <div class="grid-inner row align-items-center">
+                                <div class="col-lg-6">
+                                    <div class="entry-image">
+                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/algeria800x600.jpg')}}" alt="algeria warhouse"></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
+                                    <span class="before-heading fst-normal">{{__('Algeria')}}</span>
+                                    <div class="entry-title nott">
+                                        <h3 class="fw-normal"><a href="#">{{__('')}}</a></h3>
+                                    </div>
+                                    <div class="entry-content">
+                                        <a href="{{route('branches-page', 'Algeria')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -383,6 +401,24 @@ $configData = Helper::appClasses();
                                     </div>
                                     <div class="entry-content">
                                         <a href="{{route('branches-page', 'Turkey2')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="entry branches-padding-bottom col-md-6">
+                            <div class="grid-inner row align-items-center">
+                                <div class="col-lg-6">
+                                    <div class="entry-image">
+                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/palestine800x600.jpg')}}" alt="Palestine warhouse"></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
+                                    <span class="before-heading fst-normal">{{__('Palestine')}}</span>
+                                    <div class="entry-title nott">
+                                        <h3 class="fw-normal"><a href="#">{{__('')}}</a></h3>
+                                    </div>
+                                    <div class="entry-content">
+                                        <a href="{{route('branches-page', 'Palestine')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
                                     </div>
                                 </div>
                             </div>

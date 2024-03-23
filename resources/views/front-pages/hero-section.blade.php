@@ -327,7 +327,7 @@
           <!-- <img class="map" src="/assets/map-centered.png" alt="jmap" /> -->
           <img class="map" src="{{asset('assets/img/front-pages/landing-page/map.avif')}}" alt="jmap" />
         </div>
-        <h2 class="hero-title">{{__('Your Goods,')}}<br><span style="padding-left: 3em"> {{__('Our Mission')}}</span>.</h2>
+        <h2 class="hero-title">{{__('Your Goods,')}}<br><span style="padding-left: 3em"> {{__('Our Commitment')}}</span>.</h2>
         <div class="hero-desc text-center">
             <h4 style="color:#fff !important">{{__('Track Your Cargo From Anywhere')}}</h4>
             <!-- <a href="{{route('track-shipment')}}" class="btn-cta">{{__('Track Shipment')}}</a> -->

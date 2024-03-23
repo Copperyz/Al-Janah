@@ -32,26 +32,14 @@ class FrontPagesController extends Controller
     $warehouse = config('constants.'.$branch);
     // return $warehouse['title'];
      switch ($branch) {
-      case 'Italy':
-        $numberOfImage = 5;
-        break;
-      case 'China':
-        $numberOfImage = 5;
-        break;
-      case 'Libya':
-        $numberOfImage = 5;
-        break;
-      case 'Dubai':
-        $numberOfImage = 5;
-        break;
-      case 'Turkey1':
-        $numberOfImage = 5;
-        break;
       case 'Turkey2':
         $numberOfImage = 6;
         break;
+      case 'Italy':
+        $numberOfImage = 6;
+        break;
       default:
-        # code...
+        $numberOfImage = 5;
         break;
     }
     return view('front-pages.branches-page', compact('pageConfigs', 'branch', 'numberOfImage', 'warehouse'));

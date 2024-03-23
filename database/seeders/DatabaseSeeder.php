@@ -33,6 +33,10 @@ class DatabaseSeeder extends Seeder
             ['name' => 'trip_routes.index', 'guard_name' => 'web'],
             ['name' => 'prices.index', 'guard_name' => 'web'],
             ['name' => 'customers.index', 'guard_name' => 'web'],
+            ['name' => 'payments.index', 'guard_name' => 'web'],
+            ['name' => 'countries.index', 'guard_name' => 'web'],
+            ['name' => 'cities.index', 'guard_name' => 'web'],
+            ['name' => 'addresses.index', 'guard_name' => 'web'],
         ];
 
         $permissionModels = collect($permissions)->map(function ($permission) {
@@ -41,6 +45,14 @@ class DatabaseSeeder extends Seeder
 
         // Assign all permissions to the Super Admin role
         $superAdminRole->permissions()->attach($permissionModels->pluck('id'));
+
+        // Filter permissions for the Customer role
+        $customerPermissions = $permissionModels->filter(function ($permission) {
+            return in_array($permission['name'], ['dashboard']);
+        });
+
+        // Assign filtered permissions to the Customer role
+        $customerRole->permissions()->attach($customerPermissions->pluck('id'));
 
         // Seed a Super Admin user
         $admin = User::create([

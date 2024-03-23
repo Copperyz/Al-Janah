@@ -22,33 +22,12 @@ class UserLoginCredentials extends Mailable
         $this->customer = $user->customer;
     }
 
-    /**
-     * Get the message envelope.
-     */
-    public function envelope(): Envelope
+    public function build()
     {
-        return new Envelope(
-            subject: 'Login Credentials',
-        );
+        return $this->subject('Login Credentials')
+        ->view('emails.login_credentials')
+        ->with(['user' => $this->user, 'customer' => $this->customer]);
     }
 
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
-            view: 'emails.login_credentials',
-        );
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
-    }
+    
 }

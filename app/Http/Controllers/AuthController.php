@@ -36,7 +36,7 @@ class AuthController extends Controller
     $user = User::where('email', $request->email)->first();
     if ($user && $user->block == 0 && Hash::check($request->password, $user->password)) {
       Auth::login($user);
-      return redirect()->intended();
+      return redirect('/dashboard');
     } else {
       // If login attempt fails, throw a ValidationException with the custom error message
       throw ValidationException::withMessages([
@@ -114,7 +114,6 @@ class AuthController extends Controller
       ->with('user', $user);
       
     } catch (\Throwable $th) {
-      return $th;
       return redirect()->back()->with('error', 'Invalid data.');
     }
   }

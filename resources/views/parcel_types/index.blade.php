@@ -47,7 +47,7 @@
                         <div class="card-body text-sm-end text-center ps-sm-0">
                             <button data-bs-target="#addParcelTypeModal" data-bs-toggle="modal"
                                 class="btn btn-primary mb-2 text-nowrap add-new-city">{{ __('Add Parcel Type') }}</button>
-                            <p class="mb-0 mt-1">{{ __('Add a Good Type if it does not exist') }}</p>
+                            <p class="mb-0 mt-1">{{ __('Add a Parcel Type if it does not exist') }}</p>
                         </div>
                     </div>
                 </div>

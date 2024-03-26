@@ -100,10 +100,8 @@ class AddressController extends Controller
         ], 422);
         }
 
-        // Find the role by ID
         $branch = Branch::findOrFail($id);
 
-        // Update the role name
         $branch->update(['name' => $request->input('name')]);
         $branch->update(['city_id' => $request->input('city_id')]);
 

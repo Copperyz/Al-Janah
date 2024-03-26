@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\ParcelType;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -37,6 +38,8 @@ class DatabaseSeeder extends Seeder
             ['name' => 'countries.index', 'guard_name' => 'web'],
             ['name' => 'cities.index', 'guard_name' => 'web'],
             ['name' => 'addresses.index', 'guard_name' => 'web'],
+            ['name' => 'good_types.index', 'guard_name' => 'web'],
+            ['name' => 'parcel_types.index', 'guard_name' => 'web'],
         ];
 
         $permissionModels = collect($permissions)->map(function ($permission) {
@@ -62,5 +65,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $admin->assignRole($superAdminRole);
+
+        // Seed Parcel Types
+        $parcelType = ParcelType::create(['name' => 'Box']);
     }
 }

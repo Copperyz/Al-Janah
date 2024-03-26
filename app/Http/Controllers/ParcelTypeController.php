@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ParcelType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class ParcelTypeController extends Controller
 {
@@ -12,7 +14,8 @@ class ParcelTypeController extends Controller
      */
     public function index()
     {
-        //
+        $parcelTypes = ParcelType::paginate(10);
+        return view('parcel_types.index', compact('parcelTypes'));
     }
 
     /**
@@ -28,15 +31,40 @@ class ParcelTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+          ]);
+          if ($validator->fails()) {
+            return response()->json([
+              'message' => __('The given data was invalid'),
+              'errors' => $validator->errors()
+            ], 422);
+          }
+        try {
+            $parcelType = new ParcelType();
+            $parcelType->name = $request->name;
+            $parcelType->created_by = auth()->id();
+            $parcelType->save();
+            return response()->json(['message' => __('Parcel Type added successfully')],  200);
+
+        } catch (\Throwable $th) {
+            return $th;
+            return response()->json(['message' => __('Something went wrong')], 422);
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(ParcelType $parcelType)
+    public function show(string $id)
     {
-        //
+        $parcelType = ParcelType::find($id);
+
+        if (!$parcelType) {
+            return response()->json(['error' => 'Parcel Type not found'], 404);
+        }
+
+        return response()->json(['parcelType' => $parcelType]);
     }
 
     /**
@@ -50,9 +78,25 @@ class ParcelTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ParcelType $parcelType)
+    public function update(Request $request, string $id)
     {
-        //
+        // Validate the request
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+        return response()->json([
+            'message' => __('The given data was invalid'),
+            'errors' => $validator->errors()
+        ], 422);
+        }
+
+        $parcelType = ParcelType::findOrFail($id);
+
+        $parcelType->update(['name' => $request->input('name')]);
+
+        return response()->json(['message' => __('Parcel Type updated successfully')], 200);
     }
 
     /**

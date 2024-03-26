@@ -515,5 +515,21 @@
   "Add a address if it does not exist": "أضف عنوان إذا لم يكن موجودًا",
   "Address added successfully": "تم إضافة العنوان بنجاح",
   "Address updated successfully": "تم تعديل بيانات العنوان بنجاح",
-  "Address deleted successfully": "تم إلغاء العنوان بنجاح"
+  "Address deleted successfully": "تم إلغاء العنوان بنجاح",
+  "Good Types": "أنواع البضائع",
+  "Add Good Type": "إضافة نوع بضائع",
+  "Edit Good Type": "تعديل نوع بضائع",
+  "Add a Good Type if it does not exist": "أضف نوع بضائع إذا لم يكن موجودًا",
+  "Enter Good Type": "ادخل اسم نوع البضائع",
+  "Good Type added successfully": "تم إضافة نوع البضائع بنجاح",
+  "Good Type updated successfully": "تم تعديل بيانات نوع البضائع بنجاح",
+  "Good Type deleted successfully": "تم إلغاء نوع البضائع بنجاح",
+  "Parcel Types": "أنواع الطرود",
+  "Add Parcel Type": "إضافة نوع طرود",
+  "Edit Parcel Type": "تعديل نوع طرود",
+  "Add a Parcel Type if it does not exist": "أضف نوع طرود إذا لم يكن موجودًا",
+  "Enter Parcel Type": "ادخل اسم نوع الطرود",
+  "Parcel Type added successfully": "تم إضافة نوع الطرود بنجاح",
+  "Parcel Type updated successfully": "تم تعديل بيانات نوع الطرود بنجاح",
+  "Parcel Type deleted successfully": "تم إلغاء نوع الطرود بنجاح"
 }

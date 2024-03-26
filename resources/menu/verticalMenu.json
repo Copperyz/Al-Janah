@@ -71,6 +71,18 @@
           "slug": "inventoryItems.create"
         }
       ]
+    }, 
+    {
+      "url": "good_types",
+      "icon": "menu-icon tf-icons ti ti-shopping-bag",
+      "name": "Good Types",
+      "slug": "good_types.index"
+    },
+    {
+      "url": "parcel_types",
+      "icon": "menu-icon tf-icons ti ti-package",
+      "name": "Parcel Types",
+      "slug": "parcel_types.index"
     },
     {
       "url": "shipments",

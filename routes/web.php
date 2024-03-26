@@ -25,7 +25,10 @@ use App\Http\Controllers\PriceController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ShipmentOnlineController;
+use App\Http\Controllers\GoodTypeController;
+use App\Http\Controllers\ParcelTypeController;
 use Spatie\Permission\Contracts\Role;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -148,5 +151,11 @@ Route::middleware(['auth'])->group(function () {
 
   //Addresses
   Route::resource('addresses', AddressController::class);
+
+  //Good Types
+  Route::resource('good_types', GoodTypeController::class);
+  
+  //Parcel Types
+  Route::resource('parcel_types', ParcelTypeController::class);
   
 });

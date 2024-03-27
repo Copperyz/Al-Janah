@@ -99,12 +99,18 @@ $(function () {
         {
           text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addShipmentTranslation}</span>`,
           className: 'btn btn-primary',
+          id: 'addShipmentButton',
           action: function (e, dt, button, config) {
             window.location = './shipments/create';
           }
         }
       ]
     });
+  }
+
+  // Hide add button for customers
+  if (hideAddShipmentButton == true) {
+    $(".dt-buttons").hide();
   }
 
   // On each datatable draw, initialize tooltip

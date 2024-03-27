@@ -21,6 +21,8 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ShipmentCreated;
+use Illuminate\Support\Facades\Auth;
+
 
 class ShipmentController extends Controller
 {
@@ -252,7 +254,18 @@ class ShipmentController extends Controller
 
     public function get_shipments()
     {
-        $shipments = Shipment::orderBy('id', 'DESC')->get();
+        $user = Auth::user();
+        $roles = $user->getRoleNames();
+
+        foreach ($roles as $role) {
+            if ($role == 'Customer') {
+                $shipments = Shipment::where('customer_id', $user->customer->id)->orderBy('id', 'DESC')->get();
+            }
+            else {
+                $shipments = Shipment::orderBy('id', 'DESC')->get();
+            }
+        }
+      
         foreach ($shipments as $shipment) {
             $shipment->customerName = $shipment->customer ? $shipment->customer->first_name.' '.$shipment->customer->last_name : 'N/A';
             $shipment->totalAmount = '<button type="button" class="btn btn-outline-primary">'.number_format($shipment->amount + $shipment->shipmentPrice, 2).'<span class="badge bg-label-success badge-center ms-1">'.__('LYD').'</span></button>';

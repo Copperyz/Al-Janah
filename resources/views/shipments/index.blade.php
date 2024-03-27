@@ -113,4 +113,12 @@
         var addShipmentTranslation = @json(__('Add Shipment'));
     </script>
 
+    @if (Auth::check() && Auth::user()->hasRole('Customer'))
+        <script>
+            var hideAddShipmentButton = true;
+        </script>
+    @endif
+
+
+
 @endsection

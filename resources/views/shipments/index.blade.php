@@ -101,7 +101,7 @@
                         <th class="text-truncate">{{ __('Amount') }}</th>
                         <th>{{ __('Payment') }}</th>
                         <th>{{ __('Status') }}</th>
-                        <th class="cell-fit">{{ __('Actions') }}</th>
+                        <th class="cell-fit actionsTh">{{ __('Actions') }}</th>
                     </tr>
                 </thead>
             </table>
@@ -111,11 +111,12 @@
 
     <script>
         var addShipmentTranslation = @json(__('Add Shipment'));
+        var hideAddShipmentButton = false;
     </script>
 
     @if (Auth::check() && Auth::user()->hasRole('Customer'))
         <script>
-            var hideAddShipmentButton = true;
+            hideAddShipmentButton = true;
         </script>
     @endif
 

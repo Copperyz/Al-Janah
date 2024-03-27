@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
 
         // Filter permissions for the Customer role
         $customerPermissions = $permissionModels->filter(function ($permission) {
-            return in_array($permission['name'], ['dashboard']);
+            return in_array($permission['name'], ['dashboard', 'shipments']);
         });
 
         // Assign filtered permissions to the Customer role

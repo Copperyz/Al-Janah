@@ -80,7 +80,7 @@ class ShipmentController extends Controller
             'shipmentItems.*.width' => ['required', 'numeric', 'min:1'],
             'shipmentItems.*.weight' => ['required', 'numeric', 'min:1'],
             'shipmentItems.*.length' => ['required', 'numeric', 'min:1'],
-            'shipmentItems.*.quantity' => ['required', 'numeric', 'min:1', 'max:50'],
+            'shipmentItems.*.quantity' => ['required', 'numeric', 'min:1'],
             'notes' => ['nullable', 'string'],
         ]);
         if ($validator->fails()) {
@@ -89,7 +89,6 @@ class ShipmentController extends Controller
                 'errors' => $validator->errors()
             ], 422);
         }
-
 
         $shipment = new Shipment();
         $validatedDate = $request->input('date');

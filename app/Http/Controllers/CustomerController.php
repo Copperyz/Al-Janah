@@ -213,7 +213,7 @@ class CustomerController extends Controller
           $user->password = Hash::make($request->phone);
           $user->confirmation_token = null;
           $user->save();
-          $user->assignRole('customer');
+          $user->assignRole('Customer');
 
           $customer->customer_code = $newCode;
           $customer->type = 'Local';

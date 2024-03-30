@@ -48,17 +48,36 @@ $configData = Helper::appClasses();
 </h4> -->
 
 <div class="d-flex flex-column flex-sm-row align-items-center justify-content-sm-between mb-4 text-center text-sm-start gap-2">
-  <div class="mb-2 mb-sm-0">
-    <h4 class="mb-1">
-      {{__('Customer ID')}} #{{$customer->customer_code}}
-    </h4>
-    <p class="mb-0">
-      Aug 17, 2020, 5:48 (ET)
-    </p>
+
+  <div class="row col-md-12">
+    <div class="col-md-6">
+      <div class="mb-2 mb-sm-0">
+        <h4 class="mb-1">
+          {{__('Customer ID')}} #{{$customer->customer_code}}
+        </h4>
+        <p class="mb-0">
+          Aug 17, 2020, 5:48 (ET)
+        </p>
+      </div>
+    </div>
+    @can('delete-customer')
+    <button type="button" class="btn btn-label-danger delete-customer">{{__('Delete Customer')}}</button>
+    @endcan
+    <div class="col-md-6">
+      <div class="alert alert-warning" role="alert">
+       
+        <div class="d-flex flex-column ps-1">
+          <h5 class="alert-heading mb-2">{{__('Your Membership Key')}}</h5>
+          <div class="mb-3 col-12 form-password-toggle">
+            <div class="input-group input-group-merge">
+              <input class="form-control" disabled type="password" value="{{$customer->customer_reference}}" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
+              <span class="input-group-text cursor-pointer" style="background-color: transparent;"><i class="ti ti-eye ti-xs"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  @can('delete-customer')
-  <button type="button" class="btn btn-label-danger delete-customer">{{__('Delete Customer')}}</button>
-  @endcan
 </div>
 
 
@@ -392,4 +411,3 @@ $configData = Helper::appClasses();
 @include('_partials/_modals/coupons/modal-add-coupons')
 <!-- /Modal -->
 @endsection
-

@@ -14,6 +14,7 @@ return new class extends Migration {
       $table->id();
       $table->string('type');
       $table->string('customer_code', 13);
+      $table->uuid('customer_reference')->unique();
       $table->string('first_name', 50);
       $table->string('last_name', 50);
       $table->string('email')->unique();

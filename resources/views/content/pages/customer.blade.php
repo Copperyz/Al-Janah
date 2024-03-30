@@ -28,6 +28,7 @@
               <small>{{__('Customer ID')}} #{{$customer->customer_code}}</small>
             </div>
           </div>
+          
         </div>
         <div class="d-flex justify-content-around flex-wrap my-4">
           <div class="d-flex align-items-center gap-2">

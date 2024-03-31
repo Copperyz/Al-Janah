@@ -40,6 +40,12 @@ class DatabaseSeeder extends Seeder
             ['name' => 'addresses.index', 'guard_name' => 'web'],
             ['name' => 'good_types.index', 'guard_name' => 'web'],
             ['name' => 'parcel_types.index', 'guard_name' => 'web'],
+            ['name' => 'show-trips-card', 'guard_name' => 'web'],
+            ['name' => 'show-shipments-card', 'guard_name' => 'web'],
+            ['name' => 'show-tripRotes-card', 'guard_name' => 'web'],
+            ['name' => 'show-payments-card', 'guard_name' => 'web'],
+            ['name' => 'show-users-card', 'guard_name' => 'web'],
+            ['name' => 'show-customers-card', 'guard_name' => 'web'],
         ];
 
         $permissionModels = collect($permissions)->map(function ($permission) {
@@ -51,7 +57,7 @@ class DatabaseSeeder extends Seeder
 
         // Filter permissions for the Customer role
         $customerPermissions = $permissionModels->filter(function ($permission) {
-            return in_array($permission['name'], ['dashboard', 'shipments']);
+            return in_array($permission['name'], ['dashboard', 'shipments', 'show-shipments-card', 'show-payments-card']);
         });
 
         // Assign filtered permissions to the Customer role

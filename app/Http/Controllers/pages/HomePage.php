@@ -18,19 +18,20 @@ class HomePage extends Controller
   {
     $user = auth()->user();
     if($user->hasRole('Customer')){
-      $customer = Customer::with('shipments', 'country', 'cashBalance', 'coupons')->where('user_id', $user->id)->first();
-      return view('customers.show', compact('customer'));
+      $customerData = Customer::where('user_id', $user->id)->first();
+      $shipments = Shipment::where('customer_id', $customerData->id)->count();
+      $payments = Payment::count();
+    }else{
+      $shipments = Shipment::count();
+      $payments = Payment::count();
     }
-    if($user->hasRole('Super Admin')){
-        $customers = Customer::count();
-        $shipments = Shipment::count();
-        $trips = Trip::count();
-        $tripRoutes = TripRoute::count();
-        $users = User::count();
-        $payments = Payment::count();
+    $customers = Customer::count();
+    $trips = Trip::count();
+    $tripRoutes = TripRoute::count();
+    $users = User::count();
+    
 
       return view('content.pages.home', compact('customers', 'shipments', 'trips', 'tripRoutes', 'users', 'payments'));
-    }
-    return view('content.pages.home');
+    
   }
 }

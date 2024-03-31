@@ -48,10 +48,5 @@
 
 @section('content')
 
-    @role('Super Admin')
-        @include('content/pages/admin')
-    @endrole
-    @role('Customer')
-        @include('content/pages/customer')
-    @endrole
+    @include('content/pages/admin')
 @endsection

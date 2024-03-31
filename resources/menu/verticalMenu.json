@@ -85,15 +85,21 @@
       "slug": "parcel_types.index"
     },
     {
+      "url": "customer/profile",
+      "icon": "menu-icon tf-icons ti ti-user",
+      "name": "Profile",
+      "slug": "customer.profile"
+    },
+    {
       "url": "shipments",
       "icon": "menu-icon tf-icons ti ti-box",
-      "name": "Shipments List",
+      "name": "Shipments",
       "slug": "shipments"
     },
     {
       "url": "trips",
       "icon": "menu-icon tf-icons ti ti-plane",
-      "name": "Trips List",
+      "name": "Trips",
       "slug": "trips.index"
     },
     {

@@ -132,6 +132,7 @@ Route::middleware(['auth'])->group(function () {
   Route::post('customer-update', [CustomerController::class, 'updateCustomerData'])->name('customer.updateData');
   Route::post('customer-add-cash/{id}', [CustomerController::class, 'addCashBalance'])->name('customer.add-cash');
   Route::post('customer-add-coupon/{id}', [CustomerController::class, 'addCoupon'])->name('customer.add-coupon');
+  Route::get('customer/profile', [CustomerController::class, 'showProfile'])->name('customer.profile');
   Route::resource('customers', CustomerController::class);
 
   // Payments

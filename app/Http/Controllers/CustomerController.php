@@ -242,10 +242,16 @@ class CustomerController extends Controller
   /**
    * Display the specified resource.
    */
+  public function showProfile()
+  {
+    $user = auth()->user();
+    $customer = Customer::with('shipments', 'country', 'cashBalance', 'coupons')->where('user_id', $user->id)->first();
+    return view('customers.show')->with('customer', $customer);
+  }
   public function show(Customer $customer)
   {
-    //
-    $customer = Customer::with('shipments', 'cashBalance', 'coupons')->findOrFail($customer->id);
+    
+      $customer = Customer::with('shipments', 'country', 'cashBalance', 'coupons')->findOrFail($customer->id);
 
     return view('customers.show')->with('customer', $customer);
   }

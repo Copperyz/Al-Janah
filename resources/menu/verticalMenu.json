@@ -9,7 +9,7 @@
     },
     {
       "url": "dashboard",
-      "name": "Home",
+      "name": "Dashboard",
       "icon": "menu-icon tf-icons ti ti-smart-home",
       "slug": "dashboard"
     },

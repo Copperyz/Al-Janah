@@ -100,7 +100,7 @@
                     </script>
                 </span>
                 <span class="footer-text">
-                    {{config('variables.templateName')}}.</span>
+                    {{config('variables.templateName')}}</span>
             </div>
             <div>
                

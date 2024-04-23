@@ -289,7 +289,7 @@ $configData = Helper::appClasses();
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
                                     <span class="before-heading fst-normal">{{__('China')}}</span>
                                     <div class="entry-title nott">
-                                        <h3 class="fw-normal">{{__('Guangdong - Shanghai')}}</h3>
+                                        <h3 class="fw-normal">{{__('Hong Kong - Guangdong - Shanghai')}}</h3>
                                     </div>
                                     <div class="entry-content">
                                         <a href="{{route('branches-page', 'China')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
@@ -361,7 +361,7 @@ $configData = Helper::appClasses();
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
                                     <span class="before-heading fst-normal">{{__('Algeria')}}</span>
                                     <div class="entry-title nott">
-                                        <h3 class="fw-normal"><a href="#">{{__('')}}</a></h3>
+                                        <h3 class="fw-normal"><a href="#">{{__('Algiers')}}</a></h3>
                                     </div>
                                     <div class="entry-content">
                                         <a href="{{route('branches-page', 'Algeria')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
@@ -379,7 +379,7 @@ $configData = Helper::appClasses();
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
                                     <span class="before-heading fst-normal">{{__('Turkey')}}</span>
                                     <div class="entry-title nott">
-                                        <h3 class="fw-normal"><a href="#">{{__('Başakşehir - Fatih - Eyüpsultan - Sultangazi')}}</a></h3>
+                                        <h3 class="fw-normal"><a href="#">{{__('Başakşehir - Eyüpsultan - Sultangazi')}}</a></h3>
                                     </div>
                                     <div class="entry-content">
                                         <a href="{{route('branches-page', 'Turkey1')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
@@ -397,7 +397,7 @@ $configData = Helper::appClasses();
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
                                     <span class="before-heading fst-normal">{{__('Turkey')}}</span>
                                     <div class="entry-title nott">
-                                        <h3 class="fw-normal"><a href="#">{{__('Eskişehir - Laleli')}}</a></h3>
+                                        <h3 class="fw-normal"><a href="#">{{__('Istanbul - Fatih - Laleli')}}</a></h3>
                                     </div>
                                     <div class="entry-content">
                                         <a href="{{route('branches-page', 'Turkey2')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>

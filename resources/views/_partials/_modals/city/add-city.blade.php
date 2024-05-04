@@ -15,9 +15,9 @@
                         <select id="addCity" class="select2 form-select" data-allow-clear="true" name="city">
                             <option disabled selected>{{ __('Select') }}</option>
                             @foreach ($cities as $code => $name)
-                                <option value="{{ $name }}"><i
-                                        class="fis fi fi-{{ $code }} rounded-circle me-2 fs-3"></i>
-                                    {{ $name }}</option>
+                            <option value="{{ $name }}"><i class="rounded-circle me-2 fs-3"></i>
+                                {{ $name }}
+                            </option>
                             @endforeach
                         </select>
                     </div>
@@ -26,17 +26,16 @@
                         <select id="addCountry" class="select2 form-select" data-allow-clear="true" name="country">
                             <option disabled selected>{{ __('Select') }}</option>
                             @foreach ($countries as $country)
-                                <option value="{{ $country->id }}"><i
-                                        class="fis fi fi-{{ $country->country_code }} rounded-circle me-2 fs-3"></i>
-                                    {{ $country->name }}</option>
+                            <option value="{{ $country->id }}"><i class="fis fi fi-{{ $country->country_code }} rounded-circle me-2 fs-3"></i>
+                                {{ $country->name }}
+                            </option>
                             @endforeach
                         </select>
                     </div>
 
                     <div class="col-12 text-center mt-4">
                         <button type="submit" class="btn btn-primary me-sm-3 me-1">{{ __('Submit') }}</button>
-                        <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal"
-                            aria-label="Close">{{ __('Cancel') }}</button>
+                        <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">{{ __('Cancel') }}</button>
                     </div>
                 </form>
                 <!--/ Add role form -->

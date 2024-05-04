@@ -17,11 +17,13 @@ class HomePage extends Controller
   public function index()
   {
     $user = auth()->user();
-    if($user->hasRole('Customer')){
+    if ($user->hasRole('Customer')) {
       $customerData = Customer::where('user_id', $user->id)->first();
       $shipments = Shipment::where('customer_id', $customerData->id)->count();
-      $payments = Payment::count();
-    }else{
+      $payments = Shipment::withCount('payment')->where('customer_id', $customerData->id)
+        ->get()
+        ->sum('payment_count');;
+    } else {
       $shipments = Shipment::count();
       $payments = Payment::count();
     }
@@ -29,9 +31,8 @@ class HomePage extends Controller
     $trips = Trip::count();
     $tripRoutes = TripRoute::count();
     $users = User::count();
-    
 
-      return view('content.pages.home', compact('customers', 'shipments', 'trips', 'tripRoutes', 'users', 'payments'));
-    
+
+    return view('content.pages.home', compact('customers', 'shipments', 'trips', 'tripRoutes', 'users', 'payments'));
   }
 }

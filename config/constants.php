@@ -295,6 +295,8 @@ return [
         'kr' => 'Seoul',
         'lb' => 'Beirut',
         'ly' => 'Tripoli',
+        'ly' => 'Misrata',
+        'ly' => 'Benghazi',
         'mt' => 'Valletta',
         'nl' => 'Amsterdam',
         'om' => 'Muscat',

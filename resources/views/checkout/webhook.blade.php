@@ -9,7 +9,8 @@
     if (empty($signature)) {
         // No signature verification needed
         // Proceed with deployment or other actions
-        shell_exec('cd /home/janahxco/Al-Janah && git pull');
+        $output = shell_exec('cd /home/janahxco/Al-Janah && git fetch origin && git merge origin/main 2>&1');
+        echo "<pre>$output</pre>";
         exit('Deployment completed');
     }
 
@@ -32,7 +33,8 @@
     }
 
     // If the signature is valid, proceed with deployment
-    shell_exec('cd /home/janahxco/Al-Janah && git pull');
+    $output = shell_exec('cd /home/janahxco/Al-Janah && git fetch origin && git merge origin/main 2>&1');
+    echo "<pre>$output</pre>";
     exit('Deployment completed');
 
 @endphp

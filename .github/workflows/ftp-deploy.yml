@@ -3,20 +3,19 @@ name: FTP Deploy
 on:
   push:
     branches:
-      - main  # Set this to your default branch
+      - main  # Change to your default branch if different
 
 jobs:
   ftp-deploy:
     name: Deploy to FTP
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-    - name: FTP Deploy Action
+    - name: Setup FTP Deploy Action
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./  # Local directory to upload (root of the repository)
-        remote-dir: /home/janahxco/Al-Janah/  # Remote directory on your server

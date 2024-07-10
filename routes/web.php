@@ -51,7 +51,7 @@ Route::post('track-shipment-data', [FrontPagesController::class, 'trackShipmentD
 Route::post('/handle-redirection', [ShipmentOnlineController::class, 'handleRedirection'])->name('handle.redirection');
 Route::get('/test-form', [ShipmentOnlineController::class, 'testForm'])->name('test-form');
 
-Route::get('/web-hook', [ShipmentOnlineController::class, 'webHook'])->name('web-hook');
+Route::post('/web-hook', [ShipmentOnlineController::class, 'webHook'])->name('web-hook');
 
 
 Route::post('/shipment-online', [ShipmentOnlineController::class, 'store'])->name('shipmentOnline.store');

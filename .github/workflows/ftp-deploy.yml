@@ -28,6 +28,6 @@ jobs:
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
           to: m.nahaisi96@gmail.com
-          from: 'Al-Janah'
+          from: 'AL-JANAH'
           subject: 'Deployment Successful'
           body: 'Your deployment to FTP was successful.'

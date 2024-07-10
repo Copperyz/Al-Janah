@@ -10,26 +10,24 @@ jobs:
     name: Deploy to FTP
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Setup FTP Deploy Action
-      uses: SamKirkland/FTP-Deploy-Action@4.0.0
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        
-    - name: Send Notification Email
-      uses: mxschmitt/action-tmate@v4
-      with:
-        smtp_server: ${{ secrets.SMTP_SERVER }}
-        smtp_port: 465
-        smtp_username: ${{ secrets.SMTP_USERNAME }}
-        smtp_password: ${{ secrets.SMTP_PASSWORD }}
-        to_email: m.nahaisi96@gmail.com
-        from_email: ${{ secrets.SMTP_USERNAME }}
-        subject: 'Deployment Successful'
-        body: 'Your deployment to FTP was successful.'   
+      - name: Setup FTP Deploy Action
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
 
-   
+      - name: Send Notification Email
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: 465
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          to: m.nahaisi96@gmail.com
+          from: ${{ secrets.SMTP_USERNAME }}
+          subject: 'Deployment Successful'
+          body: 'Your deployment to FTP was successful.'

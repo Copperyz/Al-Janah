@@ -88,7 +88,7 @@ class ShipmentOnlineController extends Controller
         "receiverEmail": "johndoe@example.com",
         "receiverPhoneNumber": "+1234567890",
         "shippingAddress": "123 Example Street, Example City, 12345"
-    }';
+    }'; 
 
         return view('checkout.testForm', compact('json_data'));
     }

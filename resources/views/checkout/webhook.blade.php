@@ -9,11 +9,29 @@
     if (empty($signature)) {
         // No signature verification needed
         // Proceed with deployment or other actions
-        $output = shell_exec(
-            'cd /home/janahxco/Al-Janah && git config --global user.email "admin@janahx.com" && git config --global user.name "Admin" && git pull',
-        );
+        // Define the repository path
+        $repositoryPath = '/home/janahxco/Al-Janah';
+
+        // Commands to set Git user identity and pull changes
+        $gitConfigCommand =
+            "git config --global user.email 'admin@janahx.com' && git config --global user.name 'Admin'";
+        $gitFetchCommand = 'git fetch origin';
+        $gitMergeCommand = 'git merge origin/main --no-edit';
+
+        // Execute the Git commands and capture output
+        $output = shell_exec("cd $repositoryPath && $gitConfigCommand && $gitFetchCommand && $gitMergeCommand 2>&1");
+
+        // Output the result for debugging
         echo "<pre>$output</pre>";
-        exit('Deployment completed');
+
+        // Check if there were any errors or conflicts
+        if (strpos($output, 'CONFLICT') !== false) {
+            // Handle merge conflicts if any
+            exit('Merge conflict encountered. Resolve conflicts and try again.');
+        } else {
+            // No conflicts, deployment completed successfully
+            exit('Deployment completed');
+        }
     }
 
     // Validate signature if provided
@@ -35,10 +53,27 @@
     }
 
     // If the signature is valid, proceed with deployment
-    $output = shell_exec(
-        'cd /home/janahxco/Al-Janah && git config --global user.email "admin@janahx.com" && git config --global user.name "Admin" && git pull',
-    );
+    // Define the repository path
+    $repositoryPath = '/home/janahxco/Al-Janah';
+
+    // Commands to set Git user identity and pull changes
+    $gitConfigCommand = "git config --global user.email 'admin@janahx.com' && git config --global user.name 'Admin'";
+    $gitFetchCommand = 'git fetch origin';
+    $gitMergeCommand = 'git merge origin/main --no-edit';
+
+    // Execute the Git commands and capture output
+    $output = shell_exec("cd $repositoryPath && $gitConfigCommand && $gitFetchCommand && $gitMergeCommand 2>&1");
+
+    // Output the result for debugging
     echo "<pre>$output</pre>";
-    exit('Deployment completed');
+
+    // Check if there were any errors or conflicts
+    if (strpos($output, 'CONFLICT') !== false) {
+        // Handle merge conflicts if any
+        exit('Merge conflict encountered. Resolve conflicts and try again.');
+    } else {
+        // No conflicts, deployment completed successfully
+        exit('Deployment completed');
+    }
 
 @endphp

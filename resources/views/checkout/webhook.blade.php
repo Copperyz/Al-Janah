@@ -9,9 +9,7 @@
     if (empty($signature)) {
         // No signature verification needed
         // Proceed with deployment or other actions
-        $output = shell_exec(
-            'cd /home/janahxco/Al-Janah && git config --global user.email "admin@janahx.com" && git config --global user.name "Admin" && git pull --no-edit',
-        );
+        $output = shell_exec('cd /home/janahxco/Al-Janah && git pull --no-edit');
         echo "<pre>$output</pre>";
         exit('Deployment completed');
     }
@@ -35,9 +33,7 @@
     }
 
     // If the signature is valid, proceed with deployment
-    $output = shell_exec(
-        'cd /home/janahxco/Al-Janah && git config --global user.email "admin@janahx.com" && git config --global user.name "Admin" && git pull --no-edit',
-    );
+    $output = shell_exec('cd /home/janahxco/Al-Janah && git pull --no-edit');
     echo "<pre>$output</pre>";
     exit('Deployment completed');
 

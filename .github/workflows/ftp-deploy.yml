@@ -22,7 +22,7 @@ jobs:
 
     - name: Send Notification Email
       env:
-        SMTP_SERVER: smtp.example.com
+        SMTP_SERVER: mail.janahx.com
         SMTP_PORT: 465
         SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
         SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}

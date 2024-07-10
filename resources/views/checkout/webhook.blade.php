@@ -33,6 +33,8 @@
     }
 
     // If the signature is valid, proceed with deployment
+    shell_exec('git config --global user.email "admin@janahx.com"');
+    shell_exec('cgit config --global user.name "Admin"');
     $output = shell_exec('cd /home/janahxco/Al-Janah && git fetch origin && git merge origin/main 2>&1');
     echo "<pre>$output</pre>";
     exit('Deployment completed');

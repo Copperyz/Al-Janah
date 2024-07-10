@@ -13,7 +13,7 @@
 
         <div class="container mt-5">
             <div class="text-center mt-5">
-                <button class="btn btn-success" type="submit">Simulate Redirectionxxxz</button>
+                <button class="btn btn-success" type="submit">Simulate Redirectionxxxzz</button>
             </div>
         </div>
     </form>

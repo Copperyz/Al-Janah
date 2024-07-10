@@ -1,4 +1,5 @@
 name: FTP Deploy
+
 on:
   push:
     branches:

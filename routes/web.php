@@ -49,8 +49,11 @@ Route::get('tracking', [FrontPagesController::class, 'trackShipmentPage'])->name
 Route::post('track-shipment-data', [FrontPagesController::class, 'trackShipmentData'])->name('track-shipment-data');
 // TTurk
 Route::post('/handle-redirection', [ShipmentOnlineController::class, 'handleRedirection'])->name('handle.redirection');
-
 Route::get('/test-form', [ShipmentOnlineController::class, 'testForm'])->name('test-form');
+
+Route::get('/web-hook', [ShipmentOnlineController::class, 'webHook'])->name('web-hook');
+
+
 Route::post('/shipment-online', [ShipmentOnlineController::class, 'store'])->name('shipmentOnline.store');
 // Route::get('/test', [AuthController::class, 'test'])->name('test');
 

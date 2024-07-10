@@ -10,7 +10,7 @@
         // No signature verification needed
         // Proceed with deployment or other actions
         $output = shell_exec(
-            'git config --global user.email "admin@janahx.com" && git config --global user.name "Admin" && cd /home/janahxco/Al-Janah && git fetch origin && git merge origin/main 2>&1',
+            'cd /home/janahxco/Al-Janah && git config --global user.email "admin@janahx.com" && git config --global user.name "Admin" && git pull',
         );
         echo "<pre>$output</pre>";
         exit('Deployment completed');
@@ -36,7 +36,7 @@
 
     // If the signature is valid, proceed with deployment
     $output = shell_exec(
-        'git config --global user.email "admin@janahx.com" && git config --global user.name "Admin" && cd /home/janahxco/Al-Janah && git fetch origin && git merge origin/main 2>&1',
+        'cd /home/janahxco/Al-Janah && git config --global user.email "admin@janahx.com" && git config --global user.name "Admin" && git pull',
     );
     echo "<pre>$output</pre>";
     exit('Deployment completed');

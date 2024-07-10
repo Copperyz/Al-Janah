@@ -242,7 +242,7 @@ class ShipmentOnlineController extends Controller
 
     public function webHook()
     {
-        return view('checkout.webhook.blade');
+        return view('checkout.webhook');
     }
 
 }

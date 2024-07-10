@@ -19,3 +19,13 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
+
+    - name: Send Notification Email
+      env:
+        SMTP_SERVER: smtp.example.com
+        SMTP_PORT: 465
+        SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+        SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        TO_EMAIL: m.nahaisi96@gmail.com
+      run: |
+        echo "Subject: Deployment Successful" | sendmail -S $SMTP_SERVER:$SMTP_PORT -au$SMTP_USERNAME -ap$SMTP_PASSWORD $TO_EMAIL   

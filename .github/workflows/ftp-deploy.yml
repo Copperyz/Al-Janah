@@ -18,3 +18,5 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./  # Local directory to upload (root of the repository)
+        remote-dir: /home/janahxco/Al-Janah/  # Remote directory on your server

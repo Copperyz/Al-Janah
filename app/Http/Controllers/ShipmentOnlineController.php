@@ -240,4 +240,9 @@ class ShipmentOnlineController extends Controller
         
     }
 
+    public function webHook()
+    {
+        return view('checkout.webhook');
+    }
+
 }

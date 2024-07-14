@@ -20,7 +20,7 @@
                     <span class="app-brand-logo demo">@include('_partials.macros', [
                         'height' => 20,
                         'withbg' => "fill:
-                                                                                    #fff;",
+                                                                                                                                                                                                                                                                                                                                                                            #fff;",
                     ])</span>
                     <span
                         class="app-brand-text demo menu-text fw-bold ms-2 ps-1">{{ config('variables.templateName') }}</span>
@@ -63,39 +63,42 @@
                     </li> -->
                 </ul>
                 <!-- Toolbar: Start -->
-            <ul class="navbar-nav  ms-auto">
-                <!-- $configData['hasCustomizer'] -->
-                <!-- Style Switcher -->
+                <ul class="navbar-nav ms-auto">
+                    <!-- $configData['hasCustomizer'] -->
+                    <!-- Style Switcher -->
 
-                <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
-                    <a class="nav-link me-2 me-xl-0 changeMode" href="javascript:void(0);" data-theme="light">
-                        <i class='me-2' id="modeIcon"></i>
-                        <span class="d-sm-none" id="themeToggleText"></span>
-                    </a>
-                </li>
-                <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
-                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0)" data-bs-toggle="dropdown">
-                        <i class='ti ti-language me-2 ti-sm'></i>
-                        <span class="align-middle d-sm-none">{{ app()->getLocale() == 'en' ? 'عربي' : 'English' }}</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
-                        <li>
-                            <a class="dropdown-item" href="javascript:void(0);" id="changeLocale">
-                                <span class="align-middle">{{ app()->getLocale() == 'en' ? 'عربي' : 'English' }}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                    <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
+                        <a class="nav-link me-2 me-xl-0 changeMode" href="javascript:void(0);" data-theme="light">
+                            <i id="modeIcon" class="me-2"></i>
+                            <span class="d-sm-none" id="themeToggleText">{{ __('Change Mode') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
+                        <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0)"
+                            data-bs-toggle="dropdown">
+                            <i class="ti ti-language me-2 ti-sm"></i>
+                            <span id="changeLocaleMobile"
+                                class="align-middle d-sm-none">{{ app()->getLocale() == 'en' ? 'عربي' : 'English' }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                            <li>
+                                <a class="dropdown-item" href="javascript:void(0);" id="changeLocale">
+                                    <span
+                                        class="align-middle">{{ app()->getLocale() == 'en' ? 'عربي' : 'English' }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+
                 <!-- / Style Switcher-->
-                <!-- navbar button: Start -->
-                
+                </ul>
 
-                <!-- navbar button: End -->
-            </ul>
-            <!-- Toolbar: End -->
+                <!-- Toolbar: End -->
             </div>
             <ul class="navbar-nav flex-row align-items-center ms-auto">
-            @guest
+                @guest
                     <li>
                         <a href="{{ route('login') }}" class="btn btn-primary"><span
                                 class="tf-icons ti ti-login scaleX-n1-rtl me-md-1"></span><span
@@ -117,7 +120,7 @@
             </ul>
             <div class="landing-menu-overlay d-lg-none"></div>
             <!-- Menu wrapper: End -->
-            
+
         </div>
     </div>
 </nav>
@@ -126,71 +129,60 @@
 <script src="{{ asset(mix('assets/vendor/libs/jquery/jquery.js')) }}"></script>
 <script>
     $(document).ready(function() {
-        // Get the elements that represent the buttons
         var changeLocaleButton = $('#changeLocale');
         var changeModeButton = $('.changeMode');
-        var themeToggleText = document.getElementById('themeToggleText');
-        // var modeIcon = $('#modeIcon');
+        var changeLocaleMobileButton = $('#changeLocaleMobile');
 
-        // Check local storage for the specified keys
-        var storageKeyLocale = 'templateCustomizer-front-menu-theme-default-light--Rtl';
-        var storageKeyMode = 'templateCustomizer-front-menu-theme-default-light--Style';
+        var storageKeys = {
+            locale: 'locale',
+            mode: 'templateCustomizer-front-menu-theme-default-light--Style',
+            rtl: 'templateCustomizer-front-menu-theme-default-light--Rtl',
+            modeVertical: 'templateCustomizer-vertical-menu-theme-default-light--Style',
+            rtlVertical: 'templateCustomizer-vertical-menu-theme-default-light--Rtl'
+        };
 
-        var storageKeyLocaleVertical = 'templateCustomizer-vertical-menu-theme-default-light--Rtl';
-        var storageKeyModeVertical = 'templateCustomizer-vertical-menu-theme-default-light--Style';
+        var allKeysExist = true;
 
-        var localeKey = 'locale';
-
-        var isRtl = localStorage.getItem(storageKeyLocale) === 'true';
-        var currentMode = localStorage.getItem(storageKeyMode) || 'light';
-        if (currentMode === 'light') {
-            themeToggleText.textContent = 'Dark';
-        } else {
-            themeToggleText.textContent = 'Light';
-        }
-        var iconElement = $('#modeIcon');
-        iconElement.attr('class', currentMode === 'dark' ? 'ti ti-sun me-2' : 'ti ti-moon me-2');
-
-        var isRtlVertical = localStorage.getItem(storageKeyLocaleVertical) === 'true';
-        var currentModeVertical = localStorage.getItem(storageKeyModeVertical) || 'light';
-
-        // Get current mode and set icon
-        var modeCookie = localStorage.getItem(storageKeyMode);
-        var defaultValue = 'dark'; // Set your default mode value here
-
-        // Initialize refreshNeeded variable
-        var refreshNeeded = false;
-        var refreshLocaleNeeded = false;
-
-        // Check if mode is different from default
-        if (!modeCookie) {
-            refreshNeeded = true;
+        for (var key in storageKeys) {
+            if (localStorage.getItem(storageKeys[key]) === null) {
+                allKeysExist = false;
+                break;
+            }
         }
 
-        var localeCookie = localStorage.getItem(localeKey);
-        var locale = "{{ app()->getLocale() }}";
-
-        if (localeCookie && localeCookie !== locale) {
-            refreshLocaleNeeded = true;
+        if (!allKeysExist) {
+            createStorageKeyIfNotExist(storageKeys.locale, 'en');
+            createStorageKeyIfNotExist(storageKeys.mode, 'dark');
+            createStorageKeyIfNotExist(storageKeys.rtl, false);
+            createStorageKeyIfNotExist(storageKeys.modeVertical, 'dark');
+            createStorageKeyIfNotExist(storageKeys.rtlVertical, false);
+            window.location.reload();
         }
 
-        createStorageKeyIfNotExist(storageKeyLocale, false);
-        createStorageKeyIfNotExist(storageKeyMode, 'dark');
-        createStorageKeyIfNotExist(storageKeyLocaleVertical, false);
-        createStorageKeyIfNotExist(storageKeyModeVertical, 'dark');
-        createStorageKeyIfNotExist(localeKey, 'en');
+        var locale = localStorage.getItem(storageKeys.locale) || "{{ app()->getLocale() }}";
+        var currentMode = localStorage.getItem(storageKeys.mode) || 'light';
+        var isRtl = locale === 'ar';
 
-        // Perform refresh if needed and not on the initial page load
+        $('#modeIcon').attr('class', currentMode === 'dark' ? 'ti ti-sun me-2' : 'ti ti-moon me-2');
 
-        if (refreshLocaleNeeded) {
-            var localeCookie = localStorage.getItem(localeKey);
+        function toggleLocale() {
+            var newLocale = locale === 'en' ? 'ar' : 'en';
+            localStorage.setItem(storageKeys.locale, newLocale);
+            localStorage.setItem(storageKeys.rtl, newLocale === 'ar');
+            localStorage.setItem(storageKeys.rtlVertical, newLocale === 'ar');
+            updateLocaleURL(newLocale);
+        }
+
+        function updateLocaleURL(locale) {
             var url = '{{ route('changeLocale', ['locale' => ':locale']) }}';
-            url = url.replace(':locale', localeCookie);
-            // Update the link's href attribute
-            changeLocaleButton.attr('href', url);
-            // Navigate to the new URL
+            url = url.replace(':locale', locale);
             window.location.href = url;
-        } else if (refreshNeeded) {
+        }
+
+        function toggleMode() {
+            var newMode = currentMode === 'light' ? 'dark' : 'light';
+            localStorage.setItem(storageKeys.mode, newMode);
+            localStorage.setItem(storageKeys.modeVertical, newMode);
             window.location.reload();
         }
 
@@ -199,55 +191,20 @@
                 localStorage.setItem(key, defaultValue.toString());
             }
         }
-        // modeIcon.attr('class', (currentMode === 'light') ? 'ti ti-moon me-2 ti-sm' : 'ti ti-sun me-2 ti-sm');
 
-        // Function to toggle the value in local storage and navigate to the appropriate URL
-        function toggleLocale() {
-            isRtl = !isRtl;
-            localStorage.setItem(storageKeyLocale, isRtl.toString());
-
-            isRtlVertical = !isRtlVertical;
-            localStorage.setItem(storageKeyLocaleVertical, isRtlVertical.toString());
-
-            // Construct the URL based on the new value
-            var locale = "{{ app()->getLocale() }}";
-
-            locale = locale == 'en' ? 'ar' : 'en';
-
-            localStorage.setItem(localeKey, locale.toString());
-
-            var url = '{{ route('changeLocale', ['locale' => ':locale']) }}';
-            url = url.replace(':locale', locale);
-
-            // Update the link's href attribute
-            changeLocaleButton.attr('href', url);
-
-            // Navigate to the new URL
-            window.location.href = url;
-            // location.reload();
-        }
-
-        // Function to toggle the mode and update the UI accordingly
-        function toggleMode() {
-            currentMode = (currentMode === 'light') ? 'dark' : 'light';
-            localStorage.setItem(storageKeyMode, currentMode);
-
-            currentModeVertical = (currentModeVertical === 'light') ? 'dark' : 'light';
-            localStorage.setItem(storageKeyModeVertical, currentModeVertical);
-
-            location.reload();
-        }
-
-        // Attach click event handlers to the buttons
         changeLocaleButton.on('click', function(event) {
-            toggleLocale();
             event.preventDefault();
+            toggleLocale();
+        });
+
+        changeLocaleMobileButton.on('click', function(event) {
+            event.preventDefault();
+            toggleLocale();
         });
 
         changeModeButton.on('click', function(event) {
-            toggleMode();
             event.preventDefault();
+            toggleMode();
         });
-
     });
 </script>

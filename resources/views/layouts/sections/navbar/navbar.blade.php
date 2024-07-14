@@ -87,19 +87,20 @@
                         <span class="align-middle">{{ __('My Profile') }}</span>
                     </a>
                 </li>
-                <li>
-                    <a class="dropdown-item" href="" id="changeLocale">
-                        <i class="ti ti-language me-2 ti-sm"></i>
-                        <span class="align-middle">{{ app()->getLocale() == 'en' ? 'عربي' : 'English' }}</span></span>
-
-                    </a>
-
-                </li>
-                <li>
-                    <a class="dropdown-item changeMode" href="javascript:void(0);" data-theme="light">
-                        <span class="align-middle"><i class='ti ti-sun me-2'></i>{{ __('Change Mode') }}</span>
-                    </a>
-                </li>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
+                        <a class="dropdown-item" href="javascript:void(0);" id="changeLocaleVertical">
+                            <i class="ti ti-language me-2 ti-sm"></i>
+                            <span class="align-middle">{{ app()->getLocale() == 'en' ? 'عربي' : 'English' }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
+                        <a class="dropdown-item changeModeVertical" href="javascript:void(0);" data-theme="light">
+                            <span class="align-middle"><i id='modeIconVertical'
+                                    class='ti ti-sun me-2'></i>{{ __('Change Mode') }}</span>
+                        </a>
+                    </li>
+                </ul>
                 {{-- @if (Auth::check() && Laravel\Jetstream\Jetstream::hasApiFeatures())
               <li>
                 <a class="dropdown-item" href="{{ route('api-tokens.index') }}">
@@ -189,124 +190,77 @@
 <script src="{{ asset(mix('assets/vendor/libs/jquery/jquery.js')) }}"></script>
 <script>
     $(document).ready(function() {
-        // Get the elements that represent the buttons
-        var changeLocaleButton = $('#changeLocale');
-        var changeModeButton = $('.changeMode');
-        // var modeIcon = $('#modeIcon');
+        var changeLocaleButton = $('#changeLocaleVertical');
+        var changeModeButton = $('.changeModeVertical');
+        var iconElement = $('#modeIconVertical');
 
-        // Check local storage for the specified keys
-        var storageKeyLocale = 'templateCustomizer-front-menu-theme-default-light--Rtl';
-        var storageKeyMode = 'templateCustomizer-front-menu-theme-default-light--Style';
+        var storageKeys = {
+            locale: 'locale',
+            mode: 'templateCustomizer-front-menu-theme-default-light--Style',
+            rtl: 'templateCustomizer-front-menu-theme-default-light--Rtl',
+            modeVertical: 'templateCustomizer-vertical-menu-theme-default-light--Style',
+            rtlVertical: 'templateCustomizer-vertical-menu-theme-default-light--Rtl'
+        };
 
-        var storageKeyLocaleVertical = 'templateCustomizer-vertical-menu-theme-default-light--Rtl';
-        var storageKeyModeVertical = 'templateCustomizer-vertical-menu-theme-default-light--Style';
+        var locale = localStorage.getItem(storageKeys.locale) || "{{ app()->getLocale() }}";
+        var currentMode = localStorage.getItem(storageKeys.modeVertical) || 'light';
+        var isRtl = localStorage.getItem(storageKeys.rtl) === 'true';
 
-        var localeKey = 'locale';
-
-        var isRtl = localStorage.getItem(storageKeyLocale) === 'true';
-        var currentMode = localStorage.getItem(storageKeyMode) || 'light';
-
-        var iconElement = $('#modeIcon');
-        iconElement.attr('class', currentMode === 'dark' ? 'ti ti-sun me-2' : 'ti ti-moon me-2');
-
-        var isRtlVertical = localStorage.getItem(storageKeyLocaleVertical) === 'true';
-        var currentModeVertical = localStorage.getItem(storageKeyModeVertical) || 'light';
-
-        // Get current mode and set icon
-        var modeCookie = localStorage.getItem(storageKeyMode);
-        var defaultValue = 'dark'; // Set your default mode value here
-
-        // Initialize refreshNeeded variable
         var refreshNeeded = false;
-        var refreshLocaleNeeded = false;
 
-
-        // Check if mode is different from default
-        if (!modeCookie) {
-            refreshNeeded = true;
+        for (var key in storageKeys) {
+            if (localStorage.getItem(storageKeys[key]) === null) {
+                localStorage.setItem(storageKeys[key], getDefaultValue(key));
+                refreshNeeded = true;
+            }
         }
 
-        var localeCookie = localStorage.getItem(localeKey);
-        var locale = "{{ app()->getLocale() }}";
-
-        if (localeCookie && localeCookie !== locale) {
-            refreshLocaleNeeded = true;
+        if (refreshNeeded) {
+            window.location.reload();
+        } else {
+            updateModeIcon(currentMode);
         }
 
-        createStorageKeyIfNotExist(storageKeyLocale, false);
-        createStorageKeyIfNotExist(storageKeyMode, 'dark');
-        createStorageKeyIfNotExist(storageKeyLocaleVertical, false);
-        createStorageKeyIfNotExist(storageKeyModeVertical, 'dark');
-        createStorageKeyIfNotExist(localeKey, 'en');
+        function updateModeIcon(mode) {
+            iconElement.attr('class', mode === 'dark' ? 'ti ti-sun me-2' : 'ti ti-moon me-2');
+        }
 
-        // Perform refresh if needed and not on the initial page load
+        function toggleLocale() {
+            var newLocale = locale === 'en' ? 'ar' : 'en';
+            localStorage.setItem(storageKeys.locale, newLocale);
+            localStorage.setItem(storageKeys.rtl, newLocale === 'ar');
+            localStorage.setItem(storageKeys.rtlVertical, newLocale === 'ar');
+            updateLocaleURL(newLocale);
+        }
 
-        if (refreshLocaleNeeded) {
-            var localeCookie = localStorage.getItem(localeKey);
+        function updateLocaleURL(newLocale) {
             var url = '{{ route('changeLocale', ['locale' => ':locale']) }}';
-            url = url.replace(':locale', localeCookie);
-            // Update the link's href attribute
-            changeLocaleButton.attr('href', url);
-            // Navigate to the new URL
+            url = url.replace(':locale', newLocale);
             window.location.href = url;
-        } else if (refreshNeeded) {
+        }
+
+        function toggleMode() {
+            currentMode = currentMode === 'light' ? 'dark' : 'light';
+            localStorage.setItem(storageKeys.modeVertical, currentMode);
+            localStorage.setItem(storageKeys.mode, currentMode);
             window.location.reload();
         }
 
-        function createStorageKeyIfNotExist(key, defaultValue) {
-            if (localStorage.getItem(key) === null) {
-                localStorage.setItem(key, defaultValue.toString());
-            }
-        }
-        // modeIcon.attr('class', (currentMode === 'light') ? 'ti ti-moon me-2 ti-sm' : 'ti ti-sun me-2 ti-sm');
-
-        // Function to toggle the value in local storage and navigate to the appropriate URL
-        function toggleLocale() {
-            isRtl = !isRtl;
-            localStorage.setItem(storageKeyLocale, isRtl.toString());
-
-            isRtlVertical = !isRtlVertical;
-            localStorage.setItem(storageKeyLocaleVertical, isRtlVertical.toString());
-
-            // Construct the URL based on the new value
-            var locale = "{{ app()->getLocale() }}";
-
-            locale = locale == 'en' ? 'ar' : 'en';
-
-            localStorage.setItem(localeKey, locale.toString());
-
-            var url = '{{ route('changeLocale', ['locale' => ':locale']) }}';
-            url = url.replace(':locale', locale);
-
-            // Update the link's href attribute
-            changeLocaleButton.attr('href', url);
-
-            // Navigate to the new URL
-            window.location.href = url;
-            // location.reload();
+        function getDefaultValue(key) {
+            if (key === storageKeys.locale) return 'en';
+            if (key === storageKeys.mode || key === storageKeys.modeVertical) return 'dark';
+            if (key === storageKeys.rtl || key === storageKeys.rtlVertical) return 'false';
+            return '';
         }
 
-        // Function to toggle the mode and update the UI accordingly
-        function toggleMode() {
-            currentMode = (currentMode === 'light') ? 'dark' : 'light';
-            localStorage.setItem(storageKeyMode, currentMode);
-
-            currentModeVertical = (currentModeVertical === 'light') ? 'dark' : 'light';
-            localStorage.setItem(storageKeyModeVertical, currentModeVertical);
-
-            location.reload();
-        }
-
-        // Attach click event handlers to the buttons
         changeLocaleButton.on('click', function(event) {
-            toggleLocale();
             event.preventDefault();
+            toggleLocale();
         });
 
         changeModeButton.on('click', function(event) {
-            toggleMode();
             event.preventDefault();
+            toggleMode();
         });
-
     });
 </script>

@@ -1191,8 +1191,7 @@ li.ui-timepicker-selected,
 .navbar.landing-navbar .navbar-nav .nav-link.show,
 .navbar.landing-navbar .navbar-nav .nav-link.active,
 .navbar.landing-navbar .navbar-nav .nav-link:hover {
-  /* color: #80a9d4 !important; */
-  color: #fff !important;
+  color: #80a9d4 !important;
 }
 
 .landing-features .features-icon-wrapper .features-icon-box .features-icon {

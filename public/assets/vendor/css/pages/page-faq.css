@@ -1,5 +1,5 @@
 .faq-header {
-  background: url('../../../img/pages/header.png');
+  background: url("../../../img/pages/header.png");
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 300px !important;
@@ -21,41 +21,4 @@
 
 .dark-style .bg-faq-section {
   background-color: rgba(134, 146, 208, 0.04);
-}
-.landing-hero .hero-title {
-  background: linear-gradient(to right, #28c76f 0%, #5a4aff 47.92%, #ff3739 100%);
-  background-size: auto;
-  background-clip: border-box;
-  background-size: 200% auto;
-  color: #5d596c;
-  background-clip: text;
-  line-height: 1.2;
-  text-fill-color: transparent;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-animation: shine 2s ease-in-out infinite alternate;
-  animation: shine 2s ease-in-out infinite alternate;
-}
-@-webkit-keyframes shine {
-  0% {
-    background-position: 0% 50%;
-  }
-  80% {
-    background-position: 50% 90%;
-  }
-  100% {
-    background-position: 91% 100%;
-  }
-}
-
-@keyframes shine {
-  0% {
-    background-position: 0% 50%;
-  }
-  80% {
-    background-position: 50% 90%;
-  }
-  100% {
-    background-position: 91% 100%;
-  }
 }

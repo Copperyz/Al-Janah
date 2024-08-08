@@ -8,7 +8,7 @@
     creditCardMask = document.querySelector('.credit-card-mask'),
     expiryDateMask = document.querySelector('.expiry-date-mask'),
     cvvMask = document.querySelector('.cvv-code-mask'),
-    datepickerList = document.querySelectorAll('.date-picker'),
+    datepickerList = document.querySelectorAll('.dob-picker'),
     formCheckInputPayment = document.querySelectorAll('.form-check-input-payment');
 
   // Phone Number
@@ -57,8 +57,6 @@
   if (datepickerList) {
     datepickerList.forEach(function (datepicker) {
       datepicker.flatpickr({
-        enableTime: true,
-        dateFormat: "Y-m-d h:i K",
         monthSelectorType: 'static'
       });
     });

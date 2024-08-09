@@ -1,23 +1,48 @@
+# Node.js dependencies
 /node_modules
+
+# Laravel specific
 /public/hot
 /public/storage
 /storage/*.key
 /vendor
 .phpunit.result.cache
+
+# Docker
 docker-compose.override.yml
+
+# Homestead
 Homestead.json
 Homestead.yaml
+
+# Logs
 npm-debug.log
 yarn-error.log
+
+# Package managers
 yarn.lock
 package-lock.json
+
+# IDE configurations
 /.idea
 /.vscode
-# /public/css
-# /public/js
+
+# Environment configuration files
+.env
+.env.local
+.env.*.local
+
+# Public assets
 /public/mix-manifest.json
-# But not these files...
-# !/public/assets/*
-# /public/assets/js
-# /public/assets/css
-# /public/assets/vendor
+
+# Ignore all files under /public/assets/js but include the directories
+/public/assets/js/*
+!/public/assets/js/**/
+
+# Ignore all files under /public/assets/css but include the directories
+/public/assets/css/*
+!/public/assets/css/**/
+
+# Ignore all files under /public/assets/vendor but include the directories
+/public/assets/vendor/*
+!/public/assets/vendor/**/

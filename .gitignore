@@ -27,10 +27,6 @@ package-lock.json
 /.idea
 /.vscode
 
-# Environment configuration files
-.env
-.env.local
-.env.*.local
 
 
 # Public assets

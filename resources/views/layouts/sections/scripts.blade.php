@@ -15,7 +15,7 @@
 <script src="{{asset('assets/vendor/libs/block-ui/block-ui.js')}}"></script>
 <script src="{{asset('assets/js/extended-ui-blockui.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.js')}}"></script>
-<script src="{{ asset('assets/js/main/main.js') }}"></script>
+<script src="{{ asset(mix('assets/js/main.js')) }}"></script>
 <script>
 var exportTranslation = @json(__('Export'));
 var searchTranslation = @json(__('Search'));

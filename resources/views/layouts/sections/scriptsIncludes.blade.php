@@ -11,7 +11,7 @@ $menuCollapsed = ($configData['menuCollapsed'] === 'layout-menu-collapsed') ? js
 @endif
 
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-  <script src="{{ asset('assets/js/config.js') }}"></script>
+  <script src="{{ asset('assets/js/extends/config.js') }}"></script>
 
 @if ($configData['hasCustomizer'])
   <script>

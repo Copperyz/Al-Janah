@@ -145,6 +145,7 @@ class ShipmentController extends Controller
                     $inventoryItems->save();
                 }
         }
+        
         $customer = Customer::where('id', $shipment->customer_id)->first();
         $user = User::where('id', $customer->user_id)->first();
         Mail::to($user->email)->send(new ShipmentCreated($user));

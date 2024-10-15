@@ -24,7 +24,7 @@
 
 @section('page-script')
     <script src="{{ asset('assets/js/good_types/good-types-list.js') }}"></script>
-    <script src="{{ asset('assets/js/forms-selects.js') }}"></script>
+    <script src="{{ asset('assets/js/extends/forms-selects.js') }}"></script>
 @endsection
 
 @section('content')

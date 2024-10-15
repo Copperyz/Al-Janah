@@ -27,15 +27,15 @@ $configData = Helper::appClasses();
 
 
 @section('page-script')
-<script src="{{asset('assets/js/forms-selects.js')}}"></script>
-<script src="{{asset('assets/js/form-layouts.js')}}"></script>
+<script src="{{asset('assets/js/extends/forms-selects.js')}}"></script>
+<script src="{{asset('assets/js/extends/form-layouts.js')}}"></script>
 <script src="{{asset('assets/js/users/app-user-list.js')}}"></script>
 
 @endsection
 
 @section('content')
 
-<div class="row g-4 mb-4">
+<!-- <div class="row g-4 mb-4">
     <div class="col-sm-6 col-xl-3">
         <div class="card">
             <div class="card-body">
@@ -120,7 +120,7 @@ $configData = Helper::appClasses();
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- Users List Table -->
 <div class="card">
     <div class="card-header border-bottom">

@@ -25,7 +25,7 @@ $configData = Helper::appClasses();
 
 @section('page-script')
 <script src="{{asset('assets/js/trips/trip-stages.js')}}"></script>
-<script src="{{asset('assets/js/extended-ui-timeline.js')}}"></script>
+<script src="{{asset('assets/js/extends/extended-ui-timeline.js')}}"></script>
 @endsection
 
 @section('content')

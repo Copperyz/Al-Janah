@@ -26,9 +26,9 @@ $configData = Helper::appClasses();
 @endsection
 
 @section('page-script')
-<script src="{{asset('assets/js/forms-selects.js')}}"></script>
+<script src="{{asset('assets/js/extends/forms-selects.js')}}"></script>
 <script src="{{asset('assets/js/trips/app-trips-list.js')}}"></script>
-<script src="{{asset('assets/js/form-layouts.js')}}"></script>
+<script src="{{asset('assets/js/extends/form-layouts.js')}}"></script>
 @endsection
 
 @section('content')

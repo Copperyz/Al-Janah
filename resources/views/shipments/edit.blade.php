@@ -31,11 +31,11 @@
 
 @section('page-script')
     <script src="{{ asset('assets/js/shipments/app-shipment-items.js') }}"></script>
-    <script src="{{ asset('assets/js/offcanvas-add-payment.js') }}"></script>
-    <script src="{{ asset('assets/js/offcanvas-send-invoice.js') }}"></script>
+    <script src="{{ asset('assets/js/extends/offcanvas-add-payment.js') }}"></script>
+    <script src="{{ asset('assets/js/extends/offcanvas-send-invoice.js') }}"></script>
     <script src="{{ asset('assets/js/shipments/app-shipment-edit.js') }}"></script>
-    <script src="{{ asset('assets/js/forms-selects.js') }}"></script>
-    <script src="{{ asset('assets/js/form-layouts.js') }}"></script>
+    <script src="{{ asset('assets/js/extends/forms-selects.js') }}"></script>
+    <script src="{{ asset('assets/js/extends/form-layouts.js') }}"></script>
 @endsection
 
 @section('content')

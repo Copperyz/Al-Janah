@@ -23,7 +23,7 @@ $configData = Helper::appClasses();
 @endsection
 
 @section('page-script')
-<script src="{{asset('assets/js/front-page-landing.js')}}"></script>
+<script src="{{asset('assets/js/extends/front-page-landing.js')}}"></script>
 @endsection
 <style>
     .grid-border {

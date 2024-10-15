@@ -20,8 +20,8 @@ $configData = Helper::appClasses();
 @endsection
 
 @section('page-script')
-<script src="{{asset('assets/js/front-page-pricing.js')}}"></script>
-<script src="{{asset('assets/js/forms-selects.js')}}"></script>
+<script src="{{asset('assets/js/extends/front-page-pricing.js')}}"></script>
+<script src="{{asset('assets/js/extends/forms-selects.js')}}"></script>
 @endsection
 
 

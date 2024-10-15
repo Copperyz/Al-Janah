@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
       priceYearlyList = [].slice.call(document.querySelectorAll('.price-yearly'));
 
     function togglePrice() {
-      if (priceDurationToggler.checked) {
+      if (priceDurationToggler && priceDurationToggler.checked) {
         // If checked
         priceYearlyList.map(function (yearEl) {
           yearEl.classList.remove('d-none');
@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
     // togglePrice Event Listener
     togglePrice();
 
-    priceDurationToggler.onchange = function () {
-      togglePrice();
-    };
+    // priceDurationToggler.onchange = function () {
+    //   togglePrice();
+    // };
   })();
 });

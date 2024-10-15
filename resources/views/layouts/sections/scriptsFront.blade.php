@@ -10,7 +10,7 @@
 <!-- BEGIN: Theme JS-->
 <script src="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/block-ui/block-ui.js')}}"></script>
-<script src="{{asset('assets/js/extended-ui-blockui.js')}}"></script>
+<script src="{{asset('assets/js/extends/extended-ui-blockui.js')}}"></script>
 
 <script src="{{ asset('assets/js/main/front-main.js') }}"></script>
 <!-- END: Theme JS-->

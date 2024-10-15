@@ -87,12 +87,12 @@
   // Reviews slider next and previous
   // -----------------------------------
   // Add click event listener to next button
-  ReviewsNextBtn.addEventListener('click', function () {
-    ReviewsSliderNext.click();
-  });
-  ReviewsPreviousBtn.addEventListener('click', function () {
-    ReviewsSliderPrev.click();
-  });
+  // ReviewsNextBtn.addEventListener('click', function () {
+  //   ReviewsSliderNext.click();
+  // });
+  // ReviewsPreviousBtn.addEventListener('click', function () {
+  //   ReviewsSliderPrev.click();
+  // });
 
   // Review client logo
   // -----------------------------------
@@ -118,7 +118,7 @@
   // -----------------------------------
   document.addEventListener('DOMContentLoaded', function (event) {
     function togglePrice() {
-      if (priceDurationToggler.checked) {
+      if (priceDurationToggler && priceDurationToggler.checked) {
         // If checked
         priceYearlyList.map(function (yearEl) {
           yearEl.classList.remove('d-none');
@@ -139,8 +139,8 @@
     // togglePrice Event Listener
     togglePrice();
 
-    priceDurationToggler.onchange = function () {
-      togglePrice();
-    };
+    // priceDurationToggler.onchange = function () {
+    //   togglePrice();
+    // };
   });
 })();

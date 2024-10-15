@@ -94,6 +94,7 @@ $(function () {
       ],
     });
   }
+  
 
   // // If you have a submit button inside the form, you can bind the click event to it
   // $("#addPermissionForm :submit").on("click", function (event) {

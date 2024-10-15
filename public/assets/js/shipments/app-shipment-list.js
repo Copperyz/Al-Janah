@@ -98,7 +98,7 @@ $(function () {
       buttons: [
         {
           text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addShipmentTranslation}</span>`,
-          className: 'btn btn-primary',
+          className: 'btn btn-primary mt-2 mb-2',
           action: function (e, dt, button, config) {
             window.location = './shipments/create';
           }

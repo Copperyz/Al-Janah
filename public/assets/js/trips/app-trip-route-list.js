@@ -89,7 +89,7 @@ $(function () {
             buttons: [
                 {
                     text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addTripRouteTranslation}</span>`,
-                    className: 'add-new btn btn-primary mb-3 mb-md-0 addTripRoute',
+                    className: 'add-new btn btn-primary mb-3 mt-2 mb-2 addTripRoute',
                     attr: {
                         'data-bs-toggle': 'modal',
                         'data-bs-target': '#addTripRouteModal'

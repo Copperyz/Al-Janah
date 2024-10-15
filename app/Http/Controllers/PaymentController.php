@@ -161,7 +161,7 @@ class PaymentController extends Controller
         })
         ->addColumn('statusCapped', function ($payment) {
         // Access shipment data here, for example:
-        return $payment->status == 'paid' ? __('Paid') : __('Refunded');
+        return $payment->status == 'Paid' ? __('Paid') : __('Refunded');
         })
         ->make(true);
     }

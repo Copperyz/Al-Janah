@@ -82,7 +82,7 @@ $(function () {
       buttons: [
         {
           text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addPermissionTranslation}</span>`,
-          className: 'add-new btn btn-primary mb-3 mb-md-0',
+          className: 'add-new btn btn-primary mt-2 mb-2',
           attr: {
             'data-bs-toggle': 'modal',
             'data-bs-target': '#addPermissionModal'

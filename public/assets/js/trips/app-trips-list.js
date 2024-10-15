@@ -78,7 +78,7 @@ $(function () {
       buttons: [
         {
           text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addTripTranslation}</span>`,
-          className: 'add-new btn btn-primary mb-3 mb-md-0 addTrip',
+          className: 'add-new btn btn-primary mt-2 mb-2 addTrip',
           attr: {
             'data-bs-toggle': 'modal',
             'data-bs-target': '#addTripModal'
@@ -359,7 +359,7 @@ $(function () {
       buttons: [
         {
           text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addTripTranslation}</span>`,
-          className: 'add-new btn btn-primary mb-3 mb-md-0 addTrip',
+          className: 'add-new btn btn-primary mt-2 mb-2 addTrip',
           attr: {
             'data-bs-toggle': 'modal',
             'data-bs-target': '#addTripModal'

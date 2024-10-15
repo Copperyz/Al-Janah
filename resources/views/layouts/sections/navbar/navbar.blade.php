@@ -80,13 +80,15 @@
                 <li>
                     <div class="dropdown-divider"></div>
                 </li>
+                @if (auth()->user()->hasRole('Customer'))
                 <li>
                     <a class="dropdown-item"
-                        href="{{ Route::has('profile.show') ? route('profile.show') : 'javascript:void(0);' }}">
+                        href="{{ Route::has('customer.profile') ? route('customer.profile') : 'javascript:void(0);' }}">
                         <i class="ti ti-user-check me-2 ti-sm"></i>
                         <span class="align-middle">{{ __('My Profile') }}</span>
                     </a>
                 </li>
+                @endif
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
                         <a class="dropdown-item" href="javascript:void(0);" id="changeLocaleVertical">

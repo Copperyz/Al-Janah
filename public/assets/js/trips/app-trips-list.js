@@ -5,6 +5,22 @@
 'use strict';
 
 $(function () {
+
+    const date = document.querySelectorAll('.date-picker');
+
+
+
+  // Datepicker
+  if (date) {
+    date.forEach(function (invoiceDateEl) {
+      invoiceDateEl.flatpickr({
+        enableTime: true,         // Enable time picker
+        dateFormat: "Y-m-d H:i K", // Format for date and time (24-hour with AM/PM)
+        time_24hr: false,         // Set to false to use 12-hour format with AM/PM
+        monthSelectorType: 'static' // Static month dropdown
+      });
+    });
+  }
   // Variable declaration for table
   var dt_trips_table = $('.trips-list-table');
   // trips datatable
@@ -281,8 +297,10 @@ $(function () {
 
   // Variable declaration for table
   var dt_shipment_table = $('.shipment-list-table');
+
   // shipment datatable
   if (dt_shipment_table.length) {
+
     var dt_shipment = dt_shipment_table.DataTable({
       select: {
         style: 'multi',
@@ -307,16 +325,11 @@ $(function () {
       },
       columnDefs: [
         {
-          // For Checkboxes
           targets: 0,
           searchable: false,
           orderable: false,
           render: function () {
             return '<input type="checkbox" class="dt-checkboxes form-check-input">';
-          },
-          checkboxes: {
-            selectRow: true,
-            selectAllRender: '<input type="checkbox" class="form-check-input">'
           }
         }
       ],

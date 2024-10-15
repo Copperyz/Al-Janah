@@ -2531,8 +2531,8 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
         attr(button, "aria-label", button_aria_label_value = /*label*/
         ctx[3] ? /*label*/
         ctx[3] : null);
-        attr(button, "class", button_class_value = "".concat( /*classes*/
-        ctx[1] || '', " shepherd-button ").concat( /*secondary*/
+        attr(button, "class", button_class_value = "".concat(/*classes*/
+        ctx[1] || '', " shepherd-button ").concat(/*secondary*/
         ctx[4] ? 'shepherd-button-secondary' : ''));
         button.disabled = /*disabled*/
         ctx[2];
@@ -2544,7 +2544,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
         ctx[5];
         if (!mounted) {
           dispose = listen(button, "click", function () {
-            if (is_function( /*action*/
+            if (is_function(/*action*/
             ctx[0])) /*action*/
               ctx[0].apply(this, arguments);
           });
@@ -2565,8 +2565,8 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
           attr(button, "aria-label", button_aria_label_value);
         }
         if (dirty & /*classes, secondary*/
-        18 && button_class_value !== (button_class_value = "".concat( /*classes*/
-        ctx[1] || '', " shepherd-button ").concat( /*secondary*/
+        18 && button_class_value !== (button_class_value = "".concat(/*classes*/
+        ctx[1] || '', " shepherd-button ").concat(/*secondary*/
         ctx[4] ? 'shepherd-button-secondary' : ''))) {
           attr(button, "class", button_class_value);
         }
@@ -2771,7 +2771,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
       p: function p(ctx, _ref) {
         var _ref8 = _slicedToArray(_ref, 1),
           dirty = _ref8[0];
-        if ( /*buttons*/
+        if (/*buttons*/
         ctx[1]) {
           if (if_block) {
             if_block.p(ctx, dirty);
@@ -3101,7 +3101,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
       p: function p(ctx, _ref) {
         var _ref11 = _slicedToArray(_ref, 1),
           dirty = _ref11[0];
-        if ( /*title*/
+        if (/*title*/
         ctx[2]) {
           if (if_block0) {
             if_block0.p(ctx, dirty);
@@ -3122,7 +3122,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
           });
           check_outros();
         }
-        if ( /*cancelIcon*/
+        if (/*cancelIcon*/
         ctx[3] && /*cancelIcon*/
         ctx[3].enabled) {
           if (if_block1) {
@@ -3403,15 +3403,15 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
   }
   function create_fragment$2(ctx) {
     var div;
-    var show_if_2 = !isUndefined( /*step*/
+    var show_if_2 = !isUndefined(/*step*/
     ctx[2].options.title) || /*step*/
     ctx[2].options.cancelIcon && /*step*/
     ctx[2].options.cancelIcon.enabled;
     var t0;
-    var show_if_1 = !isUndefined( /*step*/
+    var show_if_1 = !isUndefined(/*step*/
     ctx[2].options.text);
     var t1;
-    var show_if = Array.isArray( /*step*/
+    var show_if = Array.isArray(/*step*/
     ctx[2].options.buttons) && /*step*/
     ctx[2].options.buttons.length;
     var current;
@@ -3441,7 +3441,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
         var _ref13 = _slicedToArray(_ref, 1),
           dirty = _ref13[0];
         if (dirty & /*step*/
-        4) show_if_2 = !isUndefined( /*step*/
+        4) show_if_2 = !isUndefined(/*step*/
         ctx[2].options.title) || /*step*/
         ctx[2].options.cancelIcon && /*step*/
         ctx[2].options.cancelIcon.enabled;
@@ -3466,7 +3466,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
           check_outros();
         }
         if (dirty & /*step*/
-        4) show_if_1 = !isUndefined( /*step*/
+        4) show_if_1 = !isUndefined(/*step*/
         ctx[2].options.text);
         if (show_if_1) {
           if (if_block1) {
@@ -3489,7 +3489,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
           check_outros();
         }
         if (dirty & /*step*/
-        4) show_if = Array.isArray( /*step*/
+        4) show_if = Array.isArray(/*step*/
         ctx[2].options.buttons) && /*step*/
         ctx[2].options.buttons.length;
         if (show_if) {
@@ -3602,7 +3602,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
       }
     });
     var div_levels = [{
-      "aria-describedby": div_aria_describedby_value = !isUndefined( /*step*/
+      "aria-describedby": div_aria_describedby_value = !isUndefined(/*step*/
       ctx[4].options.text) ? /*descriptionId*/
       ctx[2] : null
     }, {
@@ -3650,7 +3650,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
       p: function p(ctx, _ref) {
         var _ref14 = _slicedToArray(_ref, 1),
           dirty = _ref14[0];
-        if ( /*step*/
+        if (/*step*/
         ctx[4].options.arrow && /*step*/
         ctx[4].options.attachTo && /*step*/
         ctx[4].options.attachTo.element && /*step*/
@@ -3676,7 +3676,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
         ctx[4];
         shepherdcontent.$set(shepherdcontent_changes);
         set_attributes(div, div_data = get_spread_update(div_levels, [(!current || dirty & /*step, descriptionId*/
-        20 && div_aria_describedby_value !== (div_aria_describedby_value = !isUndefined( /*step*/
+        20 && div_aria_describedby_value !== (div_aria_describedby_value = !isUndefined(/*step*/
         ctx[4].options.text) ? /*descriptionId*/
         ctx[2] : null)) && {
           "aria-describedby": div_aria_describedby_value
@@ -4687,7 +4687,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
         path = svg_element("path");
         attr(path, "d", /*pathDefinition*/
         ctx[2]);
-        attr(svg, "class", svg_class_value = "".concat( /*modalIsVisible*/
+        attr(svg, "class", svg_class_value = "".concat(/*modalIsVisible*/
         ctx[1] ? 'shepherd-modal-is-visible' : '', " shepherd-modal-overlay-container"));
       },
       m: function m(target, anchor) {
@@ -4711,7 +4711,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
           ctx[2]);
         }
         if (dirty & /*modalIsVisible*/
-        2 && svg_class_value !== (svg_class_value = "".concat( /*modalIsVisible*/
+        2 && svg_class_value !== (svg_class_value = "".concat(/*modalIsVisible*/
         ctx[1] ? 'shepherd-modal-is-visible' : '', " shepherd-modal-overlay-container"))) {
           attr(svg, "class", svg_class_value);
         }

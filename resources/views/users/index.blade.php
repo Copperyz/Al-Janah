@@ -26,7 +26,12 @@ $configData = Helper::appClasses();
 @endsection
 
 
+@section('page-script')
+<script src="{{asset('assets/js/forms-selects.js')}}"></script>
+<script src="{{asset('assets/js/form-layouts.js')}}"></script>
+<script src="{{asset('assets/js/users/app-user-list.js')}}"></script>
 
+@endsection
 
 @section('content')
 
@@ -131,7 +136,6 @@ $configData = Helper::appClasses();
             <thead class="border-top">
                 <tr>
                     <th></th>
-                    <th>{{__('User')}}</th>
                     <th>{{__('Name')}}</th>
                     <th>{{__('Email')}}</th>
                     <th>{{__('Role')}}</th>
@@ -236,10 +240,6 @@ var addNewUserTranslation = @json(__('Add User'));
 </script>
 
 
-@section('page-script')
-<script src="{{asset('assets/js/app-user-list.js')}}"></script>
-<script src="{{asset('assets/js/forms-selects.js')}}"></script>
-<script src="{{asset('assets/js/form-layouts.js')}}"></script>
-@endsection
+
 
 @endsection

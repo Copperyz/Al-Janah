@@ -387,7 +387,7 @@ CREATE TABLE `payments` (
   `payment_method` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `transaction_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `cancel` tinyint(1) DEFAULT 0,
-  `status` enum('paid','refunded','unpaid') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` enum('Paid','Refunded','Unpaid') COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_by` bigint(20) UNSIGNED DEFAULT NULL,
   `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
   `deleted_by` bigint(20) UNSIGNED DEFAULT NULL,

@@ -135,13 +135,13 @@ class PaymentController extends Controller
     public function refund($id)
     {
         $payment = Payment::where('id', $id)->first();
-        if ($payment->status == 'paid') {
-            $payment->status = 'refunded';
+        if ($payment->status == 'Paid') {
+            $payment->status = 'Refunded';
             $payment->save();
             return response()->json(['message' => __('Payment refunded successfully')]);
         }
         else {
-            $payment->status = 'paid';
+            $payment->status = 'Paid';
             $payment->save();
             return response()->json(['message' => __('Payment paid successfully')]);
         }

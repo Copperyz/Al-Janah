@@ -28,7 +28,7 @@ return new class extends Migration {
         ->boolean('cancel')
         ->nullable()
         ->default(0);
-      $table->enum('status', ['paid', 'refunded', 'unpaid']);
+      $table->enum('status', ['Paid', 'Refunded', 'Unpaid']);
       $table->unsignedBigInteger('created_by')->nullable();
       $table->unsignedBigInteger('updated_by')->nullable();
       $table->unsignedBigInteger('deleted_by')->nullable();

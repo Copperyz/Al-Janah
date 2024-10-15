@@ -6,30 +6,11 @@
 
 // Datatable (jquery)
 $(function () {
-  let borderColor, bodyBg, headingColor;
 
-  if (isDarkStyle) {
-    borderColor = config.colors_dark.borderColor;
-    bodyBg = config.colors_dark.bodyBg;
-    headingColor = config.colors_dark.headingColor;
-  } else {
-    borderColor = config.colors.borderColor;
-    bodyBg = config.colors.bodyBg;
-    headingColor = config.colors.headingColor;
-  }
 
   // Variable declaration for table
-  var dt_customer_table = $('.datatables-customers'),
-    select2 = $('.select2'),
-    customerView = baseUrl + 'customers/';
-  if (select2.length) {
-    var $this = select2;
-    $this.wrap('<div class="position-relative"></div>').select2({
-      placeholder: 'United States ',
-      dropdownParent: $this.parent()
-    });
-  }
-
+  var dt_customer_table = $('.datatables-customers');
+  var customerView = baseUrl + 'customers/';
   // customers datatable
   if (dt_customer_table.length) {
     var dt_customer = dt_customer_table.DataTable({
@@ -316,38 +297,7 @@ $(function () {
         // }
       ],
       // For responsive popup
-      responsive: {
-        details: {
-          display: $.fn.dataTable.Responsive.display.modal({
-            header: function (row) {
-              var data = row.data();
-              return 'Details of ' + data['customer'];
-            }
-          }),
-          type: 'column',
-          renderer: function (api, rowIdx, columns) {
-            var data = $.map(columns, function (col, i) {
-              return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
-                ? '<tr data-dt-row="' +
-                    col.rowIndex +
-                    '" data-dt-column="' +
-                    col.columnIndex +
-                    '">' +
-                    '<td>' +
-                    col.title +
-                    ':' +
-                    '</td> ' +
-                    '<td>' +
-                    col.data +
-                    '</td>' +
-                    '</tr>'
-                : '';
-            }).join('');
-
-            return data ? $('<table class="table"/><tbody />').append(data) : false;
-          }
-        }
-      }
+  
     });
     $('.dataTables_length').addClass('ms-n2 mt-0 mt-md-3 me-2');
     $('.dt-action-buttons').addClass('pt-0');

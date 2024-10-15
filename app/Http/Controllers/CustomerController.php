@@ -229,7 +229,6 @@ class CustomerController extends Controller
           $customer->created_by = auth()->id();
           $customer->save();
 
-          
           Mail::to($user->email)->send(new UserLoginCredentials($user));
         
       });

@@ -54,8 +54,8 @@ $(function () {
           orderable: false,
           render: function (data, type, full, meta) {
             return (
-              '<span class="text-nowrap"><button class="btn btn-sm btn-icon me-2 editPermission" data-bs-target="#editPermissionModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit"></i></button>' +
-              '<button class="btn btn-sm btn-icon delete-record"><i class="ti ti-trash"></i></button></span>'
+              '<a href="javascript:;" class="text-body editUser" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEditUser"><i class="ti ti-edit ti-sm me-2"></i></a>' +
+              '<a href="javascript:;" class="text-body delete-record"><i class="ti ti-trash ti-sm mx-2"></i></a>' 
             );
           }
         }
@@ -181,7 +181,7 @@ $(function () {
     $('#editUserForm').find('[name="role"]').val(data.roles[0].name).prop('selected', true);
   });
 
-  var offcanvasEditUser = new bootstrap.Offcanvas($('#offcanvasEditUser'));
+  var offcanvasEditUser = new bootstrap.Offcanvas(document.getElementById('offcanvasEditUser')); // Correct initialization
 
   $('#editUserForm').submit(function (event) {
     event.preventDefault(); // Prevent default form submission

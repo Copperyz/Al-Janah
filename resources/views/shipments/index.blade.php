@@ -38,7 +38,7 @@
                                 <p class="mb-0">{{ __('Customers') }}</p>
                             </div>
                             <span class="avatar me-sm-4">
-                                <span class="avatar-initial bg-label-secondary rounded"><i
+                                <span class="avatar-initial bg-label-primary rounded"><i
                                         class="ti ti-user ti-md"></i></span>
                             </span>
                         </div>
@@ -51,7 +51,7 @@
                                 <p class="mb-0">{{ __('Shipments') }}</p>
                             </div>
                             <span class="avatar me-lg-4">
-                                <span class="avatar-initial bg-label-secondary rounded"><i
+                                <span class="avatar-initial bg-label-warning rounded"><i
                                         class="ti ti-package ti-md"></i></span>
                             </span>
                         </div>
@@ -64,7 +64,7 @@
                                 <p class="mb-0">{{ __('In Progress') }}</p>
                             </div>
                             <span class="avatar me-sm-4">
-                                <span class="avatar-initial bg-label-secondary rounded"><i
+                                <span class="avatar-initial bg-label-danger rounded"><i
                                         class="ti ti-truck ti-md"></i></span>
                             </span>
                         </div>
@@ -76,7 +76,7 @@
                                 <p class="mb-0">{{ __('Delivered') }}</p>
                             </div>
                             <span class="avatar">
-                                <span class="avatar-initial bg-label-secondary rounded"><i
+                                <span class="avatar-initial bg-label-success rounded"><i
                                         class="ti ti-checks ti-md"></i></span>
                             </span>
                         </div>
@@ -87,25 +87,25 @@
     </div>
 
     <!-- Order List Table -->
-<div class="card">
-    <div class="card-datatable table-responsive mt-3">
-        <table class="shipment-list-table table border-top">
-            <thead>
-                <tr>
-                    <th class="text-center"></th>
-                    <th class="text-center">{{ __('Customer') }}</th>
-                    <th class="text-center">{{ __('Tracking Number') }}</th>
-                    <th class="text-center">{{ __('Delivery Code') }}</th>
-                    <th class="text-center">{{ __('Date') }}</th>
-                    <th class="text-center text-truncate">{{ __('Amount') }}</th>
-                    <th class="text-center">{{ __('Payment') }}</th>
-                    <th class="text-center">{{ __('Status') }}</th>
-                    <th class="text-center cell-fit actionsTh">{{ __('Actions') }}</th>
-                </tr>
-            </thead>
-        </table>
+    <div class="card">
+        <div class="card-datatable table-responsive mt-3">
+            <table class="shipment-list-table table border-top">
+                <thead>
+                    <tr>
+                        <th class="text-center"></th>
+                        <th class="text-center">{{ __('Customer') }}</th>
+                        <th class="text-center">{{ __('Tracking Number') }}</th>
+                        <th class="text-center">{{ __('Delivery Code') }}</th>
+                        <th class="text-center">{{ __('Date') }}</th>
+                        <th class="text-center text-truncate">{{ __('Amount') }}</th>
+                        <th class="text-center">{{ __('Payment') }}</th>
+                        <th class="text-center">{{ __('Status') }}</th>
+                        <th class="text-center cell-fit actionsTh">{{ __('Actions') }}</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
     </div>
-</div>
 
 
 

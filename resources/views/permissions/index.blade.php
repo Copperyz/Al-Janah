@@ -30,17 +30,20 @@ $configData = Helper::appClasses();
 
 @section('content')
 
-<h4 class="mb-4">{{__('Permissions List')}}</h4>
-<p class="mb-4">
-    {{__('Assigning permissions to roles ensures that users with those roles have the necessary access to execute designated tasks and functionalities.')}}
-</p>
-
-
-<!-- Permission Table -->
+<div class="card mb-4">
+    <div class="card-header">
+        <h4 class="card-title">{{__('Permissions List')}}</h4>
+        <div class="d-flex justify-content-between align-items-center row gap-3 gap-md-0">
+            <p>
+                {{__('Assigning permissions to roles ensures that users with those roles have the necessary access to execute designated tasks and functionalities.')}}
+            </p>
+        </div>
+    </div>
+</div>
 <div class="card">
-    <div class="card-datatable table-responsive">
-        <table class="datatables-permissions table border-top">
-            <thead>
+    <div class="card-datatable table-responsive mt-3">
+        <table class="datatables-permissions table table">
+            <thead class="border-top">
                 <tr>
                     <th></th>
                     <th>{{__('Name')}}</th>
@@ -50,7 +53,6 @@ $configData = Helper::appClasses();
             </thead>
         </table>
     </div>
-</div>
 <!--/ Permission Table -->
 
 <script>

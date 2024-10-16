@@ -534,5 +534,14 @@
   "Parcel Type updated successfully": "تم تعديل بيانات نوع الطرود بنجاح",
   "Parcel Type deleted successfully": "تم إلغاء نوع الطرود بنجاح",
   "USD": "دولار",
-  "EUR": "يورو"
+  "EUR": "يورو",
+  "Manage users, assign roles, and control access to ensure they have the appropriate permissions for their tasks and responsibilities.": "إدارة المستخدمين وتعيين الأدوار والتحكم في الوصول لضمان حصولهم على الأذونات المناسبة لمهامهم ومسؤولياتهم.",
+  "Countries can be managed and assigned specific settings or regions, ensuring that administrators have control over the options and features available for each country.": "يمكن إدارة الدول وتعيين إعدادات أو مناطق محددة، مما يضمن أن يكون لدى المسؤولين التحكم في الخيارات والميزات المتاحة لكل دولة.",
+  "Cities can be managed and assigned specific settings or regions, ensuring that administrators have control over the options and features available for each city.": "يمكن إدارة المدن وتعيين إعدادات أو مناطق محددة، مما يضمن أن يكون لدى المسؤولين التحكم في الخيارات والميزات المتاحة لكل مدينة.",
+  "Managing addresses allows you to assign and update locations associated with users or orders, ensuring accurate data and easy access to locations.": "إدارة العناوين تتيح لك تعيين وتعديل المواقع الجغرافية المرتبطة بالمستخدمين أو الطلبات، لضمان دقة البيانات وسهولة الوصول إلى المواقع.",
+  "Managing good types allows you to categorize and assign specific attributes to different types of goods, ensuring proper classification and handling within the system.": "إدارة أنواع البضائع تتيح لك تصنيف وتعيين خصائص محددة لأنواع مختلفة من البضائع، مما يضمن تصنيفها والتعامل معها بشكل صحيح داخل النظام.",
+  "Managing parcel types allows you to define and categorize different types of parcels, ensuring proper handling and tracking within the system.": "إدارة أنواع الطرود تتيح لك تعريف وتصنيف أنواع مختلفة من الطرود، مما يضمن التعامل معها وتتبعها بشكل صحيح داخل النظام.",
+  "Trip routes can be managed and assigned specific settings or destinations, ensuring that administrators have control over the paths and destinations available for each route.": "يمكن إدارة مسارات الرحلات وتعيين إعدادات أو وجهات محددة، مما يضمن أن يكون لدى المسؤولين السيطرة على المسارات والوجهات المتاحة لكل مسار.",
+  "Prices can be managed and assigned specific settings or rates, ensuring that administrators have control over the pricing and cost structures available for each item or service.": "يمكن إدارة الأسعار وتعيين إعدادات أو معدلات محددة، مما يضمن أن يكون لدى المسؤولين السيطرة على التسعير وهياكل التكلفة المتاحة لكل عنصر أو خدمة.",
+  "Payments can be managed and assigned specific settings or methods, ensuring that administrators have control over the payment options and processing rules available for each transaction.": "يمكن إدارة المدفوعات وتعيين إعدادات أو طرق محددة، مما يضمن أن يكون لدى المسؤولين السيطرة على خيارات الدفع وقواعد المعالجة المتاحة لكل عملية."
 }

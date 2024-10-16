@@ -20,15 +20,15 @@ $(function () {
                 { data: 'payment_method' },
                 { data: 'date' },
                 { data: 'statusCapped' },
-                // { data: 'paymentStatus' },
                 { data: 'action' }
             ],
             columnDefs: [
                 {
                     // For Responsive
                     className: 'control',
-                    responsivePriority: 2,
+                    orderable: false,
                     searchable: false,
+                    responsivePriority: 2,
                     targets: 0,
                     render: function (data, type, full, meta) {
                         return '';
@@ -68,7 +68,7 @@ $(function () {
                         }
                         return (
                             '<div class="d-flex align-items-center">' +
-                            '<a href="javascript:;" class="text-body refund-record"><i class="ti ti-check ti-sm mx-2"></i></a>' +
+                            '<button class="btn btn-sm btn-primary me-2 refund-record"><i class="ti ti-reload"></i></button>' +
                             '</div>'
                         );
                     }
@@ -77,13 +77,23 @@ $(function () {
             order: [[1, 'desc']],
             dom:
                 '<"row mx-1"' +
-                '<"col-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-start gap-2"l<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start mt-md-0 mt-3"B>>' +
-                '<"col-12 col-md-6 d-flex align-items-center justify-content-end flex-column flex-md-row pe-3 gap-md-3"f<"order_status mb-3 mb-md-0">>' +
+                '<"col-sm-12 col-md-3" l>' +
+                '<"col-sm-12 col-md-9"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-md-end justify-content-center flex-wrap me-1"<"me-3"f>B>>' +
                 '>t' +
                 '<"row mx-2"' +
                 '<"col-sm-12 col-md-6"i>' +
                 '<"col-sm-12 col-md-6"p>' +
                 '>',
+            "language": {
+                "search": searchTranslation,
+                "lengthMenu": `${showTranslation} _MENU_`,
+                "info": ` ${showingTranslation} _START_ ${toTranslation} _END_ ${ofTranslation} _TOTAL_ ${entriesTranslation}`,
+                "paginate": {
+                    "next": nextTranslation,      // Change "Next" text
+                    "previous": previousTranslation, // Change "Previous" text
+                },
+                "emptyTable": noEntriesAvailableTranslation
+            },
             language: {
                 search: searchTranslation,
                 lengthMenu: `${showTranslation} _MENU_`,
@@ -97,11 +107,144 @@ $(function () {
             // Buttons with Dropdown
             buttons: [
                 {
-                    text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addPaymentTranslation}</span>`,
-                    className: 'btn btn-primary mt-2 mb-2',
-                    action: function (e, dt, button, config) {
-                        window.location = './shipments/create';
-                    }
+                    extend: 'collection',
+                    className: 'btn btn-label-secondary dropdown-toggle me-3',
+                    text: `<i class="ti ti-download me-1"></i>${exportTranslation}`,
+                    buttons: [
+                        {
+                            extend: 'print',
+                            text: '<i class="ti ti-printer me-2"></i>Print',
+                            className: 'dropdown-item',
+                            exportOptions: {
+                                columns: [1, 2, 3, 4, 5, 6],
+                                format: {
+                                    body: function (inner, colIdx, rowIdx) {
+                                        // Handle custom formatting for table data
+                                        var el = $.parseHTML(inner);
+                                        var result = '';
+                                        $.each(el, function (index, item) {
+                                            if (item.classList !== undefined && item.classList.contains('customer-name')) {
+                                                result += item.lastChild.firstChild.textContent;
+                                            } else if (item.innerText === undefined) {
+                                                result += item.textContent;
+                                            } else {
+                                                result += item.innerText;
+                                            }
+                                        });
+                                        return result;
+                                    }
+                                }
+                            },
+                            customize: function (win) {
+                                $(win.document.body)
+                                    .css('color', headingColor)
+                                    .css('border-color', borderColor)
+                                    .css('background-color', bodyBg);
+                                $(win.document.body)
+                                    .find('table')
+                                    .addClass('compact')
+                                    .css('color', 'inherit')
+                                    .css('border-color', 'inherit')
+                                    .css('background-color', 'inherit');
+                            }
+                        },
+                        {
+                            extend: 'csv',
+                            text: '<i class="ti ti-file me-2"></i>Csv',
+                            className: 'dropdown-item',
+                            exportOptions: {
+                                columns: [1, 2, 3, 4, 5, 6],
+                                format: {
+                                    body: function (inner, colIdx, rowIdx) {
+                                        var el = $.parseHTML(inner);
+                                        var result = '';
+                                        $.each(el, function (index, item) {
+                                            if (item.classList !== undefined && item.classList.contains('customer-name')) {
+                                                result += item.lastChild.firstChild.textContent;
+                                            } else if (item.innerText === undefined) {
+                                                result += item.textContent;
+                                            } else {
+                                                result += item.innerText;
+                                            }
+                                        });
+                                        return result;
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            extend: 'excel',
+                            text: '<i class="ti ti-file-export me-2"></i>Excel',
+                            className: 'dropdown-item',
+                            exportOptions: {
+                                columns: [1, 2, 3, 4, 5, 6],
+                                format: {
+                                    body: function (inner, colIdx, rowIdx) {
+                                        var el = $.parseHTML(inner);
+                                        var result = '';
+                                        $.each(el, function (index, item) {
+                                            if (item.classList !== undefined && item.classList.contains('customer-name')) {
+                                                result += item.lastChild.firstChild.textContent;
+                                            } else if (item.innerText === undefined) {
+                                                result += item.textContent;
+                                            } else {
+                                                result += item.innerText;
+                                            }
+                                        });
+                                        return result;
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            extend: 'pdf',
+                            text: '<i class="ti ti-file-text me-2"></i>Pdf',
+                            className: 'dropdown-item',
+                            exportOptions: {
+                                columns: [1, 2, 3, 4, 5, 6],
+                                format: {
+                                    body: function (inner, colIdx, rowIdx) {
+                                        var el = $.parseHTML(inner);
+                                        var result = '';
+                                        $.each(el, function (index, item) {
+                                            if (item.classList !== undefined && item.classList.contains('customer-name')) {
+                                                result += item.lastChild.firstChild.textContent;
+                                            } else if (item.innerText === undefined) {
+                                                result += item.textContent;
+                                            } else {
+                                                result += item.innerText;
+                                            }
+                                        });
+                                        return result;
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            extend: 'copy',
+                            text: '<i class="ti ti-copy me-2"></i>Copy',
+                            className: 'dropdown-item',
+                            exportOptions: {
+                                columns: [1, 2, 3, 4, 5, 6],
+                                format: {
+                                    body: function (inner, colIdx, rowIdx) {
+                                        var el = $.parseHTML(inner);
+                                        var result = '';
+                                        $.each(el, function (index, item) {
+                                            if (item.classList !== undefined && item.classList.contains('customer-name')) {
+                                                result += item.lastChild.firstChild.textContent;
+                                            } else if (item.innerText === undefined) {
+                                                result += item.textContent;
+                                            } else {
+                                                result += item.innerText;
+                                            }
+                                        });
+                                        return result;
+                                    }
+                                }
+                            }
+                        }
+                    ]
                 }
             ]
         });

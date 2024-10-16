@@ -29,11 +29,18 @@
 
 @section('content')
 
-    <h4 class="mb-4">{{ __('Good Types') }}</h4>
+<div class="card mb-3">
+    <div class="card-header">
+        <h4 class="card-title">{{__('Good Types')}}</h4>
+        <div class="d-flex justify-content-between align-items-center row gap-3 gap-md-0">
+            <p>
+                {{__('Managing good types allows you to categorize and assign specific attributes to different types of goods, ensuring proper classification and handling within the system.')}}
+            </p>
+        </div>
+    </div>
+</div>    
 
     <div class="row g-4">
-
-
         <div class="col-xl-4 col-lg-6 col-md-6">
             <div class="card h-100">
                 <div class="row h-100">

@@ -29,8 +29,8 @@ $(function () {
         {
           // For Responsive
           className: 'control',
+          orderable: false,
           searchable: false,
-          orderable: true,
           responsivePriority: 2,
           targets: 0,
           render: function (data, type, full, meta) {
@@ -154,29 +154,29 @@ $(function () {
           buttons: [
             {
               extend: 'print',
-              text: '<i class="ti ti-printer me-2" ></i>Print',
+              text: '<i class="ti ti-printer me-2"></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6],
-                // prevent avatar to be print
+                columns: [1, 2, 3, 4],
                 format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
+                  body: function (inner, colIdx, rowIdx) {
+                    // Handle custom formatting for table data
                     var el = $.parseHTML(inner);
                     var result = '';
                     $.each(el, function (index, item) {
                       if (item.classList !== undefined && item.classList.contains('customer-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
+                        result += item.lastChild.firstChild.textContent;
                       } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
+                        result += item.textContent;
+                      } else {
+                        result += item.innerText;
+                      }
                     });
                     return result;
                   }
                 }
               },
               customize: function (win) {
-                //customize print view for dark
                 $(win.document.body)
                   .css('color', headingColor)
                   .css('border-color', borderColor)
@@ -191,22 +191,22 @@ $(function () {
             },
             {
               extend: 'csv',
-              text: '<i class="ti ti-file me-2" ></i>Csv',
+              text: '<i class="ti ti-file me-2"></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6],
-                // prevent avatar to be display
+                columns: [1, 2, 3, 4],
                 format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
+                  body: function (inner, colIdx, rowIdx) {
                     var el = $.parseHTML(inner);
                     var result = '';
                     $.each(el, function (index, item) {
                       if (item.classList !== undefined && item.classList.contains('customer-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
+                        result += item.lastChild.firstChild.textContent;
                       } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
+                        result += item.textContent;
+                      } else {
+                        result += item.innerText;
+                      }
                     });
                     return result;
                   }
@@ -218,19 +218,19 @@ $(function () {
               text: '<i class="ti ti-file-export me-2"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6],
-                // prevent avatar to be display
+                columns: [1, 2, 3, 4],
                 format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
+                  body: function (inner, colIdx, rowIdx) {
                     var el = $.parseHTML(inner);
                     var result = '';
                     $.each(el, function (index, item) {
                       if (item.classList !== undefined && item.classList.contains('customer-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
+                        result += item.lastChild.firstChild.textContent;
                       } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
+                        result += item.textContent;
+                      } else {
+                        result += item.innerText;
+                      }
                     });
                     return result;
                   }
@@ -242,19 +242,19 @@ $(function () {
               text: '<i class="ti ti-file-text me-2"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6],
-                // prevent avatar to be display
+                columns: [1, 2, 3, 4],
                 format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
+                  body: function (inner, colIdx, rowIdx) {
                     var el = $.parseHTML(inner);
                     var result = '';
                     $.each(el, function (index, item) {
                       if (item.classList !== undefined && item.classList.contains('customer-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
+                        result += item.lastChild.firstChild.textContent;
                       } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
+                        result += item.textContent;
+                      } else {
+                        result += item.innerText;
+                      }
                     });
                     return result;
                   }
@@ -263,22 +263,22 @@ $(function () {
             },
             {
               extend: 'copy',
-              text: '<i class="ti ti-copy me-2" ></i>Copy',
+              text: '<i class="ti ti-copy me-2"></i>Copy',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6],
-                // prevent avatar to be display
+                columns: [1, 2, 3, 4],
                 format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
+                  body: function (inner, colIdx, rowIdx) {
                     var el = $.parseHTML(inner);
                     var result = '';
                     $.each(el, function (index, item) {
                       if (item.classList !== undefined && item.classList.contains('customer-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
+                        result += item.lastChild.firstChild.textContent;
                       } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
+                        result += item.textContent;
+                      } else {
+                        result += item.innerText;
+                      }
                     });
                     return result;
                   }
@@ -286,16 +286,9 @@ $(function () {
               }
             }
           ]
-        },
-        // {
-        //   text: '<i class="ti ti-plus me-0 me-sm-1 mb-1 ti-xs"></i><span class="d-none d-sm-inline-block">Add Customer</span>',
-        //   className: 'add-new btn btn-primary py-2',
-        //   attr: {
-        //     'data-bs-toggle': 'offcanvas',
-        //     'data-bs-target': '#offcanvasEcommerceCustomerAdd'
-        //   }
-        // }
-      ],
+        }
+      ]
+
       // For responsive popup
   
     });

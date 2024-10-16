@@ -24,9 +24,21 @@ class TripController extends Controller
   {
     $tripsCount = Trip::count();
     $customersCount = Customer::count();
-    $deliveredCount = 0;
-    $inProgressCount = 0;
-    $tripRoutes = TripRoute::all();
+
+    $deliveredCount = TripHistory::whereIn('id', function($query) {
+        $query->selectRaw('MAX(id)')
+              ->from('trip_histories')
+              ->groupBy('trip_id');
+    })->where('status', 'Delivered')
+      ->count();
+
+    $inProgressCount = TripHistory::whereIn('id', function($query) {
+        $query->selectRaw('MAX(id)')
+              ->from('trip_histories')
+              ->groupBy('trip_id');
+    })->where('status', '!=', 'Delivered')
+      ->count();
+
     $tripRoutes = TripRoute::all();
     foreach ($tripRoutes as $tripRoute) {
       $legsCombined = '';

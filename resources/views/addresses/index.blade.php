@@ -5,7 +5,7 @@
 
 @extends('layouts/layoutMaster')
 
-@section('title', __('Cities'))
+@section('title', __('Addresses'))
 
 @section('vendor-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
@@ -24,16 +24,23 @@
 
 @section('page-script')
     <script src="{{ asset('assets/js/addresses/address-list.js') }}"></script>
-    <script src="{{ asset('assets/js/forms-selects.js') }}"></script>
+    <script src="{{ asset('assets/js/extends/forms-selects.js') }}"></script>
 @endsection
 
 @section('content')
 
-    <h4 class="mb-4">{{ __('Cities') }}</h4>
+<div class="card mb-3">
+    <div class="card-header">
+        <h4 class="card-title">{{__('Addresses')}}</h4>
+        <div class="d-flex justify-content-between align-items-center row gap-3 gap-md-0">
+            <p>
+                {{__('Managing addresses allows you to assign and update locations associated with users or orders, ensuring accurate data and easy access to locations.')}}
+            </p>
+        </div>
+    </div>
+</div>    
 
     <div class="row g-4">
-
-
         <div class="col-xl-4 col-lg-6 col-md-6">
             <div class="card h-100">
                 <div class="row h-100">

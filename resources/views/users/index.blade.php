@@ -122,16 +122,19 @@ $configData = Helper::appClasses();
     </div>
 </div> -->
 <!-- Users List Table -->
-<div class="card">
-    <div class="card-header border-bottom">
-        <h5 class="card-title mb-3">Search Filter</h5>
-        <div class="d-flex justify-content-between align-items-center row pb-2 gap-3 gap-md-0">
-            <div class="col-md-4 user_role"></div>
-            <div class="col-md-4 user_plan"></div>
-            <div class="col-md-4 user_status"></div>
+<div class="card mb-4">
+    <div class="card-header">
+        <h4 class="card-title">{{__('Users')}}</h4>
+        <div class="d-flex justify-content-between align-items-center row gap-3 gap-md-0">
+            <p>
+                {{__('Manage users, assign roles, and control access to ensure they have the appropriate permissions for their tasks and responsibilities.')}}
+            </p>
         </div>
     </div>
-    <div class="card-datatable table-responsive">
+</div>    
+
+<div class="card">
+    <div class="card-datatable table-responsive mt-3">
         <table class="datatables-users table">
             <thead class="border-top">
                 <tr>

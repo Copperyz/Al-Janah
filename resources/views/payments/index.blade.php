@@ -38,12 +38,21 @@ $configData = Helper::appClasses();
 @section('content')
 <!-- Invoice List Widget -->
 
-
+<div class="card mb-3">
+        <div class="card-header">
+            <h4 class="card-title">{{__('Payments')}}</h4>
+            <div class="d-flex justify-content-between align-items-center row gap-3 gap-md-0">
+                <p>
+                    {{__('Payments can be managed and assigned specific settings or methods, ensuring that administrators have control over the payment options and processing rules available for each transaction.')}}
+                </p>
+            </div>
+        </div>
+</div>
 
 <!-- Trip List Table -->
 <div class="card">
-    <div class="card-datatable table-responsive">
-        <table class="payments-list-table table border-top">
+    <div class="card-datatable table-responsive mt-3 ">
+        <table class="payments-list-table table">
             <thead>
                 <tr>
                     <th></th>

@@ -34,10 +34,8 @@ $configData = Helper::appClasses();
   <span class="text-muted fw-light"> /</span> {{__('Customers List')}}
 </h4>
 
-
 <!-- customers List Table -->
 <div class="card">
-
   <div class="card-datatable table-responsive">
     <table class="datatables-customers table border-top">
       <thead>

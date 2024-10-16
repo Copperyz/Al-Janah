@@ -52,7 +52,7 @@
                             </div>
                             <span class="avatar me-lg-4">
                                 <span class="avatar-initial bg-label-secondary rounded"><i
-                                        class="ti ti-file-invoice ti-md"></i></span>
+                                        class="ti ti-package ti-md"></i></span>
                             </span>
                         </div>
                         <hr class="d-none d-sm-block d-lg-none">
@@ -65,7 +65,7 @@
                             </div>
                             <span class="avatar me-sm-4">
                                 <span class="avatar-initial bg-label-secondary rounded"><i
-                                        class="ti ti-checks ti-md"></i></span>
+                                        class="ti ti-truck ti-md"></i></span>
                             </span>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                             </div>
                             <span class="avatar">
                                 <span class="avatar-initial bg-label-secondary rounded"><i
-                                        class="ti ti-circle-off ti-md"></i></span>
+                                        class="ti ti-checks ti-md"></i></span>
                             </span>
                         </div>
                     </div>
@@ -87,26 +87,26 @@
     </div>
 
     <!-- Order List Table -->
-    <div class="card">
-        <div class="card-datatable table-responsive">
-            <table class="shipment-list-table table border-top">
-                <thead>
-                    <tr>
-                        <th></th>
-                        {{-- <th>#ID</th> --}}
-                        <th>{{ __('Customer') }}</th>
-                        <th>{{ __('Tracking Number') }}</th>
-                        <th>{{ __('Delivery Code') }}</th>
-                        <th>{{ __('Date') }}</th>
-                        <th class="text-truncate">{{ __('Amount') }}</th>
-                        <th>{{ __('Payment') }}</th>
-                        <th>{{ __('Status') }}</th>
-                        <th class="cell-fit actionsTh">{{ __('Actions') }}</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
+<div class="card">
+    <div class="card-datatable table-responsive mt-3">
+        <table class="shipment-list-table table border-top">
+            <thead>
+                <tr>
+                    <th class="text-center"></th>
+                    <th class="text-center">{{ __('Customer') }}</th>
+                    <th class="text-center">{{ __('Tracking Number') }}</th>
+                    <th class="text-center">{{ __('Delivery Code') }}</th>
+                    <th class="text-center">{{ __('Date') }}</th>
+                    <th class="text-center text-truncate">{{ __('Amount') }}</th>
+                    <th class="text-center">{{ __('Payment') }}</th>
+                    <th class="text-center">{{ __('Status') }}</th>
+                    <th class="text-center cell-fit actionsTh">{{ __('Actions') }}</th>
+                </tr>
+            </thead>
+        </table>
     </div>
+</div>
+
 
 
     <script>

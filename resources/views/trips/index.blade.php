@@ -95,15 +95,15 @@ $configData = Helper::appClasses();
 
 <!-- Shipment List Table -->
 <div class="card">
-    <div class="card-datatable table-responsive text-center">
-        <table class="trips-list-table table border-top">
+    <div class="card-datatable table-responsive mt-3">
+        <table class="trips-list-table table border-top text-center">
             <thead>
                 <tr>
                     <th class="text-center">{{__('Tracking NO')}}</th>
                     <th class="text-center">{{__('Shipments')}}</th>
                     <th class="text-center">{{__('Status')}}</th>
-                    <th class="text-center">{{__('Departure Date')}}</th>
-                    <th class="text-center">{{__('Estimated Delivery Date')}}</th>
+                    <th>{{__('Departure Date')}}</th>
+                    <th>{{__('Estimated Delivery Date')}}</th>
                     <th class="text-center">{{__('Actions')}}</th>
                 </tr>
             </thead>

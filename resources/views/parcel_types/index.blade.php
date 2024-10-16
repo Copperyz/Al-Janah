@@ -29,11 +29,18 @@
 
 @section('content')
 
-    <h4 class="mb-4">{{ __('Parcel Types') }}</h4>
+<div class="card mb-3">
+    <div class="card-header">
+        <h4 class="card-title">{{__('Parcel Types')}}</h4>
+        <div class="d-flex justify-content-between align-items-center row gap-3 gap-md-0">
+            <p>
+                {{__('Managing parcel types allows you to define and categorize different types of parcels, ensuring proper handling and tracking within the system.')}}
+            </p>
+        </div>
+    </div>
+</div>   
 
     <div class="row g-4">
-
-
         <div class="col-xl-4 col-lg-6 col-md-6">
             <div class="card h-100">
                 <div class="row h-100">

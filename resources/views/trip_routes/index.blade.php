@@ -36,20 +36,27 @@ $configData = Helper::appClasses();
 @endsection
 
 @section('content')
-<!-- Invoice List Widget -->
 
-
+<div class="card mb-3">
+        <div class="card-header">
+            <h4 class="card-title">{{__('Trip Routes')}}</h4>
+            <div class="d-flex justify-content-between align-items-center row gap-3 gap-md-0">
+                <p>
+                    {{__('Trip routes can be managed and assigned specific settings or destinations, ensuring that administrators have control over the paths and destinations available for each route.')}}
+                </p>
+            </div>
+        </div>
+</div>
 
 <!-- Trip List Table -->
 <div class="card">
-    <div class="card-datatable table-responsive">
+    <div class="card-datatable table-responsive mt-3">
         <table class="trip-routes-list-table table border-top">
             <thead>
                 <tr>
                     <th></th>
                     <th>{{__('Type')}}</th>
                     <th>{{__('Legs')}}</th>
-                    {{-- <th>{{__('Trip Price')}}</th> --}}
                     <th class="cell-fit">{{__('Actions')}}</th>
                 </tr>
             </thead>

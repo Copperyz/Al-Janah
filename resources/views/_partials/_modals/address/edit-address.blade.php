@@ -14,8 +14,7 @@
                         <select id="edit_city_id" class="select2 form-select" data-allow-clear="true" name="city_id">
                             <option disabled selected>{{ __('Select') }}</option>
                             @foreach ($citiesList as $city)
-                                <option value="{{ $city->id }}"><i
-                                        class="fis fi fi-{{ $city->country_code }} rounded-circle me-2 fs-3"></i>
+                                <option value="{{ $city->id }}">
                                     {{ $city->name }}</option>
                             @endforeach
                         </select>

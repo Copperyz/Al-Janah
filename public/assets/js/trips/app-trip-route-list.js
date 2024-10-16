@@ -24,31 +24,14 @@ $(function () {
                 {
                     // For Responsive
                     className: 'control',
-                    responsivePriority: 2,
+                    orderable: false,
                     searchable: false,
+                    responsivePriority: 2,
                     targets: 0,
                     render: function (data, type, full, meta) {
                         return '';
                     }
                 },
-                // {
-                //   // shipment status
-                //   targets: 4,
-                //   render: function (data, type, full, meta) {
-                //     var $shipment_status = full['paymentStatus'];
-                //     var roleBadgeObj = {
-                //       paid: '<span class="badge badge-center rounded-pill bg-label-success w-px-30 h-px-30"><i class="ti ti-checks ti-sm"></i></span>',
-                //       pending: '<span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30"><i class="ti ti-hourglass-empty mx-2 ti-sm"></i></span>',
-                //       failed: '<span class="badge badge-center rounded-pill bg-label-danger w-px-30 h-px-30"><i class="ti ti-exclamation-circle ti-sm"></i></span>',
-                //       refunded:
-                //         '<span class="badge badge-center rounded-pill bg-label-info w-px-30 h-px-30"><i class="ti ti-receipt-refund ti-sm"></i></span>'
-                //     };
-                //     return (
-                //       roleBadgeObj[$shipment_status] +
-                //       '</span>'
-                //     );
-                //   }
-                // },
                 {
                     // Actions
                     targets: -1,
@@ -68,8 +51,8 @@ $(function () {
             order: [[1, 'desc']],
             dom:
                 '<"row mx-1"' +
-                '<"col-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-start gap-2"l<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start mt-md-0 mt-3"B>>' +
-                '<"col-12 col-md-6 d-flex align-items-center justify-content-end flex-column flex-md-row pe-3 gap-md-3"f<"shipment_status mb-3 mb-md-0">>' +
+                '<"col-sm-12 col-md-3" l>' +
+                '<"col-sm-12 col-md-9"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-md-end justify-content-center flex-wrap me-1"<"me-3"f>B>>' +
                 '>t' +
                 '<"row mx-2"' +
                 '<"col-sm-12 col-md-6"i>' +

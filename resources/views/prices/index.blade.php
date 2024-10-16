@@ -6,7 +6,7 @@ $configData = Helper::appClasses();
 
 @extends('layouts/layoutMaster')
 
-@section('title', __('Trip Routes'))
+@section('title', __('Prices'))
 
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}">
@@ -36,13 +36,21 @@ $configData = Helper::appClasses();
 @endsection
 
 @section('content')
-<!-- Invoice List Widget -->
 
-
+<div class="card mb-3">
+        <div class="card-header">
+            <h4 class="card-title">{{__('Prices')}}</h4>
+            <div class="d-flex justify-content-between align-items-center row gap-3 gap-md-0">
+                <p>
+                    {{__('Prices can be managed and assigned specific settings or rates, ensuring that administrators have control over the pricing and cost structures available for each item or service.')}}
+                </p>
+            </div>
+        </div>
+</div>
 
 <!-- Trip List Table -->
 <div class="card">
-    <div class="card-datatable table-responsive">
+    <div class="card-datatable table-responsive mt-3">
         <table class="trip-routes-list-table table border-top">
             <thead>
                 <tr>
@@ -51,7 +59,7 @@ $configData = Helper::appClasses();
                     <th>{{__('To')}}</th>
                     <th>{{__('Good Type')}}</th>
                     <th>{{__('Price')}}</th>
-                    <th class="cell-fit">{{__('Actions')}}</th>
+                    <th>{{__('Actions')}}</th>
                 </tr>
             </thead>
         </table>

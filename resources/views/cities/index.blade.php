@@ -29,15 +29,18 @@
 
 @section('content')
 
-    <h4 class="mb-4">{{ __('Cities') }}</h4>
+    <div class="card mb-3">
+        <div class="card-header">
+            <h4 class="card-title">{{__('Cities')}}</h4>
+            <div class="d-flex justify-content-between align-items-center row gap-3 gap-md-0">
+                <p>
+                    {{__('Cities can be managed and assigned specific settings or regions, ensuring that administrators have control over the options and features available for each city.')}}
+                </p>
+            </div>
+        </div>
+    </div>    
 
-    <!-- <p class="mb-4">
-        {{ __('A role provided access to predefined menus and features so that depending on assigned role an administrator can have access to what the user needs.') }}
-    </p> -->
-    <!-- Country cards -->
     <div class="row g-4">
-
-
         <div class="col-xl-4 col-lg-6 col-md-6">
             <div class="card h-100">
                 <div class="row h-100">

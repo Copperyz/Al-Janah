@@ -39,19 +39,8 @@ $(function () {
         {
           // For Responsive
           className: 'control',
+          orderable: false,
           searchable: false,
-          orderable: true,
-          responsivePriority: 2,
-          targets: 0,
-          render: function (data, type, full, meta) {
-            return '';
-          }
-        },
-        {
-          // For Responsive
-          className: 'control',
-          searchable: false,
-          orderable: true,
           responsivePriority: 2,
           targets: 0,
           render: function (data, type, full, meta) {
@@ -65,10 +54,8 @@ $(function () {
           orderable: false,
           render: function (data, type, full, meta) {
             return (
-              '<div class="d-flex align-items-center">' +
-              '<a href="javascript:;" class="text-body editUser" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEditUser"><i class="ti ti-edit ti-sm me-2"></i></a>' +
-              '<a href="javascript:;" class="text-body delete-record"><i class="ti ti-trash ti-sm mx-2"></i></a>' +
-              '</div>'
+              '<span class="text-nowrap"><button class="btn btn-sm btn-icon me-2 editPermission" data-bs-target="#editPermissionModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit"></i></button>' +
+              '<button class="btn btn-sm btn-icon delete-record"><i class="ti ti-trash"></i></button></span>'
             );
           }
         }
@@ -76,14 +63,13 @@ $(function () {
       order: [[1, 'desc']],
       dom:
         '<"row mx-1"' +
-        '<"col-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-start gap-2"l<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start mt-md-0 mt-3"B>>' +
-        '<"col-12 col-md-6 d-flex align-items-center justify-content-end flex-column flex-md-row pe-3 gap-md-3"f<"order_status mb-3 mb-md-0">>' +
+        '<"col-sm-12 col-md-3" l>' +
+        '<"col-sm-12 col-md-9"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-md-end justify-content-center flex-wrap me-1"<"me-3"f>B>>' +
         '>t' +
         '<"row mx-2"' +
         '<"col-sm-12 col-md-6"i>' +
         '<"col-sm-12 col-md-6"p>' +
         '>',
-
       "language": {
         "search": searchTranslation,
         "lengthMenu": `${showTranslation} _MENU_`,
@@ -96,14 +82,15 @@ $(function () {
       },
       buttons: [
         {
-          text: `${addNewUserTranslation}`,
-          className: 'btn btn-primary mt-2 mb-2',
+          text: `<i class="ti ti-plus ti-sm me-2"></i>${addNewUserTranslation}`, // Icon and text inside the button
+          className: 'btn btn-primary text-white d-flex align-items-center mt-2 mb-2', // Full button styling
           action: function (e, dt, button, config) {
+            // Trigger the offcanvas action
+            const offcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasAddUser'));
+            offcanvas.show();
           }
         }
       ]
-  
-      
     });
   }
 
@@ -114,66 +101,62 @@ $(function () {
   //   $(this).closest('form').submit();
   // });
 
-  var offcanvasAddUser = new bootstrap.Offcanvas($('#offcanvasAddUser'));
+  // Correct way to initialize offcanvas using plain JavaScript element
+  var offcanvasAddUser = new bootstrap.Offcanvas(document.getElementById('offcanvasAddUser')); // Correct initialization
 
-  // $(".addNewUserForm").on("submit", function (event) {
-  //   event.preventDefault();
-  //   var form = $(this);
-  //   var url = form.attr('action');
-  //   var method = form.attr('method');
-  //   var formData = form.serialize();
+  $(".addNewUserForm").on("submit", function (event) {
+    event.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+    var method = form.attr('method');
+    var formData = form.serialize();
 
-  //   $.ajax({
-  //     url: url,
-  //     method: method,
-  //     data: formData,
-  //     headers: {
-  //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  //     },
-  //     success: function (response, status, xhr) {
-  //       if (xhr.status === 200) {
-  //         // Handle a successful response
-  //         Swal.fire({
-  //           title: '',
-  //           text: response.message,
-  //           icon: 'success',
-  //           confirmButtonText: doneTranslation,
-  //           customClass: {
-  //             confirmButton: 'btn btn-success'
-  //           },
-  //         }).then((result) => {
-  //           if (result.isConfirmed) {
-  //             offcanvasAddUser.hide();
-  //             // location.reload();
-  //             $("#addNewUserForm").trigger('reset');
-  //             dt_user.ajax.url('get-users').load();
-  //           }
-  //         });
-  //       }
-  //       else {
-  //         // Handle other status codes
-  //       }
-  //     },
-  //     error: function (response, xhr, status, error) {
-  //       // Handle the error response here
-  //       var errorMessages = Object.values(response.responseJSON.errors).flat();
-  //       // Format error messages with line breaks
-  //       var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
-  //       // Create the Swal alert
-  //       Swal.fire({
-  //         title: response.responseJSON.message,
-  //         html: formattedErrorMessages,
-  //         icon: 'error',
-  //         confirmButtonText: doneTranslation,
-  //         customClass: {
-  //           confirmButton: 'btn btn-primary'
-  //         },
-  //         buttonsStyling: false
-  //       });
-  //     }
-  //   });
+    $.ajax({
+      url: url,
+      method: method,
+      data: formData,
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function (response, status, xhr) {
+        if (xhr.status === 200) {
+          // Successful response
+          Swal.fire({
+            title: '',
+            text: response.message,
+            icon: 'success',
+            confirmButtonText: doneTranslation,
+            customClass: {
+              confirmButton: 'btn btn-success'
+            },
+          }).then((result) => {
+            if (result.isConfirmed) {
+              offcanvasAddUser.hide(); // Correct offcanvas hide
+              $("#addNewUserForm").trigger('reset');
+              dt_user.ajax.url('get-users').load(); // Reload the data
+            }
+          });
+        } else {
+          // Handle other status codes
+        }
+      },
+      error: function (response, xhr, status, error) {
+        var errorMessages = Object.values(response.responseJSON.errors).flat();
+        var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br>
+        Swal.fire({
+          title: response.responseJSON.message,
+          html: formattedErrorMessages,
+          icon: 'error',
+          confirmButtonText: doneTranslation,
+          customClass: {
+            confirmButton: 'btn btn-primary'
+          },
+          buttonsStyling: false
+        });
+      }
+    });
+  });
 
-  // });
 
   $(document).on('click', 'a.editUser', function () {
     var data = dt_user.row($(this).closest('tr')).data();

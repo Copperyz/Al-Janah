@@ -15,6 +15,7 @@ use App\Models\TripRoute;
 use App\Models\ParcelType;
 use Illuminate\Support\Str;
 use App\Models\ShipmentItem;
+use App\Models\ShipmentHistory;
 use Illuminate\Http\Request;
 use App\Models\InventoryItem;
 use Yajra\DataTables\Facades\DataTables;
@@ -31,10 +32,27 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        $shipmentsCount = 0;
-        $customersCount = 0;
-        $deliveredCount = 0;
-        $inProgressCount = 0;
+        // Count of all shipments
+        $shipmentsCount = Shipment::count();
+
+        // Count of all customers
+        $customersCount = Customer::count();
+
+
+        $deliveredCount = ShipmentHistory::whereIn('id', function($query) {
+        $query->selectRaw('MAX(id)')
+              ->from('shipment_histories')
+              ->groupBy('shipment_id');
+    })->where('status', 'Delivered')
+      ->count();
+
+    $inProgressCount = ShipmentHistory::whereIn('id', function($query) {
+        $query->selectRaw('MAX(id)')
+              ->from('shipment_histories')
+              ->groupBy('shipment_id');
+    })->where('status', '!=', 'Delivered')
+      ->count();
+
         return view('shipments.index', compact('shipmentsCount', 'customersCount', 'deliveredCount', 'inProgressCount'));
     }
 

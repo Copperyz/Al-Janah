@@ -31,21 +31,6 @@ $(function () {
           }
         },
         {
-          // Name
-          targets: 1,
-          render: function (data, type, full, meta) {
-            var $name = full['name'];
-            return '<span class="text-nowrap">' + $name + '</span>';
-          }
-        },
-        {
-          targets: [2], // Specify the column index you want to modify
-          render: function (data, type, full, meta) {
-            // Adjust the direction style for the specific column
-            return '<div style="direction: ltr;">' + data + '</div>';
-          },
-        },
-        {
           // Actions
           targets: -1,
           searchable: false,

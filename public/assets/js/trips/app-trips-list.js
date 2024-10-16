@@ -46,10 +46,10 @@ $(function () {
             return (
               '<a href="./trips/' +
               full['id'] +
-              '" class= "btn btn-sm btn-success me-2" > <i class="ti ti-eye ti-lg"></i></a > ' +
-              '<span><button class="btn btn-sm btn-warning me-2 showTripShipment" data-bs-target="#showTripShipmentModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-package ti-lg"></i></button>' +
-              '<span><button class="btn btn-sm btn-info me-2 editTrip" data-bs-target="#editTripModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit ti-lg"></i></button>' +
-              '<span><button class="btn btn-sm btn-danger me-2 delete-record"><i class="ti ti-trash ti-lg"></i></button>'
+              '" class= "btn btn-sm btn-success me-2" > <i class="ti ti-eye"></i></a > ' +
+              '<span><button class="btn btn-sm btn-warning me-2 showTripShipment" data-bs-target="#showTripShipmentModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-package"></i></button>' +
+              '<span><button class="btn btn-sm btn-info me-2 editTrip" data-bs-target="#editTripModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit"></i></button>' +
+              '<span><button class="btn btn-sm btn-danger me-2 delete-record"><i class="ti ti-trash"></i></button>'
             );
           }
         }

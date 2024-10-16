@@ -15,7 +15,7 @@
                         <select id="addCity" class="select2 form-select" data-allow-clear="true" name="city">
                             <option disabled selected>{{ __('Select') }}</option>
                             @foreach ($cities as $code => $name)
-                            <option value="{{ $name }}"><i class="rounded-circle me-2 fs-3"></i>
+                            <option value="{{ $name }}">
                                 {{ $name }}
                             </option>
                             @endforeach
@@ -26,7 +26,7 @@
                         <select id="addCountry" class="select2 form-select" data-allow-clear="true" name="country">
                             <option disabled selected>{{ __('Select') }}</option>
                             @foreach ($countries as $country)
-                            <option value="{{ $country->id }}"><i class="fis fi fi-{{ $country->country_code }} rounded-circle me-2 fs-3"></i>
+                            <option value="{{ $country->id }}">
                                 {{ $country->name }}
                             </option>
                             @endforeach

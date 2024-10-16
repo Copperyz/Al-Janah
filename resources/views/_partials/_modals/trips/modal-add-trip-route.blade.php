@@ -81,7 +81,7 @@
                                         name="country">
                                         <option selected disabled>{{__('Select')}}</option>
                                         @foreach($countriesList as $country)
-                                         <option value="{{$country->name}}"><i class="fis fi fi-{{$country->country_code}} rounded-circle me-2 fs-3"></i> {{$country->name}}</option>
+                                         <option value="{{$country->name}}"> {{$country->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

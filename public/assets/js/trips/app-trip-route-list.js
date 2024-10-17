@@ -97,7 +97,7 @@ $(function () {
 
     $(document).on('click', 'button.addTripRoute', function () {
         $("#addTripRouteForm").trigger('reset');
-        $("#points").empty();
+        // $("#points").empty();
     });
 
     $("#addTripRouteForm").on("submit", function (event) {

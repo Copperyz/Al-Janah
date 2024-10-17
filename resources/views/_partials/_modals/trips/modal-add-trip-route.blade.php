@@ -95,7 +95,7 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <button class="btn btn-primary" data-repeater-create>
+                        <button type="button" class="btn btn-primary" data-repeater-create>
                             <i class="ti ti-plus me-1"></i>
                             <span class="align-middle">{{__('Add')}}</span>
                         </button>

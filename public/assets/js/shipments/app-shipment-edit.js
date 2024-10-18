@@ -5,43 +5,19 @@
 'use strict';
 
 (function () {
-  const invoiceItemPriceList = document.querySelectorAll('.invoice-item-price'),
-    invoiceItemQtyList = document.querySelectorAll('.invoice-item-qty'),
-    date = new Date(),
-    invoiceDate = document.querySelector('.invoice-date'),
-    dueDate = document.querySelector('.due-date');
+  const date = document.querySelectorAll('.date-picker');
 
-  // Price
-  if (invoiceItemPriceList) {
-    invoiceItemPriceList.forEach(function (invoiceItemPrice) {
-      new Cleave(invoiceItemPrice, {
-        delimiter: '',
-        numeral: true
-      });
-    });
-  }
 
-  // Qty
-  if (invoiceItemQtyList) {
-    invoiceItemQtyList.forEach(function (invoiceItemQty) {
-      new Cleave(invoiceItemQty, {
-        delimiter: '',
-        numeral: true
-      });
-    });
-  }
 
   // Datepicker
-  if (invoiceDate) {
-    invoiceDate.flatpickr({
-      monthSelectorType: 'static',
-      defaultDate: date
-    });
-  }
-  if (dueDate) {
-    dueDate.flatpickr({
-      monthSelectorType: 'static',
-      defaultDate: new Date(date.getFullYear(), date.getMonth(), date.getDate() + 5)
+  if (date) {
+    date.forEach(function (invoiceDateEl) {
+      invoiceDateEl.flatpickr({
+        enableTime: true,         // Enable time picker
+        dateFormat: "Y-m-d H:i K", // Format for date and time (24-hour with AM/PM)
+        time_24hr: false,         // Set to false to use 12-hour format with AM/PM
+        monthSelectorType: 'static' // Static month dropdown
+      });
     });
   }
 })();

@@ -116,7 +116,7 @@ class ShipmentController extends Controller
         $shipment->amount = $request->amount;
         $shipment->shipmentPrice = $request->shipmentPrice;
         $shipment->customer_id = $request->customer_id;
-        // $shipment->notes = $request->notes;
+        $shipment->notes = $request->notes;
         $delivery_code = strtoupper(substr(Str::random(1), 0, 1) . rand(10, 99) . substr(Str::random(1), 0, 1));
         while (Shipment::where('delivery_code', $delivery_code)->exists()) {
             // Regenerate if the generated tracking number already exists
@@ -286,8 +286,7 @@ class ShipmentController extends Controller
       
         foreach ($shipments as $shipment) {
             $shipment->customerName = $shipment->customer ? $shipment->customer->first_name.' '.$shipment->customer->last_name : 'N/A';
-            $shipment->totalAmount = '<button type="button" class="btn btn-outline-primary">'.number_format($shipment->amount + $shipment->shipmentPrice, 2).'<span class="badge bg-label-success badge-center ms-1">'.__('LYD').'</span></button>';
-            $shipment->delivery_code = '<button type="button" class="btn btn-success">'.$shipment->delivery_code.'<span class="badge bg-label-success badge-center ms-1"></span></button>';
+            $shipment->totalAmount = number_format($shipment->amount + $shipment->shipmentPrice, 2).'<span class="badge bg-label-info badge-center ms-1">'.__('LYD');
             $shipment->paymentStatus = $shipment->payment ? '<span class="badge bg-label-success">'.__($shipment->payment->status).'</span>' :  '<span class="badge bg-label-danger">'.__('Unpaid').'</span>';
             $shipment->inventoryStatus =  InventoryItem::where('shipment_id', $shipment->id)->pluck('status')->first() ? '<span class="badge bg-label-info">'.__(InventoryItem::where('shipment_id', $shipment->id)->pluck('status')->first()).'</span>' :'<span class="badge bg-label-warning">'. __('Unallocated').'</span>';
         }

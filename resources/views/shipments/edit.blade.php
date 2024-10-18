@@ -89,7 +89,6 @@
                             <div class="col-md-6 mb-md-0 mb-3">
                             </div>
                         </div>
-                        <hr class="my-3 mx-n4" />
                         <div class="row px-0 px-sm-4">
                             <div class="col-12">
                                 <div class="mb-3">
@@ -99,33 +98,15 @@
                                 </div>
                             </div>
                         </div>
-                        <hr class="my-3 mx-n4" />
                         <div class="row p-0 p-sm-4">
                             <div class="col-md-6 mb-md-0 mb-3">
-                            </div>
-                            <div class="col-md-6 d-flex justify-content-end">
-                                <div class="invoice-calculations">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span class="w-px-100 me-2">{{ __('Subtotal') }}</span>
-                                        <span class="fw-medium">$00.00</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span class="w-px-100">{{ __('Discount') }}</span>
-                                        <span class="fw-medium">$00.00</span>
-                                    </div>
-                                    <hr />
-                                    <div class="d-flex justify-content-between">
-                                        <span class="w-px-100">{{ __('Total') }}</span>
-                                        <span class="fw-medium">$00.00</span>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </form>
                     <hr class="my-3 mx-n4" />
 
-                    <div class="table-responsive border-top">
-                        <table class="shipment-items-table table m-0">
+                    <div class="table-responsive">
+                        <table class="shipment-items-table table mt-3">
                             <thead>
                                 <tr>
                                     <th></th>
@@ -157,10 +138,10 @@
                             class="btn btn-label-primary w-100 submitButton">{{ __('Submit') }}</button>
                     </div>
                     <!-- <button class="btn btn-label-success d-grid w-100" data-bs-toggle="offcanvas"
-                                                data-bs-target="#addPaymentOffcanvas">
-                                                <span class="d-flex align-items-center justify-content-center text-nowrap"><i
-                                                        class="ti ti-currency-dollar ti-xs me-2"></i>{{ __('Add Payment') }}</span>
-                                            </button> -->
+                                                                        data-bs-target="#addPaymentOffcanvas">
+                                                                        <span class="d-flex align-items-center justify-content-center text-nowrap"><i
+                                                                                class="ti ti-currency-dollar ti-xs me-2"></i>{{ __('Add Payment') }}</span>
+                                                                    </button> -->
                 </div>
             </div>
         </div>

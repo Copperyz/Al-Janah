@@ -113,7 +113,7 @@
       "url": "customers",
       "icon": "menu-icon tf-icons ti ti-users-group",
       "name": "Customers",
-      "slug": "customers.index"
+      "slug": "customers"
     },
     {
       "url": "payments",

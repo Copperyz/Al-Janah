@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ShipmentItem;
+use App\Models\Shipment;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -35,7 +36,6 @@ class ShipmentItemController extends Controller
     }
 
     public function add_shipment_item(Request $request, string $id){
-        return 1;
         $validator = Validator::make($request->all(), [
             'good_types_id' => ['required', 'exists:good_types,id'],
             'parcel_types_id' => ['required', 'exists:parcel_types,id'],
@@ -58,9 +58,14 @@ class ShipmentItemController extends Controller
         $shipmentItem->price = $request->price;
         $shipmentItem->height = $request->height;
         $shipmentItem->width = $request->width;
+        $shipmentItem->length = $request->length;
         $shipmentItem->weight = $request->weight;
         $shipmentItem->quantity = $request->quantity;
         $shipmentItem->save();
+
+        $shipment = Shipment::where('id', $shipmentItem->shipment_id)->first();
+        $shipment->shipmentPrice = $shipment->shipmentPrice + $request->price;
+        $shipment->save();
 
         return response()->json(['message' => __('Item added successfully')]);
     }
@@ -86,8 +91,6 @@ class ShipmentItemController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return 2;
-
         $validator = Validator::make($request->all(), [
             'good_types_id' => ['required', 'exists:good_types,id'],
             'parcel_types_id' => ['required', 'exists:parcel_types,id'],
@@ -105,6 +108,7 @@ class ShipmentItemController extends Controller
             ], 422);
         }
         $shipmentItem = ShipmentItem::where('id', $id)->first();
+        $oldPrice = $shipmentItem->price;
         $shipmentItem->parcel_types_id = $request->parcel_types_id;
         $shipmentItem->good_types_id = $request->good_types_id;
         $shipmentItem->price = $request->price;
@@ -114,6 +118,10 @@ class ShipmentItemController extends Controller
         $shipmentItem->length = $request->length;
         $shipmentItem->quantity = $request->quantity;
         $shipmentItem->save();
+
+        $shipment = Shipment::where('id', $shipmentItem->shipment_id)->first();
+        $shipment->shipmentPrice = $shipment->shipmentPrice - $oldPrice + $request->price;
+        $shipment->save();
 
         return response()->json(['message' => __('Item updated successfully')]);
     }
@@ -126,6 +134,9 @@ class ShipmentItemController extends Controller
         $shipmentItem = ShipmentItem::find($id);
 
         if ($shipmentItem) {
+            $shipment = Shipment::where('id', $shipmentItem->shipment_id)->first();
+            $shipment->shipmentPrice = $shipment->shipmentPrice - $shipmentItem->price;
+            $shipment->save();
             $shipmentItem->delete();
             return response()->json(['message' => __('Item deleted successfully')]);
         }

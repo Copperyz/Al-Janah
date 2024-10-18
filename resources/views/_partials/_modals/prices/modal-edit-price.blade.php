@@ -5,54 +5,54 @@
             <div class="modal-body">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="text-center mb-4">
-                    <h3 class="address-title mb-2">{{__('Edit Price')}}</h3>
-                    <!-- <p class="text-muted address-subtitle">{{__('Add defined legs for the route')}}</p> -->
+                    <h3 class="address-title mb-2">{{ __('Edit Price') }}</h3>
+                    <!-- <p class="text-muted address-subtitle">{{ __('Add defined legs for the route') }}</p> -->
                 </div>
                 <form id="editPriceForm" onsubmit="return false">
                     <div class="row">
                         <div class="col-md-6 mb-3 mb-3">
-                            <label for="from_country_id" class="form-label me-4 fw-medium">{{__('From')}}</label>
+                            <label for="from_country_id" class="form-label me-4 fw-medium">{{ __('From') }}</label>
                             <select id="edit_from_country_id" class="select2 form-select form-select-lg"
                                 data-allow-clear="true" name="from_country_id">
-                                <option disabled selected>{{__('Select')}}</option>
-                                @foreach($countries as $country)
-                                <option value="{{$country->id}}">{{__($country->name)}}</option>
+                                <option disabled selected>{{ __('Select') }}</option>
+                                @foreach ($countries as $country)
+                                    <option value="{{ $country->id }}">{{ __($country->name) }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6 mb-3 mb-3">
-                            <label for="to_country_id" class="form-label me-4 fw-medium">{{__('To')}}</label>
+                            <label for="to_country_id" class="form-label me-4 fw-medium">{{ __('To') }}</label>
                             <select id="edit_to_country_id" class="select2 form-select form-select-lg"
                                 data-allow-clear="true" name="to_country_id">
-                                <option disabled selected>{{__('Select')}}</option>
-                                @foreach($countries as $country)
-                                <option value="{{$country->id}}">{{__($country->name)}}</option>
+                                <option disabled selected>{{ __('Select') }}</option>
+                                @foreach ($countries as $country)
+                                    <option value="{{ $country->id }}">{{ __($country->name) }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3 mb-3">
-                            <label for="to_country_id" class="form-label me-4 fw-medium">{{__('Good Type')}}</label>
+                            <label for="to_country_id" class="form-label me-4 fw-medium">{{ __('Good Type') }}</label>
                             <select id="edit_good_types_id" class="select2 form-select" data-allow-clear="true"
                                 name="good_types_id">
-                                <option disabled selected>{{__('Select')}}</option>
-                                @foreach($goodTypes as $goodType)
-                                <option value="{{$goodType->id}}">{{$goodType->name}}</option>
+                                <option disabled selected>{{ __('Select') }}</option>
+                                @foreach ($goodTypes as $goodType)
+                                    <option value="{{ $goodType->id }}">{{ $goodType->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6 mb-3 mb-3">
-                            <label class="form-label" for="price">{{__('Price')}}</label>
+                            <label class="form-label" for="price">{{ __('Price') }}</label>
                             <input type="number" id="price" name="price" class="form-control"
-                                placeholder="{{__('Price')}}" required />
+                                placeholder="{{ __('Price') }}" required autocomplete="off" />
                         </div>
                     </div>
                     <div class="col-12 text-center">
                         <input type="hidden" name="id" id="id">
-                        <button type="submit" class="btn btn-primary me-sm-3 me-1">{{__('Submit')}}</button>
+                        <button type="submit" class="btn btn-primary me-sm-3 me-1">{{ __('Submit') }}</button>
                         <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal"
-                            aria-label="Close">{{__('Cancel')}}</button>
+                            aria-label="Close">{{ __('Cancel') }}</button>
                     </div>
                 </form>
             </div>

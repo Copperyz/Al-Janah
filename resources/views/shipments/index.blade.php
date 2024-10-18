@@ -93,8 +93,8 @@
                 <thead>
                     <tr>
                         <th class="text-center"></th>
-                        <th class="text-center">{{ __('Customer') }}</th>
                         <th class="text-center">{{ __('Tracking Number') }}</th>
+                        <th class="text-center">{{ __('Customer') }}</th>
                         <th class="text-center">{{ __('Delivery Code') }}</th>
                         <th class="text-center">{{ __('Date') }}</th>
                         <th class="text-center text-truncate">{{ __('Amount') }}</th>

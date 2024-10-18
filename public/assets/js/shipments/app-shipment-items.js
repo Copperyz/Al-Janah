@@ -30,6 +30,7 @@ $(function () {
                     className: 'control',
                     responsivePriority: 2,
                     searchable: false,
+                    orderable: false,
                     targets: 0,
                     render: function (data, type, full, meta) {
                         return '';
@@ -54,8 +55,8 @@ $(function () {
             order: [[1, 'desc']],
             dom:
                 '<"row mx-1"' +
-                '<"col-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-start gap-2"l<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start mt-md-0 mt-3"B>>' +
-                '<"col-12 col-md-6 d-flex align-items-center justify-content-end flex-column flex-md-row pe-3 gap-md-3"f<"invoice_status mb-3 mb-md-0">>' +
+                '<"col-sm-12 col-md-3" l>' +
+                '<"col-sm-12 col-md-9"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-md-end justify-content-center flex-wrap me-1"<"me-3"f>B>>' +
                 '>t' +
                 '<"row mx-2"' +
                 '<"col-sm-12 col-md-6"i>' +
@@ -66,16 +67,16 @@ $(function () {
                 "lengthMenu": `${showTranslation} _MENU_`,
                 "info": ` ${showingTranslation} _START_ ${toTranslation} _END_ ${ofTranslation} _TOTAL_ ${entriesTranslation}`,
                 "paginate": {
-                    "next": nextTranslation,      // Change "Next" text
-                    "previous": previousTranslation, // Change "Previous" text
+                "next": nextTranslation,      // Change "Next" text
+                "previous": previousTranslation, // Change "Previous" text
                 },
                 "emptyTable": noEntriesAvailableTranslation
             },
             // Buttons with Dropdown
             buttons: [
                 {
-                    text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addItemTranslation}</span>`,
-                    className: 'btn btn-primary',
+                    text: `<i class="ti ti-plus ti-sm me-2"></i>${addItemTranslation}`, // Icon and text inside the button
+                    className: 'btn btn-primary text-white d-flex align-items-center mt-2 mb-2', // Full button styling
                     attr: {
                         'data-bs-toggle': 'modal',
                         'data-bs-target': '#addShipmentItemModal'
@@ -95,6 +96,119 @@ $(function () {
         });
     });
 
+    $(document).on('change', '#parcel_types_id_add', function () {
+        var parcelTypeId = $('#addShipmentItemForm').find('[name="parcel_types_id"]').val();
+        if (parcelTypeId == 1) {
+            $('#addShipmentItemForm').find('[name="length"]').closest('div').show();
+            $('#addShipmentItemForm').find('[name="height"]').closest('div').show();
+            $('#addShipmentItemForm').find('[name="width"]').closest('div').show();
+        } else {
+            // If not, show them (in case they were hidden previously)
+            $('#addShipmentItemForm').find('[name="length"]').closest('div').hide();
+            $('#addShipmentItemForm').find('[name="height"]').closest('div').hide();
+            $('#addShipmentItemForm').find('[name="width"]').closest('div').hide();
+        }
+    });
+
+    $(document).on('change', '#parcel_types_id_edit', function () {
+        var parcelTypeId = $('#editShipmentItemForm').find('[name="parcel_types_id"]').val();
+        if (parcelTypeId == 1) {
+            $('#editShipmentItemForm').find('[name="length"]').closest('div').show();
+            $('#editShipmentItemForm').find('[name="height"]').closest('div').show();
+            $('#editShipmentItemForm').find('[name="width"]').closest('div').show();
+        } else {
+            // If not, show them (in case they were hidden previously)
+            $('#editShipmentItemForm').find('[name="length"]').closest('div').hide();
+            $('#editShipmentItemForm').find('[name="height"]').closest('div').hide();
+            $('#editShipmentItemForm').find('[name="width"]').closest('div').hide();
+        }
+    });
+
+    $(document).on('click', '.calculate-price-btn_add', function () {
+         // Now try to get the values of input fields
+        var height = $('#addShipmentItemForm').find('[name="height"]').val();
+        var width = $('#addShipmentItemForm').find('[name="width"]').val();
+        var weight = $('#addShipmentItemForm').find('[name="weight"]').val();
+        var length = $('#addShipmentItemForm').find('[name="length"]').val();
+        var quantity = $('#addShipmentItemForm').find('[name="quantity"]').val();
+
+        // Get values of select elements within the current repeater item
+        var parcelTypeId = $('#addShipmentItemForm').find('[name="parcel_types_id"]').val();
+        var goodTypeId = $('#addShipmentItemForm').find('[name="good_types_id"]').val();
+        var trip_route_id = $('#addShipmentItemForm').find('[name="trip_route_id"]').val();
+
+        if (parcelTypeId == 1 && height && width && weight && length && parcelTypeId && goodTypeId && trip_route_id && quantity) {
+            // Call your function with these values
+            $.ajax({
+                url: "../get-price",
+                method: 'GET',
+                data: {
+                    weight: weight,
+                    height: height,
+                    width: width,
+                    length: length,
+                    quantity: quantity,
+                    parcelTypeId: parcelTypeId,
+                    goodTypeId: goodTypeId,
+                    trip_route_id: trip_route_id
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    // Update the UI with the calculated price
+                    var value = parseFloat(response) > 0 ? parseFloat(response) : $('#addShipmentItemForm').find('[name="price"]').val();
+                    $('#addShipmentItemForm').find('[name="price"]').val(parseFloat(value).toFixed(2));
+                },
+
+                error: function (error) {
+                }
+            });
+        }
+        else if (parcelTypeId != 1 && weight && parcelTypeId && goodTypeId && trip_route_id && quantity) {
+            // Call your function with these values
+            $.ajax({
+                url: "../get-price",
+                method: 'GET',
+                data: {
+                    weight: weight,
+                    height: height,
+                    width: width,
+                    length: length,
+                    quantity: quantity,
+                    parcelTypeId: parcelTypeId,
+                    goodTypeId: goodTypeId,
+                    trip_route_id: trip_route_id
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    // Update the UI with the calculated price
+                    var value = parseFloat(response) > 0 ? parseFloat(response) : $('#addShipmentItemForm').find('[name="price"]').val();
+                    $('#addShipmentItemForm').find('[name="price"]').val(parseFloat(value).toFixed(2));
+                },
+
+                error: function (error) {
+                }
+            });
+        }
+
+        else{
+            Swal.fire({
+                title: errorTranslation,
+                text: requiredFieldsTranslation,
+                icon: 'error',
+                confirmButtonText: doneTranslation,
+                customClass: {
+                  confirmButton: 'btn btn-primary'
+                },
+                buttonsStyling: false
+              });
+              return false;
+        }
+    });
+
 
     $("#addShipmentItemForm").on("submit", function (event) {
         event.preventDefault();
@@ -108,19 +222,34 @@ $(function () {
             success: function (response, status, xhr) {
                 if (xhr.status === 200) {
                     // Handle a successful response
-                    dt_shipmentItems.ajax.url(urlStart + 'get-shipmentItems/' + shipmentId).load();
+                    // dt_shipmentItems.ajax.url(urlStart + 'get-shipmentItems/' + shipmentId).load();
+                    // Swal.fire({
+                    //     title: '',
+                    //     text: response.message,
+                    //     icon: 'success',
+                    //     confirmButtonText: doneTranslation,
+                    //     customClass: {
+                    //         confirmButton: 'btn btn-success'
+                    //     },
+                    // }).then((result) => {
+                    //     if (result.isConfirmed) {
+                    //         $("#addShipmentItemForm").trigger('reset');
+                    //         $('#addShipmentItemModal').modal('hide');
+                    //     }
+                    // });
                     Swal.fire({
+                        icon: 'success',
                         title: '',
                         text: response.message,
-                        icon: 'success',
                         confirmButtonText: doneTranslation,
                         customClass: {
                             confirmButton: 'btn btn-success'
-                        },
-                    }).then((result) => {
+                        }
+                    }).then(function(result) {
+                        // Wait for the user to click the confirmation button
                         if (result.isConfirmed) {
-                            $("#addShipmentItemForm").trigger('reset');
-                            $('#addShipmentItemModal').modal('hide');
+                            // Reload the page after user confirms
+                            location.reload();
                         }
                     });
                 }
@@ -170,7 +299,8 @@ $(function () {
         var height = $('#editShipmentItemForm').find('[name="height"]').val();
         var width = $('#editShipmentItemForm').find('[name="width"]').val();
         var weight = $('#editShipmentItemForm').find('[name="weight"]').val();
-        var length = $('#editShipmentItemForm').find('[name="height"]').val();
+        var length = $('#editShipmentItemForm').find('[name="length"]').val();
+        var quantity = $('#editShipmentItemForm').find('[name="quantity"]').val();
 
 
         // Get values of select elements within the current repeater item
@@ -190,6 +320,7 @@ $(function () {
                     height: height,
                     width: width,
                     length: length,
+                    quantity: quantity,
                     parcelTypeId: parcelTypeId,
                     goodTypeId: goodTypeId,
                     trip_route_id: trip_route_id
@@ -236,8 +367,8 @@ $(function () {
             success: function (response, status, xhr) {
                 if (xhr.status === 200) {
                     // Handle a successful response
-                    $("#editShipmentItemForm").trigger('reset');
-                    dt_shipmentItems.ajax.url(urlStart + 'get-shipmentItems/' + shipmentId).load();
+                    // $("#editShipmentItemForm").trigger('reset');
+                    // dt_shipmentItems.ajax.url(urlStart + 'get-shipmentItems/' + shipmentId).load();
                     Swal.fire({
                         icon: 'success',
                         title: '',
@@ -246,9 +377,15 @@ $(function () {
                         customClass: {
                             confirmButton: 'btn btn-success'
                         }
+                    }).then(function(result) {
+                        // Wait for the user to click the confirmation button
+                        if (result.isConfirmed) {
+                            // Reload the page after user confirms
+                            location.reload();
+                        }
                     });
-                    $("#editShipmentItemForm").trigger('reset');
-                    $('#editShipmentItemModal').modal('hide');
+                    // $("#editShipmentItemForm").trigger('reset');
+                    // $('#editShipmentItemModal').modal('hide');
 
                 } else {
                     // Handle other status codes
@@ -299,7 +436,7 @@ $(function () {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function (response) {
-                        dt_shipmentItems.ajax.url(urlStart + 'get-shipmentItems/' + shipmentId).load();
+                        // dt_shipmentItems.ajax.url(urlStart + 'get-shipmentItems/' + shipmentId).load();
                         Swal.fire({
                             icon: 'success',
                             title: '',
@@ -307,6 +444,12 @@ $(function () {
                             confirmButtonText: doneTranslation,
                             customClass: {
                                 confirmButton: 'btn btn-success'
+                            }
+                        }).then(function(result) {
+                            // Wait for the user to click the confirmation button
+                            if (result.isConfirmed) {
+                                // Reload the page after user confirms
+                                location.reload();
                             }
                         });
                     },

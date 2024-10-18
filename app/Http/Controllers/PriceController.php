@@ -142,19 +142,28 @@ class PriceController extends Controller
                 if ($request->filled('goodTypeId')) {
                     $query->where('good_types_id', $request->input('goodTypeId'));
                 }
-            $fromCountry = $tripCountries[$i];
-            $toCountry = $tripCountries[$i + 1];
+            $fromCountryName = $tripCountries[$i];
+            $toCountryName = $tripCountries[$i + 1];
 
-            $price += $query->where('from_country_id', Country::where('name', $fromCountry)->pluck('id')->first())
-                ->where('to_country_id', Country::where('name', $toCountry)->pluck('id')->first())
+            $fromCountryId = Country::where('name', $fromCountryName)->pluck('id')->first();
+            $toCountryId = Country::where('name', $toCountryName)->pluck('id')->first();
+
+            $price += $query->where('from_country_id', $fromCountryId)
+                ->where('to_country_id', $toCountryId)
                 ->pluck('price')
                 ->first();
+
         }
+
         $price = $price * $request->input('weight');
         if ($request->filled('parcelTypeId') && $request->input('parcelTypeId') == 1) {
             $newPrice = $request->input('weight') * $request->input('height') * $request->input('width') / 5000;
             if($newPrice > $price)
             $price = $newPrice;
+        }
+
+        if ($request->filled('quantity')) {
+            $price = $price * $request->input('quantity');
         }
 
         return $price;

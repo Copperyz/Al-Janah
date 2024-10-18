@@ -261,6 +261,7 @@ $(function () {
                 var finalEvent = $('<div class="timeline-event"></div>');
                 finalEvent.append('<div class="timeline-header"><h6 class="mb-0">' + tripDetailsTranslation + '</h6></div>');
                 finalEvent.append('<p class="mb-2">' + typeTranslation + ': ' + routeTypeTranslation + '</p>');
+                if(response.trip_price)
                 finalEvent.append('<p class="mb-2">' + tripPriceTranslation + ': $' + response.trip_price + '</p>');
 
                 finalItem.append(finalEvent);
@@ -308,7 +309,7 @@ $(function () {
             countrySelect.find('select').append('<option value="Libya">' + libyaTranslation + '</option>');
             countrySelect.find('select').val(leg.country);
 
-            var deleteButton = $('<div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0"><button class="btn btn-label-danger mt-4" data-repeater-delete><i class="ti ti-x ti-xs me-1"></i></button></div>');
+            var deleteButton = $('<div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0"><button type="button" class="btn btn-label-danger mt-4" data-repeater-delete><i class="ti ti-x ti-xs me-1"></i></button></div>');
 
             deleteButton.find('button').on('click', function (e) {
                 e.preventDefault(); // Prevent form submission

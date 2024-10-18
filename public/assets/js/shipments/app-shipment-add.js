@@ -5,35 +5,18 @@
 'use strict';
 
 (function () {
-  const invoiceItemPriceList = document.querySelectorAll('.invoice-item-price'),
-    invoiceItemQtyList = document.querySelectorAll('.invoice-item-qty'),
-    invoiceDateList = document.querySelectorAll('.date-picker');
+  const date = document.querySelectorAll('.date-picker');
 
-  // Price
-  if (invoiceItemPriceList) {
-    invoiceItemPriceList.forEach(function (invoiceItemPrice) {
-      new Cleave(invoiceItemPrice, {
-        delimiter: '',
-        numeral: true
-      });
-    });
-  }
 
-  // Qty
-  if (invoiceItemQtyList) {
-    invoiceItemQtyList.forEach(function (invoiceItemQty) {
-      new Cleave(invoiceItemQty, {
-        delimiter: '',
-        numeral: true
-      });
-    });
-  }
 
   // Datepicker
-  if (invoiceDateList) {
-    invoiceDateList.forEach(function (invoiceDateEl) {
+  if (date) {
+    date.forEach(function (invoiceDateEl) {
       invoiceDateEl.flatpickr({
-        monthSelectorType: 'static'
+        enableTime: true,         // Enable time picker
+        dateFormat: "Y-m-d H:i K", // Format for date and time (24-hour with AM/PM)
+        time_24hr: false,         // Set to false to use 12-hour format with AM/PM
+        monthSelectorType: 'static' // Static month dropdown
       });
     });
   }
@@ -166,6 +149,7 @@ $(function () {
       var width = $container.find('[name$="[width]"]').val();
       var weight = $container.find('[name$="[weight]"]').val();
       var length = $container.find('[name$="[length]"]').val();
+      var quantity = $container.find('[name$="[quantity]"]').val();
 
       // Get values of select elements within the current repeater item
       var parcelTypeId = $container.find('[name$="[parcel_types_id]"]').val();
@@ -174,8 +158,7 @@ $(function () {
       var trip_route_id = $('#addShipmentForm').find('[name="trip_route_id"]').val();
 
       // Check if all required inputs are filled
-      if (height && width && weight && length && parcelTypeId && goodTypeId && trip_route_id) {
-        // Call your function with these values
+      if (parcelTypeId == 1 && height && width && weight && length && parcelTypeId && goodTypeId && trip_route_id && quantity) {
         $.ajax({
           url: "../get-price",
           method: 'GET',
@@ -184,6 +167,7 @@ $(function () {
             height: height,
             width: width,
             length: length,
+            quantity: quantity,
             parcelTypeId: parcelTypeId,
             goodTypeId: goodTypeId,
             trip_route_id: trip_route_id
@@ -208,8 +192,43 @@ $(function () {
           error: function (error) {
           }
         });
-      } else {
-        // Show error message using Swal.fire
+      }
+      else if(parcelTypeId != 1 && weight && parcelTypeId && goodTypeId && trip_route_id && quantity){
+        $.ajax({
+          url: "../get-price",
+          method: 'GET',
+          data: {
+            weight: weight,
+            height: height,
+            width: width,
+            length: length,
+            quantity: quantity,
+            parcelTypeId: parcelTypeId,
+            goodTypeId: goodTypeId,
+            trip_route_id: trip_route_id
+          },
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          success: function (response) {
+            // Update the UI with the calculated price
+
+
+            var value = parseFloat(response) > 0 ? parseFloat(response) : freightValue;
+            totalPrice = totalPrice - freightValue;
+            freightValue = freightValue - parseFloat($container.find('[name$="[price]"]').val() ? $container.find('[name$="[price]"]').val() : 0) + parseFloat(value);
+            $('#freightValue').text(parseFloat(freightValue).toFixed(2) + lydTranslation);
+            totalPrice = totalPrice + freightValue;
+            $('#totalValue').text(parseFloat(totalPrice).toFixed(2) + lydTranslation);
+            $container.find('[name$="[price]"]').val(parseFloat(value).toFixed(2));
+
+          },
+
+          error: function (error) {
+          }
+        });
+      }
+      else{
         Swal.fire({
           title: errorTranslation,
           text: requiredFieldsTranslation,
@@ -220,7 +239,12 @@ $(function () {
           },
           buttonsStyling: false
         });
+        return false;
       }
+      
+        // Call your function with these values
+        
+      
     } else {
       console.log('Container not found.');
     }

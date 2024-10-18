@@ -14,8 +14,8 @@ $(function () {
       columns: [
         // columns according to JSON
         { data: '' },
-        { data: 'customerName' },
         { data: 'tracking_no' },
+        { data: 'customerName' },
         { data: 'delivery_code' },
         { data: 'date' },
         { data: 'totalAmount' },
@@ -36,6 +36,80 @@ $(function () {
           }
         },
         {
+          // User full name and email
+          targets: 1,
+          responsivePriority: 4,
+          render: function (data, type, full, meta) {
+            var $name = full['customerName'],
+              $email = full['email'],
+              $image = '';
+              if ($image) {
+                // For Avatar image
+                var $output =
+                  '<img src="' + assetsPath + 'img/avatars/' + $image + '" alt="Avatar" class="rounded-circle">';
+              } else {
+                // For Avatar badge
+                var stateNum = Math.floor(Math.random() * 6);
+                var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
+                var $state = states[stateNum],
+                  $name = full['customerName'],
+                  $initials = $name.match(/\b\w/g) || [];
+                $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
+                $output = '<span class="avatar-initial rounded-circle bg-label-' + $state + '">' + $initials + '</span>';
+              }
+            // Creates full output for row
+            var $row_output =
+              '<div class="d-flex flex-column">' +
+              '<a href="./shipments/' + full['id'] +
+              '" class="text-body text-truncate"><span class="fw-medium">' +
+              full['tracking_no'] +
+              '</span></a>' +
+              '</div>' +
+              '</div>';
+            return $row_output;
+          }
+        },
+        {
+          // User full name and email
+          targets: 2,
+          responsivePriority: 4,
+          render: function (data, type, full, meta) {
+            var $name = full['customerName'],
+              $email = full['email'],
+              $image = '';
+              if ($image) {
+                // For Avatar image
+                var $output =
+                  '<img src="' + assetsPath + 'img/avatars/' + $image + '" alt="Avatar" class="rounded-circle">';
+              } else {
+                // For Avatar badge
+                var stateNum = Math.floor(Math.random() * 6);
+                var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
+                var $state = states[stateNum],
+                  $name = full['customerName'],
+                  $initials = $name.match(/\b\w/g) || [];
+                $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
+                $output = '<span class="avatar-initial rounded-circle bg-label-' + $state + '">' + $initials + '</span>';
+              }
+            // Creates full output for row
+            var $row_output =
+              '<div class="d-flex justify-content-start align-items-center user-name">' +
+              '<div class="avatar-wrapper">' +
+              '<div class="avatar me-3">' +
+              $output +
+              '</div>' +
+              '</div>' +
+              '<div class="d-flex flex-column">' +
+              '<a href="./customers/' + full['customer_id'] +
+              '" class="text-body text-truncate"><span class="fw-medium">' +
+              $name +
+              '</span></a>' +
+              '</div>' +
+              '</div>';
+            return $row_output;
+          }
+        },
+        {
           // Actions
           targets: -1,
           searchable: false,
@@ -43,7 +117,6 @@ $(function () {
           render: function (data, type, full, meta) {
             return (
               '<div class="d-flex align-items-center">' +
-              '<a href="./shipments/' + full['id'] + '" class="text-body me-2"> <i class="ti ti-eye ti-sm"></i></a>' +  // Add margin-right here
               '<a href="./shipments/' + full['id'] + '/edit" class="text-body me-2 editUser"><i class="ti ti-edit ti-sm"></i></a>' +  // Add margin-right here
               '<a href="javascript:;" class="text-body delete-record"><i class="ti ti-trash ti-sm"></i></a>' +
               '</div>'
@@ -84,6 +157,7 @@ $(function () {
       ]
     });
   }
+  
 
   // Hide add button for customers
   if (hideAddShipmentButton == true) {

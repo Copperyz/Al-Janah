@@ -43,11 +43,8 @@ $(function () {
                     orderable: false,
                     render: function (data, type, full, meta) {
                         return (
-                            '<div class="d-flex align-items-center">' +
-                            '<a href="./shipments/' + full['id'] + '" class= "text-body" > <i class="ti ti-eye mx-2 ti-sm"></i></a > ' +
-                            '<a class="text-body editShipmentItem" data-bs-target="#editShipmentItemModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit ti-sm me-2"></i></a>' +
-                            '<a href="javascript:;" class="text-body delete-record"><i class="ti ti-trash ti-sm mx-2"></i></a>' +
-                            '</div>'
+                            '<span><button class="btn btn-sm btn-info me-2 editShipmentItem" ddata-bs-target="#editShipmentItemModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit"></i></button>' +
+                            '<span><button class="btn btn-sm btn-danger me-2 delete-record"><i class="ti ti-trash"></i></button>'
                         );
                     }
                 }
@@ -140,7 +137,7 @@ $(function () {
         if (parcelTypeId == 1 && height && width && weight && length && parcelTypeId && goodTypeId && trip_route_id && quantity) {
             // Call your function with these values
             $.ajax({
-                url: "../get-price",
+                url: urlStart + 'get-price',
                 method: 'GET',
                 data: {
                     weight: weight,
@@ -153,22 +150,23 @@ $(function () {
                     trip_route_id: trip_route_id
                 },
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')  // CSRF token in headers
                 },
                 success: function (response) {
                     // Update the UI with the calculated price
                     var value = parseFloat(response) > 0 ? parseFloat(response) : $('#addShipmentItemForm').find('[name="price"]').val();
                     $('#addShipmentItemForm').find('[name="price"]').val(parseFloat(value).toFixed(2));
                 },
-
                 error: function (error) {
+                    console.error('Error:', error);  // Add error logging for better debugging
                 }
             });
+            
         }
         else if (parcelTypeId != 1 && weight && parcelTypeId && goodTypeId && trip_route_id && quantity) {
             // Call your function with these values
             $.ajax({
-                url: "../get-price",
+                url: urlStart + 'get-price',
                 method: 'GET',
                 data: {
                     weight: weight,
@@ -190,6 +188,7 @@ $(function () {
                 },
 
                 error: function (error) {
+                    console.error('Error:', error);
                 }
             });
         }
@@ -294,7 +293,7 @@ $(function () {
 
     });
 
-    $(document).on('click', '.calculate-price-btn', function () {
+    $(document).on('click', '.calculate-price-btn_edit', function () {
         // Now try to get the values of input fields
         var height = $('#editShipmentItemForm').find('[name="height"]').val();
         var width = $('#editShipmentItemForm').find('[name="width"]').val();
@@ -310,10 +309,10 @@ $(function () {
         var trip_route_id = $('#editShipmentItemForm').find('[name="trip_route_id"]').val();
 
         // Check if all required inputs are filled
-        if (height && width && weight && length && parcelTypeId && goodTypeId && trip_route_id) {
+        if (parcelTypeId == 1 && height && width && weight && length && parcelTypeId && goodTypeId && trip_route_id) {
             // Call your function with these values
             $.ajax({
-                url: "../get-price",
+                uurl: urlStart + 'get-price',
                 method: 'GET',
                 data: {
                     weight: weight,
@@ -337,7 +336,36 @@ $(function () {
                 error: function (error) {
                 }
             });
-        } else {
+        }
+        else if (parcelTypeId != 1 && weight && parcelTypeId && goodTypeId && trip_route_id) {
+            // Call your function with these values
+            $.ajax({
+                url: urlStart + 'get-price',
+                method: 'GET',
+                data: {
+                    weight: weight,
+                    height: height,
+                    width: width,
+                    length: length,
+                    quantity: quantity,
+                    parcelTypeId: parcelTypeId,
+                    goodTypeId: goodTypeId,
+                    trip_route_id: trip_route_id
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    // Update the UI with the calculated price
+                    var value = parseFloat(response) > 0 ? parseFloat(response) : $('#editShipmentItemForm').find('[name="price"]').val();
+                    $('#editShipmentItemForm').find('[name="price"]').val(parseFloat(value).toFixed(2));
+                },
+
+                error: function (error) {
+                }
+            });
+        }
+        else {
             // Show error message using Swal.fire
             Swal.fire({
                 title: 'Error',

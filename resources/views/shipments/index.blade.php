@@ -92,15 +92,15 @@
             <table class="shipment-list-table table border-top">
                 <thead>
                     <tr>
-                        <th class="text-center"></th>
-                        <th class="text-center">{{ __('Tracking Number') }}</th>
-                        <th class="text-center">{{ __('Customer') }}</th>
-                        <th class="text-center">{{ __('Delivery Code') }}</th>
-                        <th class="text-center">{{ __('Date') }}</th>
-                        <th class="text-center text-truncate">{{ __('Amount') }}</th>
-                        <th class="text-center">{{ __('Payment') }}</th>
-                        <th class="text-center">{{ __('Status') }}</th>
-                        <th class="text-center cell-fit actionsTh">{{ __('Actions') }}</th>
+                        <th></th>
+                        <th>{{ __('Tracking Number') }}</th>
+                        <th>{{ __('Customer') }}</th>
+                        <th>{{ __('Delivery Code') }}</th>
+                        <th>{{ __('Date') }}</th>
+                        <th>{{ __('Amount') }}</th>
+                        <th>{{ __('Payment') }}</th>
+                        <th>{{ __('Status') }}</th>
+                        <th>{{ __('Actions') }}</th>
                     </tr>
                 </thead>
             </table>

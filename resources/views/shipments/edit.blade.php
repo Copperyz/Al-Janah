@@ -138,10 +138,10 @@
                             class="btn btn-label-primary w-100 submitButton">{{ __('Submit') }}</button>
                     </div>
                     <!-- <button class="btn btn-label-success d-grid w-100" data-bs-toggle="offcanvas"
-                                                                        data-bs-target="#addPaymentOffcanvas">
-                                                                        <span class="d-flex align-items-center justify-content-center text-nowrap"><i
-                                                                                class="ti ti-currency-dollar ti-xs me-2"></i>{{ __('Add Payment') }}</span>
-                                                                    </button> -->
+                                                                            data-bs-target="#addPaymentOffcanvas">
+                                                                            <span class="d-flex align-items-center justify-content-center text-nowrap"><i
+                                                                                    class="ti ti-currency-dollar ti-xs me-2"></i>{{ __('Add Payment') }}</span>
+                                                                        </button> -->
                 </div>
             </div>
         </div>
@@ -150,6 +150,8 @@
 
 
     <script>
+        var errorTranslation = @json(__('The given data was invalid'));
+        var requiredFieldsTranslation = @json(__('Please fill in all required fields'));
         var shipmentId = '{{ $shipment->id }}';
         var urlStart = '../../';
         var addItemTranslation = @json(__('Add Item'));

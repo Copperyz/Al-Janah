@@ -86,10 +86,10 @@
                                 <span class="text-danger">*</span>
                             </label>
                             <input name="price" type="number" class="form-control invoice-item-price mb-3"
-                                placeholder="{{ __('Price') }}" min="0" />
+                                placeholder="{{ __('Price') }}" min="0" readonly />
                         </div>
                         <div class="col-md-5">
-                            <button type="button" class="btn btn-primary calculate-price-btn mt-4">
+                            <button type="button" class="btn btn-primary calculate-price-btn_edit mt-4">
                                 {{ __('Calculate Price') }}
                             </button>
                         </div>

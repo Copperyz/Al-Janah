@@ -36,7 +36,7 @@
 
     <div class="row invoice-add">
         <!-- Invoice Add-->
-        <div class="col-lg-9 col-12 mb-lg-0 mb-4">
+        <div class="col-lg-12 col-12 mb-lg-0 mb-4">
             <div class="card invoice-preview-card">
                 <div class="card-body">
                     <form class="source-item pt-4 px-0 px-sm-4" id="addShipmentForm">
@@ -312,17 +312,11 @@
                             </div>
                         </div>
 
-                        <hr class="my-3 mx-n4" />
 
-                        <div class="row p-0 p-sm-4">
-                            <div class="col-md-6 mb-md-0 mb-3">
-
-                            </div>
-                            <div class="col-md-6 d-flex justify-content-end">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 d-flex justify-content-end">
                                 <div class="invoice-calculations bg-primary p-3 rounded">
-                                    <div class="">
-                                        <h5 class="mb-0 text-dark">{{ __('Receipt Summary') }}</h5>
-                                    </div>
+                                    <h5 class="mb-0 text-dark">{{ __('Receipt Summary') }}</h5>
                                     <table class="table table-borderless table-sm text-dark">
                                         <tbody>
                                             <tr>
@@ -352,32 +346,27 @@
                                 </div>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
         </div>
         <!-- /Invoice Add-->
 
-        <!-- Invoice Actions -->
-        <div class="col-lg-3 col-12 invoice-actions">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <!-- <button class="btn btn-primary d-grid w-100 mb-2" data-bs-toggle="offcanvas"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    data-bs-target="#sendInvoiceOffcanvas">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <span class="d-flex align-items-center justify-content-center text-nowrap"><i
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            class="ti ti-send ti-xs me-2"></i>Send Invoice</span>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </button> -->
-                    <!-- <a href="{{ url('app/invoice/preview') }}" class="btn btn-label-secondary d-grid w-100 mb-2">Preview</a> -->
-                    <div class="d-flex my-2">
-                        <button type="button"
-                            class="btn btn-label-danger w-100 cancelButton me-2">{{ __('Cancel') }}</button>
-                        <button type="button"
-                            class="btn btn-label-primary w-100 submitButton">{{ __('Submit') }}</button>
-                    </div>
 
+
+        <div class="col-lg-12 col-md-12 mt-3">
+            <div class="card mb-4">
+                <div class="card-body d-flex justify-content-end">
+                    <div class="button-container">
+                        <button type="button"
+                            class="btn btn-label-primary cancelButton me-2">{{ __('Cancel') }}</button>
+                        <button type="button" class="btn btn-label-danger submitButton">{{ __('Submit') }}</button>
+                    </div>
                 </div>
             </div>
         </div>
+
         <!-- /Invoice Actions -->
     </div>
 

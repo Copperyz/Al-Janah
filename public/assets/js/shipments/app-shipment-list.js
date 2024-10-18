@@ -116,14 +116,11 @@ $(function () {
           orderable: false,
           render: function (data, type, full, meta) {
             return (
-              '<div class="d-flex align-items-center">' +
-              '<a href="./shipments/' + full['id'] + '/edit" class="text-body me-2 editUser"><i class="ti ti-edit ti-sm"></i></a>' +  // Add margin-right here
-              '<a href="javascript:;" class="text-body delete-record"><i class="ti ti-trash ti-sm"></i></a>' +
-              '</div>'
+              '<a href="./shipments/' + full['id'] + '/edit" class="btn btn-xs btn-info me-2"><i class="ti ti-edit ti-sm"></i></a>' +  
+              '<button class="btn btn-xs btn-danger me-2 delete-record"><i class="ti ti-trash ti-sm"></i></button>'
             );
           }
         }
-
       ],
       order: [[1, 'desc']],
       dom:

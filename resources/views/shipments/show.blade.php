@@ -40,28 +40,35 @@
 @endsection
 
 @section('content')
-
     <div class="row invoice-preview">
         <!-- Invoice -->
-        <div class="col-xl-9 col-md-8 col-12 mb-md-0 mb-4">
-            <div class="card invoice-preview-card">
-                <div class="card-body">
-                    <div
-                        class="d-flex justify-content-between flex-xl-row flex-md-column flex-sm-row flex-column m-sm-3 m-0">
-                        <div>
-                            <h4 class="fw-medium mb-2">{{ __('Shipment') }} #{{ $shipment->id }}</h4>
-                            <div class="mb-2 pt-1">
-                                <span>{{ __('Date') }} :</span>
-                                <span class="fw-medium">{{ $shipment->date }}</span>
-                            </div>
+        <div class="col-xl-10 col-md-8 col-12 mb-md-0 mb-4">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h4 class="card-title">{{ __('Shipment') }} #{{ $shipment->id }}</h4>
+                    <div class="row">
+                        <div class="col-md-6 mb-2 pt-1">
+                            <span>{{ __('Date') }} :</span>
+                            <span class="fw-medium">{{ $shipment->date }}</span>
+                        </div>
+                        <div class="col-md-6 mb-2 pt-1">
+                            <span>{{ __('Tracking Number') }} :</span>
+                            <span class="fw-medium">{{ $shipment->tracking_no }}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-2 pt-1">
+                            <span>{{ __('Notes') }} :</span>
+                            <span class="fw-medium">{{ $shipment->notes ?? '' }}</span>
                         </div>
                     </div>
                 </div>
-                <hr class="my-0" />
+            </div>
+            <div class="card invoice-preview-card">
                 <div class="card-body">
                     <div class="row p-sm-3 p-0">
                         <div class="col-xl-6 col-md-12 col-sm-5 col-12 mb-xl-0 mb-md-4 mb-sm-0 mb-4">
-                            <h6 class="mb-3">{{ __('Order Details') }}</h6>
+                            <h4 class="card-title">{{ __('Order Details') }}</h4>
                             <table>
                                 <tbody>
                                     <tr>
@@ -85,12 +92,11 @@
                                         <td class="pe-4">{{ __('City') }}:</td>
                                         <td>{{ $shipment->customer->city->name ?? '' }}</td>
                                     </tr>
-
                                 </tbody>
                             </table>
                         </div>
                         <div class="col-xl-6 col-md-12 col-sm-7 col-12">
-                            <h6 class="mb-4">{{ __('Bill') }}:</h6>
+                            <h4 class="card-title">{{ __('Bill') }}:</h4>
                             <table>
                                 <tbody>
                                     <tr>
@@ -119,51 +125,34 @@
                         </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-datatable table-responsive mt-3">
-                        <table class="shipment-items-table table">
-                            <thead class="border-top">
-                                <tr>
-                                    <th></th>
-                                    <th>{{ __('Good Type') }}</th>
-                                    <th>{{ __('Parcel Type') }}</th>
-                                    <th>{{ __('Quantity') }}</th>
-                                    <th class="text-truncate">{{ __('Height') }}</th>
-                                    <th>{{ __('Width') }}</th>
-                                    <th>{{ __('Weight') }}</th>
-                                    <th>{{ __('Price') }}</th>
-                                    <th class="cell-fit">{{ __('Actions') }}</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
+            </div>
+            <div class="card mt-3">
+                <div class="card-datatable table-responsive mt-3">
+                    <table class="shipment-items-table table">
+                        <thead class="border-top">
+                            <tr>
+                                <th></th>
+                                <th>{{ __('Good Type') }}</th>
+                                <th>{{ __('Parcel Type') }}</th>
+                                <th>{{ __('Quantity') }}</th>
+                                <th class="text-truncate">{{ __('Height') }}</th>
+                                <th>{{ __('Width') }}</th>
+                                <th>{{ __('Weight') }}</th>
+                                <th>{{ __('Price') }}</th>
+                                <th>{{ __('Actions') }}</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
-
-                <!-- <div class="card-body mx-3">
-                                                                        <div class="row">
-                                                                            <div class="col-12">
-                                                                                <span class="fw-medium">Note:</span>
-                                                                                <span>It was a pleasure working with you and your team. We hope you will keep us in mind for future freelance projects. Thank You!</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div> -->
             </div>
         </div>
         <!-- /Invoice -->
 
         <!-- Invoice Actions -->
-        <div class="col-xl-3 col-md-4 col-12 invoice-actions">
+        <div class="col-xl-2 col-md-4 col-12 invoice-actions">
             <div class="card">
                 <div class="card-body">
-                    <!-- <button class="btn btn-primary d-grid w-100 mb-2" data-bs-toggle="offcanvas"
-                                                                            data-bs-target="#sendInvoiceOffcanvas">
-                                                                            <span class="d-flex align-items-center justify-content-center text-nowrap"><i
-                                                                                    class="ti ti-send ti-xs me-2"></i>{{ __('Send Order') }}</span>
-                                                                        </button> -->
-                    <!-- <button class="btn btn-label-secondary d-grid w-100 mb-2">
-                                                                            {{ __('Download') }}
-                                                                        </button> -->
-                    <a class="btn btn-label-secondary d-flex align-items-center w-100 mb-2" target="_blank"
+                    <a class="btn btn-label-info d-flex align-items-center w-100 mb-2" target="_blank"
                         href="{{ url('payments/' . $shipment->id . '/print') }}">
                         <i class="ti ti-printer ti-xs me-2"></i>
                         {{ __('Print') }}

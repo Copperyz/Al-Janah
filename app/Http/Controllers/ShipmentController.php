@@ -243,7 +243,7 @@ class ShipmentController extends Controller
         $mysqlDate = $carbonDate->toDateTimeString();
         $shipment->date = $mysqlDate;
         $shipment->amount = $request->amount;
-        // $shipment->notes = $request->notes;
+        $shipment->notes = $request->notes;
         $shipment->save();
 
         return response()->json([

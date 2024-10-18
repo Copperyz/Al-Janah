@@ -43,7 +43,7 @@ $(function () {
           orderable: false,
           render: function (data, type, full, meta) {
             return (
-              '<span><button class="btn btn-sm btn-info me-2" data-bs-target="#editShipmentItemModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit"></i></button>' +
+              '<span><button class="btn btn-sm btn-info me-2 editShipmentItem" data-bs-target="#editShipmentItemModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit"></i></button>' +
               '<span><button class="btn btn-sm btn-danger me-2 delete-record"><i class="ti ti-trash"></i></button>'
             );
           }
@@ -282,7 +282,7 @@ $(function () {
     });
   });
 
-  $(document).on('click', 'a.editShipmentItem', function () {
+  $(document).on('click', 'button.editShipmentItem', function () {
     $('#editShipmentItemForm').trigger('reset');
     var data = dt_shipmentItems.row($(this).closest('tr')).data();
     $('#editShipmentItemForm').find('[name="name"]').val(data.name);
@@ -315,7 +315,7 @@ $(function () {
     if (parcelTypeId == 1 && height && width && weight && length && parcelTypeId && goodTypeId && trip_route_id) {
       // Call your function with these values
       $.ajax({
-        uurl: urlStart + 'get-price',
+        url: urlStart + 'get-price',
         method: 'GET',
         data: {
           weight: weight,

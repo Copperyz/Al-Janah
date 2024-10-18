@@ -44,7 +44,7 @@
                         </div>
                         <div class="col-md-6 mb-3 mb-3">
                             <label class="form-label" for="price">{{ __('Price') }}</label>
-                            <input type="number" id="price" name="price" class="form-control"
+                            <input type="text" pattern="[0-9]*[.,]?[0-9]+" id="price" name="price" class="form-control"
                                 placeholder="{{ __('Price') }}" required autocomplete="off" />
                         </div>
                     </div>

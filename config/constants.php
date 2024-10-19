@@ -292,6 +292,7 @@ return [
         'gr' => 'Athens',
         'it' => 'Rome',
         'inn' => 'NHAYA SHEVA',
+        'inm' => 'MUNDRA',
         'jp' => 'Tokyo',
         'jo' => 'Amman',
         'kp' => 'Pyongyang',

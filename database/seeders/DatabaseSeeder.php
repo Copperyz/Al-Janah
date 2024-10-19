@@ -7,6 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\ParcelType;
+use App\Models\Currency;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -74,5 +75,20 @@ class DatabaseSeeder extends Seeder
 
         // Seed Parcel Types
         $parcelType = ParcelType::create(['name' => 'Box']);
+
+        // Seed Currencies
+        $currencies = [
+            ['name' => 'US Dollar', 'symbol' => '$', 'valueInUsd' => 1.000],
+            ['name' => 'Libyan Dinar', 'symbol' => 'LYD', 'valueInUsd' => 0.21],
+            ['name' => 'Turkish Lira', 'symbol' => '₺', 'valueInUsd' => 0.029],
+            ['name' => 'Euro', 'symbol' => '€', 'valueInUsd' => 1.090],
+            ['name' => 'British Pound', 'symbol' => '£', 'valueInUsd' => 1.200],
+            ['name' => 'Chinese Yuan', 'symbol' => 'CN¥', 'valueInUsd' => 0.14],
+        ];
+
+        // Insert each currency into the database
+        foreach ($currencies as $currency) {
+            Currency::create($currency);
+        }
     }
 }

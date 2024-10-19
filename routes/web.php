@@ -27,6 +27,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ShipmentOnlineController;
 use App\Http\Controllers\GoodTypeController;
 use App\Http\Controllers\ParcelTypeController;
+use App\Http\Controllers\CurrencyController;
 use Spatie\Permission\Contracts\Role;
 
 
@@ -162,5 +163,9 @@ Route::middleware(['auth'])->group(function () {
   
   //Parcel Types
   Route::resource('parcel_types', ParcelTypeController::class);
+
+  //Currencies
+  Route::get('get-currencies', [CurrencyController::class, 'getCurrencies'])->name('get-currencies');
+  Route::resource('currencies', CurrencyController::class);
   
 });

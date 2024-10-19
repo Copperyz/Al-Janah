@@ -16,6 +16,7 @@ use App\Models\ParcelType;
 use Illuminate\Support\Str;
 use App\Models\ShipmentItem;
 use App\Models\ShipmentHistory;
+use App\Models\Currency;
 use Illuminate\Http\Request;
 use App\Models\InventoryItem;
 use Yajra\DataTables\Facades\DataTables;
@@ -68,6 +69,7 @@ class ShipmentController extends Controller
         $cities = City::all();
         $tripRoutes = TripRoute::all();
         $inventories = Inventory::all();
+        $currencies = Currency::all();
         foreach ($tripRoutes as $tripRoute) {
             $legsCombined = '';
             foreach ($tripRoute->legs as $leg) {
@@ -78,7 +80,7 @@ class ShipmentController extends Controller
             $tripRoute->legs_combined = $legsCombined;    
             $tripRoute->typeLocale = __($tripRoute->type); 
         }
-        return view('shipments.create', compact('customers', 'parcelTypes', 'goodTypes', 'countries', 'cities', 'tripRoutes', 'inventories'));
+        return view('shipments.create', compact('customers', 'parcelTypes', 'goodTypes', 'countries', 'cities', 'tripRoutes', 'inventories', 'currencies'));
     }
 
     /**
@@ -90,6 +92,7 @@ class ShipmentController extends Controller
             'date' => ['required', 'date_format:Y-m-d h:i A'],
             'amount' => ['required', 'numeric'],
             'customer_id' => ['required', 'exists:customers,id'],
+            'currency_id' => ['required', 'exists:currencies,id'],
             'shipmentItems' => ['required', 'array', 'min:1'],
             'shipmentItems.*.parcel_types_id' => ['required', 'exists:parcel_types,id'],
             'shipmentItems.*.good_types_id' => ['required', 'exists:good_types,id'],
@@ -114,6 +117,7 @@ class ShipmentController extends Controller
         $mysqlDate = $carbonDate->toDateTimeString();
         $shipment->date = $mysqlDate;
         $shipment->amount = $request->amount;
+        $shipment->currency_id = $request->currency_id;
         $shipment->shipmentPrice = $request->shipmentPrice;
         $shipment->customer_id = $request->customer_id;
         $shipment->notes = $request->notes;
@@ -208,6 +212,7 @@ class ShipmentController extends Controller
         $shipment = Shipment::where('id', $shipment->id)->first();
         $shipment->orderDate = Carbon::parse($shipment->date)->format('Y-m-d\Th:i');
         $tripRoutes = TripRoute::all();
+        $currencies = Currency::all();
         foreach ($tripRoutes as $tripRoute) {
             $legsCombined = '';
             foreach ($tripRoute->legs as $leg) {
@@ -218,7 +223,7 @@ class ShipmentController extends Controller
             $tripRoute->legs_combined = $legsCombined;    
             $tripRoute->typeLocale = __($tripRoute->type); 
         }
-        return view('shipments.edit', compact('shipment', 'customers', 'parcelTypes', 'goodTypes', 'tripRoutes'));
+        return view('shipments.edit', compact('shipment', 'customers', 'parcelTypes', 'goodTypes', 'tripRoutes', 'currencies'));
     }
 
     /**
@@ -229,6 +234,7 @@ class ShipmentController extends Controller
         $validator = Validator::make($request->all(), [
             'date' => ['required', 'date_format:Y-m-d h:i A'],
             'amount' => ['required', 'numeric'],
+            'currency_id' => ['required', 'exists:currencies,id'],
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -243,6 +249,8 @@ class ShipmentController extends Controller
         $mysqlDate = $carbonDate->toDateTimeString();
         $shipment->date = $mysqlDate;
         $shipment->amount = $request->amount;
+        $shipment->currency_id = $request->currency_id;
+        $shipment->currency_id = $request->currency_id;
         $shipment->notes = $request->notes;
         $shipment->save();
 
@@ -286,7 +294,7 @@ class ShipmentController extends Controller
       
         foreach ($shipments as $shipment) {
             $shipment->customerName = $shipment->customer ? $shipment->customer->first_name.' '.$shipment->customer->last_name : 'N/A';
-            $shipment->totalAmount = number_format($shipment->amount + $shipment->shipmentPrice, 2).'<span class="badge bg-label-info badge-center ms-1">'.__('LYD');
+            $shipment->totalAmount = number_format($shipment->amount + $shipment->shipmentPrice, 2).' '.($shipment->currency->symbol ?? '$');
             $shipment->paymentStatus = $shipment->payment ? '<span class="badge bg-label-success">'.__($shipment->payment->status).'</span>' :  '<span class="badge bg-label-danger">'.__('Unpaid').'</span>';
             $shipment->inventoryStatus =  InventoryItem::where('shipment_id', $shipment->id)->pluck('status')->first() ? '<span class="badge bg-label-info">'.__(InventoryItem::where('shipment_id', $shipment->id)->pluck('status')->first()).'</span>' :'<span class="badge bg-label-warning">'. __('Unallocated').'</span>';
         }

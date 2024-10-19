@@ -41,26 +41,13 @@
 @section('content')
     <div class="row invoice-edit">
         <!-- Invoice Edit-->
-        <div class="col-lg-9 col-12 mb-lg-0 mb-4">
+        <div class="col-lg-10 col-12 mb-lg-0 mb-4">
             <div class="card invoice-preview-card">
                 <div class="card-body">
                     <form class="source-item pt-4 px-0 px-sm-4" id="editShipmentForm">
                         <div class="row p-0 p-sm-4">
                             <!-- First Column -->
                             <div class="col-md-12 mb-md-0 mb-3">
-                                <div class="mb-3 col-md-6">
-                                    <label for="html5-datetime-local-input"
-                                        class="form-label me-4 fw-medium">{{ __('Date') }}</label>
-                                    <input class="form-control date-picker" id="datePicker" type="datetime-local"
-                                        value="{{ $shipment->orderDate }}" placeholder="{{ __('Enter date') }}"
-                                        name="date" />
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label for="salesperson" class="form-label me-4 fw-medium">{{ __('Amount') }}</label>
-                                    <input type="text" class="form-control" id="salesperson"
-                                        placeholder="{{ __('Enter amount') }}" name="amount"
-                                        value="{{ $shipment->amount }}" />
-                                </div>
                                 <div class="mb-3 col-md-12">
                                     <label for="customer_id" class="form-label me-4 fw-medium">{{ __('Customer') }}</label>
                                     <select id="customer_id" class="select2 form-select form-select-lg"
@@ -84,6 +71,38 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="row">
+                                    <div class="mb-3 col-md-4">
+                                        <label for="html5-datetime-local-input"
+                                            class="form-label me-4 fw-medium">{{ __('Date') }}</label>
+                                        <input class="form-control date-picker" id="datePicker" type="datetime-local"
+                                            value="{{ $shipment->orderDate }}" placeholder="{{ __('Enter date') }}"
+                                            name="date" />
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label for="salesperson"
+                                            class="form-label me-4 fw-medium">{{ __('Amount') }}</label>
+                                        <input type="text" class="form-control" id="salesperson"
+                                            placeholder="{{ __('Enter amount') }}" name="amount"
+                                            value="{{ $shipment->amount }}" />
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label for="currency_id" class="form-label me-4 fw-medium">{{ __('Currency') }}
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <select id="currency_id" class="select2 form-select form-select-lg"
+                                            data-allow-clear="true" name="currency_id">
+                                            <option disabled selected>{{ __('Select') }}</option>
+                                            @foreach ($currencies as $currency)
+                                                <option value="{{ $currency->id }}"
+                                                    @if ($currency->id == $shipment->currency_id) selected @endif>
+                                                    {{ $currency->name }} ( {{ $currency->symbol }} )
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
                             </div>
                             <!-- Second Column -->
                             <div class="col-md-6 mb-md-0 mb-3">
@@ -117,7 +136,7 @@
                                     <th>{{ __('Width') }}</th>
                                     <th>{{ __('Weight') }}</th>
                                     <th>{{ __('Price') }}</th>
-                                    <th class="cell-fit">{{ __('Actions') }}</th>
+                                    <th>{{ __('Actions') }}</th>
                                 </tr>
                             </thead>
                         </table>
@@ -128,7 +147,7 @@
         <!-- /Invoice Edit-->
 
         <!-- Invoice Actions -->
-        <div class="col-lg-3 col-12 invoice-actions">
+        <div class="col-lg-2 col-12 invoice-actions">
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="d-flex my-2">
@@ -137,11 +156,6 @@
                         <button type="button"
                             class="btn btn-label-primary w-100 submitButton">{{ __('Submit') }}</button>
                     </div>
-                    <!-- <button class="btn btn-label-success d-grid w-100" data-bs-toggle="offcanvas"
-                                                                            data-bs-target="#addPaymentOffcanvas">
-                                                                            <span class="d-flex align-items-center justify-content-center text-nowrap"><i
-                                                                                    class="ti ti-currency-dollar ti-xs me-2"></i>{{ __('Add Payment') }}</span>
-                                                                        </button> -->
                 </div>
             </div>
         </div>

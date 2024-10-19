@@ -104,7 +104,7 @@
                             <td>{{ $shipmentItem->parcelType->name }}</td>
                             <td>{{ $shipmentItem->quantity }}</td>
                             <td>{{ $shipmentItem->weight }} {{ __('Kg') }}</td>
-                            <td>{{ number_format($shipmentItem->price, 2) }} {{ __('LYD') }}</td>
+                            <td>{{ number_format($shipmentItem->price, 2) }} {{ $shipment->currency->symbol }}</td>
                         </tr>
                     @endforeach
                     <tr>
@@ -122,10 +122,10 @@
                         </td>
                         <td class="">
                             <!-- Reduced vertical padding -->
-                            <p class="fw-medium mb-2">{{ $shipment->amount }} {{ __('LYD') }}</p>
-                            <p class="fw-medium mb-2">{{ $shipment->shipmentPrice }} {{ __('LYD') }}</p>
+                            <p class="fw-medium mb-2">{{ $shipment->amount }} {{ $shipment->currency->symbol }}</p>
+                            <p class="fw-medium mb-2">{{ $shipment->shipmentPrice }} {{ $shipment->currency->symbol }}</p>
                             <p class="fw-medium mb-2">{{ number_format($shipment->amount + $shipment->shipmentPrice, 2) }}
-                                {{ __('LYD') }}
+                                {{ $shipment->currency->symbol }}
                             </p>
                         </td>
                     </tr>

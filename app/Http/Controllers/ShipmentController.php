@@ -102,7 +102,7 @@ class ShipmentController extends Controller
             'shipmentItems.*.weight' => ['required', 'numeric', 'min:1'],
             'shipmentItems.*.length' => ['required', 'numeric', 'min:1'],
             'shipmentItems.*.quantity' => ['required', 'numeric', 'min:1'],
-            'notes' => ['nullable', 'string'],
+            // 'notes' => ['nullable', 'string'],
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -120,7 +120,7 @@ class ShipmentController extends Controller
         $shipment->currency_id = $request->currency_id;
         $shipment->shipmentPrice = $request->shipmentPrice;
         $shipment->customer_id = $request->customer_id;
-        $shipment->notes = $request->notes;
+        // $shipment->notes = $request->notes;
         $delivery_code = strtoupper(substr(Str::random(1), 0, 1) . rand(10, 99) . substr(Str::random(1), 0, 1));
         while (Shipment::where('delivery_code', $delivery_code)->exists()) {
             // Regenerate if the generated tracking number already exists

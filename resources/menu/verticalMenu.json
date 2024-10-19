@@ -120,6 +120,12 @@
       "icon": "menu-icon tf-icons ti ti-cash",
       "name": "Payments",
       "slug": "payments.index"
+    },
+    {
+      "url": "currencies",
+      "icon": "menu-icon tf-icons ti ti-exchange",
+      "name": "Currencies",
+      "slug": "currencies.index"
     }
   ]
 }

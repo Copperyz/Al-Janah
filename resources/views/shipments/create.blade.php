@@ -106,7 +106,22 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="mb-3">
+                                    <label for="currency_id" class="form-label me-4 fw-medium">{{ __('Currency') }}
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select id="currency_id" class="select2 form-select form-select-lg"
+                                        data-allow-clear="true" name="currency_id">
+                                        <option disabled selected>{{ __('Select') }}</option>
+                                        @foreach ($currencies as $currency)
+                                            <option value="{{ $currency->id }}">
+                                                {{ $currency->name }} ( {{ $currency->symbol }} )
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
+
                             <input type="hidden" name="shipmentPrice" id="shipmentPrice">
                         </div>
 
@@ -118,25 +133,43 @@
                             <div class="repeater-wrapper pt-0 pt-md-4" data-repeater-item>
                                 <div class="d-flex border rounded position-relative pe-0">
                                     <div class="row w-100 p-3">
-                                        <div class="col-md-6 col-12 mb-md-0 mb-3">
-                                            <p class="mb-2 repeater-title">{{ __('Item Details') }}</p>
-                                            <div class="mb-3">
-                                                <label for="parcel_types_id"
-                                                    class="form-label me-4 fw-medium">{{ __('Parcel Type') }}
-                                                    <span class="text-danger">*</span>
-                                                </label>
-                                                <select id="parcel_types_id" class="select2 form-select"
-                                                    data-allow-clear="true" name="parcel_types_id">
-                                                    <option disabled selected>{{ __('Select') }}</option>
-                                                    @foreach ($parcelTypes as $parcelType)
-                                                        <option value="{{ $parcelType->id }}">{{ $parcelType->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
+                                        <h5 class="mb-2 repeater-title">{{ __('Item Details') }}</h5>
+                                        <div class="mb-md-0 mb-3">
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="parcel_types_id"
+                                                        class="form-label me-4 fw-medium">{{ __('Parcel Type') }}
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <select id="parcel_types_id" class="select2 form-select"
+                                                        data-allow-clear="true" name="parcel_types_id">
+                                                        <option disabled selected>{{ __('Select') }}</option>
+                                                        @foreach ($parcelTypes as $parcelType)
+                                                            <option value="{{ $parcelType->id }}">{{ $parcelType->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="good_types_id"
+                                                        class="form-label me-4 fw-medium">{{ __('Good Type') }}
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <select id="good_types_id" class="select2 form-select"
+                                                        data-allow-clear="true" name="good_types_id">
+                                                        <option disabled selected>{{ __('Select') }}</option>
+                                                        @foreach ($goodTypes as $goodType)
+                                                            <option value="{{ $goodType->id }}">{{ $goodType->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
 
+
+
                                             <div class="row mb-3">
-                                                <div class="col-md-3">
+                                                <div class="col-md-2">
                                                     <label for="parcel_types_id"
                                                         class="form-label me-4 fw-medium">{{ __('Weight') }}
                                                         <span class="text-danger">*</span></label>
@@ -146,7 +179,7 @@
                                                         autocomplete="off" />
 
                                                 </div>
-                                                <div class="col-md-3 Height">
+                                                <div class="col-md-2 Height">
                                                     <label for="parcel_types_id"
                                                         class="form-label me-4 fw-medium">{{ __('Height') }}
                                                         <span class="text-danger">*</span>
@@ -154,7 +187,7 @@
                                                     <input name="height" type="number"
                                                         class="form-control invoice-item-price mb-3" placeholder="0" />
                                                 </div>
-                                                <div class="col-md-3 Width">
+                                                <div class="col-md-2 Width">
                                                     <label for="parcel_types_id"
                                                         class="form-label me-4 fw-medium">{{ __('Width') }}
                                                         <span class="text-danger">*</span>
@@ -162,13 +195,24 @@
                                                     <input name="width" type="number"
                                                         class="form-control invoice-item-price mb-3" placeholder="0" />
                                                 </div>
-                                                <div class="col-md-3 Length">
+                                                <div class="col-md-2 Length">
                                                     <label for="parcel_types_id"
                                                         class="form-label me-4 fw-medium">{{ __('Length') }}
                                                         <span class="text-danger">*</span>
                                                     </label>
                                                     <input name="length" type="number"
                                                         class="form-control invoice-item-price mb-3" placeholder="0" />
+                                                </div>
+
+
+                                                <div class="col-md-2 mb-3">
+                                                    <label for="good_types_id"
+                                                        class="form-label me-4 fw-medium">{{ __('Qty') }}
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input name="quantity" type="number"
+                                                        class="form-control invoice-item-qty" placeholder="1"
+                                                        min="1" max="50" value="1" />
                                                 </div>
                                             </div>
 
@@ -193,7 +237,7 @@
                                                     </label>
                                                     <select id="inventory_id" class="select2 form-select"
                                                         data-allow-clear="true" name="inventory_id">
-                                                        <option disabled>{{ __('Select') }}</option>
+                                                        <option disabled selected>{{ __('Select') }}</option>
                                                         @foreach ($inventories as $inventory)
                                                             <option value="{{ $inventory->id }}">
                                                                 {{ $inventory->name }}
@@ -237,33 +281,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6 col-12 mb-md-0 mb-3">
-                                            <div class="mb-3">
-                                                <label for="good_types_id"
-                                                    class="form-label me-4 fw-medium">{{ __('Good Type') }}
-                                                    <span class="text-danger">*</span>
-                                                </label>
-                                                <select id="good_types_id" class="select2 form-select"
-                                                    data-allow-clear="true" name="good_types_id">
-                                                    <option disabled selected>{{ __('Select') }}</option>
-                                                    @foreach ($goodTypes as $goodType)
-                                                        <option value="{{ $goodType->id }}">{{ $goodType->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
 
-                                            <div class="col-md-3 mb-3">
-                                                <label for="good_types_id"
-                                                    class="form-label me-4 fw-medium">{{ __('Qty') }}
-                                                    <span class="text-danger">*</span>
-                                                </label>
-                                                <input name="quantity" type="number"
-                                                    class="form-control invoice-item-qty" placeholder="1" min="1"
-                                                    max="50" value="1" />
-                                            </div>
-
-                                        </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label for="parcel_types_id"
@@ -325,12 +343,22 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="fw-medium">{{ __('Packages cost') }}</td>
-                                                <td id="packageValue" class="fw-medium">00.00 {{ __('LYD') }}</td>
+                                                <td class="fw-bold">{{ __('Packages cost') }}</td>
+                                                <td class="fw-bold">
+                                                    <div class="d-flex justify-content-between">
+                                                        <span id="packageCurrency" class="me-1"></span>
+                                                        <span id="packageValue">00.00</span>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <td class="fw-medium">{{ __('Freight cost') }}</td>
-                                                <td id="freightValue" class="fw-medium">00.00 {{ __('LYD') }}</td>
+                                                <td class="fw-bold">{{ __('Freight cost') }}</td>
+                                                <td class="fw-bold">
+                                                    <div class="d-flex justify-content-between">
+                                                        <span id="freightCurrency" class="me-1"></span>
+                                                        <span id="freightValue">00.00</span>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" class="text-center">
@@ -339,7 +367,12 @@
                                             </tr>
                                             <tr>
                                                 <td class="fw-bold">{{ __('Total') }}</td>
-                                                <td id="totalValue" class="fw-bold">00.00 {{ __('LYD') }}</td>
+                                                <td class="fw-bold">
+                                                    <div class="d-flex justify-content-between">
+                                                        <span id="totalCurrency" class="me-1"></span>
+                                                        <span id="totalValue">00.00</span>
+                                                    </div>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>

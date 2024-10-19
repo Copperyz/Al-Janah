@@ -29,4 +29,9 @@ class Shipment extends Model
   {
     return $this->hasMany(ShipmentHistory::class);
   }
+
+  public function currency()
+  {
+    return $this->belongsTo(Currency::class, 'currency_id');
+  }
 }

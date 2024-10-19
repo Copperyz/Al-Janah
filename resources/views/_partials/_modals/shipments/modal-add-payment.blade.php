@@ -21,12 +21,13 @@
                         onsubmit="return false">
                         <div class="mb-3">
                             <label class="form-label" for="invoiceAmount">{{ __('Total Amount') }}</label>
-                            <div class="input-group">
-                                <span class="input-group-text">{{ __('LYD') }}</span>
+                            <div class="input-group" dir="ltr">
+                                <span class="input-group-text">{{ $shipment->currency->name }}</span>
                                 <input type="text" id="invoiceAmount" name="invoiceAmount"
-                                    class="form-control invoice-amount"
+                                    class="form-control invoice-amount {{ session()->get('locale') == 'ar' ? 'text-start' : 'text-end' }}"
                                     placeholder="{{ $shipment->amount + $shipment->shipmentPrice }}"
-                                    value="{{ $shipment->amount + $shipment->shipmentPrice }}" disabled />
+                                    value="{{ number_format($shipment->amount + $shipment->shipmentPrice, 2) }}"
+                                    disabled />
                             </div>
                         </div>
                         <div class="mb-3">

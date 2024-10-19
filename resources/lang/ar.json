@@ -543,5 +543,15 @@
   "Managing parcel types allows you to define and categorize different types of parcels, ensuring proper handling and tracking within the system.": "إدارة أنواع الطرود تتيح لك تعريف وتصنيف أنواع مختلفة من الطرود، مما يضمن التعامل معها وتتبعها بشكل صحيح داخل النظام.",
   "Trip routes can be managed and assigned specific settings or destinations, ensuring that administrators have control over the paths and destinations available for each route.": "يمكن إدارة مسارات الرحلات وتعيين إعدادات أو وجهات محددة، مما يضمن أن يكون لدى المسؤولين السيطرة على المسارات والوجهات المتاحة لكل مسار.",
   "Prices can be managed and assigned specific settings or rates, ensuring that administrators have control over the pricing and cost structures available for each item or service.": "يمكن إدارة الأسعار وتعيين إعدادات أو معدلات محددة، مما يضمن أن يكون لدى المسؤولين السيطرة على التسعير وهياكل التكلفة المتاحة لكل عنصر أو خدمة.",
-  "Payments can be managed and assigned specific settings or methods, ensuring that administrators have control over the payment options and processing rules available for each transaction.": "يمكن إدارة المدفوعات وتعيين إعدادات أو طرق محددة، مما يضمن أن يكون لدى المسؤولين السيطرة على خيارات الدفع وقواعد المعالجة المتاحة لكل عملية."
+  "Currencies can be managed and assigned specific settings or rates, ensuring that administrators have control over the pricing and cost structures available for each item or service.": "يمكن إدارة العملات وتعيين إعدادات أو معدلات محددة، مما يضمن أن يكون لدى المسؤولين السيطرة على التسعير وهياكل التكلفة المتاحة لكل عنصر أو خدمة.",
+  "Payments can be managed and assigned specific settings or methods, ensuring that administrators have control over the payment options and processing rules available for each transaction.": "يمكن إدارة المدفوعات وتعيين إعدادات أو طرق محددة، مما يضمن أن يكون لدى المسؤولين السيطرة على خيارات الدفع وقواعد المعالجة المتاحة لكل عملية.",
+  "Currencies": "العملات",
+  "Currency": "العملة",
+  "Symbol": "رمز",
+  "Value in USD": "القيمة بالدولار",
+  "Add Currency": "اضافة عملة",
+  "Edit Currency": "تعديل عملة",
+  "Currency added successfully": "تم إضافة العملة بنجاح",
+  "Currency updated successfully": "تم تعديل بيانات العملة بنجاح",
+  "Currency deleted successfully": "تم إلغاء العملة بنجاح"
 }

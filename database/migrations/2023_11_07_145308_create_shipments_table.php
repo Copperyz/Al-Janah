@@ -17,6 +17,7 @@ return new class extends Migration {
       $table->string('delivery_code', 50);
       $table->string('current_status', 50)->nullable();
       $table->decimal('amount', 10, 2);
+      $table->unsignedBigInteger('currency_id')->nullable();
       $table->decimal('shipmentPrice', 10, 2);
       $table->date('date');
       $table->tinyInteger('detour')->default(0);
@@ -30,6 +31,10 @@ return new class extends Migration {
         ->foreign('customer_id')
         ->references('id')
         ->on('customers');
+        $table
+        ->foreign('currency_id')
+        ->references('id')
+        ->on('currencies');  
       $table
         ->foreign('created_by')
         ->references('id')

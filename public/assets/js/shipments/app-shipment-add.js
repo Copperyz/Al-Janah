@@ -139,6 +139,21 @@ $(function () {
   var totalPrice = 0;
 
 
+  
+  $(document).on('change', '#currency_id', function () {
+    // Get the selected option text
+    var selectedText = $(this).find('option:selected').text();
+
+    // Extract only the symbol part from the selected text
+    var symbol = selectedText.split('(')[1].replace(')', '').trim();
+
+    // Update the currency span with the symbol
+    $('#packageCurrency').text(symbol);
+    $('#freightCurrency').text(symbol);
+    $('#totalCurrency').text(symbol);
+});
+
+
   $(document).on('click', '.calculate-price-btn', function () {
     var $container = $(this).closest('.repeater-wrapper'); // Adjust the selector based on your actual HTML structure
 
@@ -182,9 +197,9 @@ $(function () {
             var value = parseFloat(response) > 0 ? parseFloat(response) : freightValue;
             totalPrice = totalPrice - freightValue;
             freightValue = freightValue - parseFloat($container.find('[name$="[price]"]').val() ? $container.find('[name$="[price]"]').val() : 0) + parseFloat(value);
-            $('#freightValue').text(parseFloat(freightValue).toFixed(2) + lydTranslation);
+            $('#freightValue').text(parseFloat(freightValue).toFixed(2));
             totalPrice = totalPrice + freightValue;
-            $('#totalValue').text(parseFloat(totalPrice).toFixed(2) + lydTranslation);
+            $('#totalValue').text(parseFloat(totalPrice).toFixed(2));
             $container.find('[name$="[price]"]').val(parseFloat(value).toFixed(2));
 
           },
@@ -217,9 +232,9 @@ $(function () {
             var value = parseFloat(response) > 0 ? parseFloat(response) : freightValue;
             totalPrice = totalPrice - freightValue;
             freightValue = freightValue - parseFloat($container.find('[name$="[price]"]').val() ? $container.find('[name$="[price]"]').val() : 0) + parseFloat(value);
-            $('#freightValue').text(parseFloat(freightValue).toFixed(2) + lydTranslation);
+            $('#freightValue').text(parseFloat(freightValue).toFixed(2));
             totalPrice = totalPrice + freightValue;
-            $('#totalValue').text(parseFloat(totalPrice).toFixed(2) + lydTranslation);
+            $('#totalValue').text(parseFloat(totalPrice).toFixed(2));
             $container.find('[name$="[price]"]').val(parseFloat(value).toFixed(2));
 
           },
@@ -256,8 +271,8 @@ $(function () {
     totalPrice = totalPrice - parseFloat($container.find('[name$="[price]"]').val() ? $container.find('[name$="[price]"]').val() : 0);;
 
     freightValue = freightValue - parseFloat($container.find('[name$="[price]"]').val() ? $container.find('[name$="[price]"]').val() : 0);
-    $('#freightValue').text(parseFloat(freightValue).toFixed(2) + lydTranslation);
-    $('#totalValue').text(parseFloat(totalPrice).toFixed(2) + lydTranslation);
+    $('#freightValue').text(parseFloat(freightValue).toFixed(2));
+    $('#totalValue').text(parseFloat(totalPrice).toFixed(2));
 
     $container.find('[name$="[price]"]').val(0);
     removeItem(this);
@@ -406,13 +421,13 @@ $(function () {
     var freightV = parseFloat(freightValue) || 0; // Ensure packageValue is a valid number
 
     // Update packageValue display
-    $('#packageValue').text(packageValue.toFixed(2) + lydTranslation);
+    $('#packageValue').text(packageValue.toFixed(2));
 
     // Update totalPrice
     totalPrice = packageValue + freightV; // Set totalPrice to the current packageValue
 
     // Update totalValue display
-    $('#totalValue').text(totalPrice.toFixed(2) + lydTranslation);
+    $('#totalValue').text(totalPrice.toFixed(2));
   });
 
   // Initially hide the dimensions fields

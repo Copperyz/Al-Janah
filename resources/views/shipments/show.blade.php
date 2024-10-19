@@ -101,23 +101,23 @@
                                 <tbody>
                                     <tr>
                                         <td class="pe-4">{{ __('Shipment Price') }}:</td>
-                                        <td class="fw-medium">
+                                        <td class="fw-medium" dir="ltr">
+                                            {{ __($shipment->currency->symbol ?? '$') }}
                                             {{ $shipment->shipmentPrice }}
-                                            {{ __('LYD') }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="pe-4">{{ __('Packages cost') }}:</td>
-                                        <td class="fw-medium">
+                                        <td class="fw-medium" dir="ltr">
+                                            {{ __($shipment->currency->symbol ?? '$') }}
                                             {{ number_format($shipment->amount, 2) }}
-                                            {{ __('LYD') }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="pe-4">{{ __('Total') }}:</td>
-                                        <td class="fw-medium">
+                                        <td class="fw-medium" dir="ltr">
+                                            {{ __($shipment->currency->symbol ?? '$') }}
                                             {{ number_format($shipment->amount + $shipment->shipmentPrice, 2) }}
-                                            {{ __('LYD') }}
                                         </td>
                                     </tr>
                                 </tbody>

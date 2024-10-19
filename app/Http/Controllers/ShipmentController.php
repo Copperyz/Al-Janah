@@ -251,7 +251,7 @@ class ShipmentController extends Controller
         $shipment->amount = $request->amount;
         $shipment->currency_id = $request->currency_id;
         $shipment->currency_id = $request->currency_id;
-        $shipment->notes = $request->notes;
+        // $shipment->notes = $request->notes;
         $shipment->save();
 
         return response()->json([

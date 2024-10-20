@@ -553,5 +553,6 @@
   "Edit Currency": "تعديل عملة",
   "Currency added successfully": "تم إضافة العملة بنجاح",
   "Currency updated successfully": "تم تعديل بيانات العملة بنجاح",
-  "Currency deleted successfully": "تم إلغاء العملة بنجاح"
+  "Currency deleted successfully": "تم إلغاء العملة بنجاح",
+  "Shipment Created": "تم إنشاء الشحنة"
 }

@@ -96,11 +96,11 @@ class ShipmentController extends Controller
             'shipmentItems' => ['required', 'array', 'min:1'],
             'shipmentItems.*.parcel_types_id' => ['required', 'exists:parcel_types,id'],
             'shipmentItems.*.good_types_id' => ['required', 'exists:good_types,id'],
-            'shipmentItems.*.price' => ['required', 'numeric', 'min:1'],
-            'shipmentItems.*.height' => ['required', 'numeric', 'min:1'],
-            'shipmentItems.*.width' => ['required', 'numeric', 'min:1'],
-            'shipmentItems.*.weight' => ['required', 'numeric', 'min:1'],
-            'shipmentItems.*.length' => ['required', 'numeric', 'min:1'],
+            'shipmentItems.*.price' => ['required', 'numeric', 'min:0'],
+            'shipmentItems.*.height' => ['required', 'numeric', 'min:0'],
+            'shipmentItems.*.width' => ['required', 'numeric', 'min:0'],
+            'shipmentItems.*.weight' => ['required', 'numeric', 'min:0'],
+            'shipmentItems.*.length' => ['required', 'numeric', 'min:0'],
             'shipmentItems.*.quantity' => ['required', 'numeric', 'min:1'],
             // 'notes' => ['nullable', 'string'],
         ]);
@@ -120,7 +120,8 @@ class ShipmentController extends Controller
         $shipment->currency_id = $request->currency_id;
         $shipment->shipmentPrice = $request->shipmentPrice;
         $shipment->customer_id = $request->customer_id;
-        // $shipment->notes = $request->notes;
+        $shipment->notes = $request->notes;
+        $shipment->created_by = auth()->id();
         $delivery_code = strtoupper(substr(Str::random(1), 0, 1) . rand(10, 99) . substr(Str::random(1), 0, 1));
         while (Shipment::where('delivery_code', $delivery_code)->exists()) {
             // Regenerate if the generated tracking number already exists
@@ -167,7 +168,7 @@ class ShipmentController extends Controller
                     $inventoryItems->save();
                 }
         }
-        
+
         $customer = Customer::where('id', $shipment->customer_id)->first();
         $user = User::where('id', $customer->user_id)->first();
         Mail::to($user->email)->send(new ShipmentCreated($user));
@@ -251,7 +252,8 @@ class ShipmentController extends Controller
         $shipment->amount = $request->amount;
         $shipment->currency_id = $request->currency_id;
         $shipment->currency_id = $request->currency_id;
-        // $shipment->notes = $request->notes;
+        $shipment->notes = $request->notes;
+        $shipment->updated_by = auth()->id();
         $shipment->save();
 
         return response()->json([
@@ -270,6 +272,8 @@ class ShipmentController extends Controller
         if ($shipmentItems) {
             $shipmentItems->delete();
             $shipment = Shipment::find($id);
+            $shipment->deleted_by = auth()->id();
+            $shipment->save();
             $shipment->delete();
 
             return response()->json(['message' => __('Shipment deleted successfully')]);

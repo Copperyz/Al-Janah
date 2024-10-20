@@ -1,4 +1,4 @@
-@if(count($shipmentHistory) > 0)
+@if(isset($shipment))
 <div class="container animate__fadeInDown">
     <div class="row justify-content-center">
         <div class="card col-md-12">
@@ -9,12 +9,19 @@
                     <div class="card-header border-0 pt-4 pb-2 d-flex justify-content-between">
                         <h5 class="mb-0 card-title">{{__('Tracking Shipment')}}
                             <span class="small text-success">
-                                ({{ Str::of(request()->url())->afterLast('/') }})
+                              ( {{ $shipment->tracking_no }} )
                             </span>
                         </h5>
-
-
                     </div>
+                        <div class="ms-4 ps-0 pb-0">
+                            - <small class="text-success text-uppercase fw-medium">
+                                {{ __('Shipment Created') }}
+                            </small>
+                            <p class="ms-1 text-muted mb-0">
+                               {{ $shipment->created_at }}
+                            </p>
+                        </div>
+                        @if(count($shipmentHistory) > 0)
                     <!-- Sidebar when screen < md -->
                     <div class="card-body p-0 logistics-fleet-sidebar-body">
                         <!-- Menu Accordion -->
@@ -31,7 +38,6 @@
                             @endphp
 
                             <!-- Display a block for each country -->
-                            <div class="accordion-item border-0 mb-4" id="fl-{{$countryHistory[0]['route_leg']+1}}">
                                 <div class="accordion-header" id="fleet{{$countryHistory[0]['route_leg']+1}}">
                                     <div role="button" class="accordion-button collapsed shadow-none align-items-center"
                                         data-bs-toggle="collapse"
@@ -92,6 +98,7 @@
 
                         </div>
                     </div>
+                    @endif
                 </div>
 
 

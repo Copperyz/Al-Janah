@@ -101,7 +101,7 @@ class FrontPagesController extends Controller
       return $th;
     }
 
-    return view('trips.tracking', compact('shipmentHistory', 'tripRoutes'));
+    return view('trips.tracking', compact('shipmentHistory', 'tripRoutes', 'shipment'));
   }
   public function showPriceSections(Request $request)
   {

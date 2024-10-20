@@ -176,7 +176,7 @@
                                                     <input name="weight" type="text"
                                                         class="form-control invoice-item-price mb-3" placeholder="0"
                                                         inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+"
-                                                        autocomplete="off" />
+                                                        autocomplete="off" value="0"/>
 
                                                 </div>
                                                 <div class="col-md-2 Height">
@@ -184,24 +184,24 @@
                                                         class="form-label me-4 fw-medium">{{ __('Height') }}
                                                         <span class="text-danger">*</span>
                                                     </label>
-                                                    <input name="height" type="number"
-                                                        class="form-control invoice-item-price mb-3" placeholder="0" />
+                                                    <input name="height" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+"
+                                                        class="form-control invoice-item-price mb-3" placeholder="0" value="0"/>
                                                 </div>
                                                 <div class="col-md-2 Width">
                                                     <label for="parcel_types_id"
                                                         class="form-label me-4 fw-medium">{{ __('Width') }}
                                                         <span class="text-danger">*</span>
                                                     </label>
-                                                    <input name="width" type="number"
-                                                        class="form-control invoice-item-price mb-3" placeholder="0" />
+                                                    <input name="width" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+"
+                                                        class="form-control invoice-item-price mb-3" placeholder="0" value="0"/>
                                                 </div>
                                                 <div class="col-md-2 Length">
                                                     <label for="parcel_types_id"
                                                         class="form-label me-4 fw-medium">{{ __('Length') }}
                                                         <span class="text-danger">*</span>
                                                     </label>
-                                                    <input name="length" type="number"
-                                                        class="form-control invoice-item-price mb-3" placeholder="0" />
+                                                    <input name="length" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]+"
+                                                        class="form-control invoice-item-price mb-3" placeholder="0" value="0"/>
                                                 </div>
 
 

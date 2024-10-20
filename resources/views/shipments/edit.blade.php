@@ -113,7 +113,7 @@
                                 <div class="mb-3">
                                     <label for="note" class="form-label fw-medium">{{ __('Notes') }}</label>
                                     <textarea class="form-control" rows="2" id="notes" placeholder="" value="{{ $shipment->notes }}"
-                                        name="notes"></textarea>
+                                        name="notes">{{ $shipment->notes }}</textarea>
                                 </div>
                             </div>
                         </div>

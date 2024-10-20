@@ -69,7 +69,6 @@
             button.setAttribute('disabled', 'disabled');
 
             var trackingNumber = $('#trackingNumber').val();
-
             $.ajax({
                 type: 'POST',
                 url: 'track-shipment-data',

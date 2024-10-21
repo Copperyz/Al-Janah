@@ -557,5 +557,6 @@
   "Currency deleted successfully": "تم إلغاء العملة بنجاح",
   "Shipment Created": "تم إنشاء الشحنة",
   "Track my Shipment": "تتبع شحنتي",
-  "Enter Tracking Number": "ادخل رقم التتبع"
+  "Enter Tracking Number": "ادخل رقم التتبع",
+  "No updates have been made for this stage yet": "لم يتم إجراء أي تحديثات لهذه المرحلة حتى الآن"
 }

@@ -217,23 +217,25 @@ class TripController extends Controller
   public function get_trip_shipments($id)
   {
     $shipments = Shipment::select(
-      'shipments.*',
-      DB::raw('(CASE WHEN trip_shipments.trip_id = ' . intval($id) . ' THEN 1 ELSE 0 END) AS selected')
+        'shipments.*',
+        DB::raw('(CASE WHEN trip_shipments.trip_id = ' . intval($id) . ' THEN 1 ELSE 0 END) AS selected')
     )
-      ->leftJoin('trip_shipments', 'shipments.id', '=', 'trip_shipments.shipment_id')
-      ->where(function ($query) use ($id) {
-        $query->whereNull('trip_shipments.shipment_id')->orWhere('trip_shipments.trip_id', $id);
-      })
-      ->get();
-    return Datatables::of($shipments)
-      ->addColumn('customerName', function ($shipment) {
-        return $shipment->customer ? $shipment->customer->first_name . ' ' . $shipment->customer->last_name : 'N/A';
-      })
-      ->addColumn('status', function ($trips) {
-        return __($trips->current_status);
-      })
-      ->make(true);
-  }
+    ->leftJoin('trip_shipments', 'shipments.id', '=', 'trip_shipments.shipment_id')
+    ->where(function ($query) use ($id) {
+        $query->whereNull('trip_shipments.shipment_id')
+              ->orWhere('trip_shipments.trip_id', $id);
+    });
+
+    return Datatables::eloquent($shipments)
+        ->addColumn('customerName', function ($shipment) {
+            return $shipment->customer ? $shipment->customer->first_name . ' ' . $shipment->customer->last_name : 'N/A';
+        })
+        ->addColumn('status', function ($shipment) {
+            return __($shipment->current_status);
+        })
+        ->rawColumns(['status']) // if you want to allow raw HTML for 'status'
+        ->make(true);
+}
 
   public function tracking($id)
   {

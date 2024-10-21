@@ -298,157 +298,156 @@ $(function () {
   // Variable declaration for table
   var dt_shipment_table = $('.shipment-list-table');
 
-  // shipment datatable
+  // Check if the table exists in the DOM
   if (dt_shipment_table.length) {
 
-    var dt_shipment = dt_shipment_table.DataTable({
-      select: {
-        style: 'multi',
-        selector: 'td:first-child input[type="checkbox"]'
-      },
-      columns: [
-        // columns according to JSON
-        { data: 'id' },
-        { data: 'customerName' },
-        { data: 'tracking_no' },
-        { data: 'date' },
-        { data: 'amount' }
-      ],
-      rowCallback: function (row, data) {
-        if (data.selected == 1) {
-          $('input.dt-checkboxes', row).prop('checked', true);
-          $(row).addClass('selected');
-        } else {
-          $('input.dt-checkboxes', row).prop('checked', false);
-          $(row).removeClass('selected');
-        }
-      },
-      columnDefs: [
-        {
-          targets: 0,
-          searchable: false,
-          orderable: false,
-          render: function () {
-            return '<input type="checkbox" class="dt-checkboxes form-check-input">';
-          }
-        }
-      ],
-      order: [[1, 'desc']],
-      dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>><"table-responsive"t><"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-      select: {
-        // Select style
-        style: 'multi'
-      },
-      language: {
-        search: searchTranslation,
-        lengthMenu: `${showTranslation} _MENU_`,
-        info: ` ${showingTranslation} _START_ ${toTranslation} _END_ ${ofTranslation} _TOTAL_ ${entriesTranslation}`,
-        paginate: {
-          next: nextTranslation, // Change "Next" text
-          previous: previousTranslation // Change "Previous" text
-        },
-        emptyTable: noEntriesAvailableTranslation,
-        select: {
-          rows: {
-            _: `${rowSelectedTranslation} %d ${rows}`,
-            1: onlyRow
-          }
-        }
-      },
-      // Buttons with Dropdown
-      buttons: [
-        {
-          text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addTripTranslation}</span>`,
-          className: 'add-new btn btn-primary mt-2 mb-2 addTrip',
-          attr: {
-            'data-bs-toggle': 'modal',
-            'data-bs-target': '#addTripModal'
+      // Initialize DataTable
+      var dt_shipment = dt_shipment_table.DataTable({
+          processing: false,
+          serverSide: true,
+          ajax: {
+              url: '/get-shipments', // Adjust the URL based on your route
+              type: 'GET'
           },
-          init: function (api, node, config) {
-            $(node).removeClass('btn-secondary');
-          }
-        }
-      ]
-    });
+          columns: [
+              { data: 'id' },
+              { data: 'customerName' },
+              { data: 'tracking_no' },
+              { data: 'date' },
+              { data: 'amount' }
+          ],
+          rowCallback: function (row, data) {
+              if (data.selected == 1) {
+                  $('input.dt-checkboxes', row).prop('checked', true);
+                  $(row).addClass('selected');
+              } else {
+                  $('input.dt-checkboxes', row).prop('checked', false);
+                  $(row).removeClass('selected');
+              }
+          },
+          columnDefs: [
+              {
+                  targets: 0,
+                  searchable: false,
+                  orderable: false,
+                  render: function () {
+                      return '<input type="checkbox" class="dt-checkboxes form-check-input">';
+                  }
+              }
+          ],
+          order: [[1, 'desc']],
+          dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>><"table-responsive"t><"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+          select: {
+              style: 'multi'
+          },
+          language: {
+              search: 'Search:',
+              lengthMenu: 'Show _MENU_ entries',
+              info: 'Showing _START_ to _END_ of _TOTAL_ entries',
+              paginate: {
+                  next: 'Next', // Customize text for Next
+                  previous: 'Previous' // Customize text for Previous
+              },
+              emptyTable: 'No data available in table',
+              loadingRecords: '<div class="spinner-border" role="status"><span class="sr-only">Loading data, please wait...</span></div>',
+              select: {
+                  rows: {
+                      _: '%d rows selected',
+                      1: '1 row selected'
+                  }
+              }
+          },
+          buttons: [
+              {
+                  text: '<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">Add Trip</span>',
+                  className: 'btn btn-primary mt-2 mb-2 addTrip',
+                  attr: {
+                      'data-bs-toggle': 'modal',
+                      'data-bs-target': '#addTripModal'
+                  },
+                  init: function (api, node, config) {
+                      $(node).removeClass('btn-secondary');
+                  }
+              }
+          ]
+      });
+
+      // Initialize tooltip on draw event
+      dt_shipment_table.on('draw.dt', function () {
+          var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+          tooltipTriggerList.map(function (tooltipTriggerEl) {
+              return new bootstrap.Tooltip(tooltipTriggerEl, {
+                  boundary: document.body
+              });
+          });
+      });
   }
 
-  var selectedRows = [];
+    var selectedRows = []; // Declare selectedRows outside the event handler
+    var deSelectedRows = []; // Declare deSelectedRows outside the event handler
+    var selectedChangeType;
+    // Event listener for the checkbox change
+    dt_shipment.on('select', function (e, dt, type, indexes) {
+      var selectedData = dt_shipment.rows(indexes).data().toArray();
+      // Filter out rows that are already in selectedRows
+      selectedData = selectedData.filter(row => !selectedRows.some(selectedRow => selectedRow.id === row.id));
+      selectedRows.push(...selectedData);
+    });
 
-  // On each datatable draw, initialize tooltip
-  dt_shipment_table.on('draw.dt', function () {
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-      return new bootstrap.Tooltip(tooltipTriggerEl, {
-        boundary: document.body
+    dt_shipment.on('deselect', function (e, dt, type, indexes) {
+      var deselectedData = dt_shipment.rows(indexes).data().toArray();
+      // Display SweetAlert with a dropdown for choices
+      const choices = [Detour, Complete];
+
+      // Create a custom HTML content with radio buttons for choices
+      const htmlContent = `
+          <div style="display: flex; justify-content: space-around; margin: 1em 0;">
+              ${choices
+          .map(
+            choice => `
+                  <div class="form-check">
+                      <input type="radio" class="form-check-input" name="radioOption" value="${choice}" id="radio_${choice}" ${choice == 'Detour' ? 'checked' : ''
+              }>
+                      <label class="form-check-label" for="radio_${choice}">${choice}</label>
+                  </div>
+              `
+          )
+          .join('')}
+          </div>
+      `;
+
+      // Display SweetAlert with custom HTML content
+      Swal.fire({
+        title: shipmentReasonTranslate,
+        text: shipmentReasonTranslate,
+        icon: 'warning',
+        html: htmlContent,
+        showCancelButton: true,
+        confirmButtonText: submitTranslation,
+        cancelButtonText: cancelTranslation,
+        customClass: {
+          confirmButton: 'btn btn-primary me-3',
+          cancelButton: 'btn btn-label-secondary'
+        },
+        buttonsStyling: false,
+        preConfirm: () => {
+          // Return the selected value
+          const selectedRadio = document.querySelector('input[name="radioOption"]:checked');
+          return selectedRadio ? selectedRadio.value : '';
+        }
+      }).then(result => {
+        if (result.isConfirmed) {
+          selectedRows = selectedRows.filter(selectedRow => !deselectedData.some(row => row.id === selectedRow.id));
+          deselectedData = deselectedData.filter(
+            row => !deSelectedRows.some(deSelectedRow => deSelectedRow.id === row.id)
+          );
+          selectedChangeType = result.value;
+          // Remove rows that are being deselected from selectedRows
+          deSelectedRows.push(...deselectedData);
+          // Continue with any additional logic or actions
+        }
       });
     });
-  });
-
-  var selectedRows = []; // Declare selectedRows outside the event handler
-  var deSelectedRows = []; // Declare deSelectedRows outside the event handler
-  var selectedChangeType;
-  // Event listener for the checkbox change
-  dt_shipment.on('select', function (e, dt, type, indexes) {
-    var selectedData = dt_shipment.rows(indexes).data().toArray();
-    // Filter out rows that are already in selectedRows
-    selectedData = selectedData.filter(row => !selectedRows.some(selectedRow => selectedRow.id === row.id));
-    selectedRows.push(...selectedData);
-  });
-
-  dt_shipment.on('deselect', function (e, dt, type, indexes) {
-    var deselectedData = dt_shipment.rows(indexes).data().toArray();
-    // Display SweetAlert with a dropdown for choices
-    const choices = [Detour, Complete];
-
-    // Create a custom HTML content with radio buttons for choices
-    const htmlContent = `
-        <div style="display: flex; justify-content: space-around; margin: 1em 0;">
-            ${choices
-        .map(
-          choice => `
-                <div class="form-check">
-                    <input type="radio" class="form-check-input" name="radioOption" value="${choice}" id="radio_${choice}" ${choice == 'Detour' ? 'checked' : ''
-            }>
-                    <label class="form-check-label" for="radio_${choice}">${choice}</label>
-                </div>
-            `
-        )
-        .join('')}
-        </div>
-    `;
-
-    // Display SweetAlert with custom HTML content
-    Swal.fire({
-      title: shipmentReasonTranslate,
-      text: shipmentReasonTranslate,
-      icon: 'warning',
-      html: htmlContent,
-      showCancelButton: true,
-      confirmButtonText: submitTranslation,
-      cancelButtonText: cancelTranslation,
-      customClass: {
-        confirmButton: 'btn btn-primary me-3',
-        cancelButton: 'btn btn-label-secondary'
-      },
-      buttonsStyling: false,
-      preConfirm: () => {
-        // Return the selected value
-        const selectedRadio = document.querySelector('input[name="radioOption"]:checked');
-        return selectedRadio ? selectedRadio.value : '';
-      }
-    }).then(result => {
-      if (result.isConfirmed) {
-        selectedRows = selectedRows.filter(selectedRow => !deselectedData.some(row => row.id === selectedRow.id));
-        deselectedData = deselectedData.filter(
-          row => !deSelectedRows.some(deSelectedRow => deSelectedRow.id === row.id)
-        );
-        selectedChangeType = result.value;
-        // Remove rows that are being deselected from selectedRows
-        deSelectedRows.push(...deselectedData);
-        // Continue with any additional logic or actions
-      }
-    });
-  });
 
   $(document).on('click', 'button.showTripShipment', function () {
     var data = dt_trips.row($(this).closest('tr')).data();

@@ -1,31 +1,31 @@
 @if(isset($shipment))
 <div class="container animate__fadeInDown">
     <div class="row justify-content-center">
-        <div class="card col-md-12">
+        <div class="card col-md-6">
             <!-- Map Menu Wrapper -->
-            <div class="d-flex">
+            <div class="text-start" >
                 <!-- Map Menu -->
-                <div class="app-logistics-fleet-sidebar col h-100" id="app-logistics-fleet-sidebar">
-                    <div class="card-header border-0 pt-4 pb-2 d-flex justify-content-between">
+                <div class="app-logistics-fleet-sidebar" id="app-logistics-fleet-sidebar">
+                    <div class="card-header border-0" >
                         <h5 class="mb-0 card-title">{{__('Tracking Shipment')}}
-                            <span class="small text-success">
-                              ( {{ $shipment->tracking_no }} )
-                            </span>
+                            (<span class="small text-success">
+                               {{ $shipment->tracking_no }} 
+                            </span>)
                         </h5>
                     </div>
-                        <div class="ms-4 ps-0 pb-0">
+                        <div class="ms-4">
                             - <small class="text-success text-uppercase fw-medium">
                                 {{ __('Shipment Created') }}
                             </small>
-                            <p class="ms-1 text-muted mb-0">
+                            <p class="text-muted mb-0 ms-1">
                                {{ $shipment->created_at }}
                             </p>
                         </div>
                         @if(count($shipmentHistory) > 0)
                     <!-- Sidebar when screen < md -->
-                    <div class="card-body p-0 logistics-fleet-sidebar-body">
+                    <div class="card-body logistics-fleet-sidebar-body">
                         <!-- Menu Accordion -->
-                        <div class="accordion p-2" id="fleet" data-bs-toggle="sidebar"
+                        <div class="accordion" id="fleet" data-bs-toggle="sidebar"
                             data-target="#app-logistics-fleet-sidebar">
                             @php
                             $groupedHistory = collect($shipmentHistory)->groupBy('country');
@@ -39,12 +39,12 @@
 
                             <!-- Display a block for each country -->
                                 <div class="accordion-header" id="fleet{{$countryHistory[0]['route_leg']+1}}">
-                                    <div role="button" class="accordion-button collapsed shadow-none align-items-center"
+                                    <div role="button" class="accordion-button collapsed shadow-none me-5"
                                         data-bs-toggle="collapse"
                                         data-bs-target="#fleetCollapse{{$countryHistory[0]['route_leg']+1}}_{{$countryHistory[0]['tripRouteId']}}"
                                         aria-expanded="true"
                                         aria-controls="fleetCollapse{{$countryHistory[0]['route_leg']+1}}_{{$countryHistory[0]['tripRouteId']}}">
-                                        <div class="d-flex align-items-center">
+                                        <div class="d-flex">
                                             <div class="avatar-wrapper">
                                                 <div class="avatar me-2">
                                                     @if($countryType === 'Origin')

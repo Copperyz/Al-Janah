@@ -33,18 +33,17 @@
             </h3>
             <div class="input-wrapper my-3 input-group input-group-lg input-group-merge">
                 <span class="input-group-text" id="basic-addon1"><i class="ti ti-search"></i></span>
-                <input type="text" id="trackingNumber" class="form-control" placeholder="{{ __('enter tracking code') }}"
-                    aria-label="Search" aria-describedby="basic-addon1" />
+                <input type="text" id="trackingNumber" class="form-control text-center" placeholder="{{ __('Enter Tracking Number') }}"
+                    aria-label="Search" aria-describedby="basic-addon1" autocomplete="off"/>
             </div>
-
-            <div class="row mt-3">
-                <div class="d-grid gap-2 col-lg-12 mx-auto">
+            <div class="d-grid gap-2  mt-4">
                     <button class="btn btn-primary btn-lg waves-effect waves-light px-5" onclick="searchShipment(event)">
                         <span id="btnSpinner" class="spinner-grow visually-hidden" role="status" aria-hidden="true"></span>
-                        {{ __("Where's my cargo") }}</button>
+                        {{ __("Track my Shipment") }}</button>
                 </div>
-            </div>
-            <div class="animate__fadeInDown" id="searchResults" style="margin-top: 2em;">
+            <div class="row mt-3 col-md-12">
+                
+                <div class="animate__fadeInDown text-center" id="searchResults" style="margin-top: 2em;">
                 <!-- Display search results here dynamically -->
                 <!-- <p class="text-center mb-0 px-3">or choose a category to quickly find the help you need</p> -->
                 <!-- <div class="alert alert-primary alert-dismissible" role="alert">
@@ -53,6 +52,8 @@
                 </div> -->
             </div>
 
+            </div>
+            
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

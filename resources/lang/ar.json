@@ -240,6 +240,7 @@
   "Trip Status Changed successfully": "تم تغير حالة الرحلة بنجاح",
   "Note": "ملاحظة",
   "Tracking Shipment": "تتبع الشحنة",
+  "Track Shipment": "تتبع الشحنة",
   "Tracking shipments involves monitoring the movement and status of packages or goods during their transit from the origin to the destination. The process begins with the initiation of a shipment, assigning a unique tracking number to each package. Relevant information, including origin, destination, package details, and estimated delivery time, is associated with this tracking number.": "يتضمن تتبع الشحنات مراقبة حركة الطرود أو البضائع وحالتها أثناء عبورها من المحطة الأصلية إلى الوجهة. تبدأ العملية ببدء الشحنة، مع تخصيص رقم تتبع فريد لكل طرد. ترتبط المعلومات ذات الصلة، بما في ذلك المنشأ والوجهة وتفاصيل الحزمة ووقت التسليم المقدر، برقم التتبع هذا.",
   "Prices": "الأسعار",
   "Add Price": "إضافة تسعيرة",
@@ -349,7 +350,7 @@
   "Get started with us and Choose a trip route and fill shipment details": "ابدأ معنا واختر مسار الرحلة واملأ تفاصيل الشحنة",
   "Track Your Shipment Status": "تتبع حالة الشحنة الخاصة بك",
   "Tracking Number": "رقم التتبع",
-  "Track Shipment": "تتبع الشحنات",
+  " my": "تتبع الشحنات",
   "No results were found.": "لم يتم العثور على نتائج.",
   "Shipping Prices": "اسعار الشحن",
   "Unbeatable Shipment Rates – Simple, Transparent, and Affordable": "أسعار شحن منافسة - بسيطة، واضحة، وجيدة التكلفة",
@@ -554,5 +555,7 @@
   "Currency added successfully": "تم إضافة العملة بنجاح",
   "Currency updated successfully": "تم تعديل بيانات العملة بنجاح",
   "Currency deleted successfully": "تم إلغاء العملة بنجاح",
-  "Shipment Created": "تم إنشاء الشحنة"
+  "Shipment Created": "تم إنشاء الشحنة",
+  "Track my Shipment": "تتبع شحنتي",
+  "Enter Tracking Number": "ادخل رقم التتبع"
 }

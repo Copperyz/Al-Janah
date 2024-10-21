@@ -70,7 +70,7 @@
                                             </div>
                                         </div>
                                         <div id="fleetCollapse{{ $legIndex }}" class="accordion-collapse collapse"
-                                            data-bs-parent="#fleet">
+                                            data-bs-parent="#fleet" style="379.047px">
                                             <div class="accordion-body pt-3 pb-0">
                                                 <ul class="timeline ps-3 mb-0">
                                                     @php

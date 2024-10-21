@@ -35,7 +35,8 @@
 
                                     @foreach ($tripRoute['legs'] as $legIndex => $leg)
                                         <!-- Display each leg -->
-                                        <div class="accordion-header" id="fleet{{ $legIndex }}">
+                                        <div class="accordion-header" id="fleet{{ $legIndex }}"
+                                            style="width: 266.266px">
                                             <div role="button" class="accordion-button collapsed shadow-none me-5"
                                                 data-bs-toggle="collapse"
                                                 data-bs-target="#fleetCollapse{{ $legIndex }}" aria-expanded="true"

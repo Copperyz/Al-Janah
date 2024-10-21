@@ -100,6 +100,7 @@ class FrontPagesController extends Controller
     } catch (\Throwable $th) {
       return $th;
     }
+
     return view('trips.tracking', compact('shipmentHistory', 'tripRoutes', 'shipment'));
   }
   public function showPriceSections(Request $request)

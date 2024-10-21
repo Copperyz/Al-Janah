@@ -33,40 +33,40 @@
             </h3>
             <div class="input-wrapper my-3 input-group input-group-lg input-group-merge">
                 <span class="input-group-text" id="basic-addon1"><i class="ti ti-search"></i></span>
-                <input type="text" id="trackingNumber" class="form-control text-center" placeholder="{{ __('Enter Tracking Number') }}"
-                    aria-label="Search" aria-describedby="basic-addon1" autocomplete="off"/>
+                <input type="text" id="trackingNumber" class="form-control text-center"
+                    placeholder="{{ __('Enter Tracking Number') }}" aria-label="Search" aria-describedby="basic-addon1"
+                    autocomplete="off" />
             </div>
-            <div class="d-grid gap-2  mt-4">
-                    <button class="btn btn-primary btn-lg waves-effect waves-light px-5" onclick="searchShipment(event)">
-                        <span id="btnSpinner" class="spinner-grow visually-hidden" role="status" aria-hidden="true"></span>
-                        {{ __("Track my Shipment") }}</button>
-                </div>
+            <div class="d-grid gap-2 mt-4">
+                <button class="btn btn-primary" onclick="searchShipment(event)">
+                    <span id="btnSpinner" class="spinner-grow visually-hidden" role="status" aria-hidden="true"></span>
+                    {{ __('Search') }}</button>
+            </div>
             <div class="row mt-3 col-md-12">
-                
+
                 <div class="animate__fadeInDown text-center" id="searchResults" style="margin-top: 2em;">
-                <!-- Display search results here dynamically -->
-                <!-- <p class="text-center mb-0 px-3">or choose a category to quickly find the help you need</p> -->
-                <!-- <div class="alert alert-primary alert-dismissible" role="alert">
-                    {{ __('Tracking shipments involves monitoring the movement and status of packages or goods during their transit from the origin to the destination') }}.<br>
-                    {{ __('The process begins with the initiation of a shipment, assigning a unique tracking number to each package') }}.<br>{{ __('Relevant information, including origin, destination, package details, and estimated delivery time, is associated with this tracking number.') }}
-                </div> -->
-            </div>
+                    <!-- Display search results here dynamically -->
+                    <!-- <p class="text-center mb-0 px-3">or choose a category to quickly find the help you need</p> -->
+                    <!-- <div class="alert alert-primary alert-dismissible" role="alert">
+                                                                                    {{ __('Tracking shipments involves monitoring the movement and status of packages or goods during their transit from the origin to the destination') }}.<br>
+                                                                                    {{ __('The process begins with the initiation of a shipment, assigning a unique tracking number to each package') }}.<br>{{ __('Relevant information, including origin, destination, package details, and estimated delivery time, is associated with this tracking number.') }}
+                                                                                </div> -->
+                </div>
 
             </div>
-            
+
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         function searchShipment(evnet) {
+            $('#searchResults').empty();
 
             showSpinner('#searchResults');
 
-            var button = event.target;
-            var spinner = document.getElementById('btnSpinner');
 
-            // Show the spinner
-            spinner.classList.remove('visually-hidden');
+            var button = event.target;
+
             button.setAttribute('disabled', 'disabled');
 
             var trackingNumber = $('#trackingNumber').val();
@@ -82,12 +82,10 @@
                 success: function(data) {
                     $('#searchResults').html(data);
                     hideSpinner();
-                    spinner.classList.add('visually-hidden');
                     button.removeAttribute('disabled');
                 },
                 error: function(error) {
                     hideSpinner();
-                    spinner.classList.add('visually-hidden');
                     button.removeAttribute('disabled');
                 }
             });

@@ -282,28 +282,60 @@ class ShipmentController extends Controller
         return response()->json(['message' => __('Item not found')], 404);
     }
 
+    // public function get_shipments()
+    // {
+    //     $user = Auth::user();
+    //     $roles = $user->getRoleNames();
+
+    //     foreach ($roles as $role) {
+    //         if ($role == 'Customer') {
+    //             $shipments = Shipment::where('customer_id', $user->customer->id)->orderBy('id', 'DESC')->get();
+    //         }
+    //         else {
+    //             $shipments = Shipment::orderBy('id', 'DESC')->get();
+    //         }
+    //     }
+      
+    //     foreach ($shipments as $shipment) {
+    //         $shipment->customerName = $shipment->customer ? $shipment->customer->first_name.' '.$shipment->customer->last_name : 'N/A';
+    //         $shipment->totalAmount = number_format($shipment->amount + $shipment->shipmentPrice, 2).' '.($shipment->currency->symbol ?? '$');
+    //         $shipment->paymentStatus = $shipment->payment ? '<span class="badge bg-label-success">'.__($shipment->payment->status).'</span>' :  '<span class="badge bg-label-danger">'.__('Unpaid').'</span>';
+    //         $shipment->inventoryStatus =  InventoryItem::where('shipment_id', $shipment->id)->pluck('status')->first() ? '<span class="badge bg-label-info">'.__(InventoryItem::where('shipment_id', $shipment->id)->pluck('status')->first()).'</span>' :'<span class="badge bg-label-warning">'. __('Unallocated').'</span>';
+    //     }
+    //     return Datatables::of($shipments)
+    //     ->rawColumns(['paymentStatus', 'inventoryStatus', 'totalAmount', 'delivery_code'])
+    //     ->make(true);
+    // }
+
     public function get_shipments()
     {
         $user = Auth::user();
         $roles = $user->getRoleNames();
 
-        foreach ($roles as $role) {
-            if ($role == 'Customer') {
-                $shipments = Shipment::where('customer_id', $user->customer->id)->orderBy('id', 'DESC')->get();
-            }
-            else {
-                $shipments = Shipment::orderBy('id', 'DESC')->get();
-            }
+        // Check role and filter shipments accordingly
+        if ($roles->contains('Customer')) {
+            $shipmentsQuery = Shipment::with(['customer', 'currency', 'payment'])->where('customer_id', $user->customer->id)->orderBy('id', 'DESC');
+        } else {
+            $shipmentsQuery = Shipment::with(['customer', 'currency', 'payment'])->orderBy('id', 'DESC');
         }
-      
-        foreach ($shipments as $shipment) {
-            $shipment->customerName = $shipment->customer ? $shipment->customer->first_name.' '.$shipment->customer->last_name : 'N/A';
-            $shipment->totalAmount = number_format($shipment->amount + $shipment->shipmentPrice, 2).' '.($shipment->currency->symbol ?? '$');
-            $shipment->paymentStatus = $shipment->payment ? '<span class="badge bg-label-success">'.__($shipment->payment->status).'</span>' :  '<span class="badge bg-label-danger">'.__('Unpaid').'</span>';
-            $shipment->inventoryStatus =  InventoryItem::where('shipment_id', $shipment->id)->pluck('status')->first() ? '<span class="badge bg-label-info">'.__(InventoryItem::where('shipment_id', $shipment->id)->pluck('status')->first()).'</span>' :'<span class="badge bg-label-warning">'. __('Unallocated').'</span>';
-        }
-        return Datatables::of($shipments)
-        ->rawColumns(['paymentStatus', 'inventoryStatus', 'totalAmount', 'delivery_code'])
-        ->make(true);
+        
+
+        // Use DataTables for server-side processing
+        return Datatables::of($shipmentsQuery)
+            ->addColumn('customerName', function($shipment) {
+                return $shipment->customer ? $shipment->customer->first_name . ' ' . $shipment->customer->last_name : 'N/A';
+            })
+            ->addColumn('totalAmount', function($shipment) {
+                return number_format($shipment->amount + $shipment->shipmentPrice, 2) . ' ' . ($shipment->currency->symbol ?? '$');
+            })
+            ->addColumn('paymentStatus', function($shipment) {
+                return $shipment->payment ? '<span class="badge bg-label-success">' . __($shipment->payment->status) . '</span>' : '<span class="badge bg-label-danger">' . __('Unpaid') . '</span>';
+            })
+            ->addColumn('inventoryStatus', function($shipment) {
+                $inventoryStatus = InventoryItem::where('shipment_id', $shipment->id)->pluck('status')->first();
+                return $inventoryStatus ? '<span class="badge bg-label-info">' . __($inventoryStatus) . '</span>' : '<span class="badge bg-label-warning">' . __('Unallocated') . '</span>';
+            })
+            ->rawColumns(['paymentStatus', 'inventoryStatus', 'totalAmount'])
+            ->make(true);
     }
 }

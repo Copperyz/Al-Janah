@@ -60,7 +60,7 @@
     function showSpinner(targetElement) {
         if (targetElement) {
             $(targetElement).block({
-                message: '<div class="spinner-border" role="status"><span class="sr-only">Loading data, please wait...</span></div>'
+                message: '<div class="spinner-border" role="status"><span class="sr-only">Loading data, please wait...</span></div>',
                 css: {
                     backgroundColor: 'transparent',
                     border: '0'
@@ -71,7 +71,7 @@
             });
         } else {
             $.blockUI({
-                message: '<div class="spinner-border" role="status"><span class="sr-only">Loading data, please wait...</span></div>'
+                message: '<div class="spinner-border" role="status"><span class="sr-only">Loading data, please wait...</span></div>',
                 css: {
                     backgroundColor: 'transparent',
                     border: '0'

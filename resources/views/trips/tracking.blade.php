@@ -1,7 +1,8 @@
 @if (isset($shipment))
     <div class="container animate__fadeInDown">
         <div class="row justify-content-center">
-            <div class="card col-md-6">
+            <!-- Use Bootstrap grid to define fixed widths -->
+            <div class="card col-md-6 col-xs-8 col-lg-6" style="height: 500px; overflow: hidden;">
                 <!-- Map Menu Wrapper -->
                 <div class="text-start">
                     <!-- Map Menu -->
@@ -17,13 +18,14 @@
                             - <small class="text-success text-uppercase fw-medium">
                                 {{ __('Shipment Created') }}
                             </small>
-                            <p class="text-muted mb-0 ms-1">
+                            <p class="text-muted mb-0 ms-1" style="word-wrap: break-word;">
                                 {{ $shipment->created_at }}
                             </p>
                         </div>
 
                         <!-- Sidebar when screen < md -->
-                        <div class="card-body logistics-fleet-sidebar-body">
+                        <div class="card-body logistics-fleet-sidebar-body"
+                            style="height: calc(100% - 120px); overflow-y: auto;">
                             <!-- Menu Accordion -->
                             <div class="accordion" id="fleet" data-bs-toggle="sidebar"
                                 data-target="#app-logistics-fleet-sidebar">
@@ -35,11 +37,10 @@
 
                                     @foreach ($tripRoute['legs'] as $legIndex => $leg)
                                         <!-- Display each leg -->
-                                        <div class="accordion-header" id="fleet{{ $legIndex }}"
-                                            style="width: 266.266px">
+                                        <div class="accordion-header" id="fleet{{ $legIndex }}">
                                             <div role="button" class="accordion-button collapsed shadow-none me-5"
                                                 data-bs-toggle="collapse"
-                                                data-bs-target="#fleetCollapse{{ $legIndex }}" aria-expanded="true"
+                                                data-bs-target="#fleetCollapse{{ $legIndex }}"
                                                 aria-controls="fleetCollapse{{ $legIndex }}">
                                                 <div class="d-flex">
                                                     <div class="avatar-wrapper">
@@ -64,13 +65,15 @@
                                                     </div>
                                                     <span class="d-flex flex-column">
                                                         <span class="h6 mb-0">{{ __($leg['type']) }}</span>
-                                                        <span class="text-muted">{{ __($leg['country']) }}</span>
+                                                        <span class="text-muted" style="word-wrap: break-word;">
+                                                            {{ __($leg['country']) }}
+                                                        </span>
                                                     </span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div id="fleetCollapse{{ $legIndex }}" class="accordion-collapse collapse"
-                                            data-bs-parent="#fleet" style="379.047px">
+                                            data-bs-parent="#fleet">
                                             <div class="accordion-body pt-3 pb-0">
                                                 <ul class="timeline ps-3 mb-0">
                                                     @php
@@ -87,7 +90,7 @@
                                                                 <i class='ti ti-alert-circle'></i>
                                                             </span>
                                                             <div class="timeline-event ps-0 pb-0">
-                                                                <h6 class="mb-1">
+                                                                <h6 class="mb-1" style="word-wrap: break-word;">
                                                                     {{ __('No updates have been made for this stage yet') }}
                                                                 </h6>
                                                             </div>
@@ -106,7 +109,9 @@
                                                                             {{ __($history['status']) }}
                                                                         </small>
                                                                     </div>
-                                                                    <h6 class="mb-1">{{ $history['note'] }}</h6>
+                                                                    <h6 class="mb-1" style="word-wrap: break-word;">
+                                                                        {{ $history['note'] }}
+                                                                    </h6>
                                                                     <p class="text-muted mb-0">
                                                                         {{ date('M d, Y, H:i A', strtotime($history['created_at'])) }}
                                                                     </p>

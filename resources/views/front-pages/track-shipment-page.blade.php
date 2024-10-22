@@ -27,8 +27,8 @@
 @section('content')
     <div>
         <div class="faq-header d-flex flex-column landing-hero justify-content-center align-items-center rounded"
-            style="min-height: 100vh !important;">
-            <h3 class="text-center text-primary hero-title display-6 fw-bold">
+            style="min-height: 110vh !important;">
+            <h3 class="text-center text-primary hero-title display-6 fw-bold mt-4">
                 {{ __('Track your shipment') }}
             </h3>
             <div class="input-wrapper my-3 input-group input-group-lg input-group-merge">

@@ -2,7 +2,7 @@
     <div class="container animate__fadeInDown">
         <div class="row justify-content-center">
             <!-- Use Bootstrap grid to define fixed widths -->
-            <div class="card col-md-6 col-xs-8 col-lg-6" style="height: 500px; overflow: hidden;">
+            <div class="card col-md-6 col-xs-8 col-lg-6" style="height: 200%; overflow: hidden;">
                 <!-- Map Menu Wrapper -->
                 <div class="text-start">
                     <!-- Map Menu -->
@@ -19,29 +19,25 @@
                                 {{ __('Shipment Created') }}
                             </small>
                             <p class="text-muted mb-0 ms-1" style="word-wrap: break-word;">
-                                {{ $shipment->created_at }}
+                                {{ date('M d, Y, H:i A', strtotime($shipment->date)) }}
                             </p>
                         </div>
 
                         <!-- Sidebar when screen < md -->
                         <div class="card-body logistics-fleet-sidebar-body"
-                            style="height: calc(100% - 120px); overflow-y: auto;">
+                            style="height: 100hv; overflow-y: auto;">
                             <!-- Menu Accordion -->
                             <div class="accordion" id="fleet" data-bs-toggle="sidebar"
                                 data-target="#app-logistics-fleet-sidebar">
 
                                 @foreach ($tripRoutes as $tripRoute)
-                                    <h6 class="mt-3">{{ __('Trip Route') }}
+                                    <h6>{{ __('Trip Route') }}
                                         ({{ __($tripRoute['type']) }})
                                     </h6>
 
                                     @foreach ($tripRoute['legs'] as $legIndex => $leg)
                                         <!-- Display each leg -->
-                                        <div class="accordion-header" id="fleet{{ $legIndex }}">
-                                            <div role="button" class="accordion-button collapsed shadow-none me-5"
-                                                data-bs-toggle="collapse"
-                                                data-bs-target="#fleetCollapse{{ $legIndex }}"
-                                                aria-controls="fleetCollapse{{ $legIndex }}">
+                                        <div class="accordion-header mt-4" id="fleet{{ $legIndex }}">
                                                 <div class="d-flex">
                                                     <div class="avatar-wrapper">
                                                         <div class="avatar me-2">
@@ -70,9 +66,8 @@
                                                         </span>
                                                     </span>
                                                 </div>
-                                            </div>
                                         </div>
-                                        <div id="fleetCollapse{{ $legIndex }}" class="accordion-collapse collapse"
+                                        <div id="fleetCollapse{{ $legIndex }}" class="accordion-collapse collapsed"
                                             data-bs-parent="#fleet">
                                             <div class="accordion-body pt-3 pb-0">
                                                 <ul class="timeline ps-3 mb-0">

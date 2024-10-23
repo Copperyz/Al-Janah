@@ -11,6 +11,10 @@ $(function () {
     // shipment routes datatable
     if (dt_currencies_table.length) {
         var dt_currencies = dt_currencies_table.DataTable({
+            processing: true,  // Show processing indicator
+            serverSide: true,  // Enable server-side processing
+            scrollY: '450px', // Set a fixed height for the DataTable
+            scrollCollapse: false, // Allow table height to shrink if less data is available
             ajax: 'get-currencies',
             columns: [
                 // columns according to JSON
@@ -65,7 +69,8 @@ $(function () {
                     "next": nextTranslation,      // Change "Next" text
                     "previous": previousTranslation, // Change "Previous" text
                 },
-                "emptyTable": noEntriesAvailableTranslation
+                "emptyTable": noEntriesAvailableTranslation,
+                "loadingRecords": '',
             },
             // Buttons with Dropdown
             buttons: [

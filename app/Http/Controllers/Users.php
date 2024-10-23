@@ -149,15 +149,19 @@ class Users extends Controller
 
   public function get_users()
   {
-    $users = User::with('roles:id,name')->orderBy('id', 'DESC')->get();
-    return Datatables::of($users)
-      ->addColumn('userPermissions', function ($user) {
-          return $user->getDirectPermissions()->pluck('name')->toArray();
-      })
-      ->addColumn('userRoles', function ($user) {
-          return $user->getRoleNames()->toArray();
-      })
-      ->rawColumns(['Options'])
-      ->make(true);
+      // Build the query with eager loading for roles and optimized ordering
+      $query = User::with('roles:id,name')->select('id', 'name', 'email')->orderBy('id', 'DESC');
+  
+      // Use the DataTables library to handle server-side processing
+      return Datatables::eloquent($query)
+          ->addColumn('userPermissions', function ($user) {
+              return $user->getDirectPermissions()->pluck('name')->toArray();
+          })
+          ->addColumn('userRoles', function ($user) {
+              return $user->getRoleNames()->toArray();
+          })
+          ->rawColumns(['Options'])
+          ->make(true);
   }
+  
 }

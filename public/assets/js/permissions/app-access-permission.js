@@ -6,80 +6,76 @@
 
 $(function () {
   var dataTablePermissions = $('.datatables-permissions'),
-    dt_permission;
-  // Users List datatable
+  dt_permission;
+
+// Initialize Users List DataTable
   if (dataTablePermissions.length) {
     dt_permission = dataTablePermissions.DataTable({
-      ajax: 'get-permissions',
-      columns: [
-        // columns according to JSON
-        { data: '' },
-        { data: 'name' },
-        { data: 'carbonDate' },
-        { data: '' }
-      ],
-      columnDefs: [
-        {
-          // For Responsive
-          className: 'control',
-          orderable: false,
-          searchable: false,
-          responsivePriority: 2,
-          targets: 0,
-          render: function (data, type, full, meta) {
-            return '';
-          }
+        ajax: 'get-permissions',
+        processing: true,  // Show processing indicator
+        serverSide: true,  // Enable server-side processing
+        scrollY: '450px', // Set a fixed height for the DataTable
+        scrollCollapse: false, // Allow table height to shrink if less data is available
+        columns: [
+            { data: null, orderable: false, searchable: false }, // Control column
+            { data: 'name' },
+            { data: 'carbonDate' },
+            { data: null, orderable: false, searchable: false } // Actions column
+        ],
+        columnDefs: [
+            {
+                targets: 0, // Control column
+                render: function () {
+                    return ''; // Placeholder for control column
+                }
+            },
+            {
+                targets: -1, // Actions column
+                render: function () {
+                    return `
+                        <span class="text-nowrap">
+                            <button class="btn btn-sm btn-icon me-2 editPermission" 
+                                    data-bs-target="#editPermissionModal" 
+                                    data-bs-toggle="modal">
+                                <i class="ti ti-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-icon delete-record">
+                                <i class="ti ti-trash"></i>
+                            </button>
+                        </span>
+                    `;
+                }
+            }
+        ],
+        order: [[1, 'asc']], // Default order by name
+        dom: '<"row mx-1"<"col-sm-12 col-md-3" l><"col-sm-12 col-md-9"<"dt-action-buttons text-xl-end d-flex align-items-center justify-content-md-end justify-content-center flex-wrap me-1"<"me-3"f>B>>>t<"row mx-2"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+        language: {
+            search: searchTranslation,
+            lengthMenu: `${showTranslation} _MENU_`,
+            info: `${showingTranslation} _START_ ${toTranslation} _END_ ${ofTranslation} _TOTAL_ ${entriesTranslation}`,
+            paginate: {
+                next: nextTranslation,
+                previous: previousTranslation
+            },
+            emptyTable: noEntriesAvailableTranslation,
+            loadingRecords: ''
         },
-        {
-          // Actions
-          targets: -1,
-          searchable: false,
-          orderable: false,
-          render: function (data, type, full, meta) {
-            return (
-              '<span class="text-nowrap"><button class="btn btn-sm btn-icon me-2 editPermission" data-bs-target="#editPermissionModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit"></i></button>' +
-              '<button class="btn btn-sm btn-icon delete-record"><i class="ti ti-trash"></i></button></span>'
-            );
-          }
-        }
-      ],
-      order: [[1, 'asc']],
-      dom:
-        '<"row mx-1"' +
-        '<"col-sm-12 col-md-3" l>' +
-        '<"col-sm-12 col-md-9"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-md-end justify-content-center flex-wrap me-1"<"me-3"f>B>>' +
-        '>t' +
-        '<"row mx-2"' +
-        '<"col-sm-12 col-md-6"i>' +
-        '<"col-sm-12 col-md-6"p>' +
-        '>',
-      "language": {
-        "search": searchTranslation,
-        "lengthMenu": `${showTranslation} _MENU_`,
-        "info": ` ${showingTranslation} _START_ ${toTranslation} _END_ ${ofTranslation} _TOTAL_ ${entriesTranslation}`,
-        "paginate": {
-          "next": nextTranslation,      // Change "Next" text
-          "previous": previousTranslation, // Change "Previous" text
-        },
-        "emptyTable": noEntriesAvailableTranslation
-      },
-      // Buttons with Dropdown
-      buttons: [
-        {
-          text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addPermissionTranslation}</span>`,
-          className: 'add-new btn btn-primary mt-2 mb-2',
-          attr: {
-            'data-bs-toggle': 'modal',
-            'data-bs-target': '#addPermissionModal'
-          },
-          init: function (api, node, config) {
-            $(node).removeClass('btn-secondary');
-          }
-        }
-      ],
+        buttons: [
+            {
+                text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addPermissionTranslation}</span>`,
+                className: 'add-new btn btn-primary mt-2 mb-2',
+                attr: {
+                    'data-bs-toggle': 'modal',
+                    'data-bs-target': '#addPermissionModal'
+                },
+                init: function (api, node) {
+                    $(node).removeClass('btn-secondary'); // Remove secondary class
+                }
+            }
+        ]
     });
   }
-  
+
 
   // // If you have a submit button inside the form, you can bind the click event to it
   // $("#addPermissionForm :submit").on("click", function (event) {

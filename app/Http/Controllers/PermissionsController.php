@@ -104,15 +104,25 @@ class PermissionsController extends Controller
     }
 
     public function get_permissions()
-  {
-    $permissions = Permission::orderBy('id', 'DESC')->get();
-    $permissions->each(function ($permission) {
-    $carbonDate = Carbon::parse($permission->created_at);
-    $permission->setAttribute('carbonDate', $carbonDate->format('Y-m-d g:i A'));
-    });
+    {
+        // Start building the query and order by ID in descending order
+        $query = Permission::orderBy('id', 'DESC');
+    
 
-    return Datatables::of($permissions)
-      ->rawColumns(['Options'])
-      ->make(true);
-  }
+        // Paginate the results using DataTable parameters
+        $permissions = $query->get();
+    
+        // Format the created_at date using Carbon for each permission
+        $permissions->each(function ($permission) {
+            $carbonDate = Carbon::parse($permission->created_at);
+            $permission->setAttribute('carbonDate', $carbonDate->format('Y-m-d g:i A'));
+        });
+    
+        // Create DataTable response
+        return Datatables::of($permissions)
+            ->rawColumns(['Options'])
+            ->make(true);
+    }
+    
+    
 }

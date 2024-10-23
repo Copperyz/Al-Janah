@@ -26,41 +26,38 @@ $(function () {
   // Users datatable
   if (dt_user_table.length) {
     var dt_user = dt_user_table.DataTable({
-      ajax: 'get-users', // JSON file to add data
+      ajax: 'get-users', // Server-side endpoint for user data
+      processing: true,  // Show processing indicator
+      serverSide: true,  // Enable server-side processing
+      scrollY: '450px', // Set a fixed height for the DataTable
+      scrollCollapse: false, // Allow table height to shrink if less data is available
       columns: [
-        // columns according to JSON
-        { data: '' },
-        { data: 'name' },
-        { data: 'email' },
-        { data: 'roles[0].name' },
-        { data: '' }
-      ],
-      columnDefs: [
-        {
-          // For Responsive
-          className: 'control',
-          orderable: false,
-          searchable: false,
-          responsivePriority: 2,
-          targets: 0,
+        // Placeholder for responsive control
+        { data: null, defaultContent: '', orderable: false, className: 'control', responsivePriority: 1 },
+        { data: 'name', title: 'Name' },         // User Name from JSON
+        { data: 'email', title: 'Email' },       // User Email from JSON
+        { 
+          data: 'userRoles',                     // Role from JSON, processed in Laravel
+          title: 'Role',
           render: function (data, type, full, meta) {
-            return '';
+            return data || 'No Role';            // Render "No Role" if empty
           }
         },
-        {
-          // Actions
-          targets: -1,
-          searchable: false,
-          orderable: false,
+        { 
+          data: null,                            // Actions column, no data from server
+          orderable: false,                      // Make non-orderable
+          searchable: false,                     // Make non-searchable
+          className: 'text-center',              // Add centering class
           render: function (data, type, full, meta) {
             return (
-              '<a href="javascript:;" class="text-body editUser" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEditUser"><i class="ti ti-edit ti-sm me-2"></i></a>' +
-              '<a href="javascript:;" class="text-body delete-record"><i class="ti ti-trash ti-sm mx-2"></i></a>' 
+              '<a href="javascript:;" class="text-body editUser" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEditUser">' +
+              '<i class="ti ti-edit ti-sm me-2"></i></a>' +
+              '<a href="javascript:;" class="text-body delete-record"><i class="ti ti-trash ti-sm mx-2"></i></a>'
             );
           }
         }
       ],
-      order: [[1, 'desc']],
+      order: [[1, 'desc']],  // Default sorting by the 'name' column
       dom:
         '<"row mx-1"' +
         '<"col-sm-12 col-md-3" l>' +
@@ -70,22 +67,22 @@ $(function () {
         '<"col-sm-12 col-md-6"i>' +
         '<"col-sm-12 col-md-6"p>' +
         '>',
-      "language": {
-        "search": searchTranslation,
-        "lengthMenu": `${showTranslation} _MENU_`,
-        "info": ` ${showingTranslation} _START_ ${toTranslation} _END_ ${ofTranslation} _TOTAL_ ${entriesTranslation}`,
-        "paginate": {
-          "next": nextTranslation,      // Change "Next" text
-          "previous": previousTranslation, // Change "Previous" text
+      language: {
+        search: searchTranslation,
+        lengthMenu: `${showTranslation} _MENU_`,
+        info: ` ${showingTranslation} _START_ ${toTranslation} _END_ ${ofTranslation} _TOTAL_ ${entriesTranslation}`,
+        paginate: {
+          next: nextTranslation,      // Change "Next" text
+          previous: previousTranslation, // Change "Previous" text
         },
-        "emptyTable": noEntriesAvailableTranslation
+        emptyTable: noEntriesAvailableTranslation,
+        loadingRecords: '',
       },
       buttons: [
         {
-          text: `<i class="ti ti-plus ti-sm me-2"></i>${addNewUserTranslation}`, // Icon and text inside the button
-          className: 'btn btn-primary text-white d-flex align-items-center mt-2 mb-2', // Full button styling
+          text: `<i class="ti ti-plus ti-sm me-2"></i>${addNewUserTranslation}`,
+          className: 'btn btn-primary text-white d-flex align-items-center mt-2 mb-2',
           action: function (e, dt, button, config) {
-            // Trigger the offcanvas action
             const offcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasAddUser'));
             offcanvas.show();
           }
@@ -93,6 +90,7 @@ $(function () {
       ]
     });
   }
+  
 
 
   // If you have a submit button inside the form, you can bind the click event to it

@@ -10,8 +10,10 @@ $(function () {
   // shipments datatable
   if (dt_shipments_table.length) {
     var dt_shipments = dt_shipments_table.DataTable({
-      processing: false,
-      serverSide: true,
+      processing: true,  // Show processing indicator
+      serverSide: true,  // Enable server-side processing
+      scrollY: '450px', // Set a fixed height for the DataTable
+      scrollCollapse: false, // Allow table height to shrink if less data is available
       ajax: 'get-shipments',
       columns: [
         // columns according to JSON
@@ -143,7 +145,7 @@ $(function () {
           "previous": previousTranslation, // Change "Previous" text
         },
         "emptyTable": noEntriesAvailableTranslation,
-        "loadingRecords": '<div class="spinner-border" role="status"><span class="sr-only">Loading data, one moment...</span></div>',
+        "loadingRecords": '',
       },
       // Buttons with Dropdown
       buttons: [

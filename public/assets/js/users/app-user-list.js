@@ -34,11 +34,10 @@ $(function () {
       columns: [
         // Placeholder for responsive control
         { data: null, defaultContent: '', orderable: false, className: 'control', responsivePriority: 1 },
-        { data: 'name', title: 'Name' },         // User Name from JSON
-        { data: 'email', title: 'Email' },       // User Email from JSON
+        { data: 'name' },         // User Name from JSON
+        { data: 'email' },       // User Email from JSON
         { 
           data: 'userRoles',                     // Role from JSON, processed in Laravel
-          title: 'Role',
           render: function (data, type, full, meta) {
             return data || 'No Role';            // Render "No Role" if empty
           }

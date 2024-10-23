@@ -24,8 +24,7 @@
                         </div>
 
                         <!-- Sidebar when screen < md -->
-                        <div class="card-body logistics-fleet-sidebar-body"
-                            style="height: 100hv; overflow-y: auto;">
+                        <div class="card-body logistics-fleet-sidebar-body" style="height: 100hv; overflow-y: auto;">
                             <!-- Menu Accordion -->
                             <div class="accordion" id="fleet" data-bs-toggle="sidebar"
                                 data-target="#app-logistics-fleet-sidebar">
@@ -34,38 +33,37 @@
                                     <h6>{{ __('Trip Route') }}
                                         ({{ __($tripRoute['type']) }})
                                     </h6>
-
                                     @foreach ($tripRoute['legs'] as $legIndex => $leg)
                                         <!-- Display each leg -->
                                         <div class="accordion-header mt-4" id="fleet{{ $legIndex }}">
-                                                <div class="d-flex">
-                                                    <div class="avatar-wrapper">
-                                                        <div class="avatar me-2">
-                                                            @if ($leg['type'] === 'Origin')
-                                                                <span
-                                                                    class="avatar-initial rounded-circle bg-label-secondary">
-                                                                    <i class="ti ti-home text-body ti-sm"></i>
-                                                                </span>
-                                                            @elseif($leg['type'] === 'Destination')
-                                                                <span
-                                                                    class="avatar-initial rounded-circle bg-label-secondary">
-                                                                    <i class="ti ti-flag text-body ti-sm"></i>
-                                                                </span>
-                                                            @else
-                                                                <span
-                                                                    class="avatar-initial rounded-circle bg-label-secondary">
-                                                                    <i class="ti ti-truck text-body ti-sm"></i>
-                                                                </span>
-                                                            @endif
-                                                        </div>
+                                            <div class="d-flex">
+                                                <div class="avatar-wrapper">
+                                                    <div class="avatar me-2">
+                                                        @if ($leg['type'] === 'Origin')
+                                                            <span
+                                                                class="avatar-initial rounded-circle bg-label-secondary">
+                                                                <i class="ti ti-home text-body ti-sm"></i>
+                                                            </span>
+                                                        @elseif($leg['type'] === 'Destination')
+                                                            <span
+                                                                class="avatar-initial rounded-circle bg-label-secondary">
+                                                                <i class="ti ti-flag text-body ti-sm"></i>
+                                                            </span>
+                                                        @else
+                                                            <span
+                                                                class="avatar-initial rounded-circle bg-label-secondary">
+                                                                <i class="ti ti-truck text-body ti-sm"></i>
+                                                            </span>
+                                                        @endif
                                                     </div>
-                                                    <span class="d-flex flex-column">
-                                                        <span class="h6 mb-0">{{ __($leg['type']) }}</span>
-                                                        <span class="text-muted" style="word-wrap: break-word;">
-                                                            {{ __($leg['country']) }}
-                                                        </span>
-                                                    </span>
                                                 </div>
+                                                <span class="d-flex flex-column">
+                                                    <span class="h6 mb-0">{{ __($leg['type']) }}</span>
+                                                    <span class="text-muted" style="word-wrap: break-word;">
+                                                        {{ __($leg['country']) }}
+                                                    </span>
+                                                </span>
+                                            </div>
                                         </div>
                                         <div id="fleetCollapse{{ $legIndex }}" class="accordion-collapse collapsed"
                                             data-bs-parent="#fleet">

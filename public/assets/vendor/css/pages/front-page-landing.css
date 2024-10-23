@@ -118,8 +118,8 @@
 }
 
 .landing-reviews {
-  border-top-left-radius: 3.75rem;
-  border-top-right-radius: 3.75rem;
+  /* border-top-left-radius: 3.75rem;
+  border-top-right-radius: 3.75rem; */
 }
 .landing-reviews .landing-reviews-btns .reviews-btn {
   padding: 0.45rem;
@@ -209,8 +209,8 @@
 }
 
 .landing-faq {
-  border-top-left-radius: 3.75rem;
-  border-top-right-radius: 3.75rem;
+  /* border-top-left-radius: 3.75rem;
+  border-top-right-radius: 3.75rem; */
 }
 .landing-faq .faq-image {
   max-width: 20rem;

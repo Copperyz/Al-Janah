@@ -63,19 +63,20 @@ Route::middleware(['guest'])->group(function () {
   Route::post('/login', [AuthController::class, 'Login'])->name('Login');
   Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
   Route::post('/register', [AuthController::class, 'Register'])->name('register');
-  Route::get('/confirm-account/{token}', [AuthController::class, 'confirmAccount'])->name('confirm-account');
-  Route::post('store-account/{id}', [AuthController::class, 'storeAccount'])->name('store-account');
 });
+//customer register
+Route::post('store-account/{id}', [AuthController::class, 'storeAccount'])->name('store-account');
+Route::get('/confirm-account/{token}', [AuthController::class, 'confirmAccount'])->name('confirm-account');
 
 // Settings
 Route::get('/change-locale/{locale}', [Settings::class, 'setLocale'])->name('changeLocale');
 
 // Auth
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->group(function (){
   Route::post('/logout', [AuthController::class, 'Logout'])->name('logout');
 });
+Route::middleware(['auth', 'complete.registration'])->group(function () {
 
-Route::middleware(['auth'])->group(function () {
   Route::get('dashboard', [HomePage::class, 'index'])->name('dashboard');
 
   // Users

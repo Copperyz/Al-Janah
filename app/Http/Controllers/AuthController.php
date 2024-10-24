@@ -117,13 +117,7 @@ class AuthController extends Controller
       return redirect()->back()->with('error', 'Invalid data.');
     }
   }
-  // public function test(){
-  //   $countries = Country::all();
-  //   $cities = City::all();
-  //   return view('auth.complete-register')
-  //   ->with('countries', $countries)
-  //   ->with('cities', $cities);
-  // }
+
   public function storeAccount(Request $request, $userID){
 
     $user = User::findOrFail($userID);
@@ -131,7 +125,6 @@ class AuthController extends Controller
     if (!$user) {
         return redirect()->route('login')->with('error', 'Invalid confirmation token.');
     }
-
     $validator = Validator::make($request->all(), [
       'first_name' => ['required', 'string', 'max:255'],
       'last_name' => ['required', 'string', 'max:255'],
@@ -214,3 +207,4 @@ class AuthController extends Controller
     return redirect('/');
   }
 }
+

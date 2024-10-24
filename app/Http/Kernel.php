@@ -74,5 +74,6 @@ class Kernel extends HttpKernel
 
   protected $routeMiddleware = [
     'permission' => \App\Http\Middleware\PermissionMiddleware::class,
+    'complete.registration' => \App\Http\Middleware\EnsureRegistrationIsCompleted::class,
   ];
 }

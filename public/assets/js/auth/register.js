@@ -29,6 +29,7 @@ $(function () {
       success: function (response, status, xhr) {
         if (xhr.status === 200) {
           // Handle a successful response
+          console.log(response)
           Swal.fire({
             title: '',
             text: response.message,
@@ -48,6 +49,8 @@ $(function () {
       },
       error: function (response, xhr, status, error) {
         // Handle the error response here
+        console.log('000000')
+        console.log(response);
         var errorMessages = Object.values(response.responseJSON.errors).flat();
         // Format error messages with line breaks
         var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags

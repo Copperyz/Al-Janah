@@ -227,9 +227,7 @@ class ShipmentController extends Controller
         return view('shipments.edit', compact('shipment', 'customers', 'parcelTypes', 'goodTypes', 'tripRoutes', 'currencies'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [

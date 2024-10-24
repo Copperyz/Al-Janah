@@ -80,7 +80,7 @@
                 <li>
                     <div class="dropdown-divider"></div>
                 </li>
-                @if (auth()->user()->hasRole('Customer'))
+                @if (Auth::check() && auth()->user()->hasRole('Customer'))
                 <li>
                     <a class="dropdown-item"
                         href="{{ Route::has('customer.profile') ? route('customer.profile') : 'javascript:void(0);' }}">

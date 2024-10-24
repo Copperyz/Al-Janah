@@ -48,8 +48,8 @@ $configData = Helper::appClasses();
                   <img src="{{asset('assets/img/illustrations/boy-verify-email-'.$configData['style'].'.png')}}" alt="boy-verify-email-light" width="273" class="img-fluid" data-app-light-img="illustrations/boy-verify-email-light.png" data-app-dark-img="illustrations/boy-verify-email-dark.png">
                 </div>
                 <div class="onboarding-content mb-0">
-                  <h4 class="onboarding-title text-body">{{__('Thank you for confirming your email')}}</h4>
-                  <div class="onboarding-info">{{__('Kindly furnish additional details to initiate effective tracking of your shipments')}}.</div>
+                  <h4 class="onboarding-title text-body">{{__('Finalize Your Profile Setup')}}</h4>
+                  <div class="onboarding-info">{{__('Provide the necessary details to enable smooth tracking and management of your shipments')}}.</div>
                   <form method="POST" action="{{route('store-account', $user->id)}}" id="completeRegisterForm">
                     <div class="row">
                         <div class="col-sm-6">
@@ -110,7 +110,7 @@ $configData = Helper::appClasses();
                         </div>
                     </div>
                     <div class="modal-footer border-0">
-                      <!-- <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">{{__('Close')}}</button> -->
+                      <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">{{__('Close')}}</button>
                       <button type="submit" class="btn btn-primary">{{__('Submit')}}</button>
                     </div>
                 </form>

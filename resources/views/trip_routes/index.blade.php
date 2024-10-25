@@ -51,7 +51,7 @@
     <!-- Trip List Table -->
     <div class="card">
         <div class="card-datatable table-responsive mt-3">
-            <table class="trip-routes-list-table table border-top">
+            <table class="trip-routes-list-table table">
                 <thead>
                     <tr>
                         <th></th>
@@ -71,7 +71,24 @@
         var tripDetailsTranslation = @json(__('Trip Details'));
         var typeTranslation = @json(__('Type'));
         var selectTranslation = @json(__('Select'));
+        var addButton = '<br>';
     </script>
+
+    @if (auth()->user()->can('add trip route'))
+        <script>
+            addButton = {
+                text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addTripRouteTranslation}</span>`,
+                className: 'add-new btn btn-primary mb-3 mt-2 mb-2 addTripRoute',
+                attr: {
+                    'data-bs-toggle': 'modal',
+                    'data-bs-target': '#addTripRouteModal'
+                },
+                init: function(api, node, config) {
+                    $(node).removeClass('btn-secondary');
+                }
+            }
+        </script>
+    @endif
 
 
     <!-- Modal -->

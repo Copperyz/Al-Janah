@@ -149,19 +149,37 @@ class Users extends Controller
 
   public function get_users()
   {
-      // Build the query with eager loading for roles and optimized ordering
-      $query = User::with('roles:id,name')->select('id', 'name', 'email')->orderBy('id', 'DESC');
-  
-      // Use the DataTables library to handle server-side processing
-      return Datatables::eloquent($query)
-          ->addColumn('userPermissions', function ($user) {
-              return $user->getDirectPermissions()->pluck('name')->toArray();
-          })
-          ->addColumn('userRoles', function ($user) {
-              return $user->getRoleNames()->toArray();
-          })
-          ->rawColumns(['Options'])
-          ->make(true);
+    $query = User::with('roles:id,name')
+    ->select('id', 'name', 'email')
+    ->orderBy('id', 'DESC');
+
+    // Use the DataTables library to handle server-side processing
+    return Datatables::eloquent($query)
+        ->addColumn('userPermissions', function ($user) {
+            return $user->getDirectPermissions()->pluck('name')->toArray();
+        })
+        ->addColumn('userRoles', function ($user) {
+            return $user->getRoleNames()->toArray();
+        })
+        ->addColumn('options', function ($user) {
+            $options = '';
+
+            // Check if the authenticated user has permission to edit the user
+            if (auth()->user()->can('edit user')) {
+                $options .= '<a href="javascript:;" class="text-body editUser" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEditUser">' .
+                    '<i class="ti ti-edit ti-sm me-2"></i></a>';
+            }
+
+            // Check if the authenticated user has permission to delete the user
+            if (auth()->user()->can('delete user')) {
+                $options .= '<a href="javascript:;" class="text-body delete-record"><i class="ti ti-trash ti-sm mx-2"></i></a>';
+            }
+
+            return $options;
+        })
+        ->rawColumns(['options'])
+        ->make(true);
+
   }
   
 }

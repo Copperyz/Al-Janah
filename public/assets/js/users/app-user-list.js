@@ -43,17 +43,10 @@ $(function () {
           }
         },
         { 
-          data: null,                            // Actions column, no data from server
+          data: 'options',                            // Actions column, no data from server
           orderable: false,                      // Make non-orderable
           searchable: false,                     // Make non-searchable
           className: 'text-center',              // Add centering class
-          render: function (data, type, full, meta) {
-            return (
-              '<a href="javascript:;" class="text-body editUser" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEditUser">' +
-              '<i class="ti ti-edit ti-sm me-2"></i></a>' +
-              '<a href="javascript:;" class="text-body delete-record"><i class="ti ti-trash ti-sm mx-2"></i></a>'
-            );
-          }
         }
       ],
       order: [[1, 'desc']],  // Default sorting by the 'name' column
@@ -78,14 +71,7 @@ $(function () {
         loadingRecords: '',
       },
       buttons: [
-        {
-          text: `<i class="ti ti-plus ti-sm me-2"></i>${addNewUserTranslation}`,
-          className: 'btn btn-primary text-white d-flex align-items-center mt-2 mb-2',
-          action: function (e, dt, button, config) {
-            const offcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasAddUser'));
-            offcanvas.show();
-          }
-        }
+        addButton
       ]
     });
   }

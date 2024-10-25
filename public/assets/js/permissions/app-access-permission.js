@@ -20,7 +20,7 @@ $(function () {
             { data: null, orderable: false, searchable: false }, // Control column
             { data: 'name' },
             { data: 'carbonDate' },
-            { data: null, orderable: false, searchable: false } // Actions column
+            { data: 'options', orderable: false, searchable: false } // Actions column
         ],
         columnDefs: [
             {
@@ -29,23 +29,6 @@ $(function () {
                     return ''; // Placeholder for control column
                 }
             },
-            {
-                targets: -1, // Actions column
-                render: function () {
-                    return `
-                        <span class="text-nowrap">
-                            <button class="btn btn-sm btn-icon me-2 editPermission" 
-                                    data-bs-target="#editPermissionModal" 
-                                    data-bs-toggle="modal">
-                                <i class="ti ti-edit"></i>
-                            </button>
-                            <button class="btn btn-sm btn-icon delete-record">
-                                <i class="ti ti-trash"></i>
-                            </button>
-                        </span>
-                    `;
-                }
-            }
         ],
         order: [[1, 'asc']], // Default order by name
         dom: '<"row mx-1"<"col-sm-12 col-md-3" l><"col-sm-12 col-md-9"<"dt-action-buttons text-xl-end d-flex align-items-center justify-content-md-end justify-content-center flex-wrap me-1"<"me-3"f>B>>>t<"row mx-2"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
@@ -61,17 +44,7 @@ $(function () {
             loadingRecords: ''
         },
         buttons: [
-            {
-                text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addPermissionTranslation}</span>`,
-                className: 'add-new btn btn-primary mt-2 mb-2',
-                attr: {
-                    'data-bs-toggle': 'modal',
-                    'data-bs-target': '#addPermissionModal'
-                },
-                init: function (api, node) {
-                    $(node).removeClass('btn-secondary'); // Remove secondary class
-                }
-            }
+            addButton
         ]
     });
   }

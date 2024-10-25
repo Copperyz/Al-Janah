@@ -22,7 +22,7 @@ $(function () {
                 { data: 'typeLocale' },
                 { data: 'legs_combined' },
                 // { data: 'trip_price' },
-                { data: 'action' }
+                { data: 'options' }
             ],
             columnDefs: [
                 {
@@ -41,15 +41,6 @@ $(function () {
                     targets: -1,
                     searchable: false,
                     orderable: false,
-                    render: function (data, type, full, meta) {
-                        return (
-                            '<div class="d-flex align-items-center">' +
-                            '<span class="text-nowrap"><button class="btn btn-sm btn-icon me-2 showTripRoute" data-bs-target="#showTripRouteModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-eye"></i></button>' +
-                            '<span class="text-nowrap"><button class="btn btn-sm btn-icon me-2 editTripRoute" data-bs-target="#editTripRouteModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit"></i></button>' +
-                            '<a href="javascript:;" class="text-body delete-record"><i class="ti ti-trash ti-sm mx-2"></i></a>' +
-                            '</div>'
-                        );
-                    }
                 }
             ],
             order: [[1, 'desc']],
@@ -75,17 +66,7 @@ $(function () {
             },
             // Buttons with Dropdown
             buttons: [
-                {
-                    text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addTripRouteTranslation}</span>`,
-                    className: 'add-new btn btn-primary mb-3 mt-2 mb-2 addTripRoute',
-                    attr: {
-                        'data-bs-toggle': 'modal',
-                        'data-bs-target': '#addTripRouteModal'
-                    },
-                    init: function (api, node, config) {
-                        $(node).removeClass('btn-secondary');
-                    }
-                }
+                addButton
             ],
         });
     }

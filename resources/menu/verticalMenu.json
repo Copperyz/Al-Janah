@@ -95,7 +95,7 @@
       "url": "trips",
       "icon": "menu-icon tf-icons ti ti-plane",
       "name": "Trips",
-      "slug": "trips.index"
+      "slug": "trips"
     },
     {
       "url": "trip_routes",

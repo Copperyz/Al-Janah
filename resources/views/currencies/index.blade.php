@@ -51,7 +51,7 @@
     <!-- Trip List Table -->
     <div class="card">
         <div class="card-datatable table-responsive mt-3">
-            <table class="currencies-list-table table border-top">
+            <table class="currencies-list-table table">
                 <thead>
                     <tr>
                         <th></th>
@@ -99,8 +99,21 @@
 
         var areYouSureTranslation = @json(__('Are you sure?'));
         var areYouSureTextTranslation = @json(__('You will not be able to revert this!'));
+        var addButton = '<br>';
     </script>
 
+    @if (auth()->user()->can('add currency'))
+        <script>
+            addButton = {
+                text: `<i class="ti ti-plus ti-sm me-2"></i>${addCurrencyTranslation}`,
+                className: 'btn btn-primary text-white d-flex align-items-center mt-2 mb-2',
+                action: function(e, dt, button, config) {
+                    const offcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasAddUser'));
+                    offcanvas.show();
+                }
+            }
+        </script>
+    @endif
 
     <!-- Modal -->
     @include('_partials/_modals/currencies/modal-add-currency')

@@ -109,6 +109,20 @@ class CurrencyController extends Controller
     {
         $currencies = Currency::get();
         return Datatables::of($currencies)
+        ->addColumn('options', function ($currency) {
+            $options = '';
+
+            if (auth()->user()->can('edit currency')) {
+                $options .= '<span class="text-nowrap"><button class="btn btn-sm btn-icon me-2 editCurrency" data-bs-target="#editCurrencyModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit"></i></button>';
+            }
+
+            if (auth()->user()->can('delete currency')) {
+                $options .= '<a href="javascript:;" class="text-body delete-record"><i class="ti ti-trash ti-sm mx-2"></i></a>';
+            }
+
+            return $options;
+        })
+        ->rawColumns(['options'])
         ->make(true);
     }
 }

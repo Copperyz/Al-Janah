@@ -89,7 +89,7 @@
     <!-- Order List Table -->
     <div class="card">
         <div class="card-datatable table-responsive mt-3">
-            <table class="shipment-list-table table border-top">
+            <table class="shipment-list-table table">
                 <thead>
                     <tr>
                         <th></th>
@@ -112,11 +112,24 @@
     <script>
         var addShipmentTranslation = @json(__('Add Shipment'));
         var hideAddShipmentButton = false;
+        var addButton = '<br>';
     </script>
 
     @if (Auth::check() && Auth::user()->hasRole('Customer'))
         <script>
             hideAddShipmentButton = true;
+        </script>
+    @endif
+
+    @if (auth()->user()->can('add shipment'))
+        <script>
+            addButton = {
+                text: `<i class="ti ti-plus ti-sm me-2"></i>${addShipmentTranslation}`,
+                className: 'btn btn-primary mt-2 mb-2',
+                action: function(e, dt, button, config) {
+                    window.location = './shipments/create';
+                }
+            }
         </script>
     @endif
 

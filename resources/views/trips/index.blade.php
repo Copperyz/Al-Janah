@@ -96,7 +96,7 @@
     <!-- Shipment List Table -->
     <div class="card">
         <div class="card-datatable table-responsive mt-3">
-            <table class="trips-list-table table border-top text-center">
+            <table class="trips-list-table table text-center">
                 <thead>
                     <tr>
                         <th class="text-center">{{ __('Tracking NO') }}</th>
@@ -135,7 +135,26 @@
 
         var areYouSureTranslation = @json(__('Are you sure?'));
         var areYouSureTextTranslation = @json(__('You will not be able to revert this!'));
+
+        var addButton = '<br>';
     </script>
+
+
+    @if (auth()->user()->can('add trip'))
+        <script>
+            addButton = {
+                text: `<i class="ti ti-plus ti-sm me-2"></i>${addTripTranslation}`, // Icon and text inside the button
+                className: 'btn btn-primary text-white d-flex align-items-center mt-2 mb-2 addTrip', // Full button styling
+                attr: {
+                    'data-bs-toggle': 'modal',
+                    'data-bs-target': '#addTripModal'
+                },
+                init: function(api, node, config) {
+                    $(node).removeClass('btn-secondary');
+                }
+            }
+        </script>
+    @endif
 
     @include('_partials/_modals/trips/modal-add-trip')
     @include('_partials/_modals/trips/modal-edit-trip')

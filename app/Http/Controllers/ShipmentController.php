@@ -28,6 +28,19 @@ use Illuminate\Support\Facades\Auth;
 
 class ShipmentController extends Controller
 {
+
+    public function __construct()
+    {
+        // Protect only the 'edit' action with 'edit shipment' permission
+        $this->middleware('permission:edit shipment')->only('edit');
+
+        // Protect only the 'add' action with 'add shipment' permission
+        $this->middleware('permission:add shipment')->only('create');
+
+        // Protect only the 'show' action with 'show shipment' permission
+        $this->middleware('permission:show shipment')->only('show');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -333,7 +346,22 @@ class ShipmentController extends Controller
                 $inventoryStatus = InventoryItem::where('shipment_id', $shipment->id)->pluck('status')->first();
                 return $inventoryStatus ? '<span class="badge bg-label-info">' . __($inventoryStatus) . '</span>' : '<span class="badge bg-label-warning">' . __('Unallocated') . '</span>';
             })
-            ->rawColumns(['paymentStatus', 'inventoryStatus', 'totalAmount'])
+            ->addColumn('options', function ($shipment) {
+                $options = '';
+    
+                // Check if the authenticated user has permission to edit the user
+                if (auth()->user()->can('edit shipment')) {
+                    $options .= '<a href="./shipments/'.$shipment->id.'/edit" class="btn btn-xs btn-info me-2"><i class="ti ti-edit ti-sm"></i></a>';
+                }
+    
+                // Check if the authenticated user has permission to delete the user
+                if (auth()->user()->can('delete shipment')) {
+                    $options .= '<button class="btn btn-xs btn-danger me-2 delete-record"><i class="ti ti-trash ti-sm"></i></button>';
+                }
+    
+                return $options;
+            })
+            ->rawColumns(['paymentStatus', 'inventoryStatus', 'totalAmount', 'options'])
             ->make(true);
     }
 }

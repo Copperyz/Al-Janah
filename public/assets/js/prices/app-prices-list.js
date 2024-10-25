@@ -23,7 +23,7 @@ $(function () {
                 { data: 'toCountry' },
                 { data: 'goodType' },
                 { data: 'price' },
-                { data: 'action' }
+                { data: 'options' }
             ],
             columnDefs: [
                 {
@@ -42,14 +42,6 @@ $(function () {
                     targets: -1,
                     searchable: false,
                     orderable: false,
-                    render: function (data, type, full, meta) {
-                        return (
-                            '<div class="d-flex align-items-center">' +
-                            '<span class="text-nowrap"><button class="btn btn-sm btn-icon me-2 editPrice" data-bs-target="#editPriceModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit"></i></button>' +
-                            '<a href="javascript:;" class="text-body delete-record"><i class="ti ti-trash ti-sm mx-2"></i></a>' +
-                            '</div>'
-                        );
-                    }
                 }
             ],
             order: [[1, 'desc']],
@@ -75,17 +67,7 @@ $(function () {
             },
             // Buttons with Dropdown
             buttons: [
-                {
-                    text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addPriceTranslation}</span>`,
-                    className: 'add-new btn btn-primary mt-2 mb-2 addPrice',
-                    attr: {
-                        'data-bs-toggle': 'modal',
-                        'data-bs-target': '#addPriceModal'
-                    },
-                    init: function (api, node, config) {
-                        $(node).removeClass('btn-secondary');
-                    }
-                }
+                addButton
             ],
         });
     }

@@ -211,6 +211,28 @@ class TripController extends Controller
       ->addColumn('shipmentsCount', function ($trip) {
         return $trip->shipments->count();
       })
+      ->addColumn('options', function ($trip) {
+        $options = '';
+        
+        if (auth()->user()->can('show trip')) {
+            $options .= '<a href="./trips/'.$trip->id.'" class= "btn btn-sm btn-success me-2" > <i class="ti ti-eye"></i></a >';
+        }
+
+        if (auth()->user()->can('show trip shipments')) {
+          $options .= '<span><button class="btn btn-sm btn-warning me-2 showTripShipment" data-bs-target="#showTripShipmentModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-package"></i></button>';
+        }
+
+        if (auth()->user()->can('edit trip')) {
+            $options .= '<span><button class="btn btn-sm btn-info me-2 editTrip" data-bs-target="#editTripModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit"></i></button>';
+        }
+
+        if (auth()->user()->can('delete trip')) {
+          $options .= '<span><button class="btn btn-sm btn-danger me-2 delete-record"><i class="ti ti-trash"></i></button>';
+        }
+
+        return $options;
+    })
+    ->rawColumns(['options'])
       ->make(true);
   }
 

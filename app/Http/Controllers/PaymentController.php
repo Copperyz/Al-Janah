@@ -17,6 +17,13 @@ use Illuminate\Support\Facades\Validator;
 
 class PaymentController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:print invoice')->only('print');
+    }
+
+
     /**
      * Display a listing of the resource.
      */
@@ -163,6 +170,21 @@ class PaymentController extends Controller
         // Access shipment data here, for example:
         return $payment->status == 'Paid' ? __('Paid') : __('Refunded');
         })
+        ->addColumn('options', function ($payment) {
+            $options = '';
+
+            if (auth()->user()->can('refund payment')) {
+                if ($payment->status == 'Refunded') {
+                    $options .= '<button class="btn btn-sm btn-primary me-2 refund-record"><i class="ti ti-receipt"></i></button>';
+                }
+                else {
+                    $options .= '<button class="btn btn-sm btn-primary me-2 refund-record"><i class="ti ti-reload"></i></button>';
+                }
+            }
+
+            return $options;
+        })
+        ->rawColumns(['options'])
         ->make(true);
     }
 

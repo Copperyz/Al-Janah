@@ -152,23 +152,29 @@
         <div class="col-xl-2 col-md-4 col-12 invoice-actions">
             <div class="card">
                 <div class="card-body">
-                    <a class="btn btn-label-info d-flex align-items-center w-100 mb-2" target="_blank"
-                        href="{{ url('payments/' . $shipment->id . '/print') }}">
-                        <i class="ti ti-printer ti-xs me-2"></i>
-                        {{ __('Print') }}
-                    </a>
-                    <a href="{{ route('shipments.edit', ['shipment' => $shipment->id]) }}"
-                        class="btn btn-label-warning d-flex align-items-center w-100 mb-2">
-                        <i class="ti ti-pencil ti-xs me-2"></i>
-                        {{ __('Edit Order') }}
-                    </a>
-                    @if (!isset($payment))
-                        <button class="btn btn-label-success d-grid w-100" data-bs-toggle="modal"
-                            data-bs-target="#addPaymentModal">
-                            <span class="d-flex align-items-center justify-content-center text-nowrap"><i
-                                    class="ti ti-currency-dollar ti-xs me-2"></i>{{ __('Add Payment') }}</span>
-                        </button>
-                    @endif
+                    @can('print invoice')
+                        <a class="btn btn-label-info d-flex align-items-center w-100 mb-2" target="_blank"
+                            href="{{ url('payments/' . $shipment->id . '/print') }}">
+                            <i class="ti ti-printer ti-xs me-2"></i>
+                            {{ __('Print') }}
+                        </a>
+                    @endcan
+                    @can('edit shipment')
+                        <a href="{{ route('shipments.edit', ['shipment' => $shipment->id]) }}"
+                            class="btn btn-label-warning d-flex align-items-center w-100 mb-2">
+                            <i class="ti ti-pencil ti-xs me-2"></i>
+                            {{ __('Edit Order') }}
+                        </a>
+                    @endcan
+                    @can('add payment')
+                        @if (!isset($payment))
+                            <button class="btn btn-label-success d-grid w-100" data-bs-toggle="modal"
+                                data-bs-target="#addPaymentModal">
+                                <span class="d-flex align-items-center justify-content-center text-nowrap"><i
+                                        class="ti ti-currency-dollar ti-xs me-2"></i>{{ __('Add Payment') }}</span>
+                            </button>
+                        @endif
+                    @endcan
                 </div>
             </div>
         </div>

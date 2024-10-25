@@ -124,9 +124,11 @@ class TripRouteController extends Controller
 
     public function get_trip_routes()
     {
+        // Fetch trip routes with eager loading of 'legs' relationship and order by 'id' descending
         $tripRoutes = TripRoute::orderBy('id', 'DESC')->get();
-
-       foreach ($tripRoutes as $tripRoute) {
+    
+        // Loop through each trip route and combine legs and types
+        foreach ($tripRoutes as $tripRoute) {
             $legsCombined = '';
             foreach ($tripRoute->legs as $leg) {
                 if (!empty($leg['country'])) {
@@ -136,7 +138,46 @@ class TripRouteController extends Controller
             $tripRoute->legs_combined = $legsCombined;    
             $tripRoute->typeLocale = __($tripRoute->type); 
         }
-
-        return Datatables::of($tripRoutes)->make(true);
+    
+        // Return the DataTables response
+        return Datatables::of($tripRoutes)
+            // Add the 'options' column based on permissions
+            ->addColumn('options', function ($tripRoute) {
+                $options = '<span class="text-nowrap">';
+    
+                // Show button based on 'show trip route' permission
+                if (auth()->user()->can('show trip route')) {
+                    $options .= '<button class="btn btn-sm btn-icon me-2 showTripRoute" 
+                                    data-bs-target="#showTripRouteModal" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-dismiss="modal">
+                                    <i class="ti ti-eye"></i>
+                                </button>';
+                }
+    
+                // Edit button based on 'edit trip route' permission
+                if (auth()->user()->can('edit trip route')) {
+                    $options .= '<button class="btn btn-sm btn-icon me-2 editTripRoute" 
+                                    data-bs-target="#editTripRouteModal" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-dismiss="modal">
+                                    <i class="ti ti-edit"></i>
+                                </button>';
+                }
+    
+                // Delete button based on 'delete trip route' permission
+                if (auth()->user()->can('delete trip route')) {
+                    $options .= '<a href="javascript:;" class="text-body delete-record">
+                                    <i class="ti ti-trash ti-sm mx-2"></i>
+                                </a>';
+                }
+    
+                $options .= '</span>';
+    
+                return $options;
+            })
+            // Allow raw HTML for 'options' column
+            ->rawColumns(['options'])
+            ->make(true);
     }
 }

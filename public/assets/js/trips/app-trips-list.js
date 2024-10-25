@@ -38,7 +38,7 @@ $(function () {
         { data: 'status' },
         { data: 'departure_date' },
         { data: 'estimated_delivery_date' },
-        { data: 'action' }
+        { data: 'options' }
       ],
       columnDefs: [
         {
@@ -46,16 +46,6 @@ $(function () {
           targets: -1,
           searchable: false,
           orderable: false,
-          render: function (data, type, full, meta) {
-            return (
-              '<a href="./trips/' +
-              full['id'] +
-              '" class= "btn btn-sm btn-success me-2" > <i class="ti ti-eye"></i></a > ' +
-              '<span><button class="btn btn-sm btn-warning me-2 showTripShipment" data-bs-target="#showTripShipmentModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-package"></i></button>' +
-              '<span><button class="btn btn-sm btn-info me-2 editTrip" data-bs-target="#editTripModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit"></i></button>' +
-              '<span><button class="btn btn-sm btn-danger me-2 delete-record"><i class="ti ti-trash"></i></button>'
-            );
-          }
         }
       ],
       order: [[1, 'desc']],
@@ -81,17 +71,7 @@ $(function () {
       },
       // Buttons with Dropdown
       buttons: [
-        {
-          text: `<i class="ti ti-plus ti-sm me-2"></i>${addTripTranslation}`, // Icon and text inside the button
-          className: 'btn btn-primary text-white d-flex align-items-center mt-2 mb-2 addTrip', // Full button styling
-          attr: {
-            'data-bs-toggle': 'modal',
-            'data-bs-target': '#addTripModal'
-          },
-          init: function (api, node, config) {
-            $(node).removeClass('btn-secondary');
-          }
-        }
+        addButton
       ]
     });
   }

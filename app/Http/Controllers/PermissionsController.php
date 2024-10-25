@@ -108,21 +108,44 @@ class PermissionsController extends Controller
         // Start building the query and order by ID in descending order
         $query = Permission::orderBy('id', 'DESC');
     
-
-        // Paginate the results using DataTable parameters
+        // Fetch the permissions from the database
         $permissions = $query->get();
-    
+        
         // Format the created_at date using Carbon for each permission
         $permissions->each(function ($permission) {
             $carbonDate = Carbon::parse($permission->created_at);
             $permission->setAttribute('carbonDate', $carbonDate->format('Y-m-d g:i A'));
         });
-    
+        
         // Create DataTable response
         return Datatables::of($permissions)
-            ->rawColumns(['Options'])
+            ->addColumn('options', function ($permission) {
+                $options = '<span class="text-nowrap">';
+                
+                // Check if the user has permission to edit
+                if (auth()->user()->can('edit permission')) {
+                    $options .= '<button class="btn btn-sm btn-icon me-2 editPermission" 
+                                    data-bs-target="#editPermissionModal" 
+                                    data-bs-toggle="modal">
+                                    <i class="ti ti-edit"></i>
+                                </button>';
+                }
+                
+                // Check if the user has permission to delete
+                if (auth()->user()->can('delete permission')) {
+                    $options .= '<button class="btn btn-sm btn-icon delete-record">
+                                    <i class="ti ti-trash"></i>
+                                </button>';
+                }
+                
+                $options .= '</span>';
+                
+                return $options;
+            })
+            ->rawColumns(['options'])
             ->make(true);
     }
+    
     
     
 }

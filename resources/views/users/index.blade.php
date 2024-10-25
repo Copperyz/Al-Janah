@@ -164,14 +164,11 @@
     @if (auth()->user()->can('add user'))
         <script>
             addButton = {
-                text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addNewUserTranslation}</span>`,
-                className: 'add-new btn btn-primary mt-2 mb-2 addCurrency',
-                attr: {
-                    'data-bs-toggle': 'modal',
-                    'data-bs-target': '#addCurrencyModal'
-                },
-                init: function(api, node, config) {
-                    $(node).removeClass('btn-secondary');
+                text: `<i class="ti ti-plus ti-sm me-2"></i>${addNewUserTranslation}`,
+                className: 'btn btn-primary text-white d-flex align-items-center mt-2 mb-2',
+                action: function(e, dt, button, config) {
+                    const offcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasAddUser'));
+                    offcanvas.show();
                 }
             }
         </script>

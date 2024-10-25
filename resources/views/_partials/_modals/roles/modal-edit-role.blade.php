@@ -13,7 +13,7 @@
                     <div class="col-12 mb-4">
                         <label class="form-label" for="name">{{__('Role Name')}}</label>
                         <input type="text" id="name" name="name" class="form-control"
-                            placeholder='{{ __("Enter a role name") }}' tabindex="-1" />
+                            placeholder='{{ __("Enter a role name") }}' tabindex="-1" autocomplete="off"  />
                     </div>
                     <div class="col-12">
                         <h5>{{__('Role Permissions')}}</h5>

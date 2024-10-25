@@ -153,13 +153,13 @@ Route::middleware(['auth', 'complete.registration'])->group(function () {
   });
 
   // Customers
+  Route::get('customer/profile', [CustomerController::class, 'showProfile'])->name('customer.profile');
   Route::group(['middleware' => ['permission:customers']], function () {
     Route::get('customers-all', [CustomerController::class, 'getCustomers'])->name('customers.all');
     Route::get('customers-shipments/{id}', [CustomerController::class, 'getShipmetns'])->name('customers.shipments');
     Route::post('customer-update', [CustomerController::class, 'updateCustomerData'])->name('customer.updateData');
     Route::post('customer-add-cash/{id}', [CustomerController::class, 'addCashBalance'])->name('customer.add-cash');
     Route::post('customer-add-coupon/{id}', [CustomerController::class, 'addCoupon'])->name('customer.add-coupon');
-    Route::get('customer/profile', [CustomerController::class, 'showProfile'])->name('customer.profile');
     Route::resource('customers', CustomerController::class);
   });
   

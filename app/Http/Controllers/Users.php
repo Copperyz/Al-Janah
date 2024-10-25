@@ -150,6 +150,7 @@ class Users extends Controller
   public function get_users()
   {
     $query = User::with('roles:id,name')
+    ->where('id', '!=', 1)
     ->select('id', 'name', 'email')
     ->orderBy('id', 'DESC');
 

@@ -164,7 +164,7 @@
     @if (auth()->user()->can('add user'))
         <script>
             addButton = {
-                text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addCurrencyTranslation}</span>`,
+                text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addNewUserTranslation}</span>`,
                 className: 'add-new btn btn-primary mt-2 mb-2 addCurrency',
                 attr: {
                     'data-bs-toggle': 'modal',

@@ -16,6 +16,8 @@ use App\Models\ParcelType;
 use Illuminate\Support\Str;
 use App\Models\ShipmentItem;
 use App\Models\ShipmentHistory;
+use App\Models\TripShipment;
+use App\Models\Trip;
 use App\Models\Currency;
 use Illuminate\Http\Request;
 use App\Models\InventoryItem;
@@ -347,11 +349,12 @@ class ShipmentController extends Controller
                 return $inventoryStatus ? '<span class="badge bg-label-info">' . __($inventoryStatus) . '</span>' : '<span class="badge bg-label-warning">' . __('Unallocated') . '</span>';
             })
             ->addColumn('shipmentRoute', function($shipment) {
-                $tripRoute = TripRoute::find($shipment->trips[0]->trip_route_id)->first();
+                $tripId = TripShipment::where('shipment_id', $shipment->id)->pluck('trip_id')->first();
+                $tripRoute = TripRoute::find(Trip::find($tripId)->pluck('trip_route_id')->first())->first();
                 $legsCombined = '';
                 foreach ($tripRoute->legs as $leg) {
                     if (!empty($leg['country'])) {
-                        $legsCombined .= ($legsCombined ? '. ' : '') . ' ' . __($leg['type']) . ' (' . __($leg['country']) . ') ';
+                        $legsCombined .= ($legsCombined ? '. ' : '') . ' (' . __($leg['country']) . ') ';
                     }
                 }
                 return $legsCombined;

@@ -22,6 +22,14 @@
                                 {{ date('M d, Y, H:i A', strtotime($shipment->date)) }}
                             </p>
                         </div>
+                        <div class="ms-4 mt-2">
+                            - <small class="text-success text-uppercase fw-medium">
+                                {{ __('Estimated Delivery Date') }}
+                            </small>
+                            <p class="text-muted mb-0 ms-1" style="word-wrap: break-word;">
+                                {{ date('M d, Y, H:i A', strtotime($shipment->trips[0]->estimated_delivery_date)) }}
+                            </p>
+                        </div>
 
                         <!-- Sidebar when screen < md -->
                         <div class="card-body logistics-fleet-sidebar-body" style="height: 100hv; overflow-y: auto;">
@@ -120,6 +128,7 @@
 
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

@@ -327,7 +327,7 @@ class ShipmentController extends Controller
         if ($roles->contains('Customer')) {
             $shipmentsQuery = Shipment::with(['customer', 'currency', 'payment'])->where('customer_id', $user->customer->id)->orderBy('id', 'DESC');
         } else {
-            $shipmentsQuery = Shipment::with(['customer', 'currency', 'payment'])->orderBy('id', 'DESC');
+            $shipmentsQuery = Shipment::with(['customer', 'currency', 'payment', 'trips'])->orderBy('id', 'DESC');
         }
         
 
@@ -345,6 +345,16 @@ class ShipmentController extends Controller
             ->addColumn('inventoryStatus', function($shipment) {
                 $inventoryStatus = InventoryItem::where('shipment_id', $shipment->id)->pluck('status')->first();
                 return $inventoryStatus ? '<span class="badge bg-label-info">' . __($inventoryStatus) . '</span>' : '<span class="badge bg-label-warning">' . __('Unallocated') . '</span>';
+            })
+            ->addColumn('shipmentRoute', function($shipment) {
+                $tripRoute = TripRoute::find($shipment->trips[0]->trip_route_id)->first();
+                $legsCombined = '';
+                foreach ($tripRoute->legs as $leg) {
+                    if (!empty($leg['country'])) {
+                        $legsCombined .= ($legsCombined ? '. ' : '') . ' ' . __($leg['type']) . ' (' . __($leg['country']) . ') ';
+                    }
+                }
+                return $legsCombined;
             })
             ->addColumn('options', function ($shipment) {
                 $options = '';

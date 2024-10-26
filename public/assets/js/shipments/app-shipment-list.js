@@ -20,7 +20,7 @@ $(function () {
         { data: '' },
         { data: 'tracking_no' },
         { data: 'customerName' },
-        { data: 'delivery_code' },
+        { data: 'shipmentRoute' },
         { data: 'date' },
         { data: 'totalAmount' },
         { data: 'paymentStatus' },

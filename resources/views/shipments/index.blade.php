@@ -95,7 +95,7 @@
                         <th></th>
                         <th>{{ __('Tracking Number') }}</th>
                         <th>{{ __('Customer') }}</th>
-                        <th>{{ __('Delivery Code') }}</th>
+                        <th>{{ __('Trip Route') }}</th>
                         <th>{{ __('Date') }}</th>
                         <th>{{ __('Amount') }}</th>
                         <th>{{ __('Payment') }}</th>

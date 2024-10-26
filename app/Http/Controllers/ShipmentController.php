@@ -349,25 +349,28 @@ class ShipmentController extends Controller
                 return $inventoryStatus ? '<span class="badge bg-label-info">' . __($inventoryStatus) . '</span>' : '<span class="badge bg-label-warning">' . __('Unallocated') . '</span>';
             })
             ->addColumn('shipmentRoute', function($shipment) {
-                $tripId = TripShipment::where('shipment_id', $shipment->id)->pluck('trip_id')->first();
-                $tripRoute = TripRoute::find(Trip::find($tripId)->pluck('trip_route_id')->first())->first();
+                $tripId = TripShipment::where('shipment_id', $shipment->id)->value('trip_id');
+                $tripRouteId = Trip::where('id', $tripId)->value('trip_route_id');
+                $tripRoute = TripRoute::find($tripRouteId);
+            
                 $legsCombined = '';
-                foreach ($tripRoute->legs as $leg) {
-                    if (!empty($leg['country'])) {
-                        $legsCombined .= ($legsCombined ? '. ' : '') . ' (' . __($leg['country']) . ') ';
+                if ($tripRoute && $tripRoute->legs) {
+                    foreach ($tripRoute->legs as $leg) {
+                        if (!empty($leg['country'])) {
+                            $legsCombined .= ($legsCombined ? '. ' : '') . ' (' . __($leg['country']) . ') ';
+                        }
                     }
                 }
+            
                 return $legsCombined;
             })
             ->addColumn('options', function ($shipment) {
                 $options = '';
     
-                // Check if the authenticated user has permission to edit the user
                 if (auth()->user()->can('edit shipment')) {
                     $options .= '<a href="./shipments/'.$shipment->id.'/edit" class="btn btn-xs btn-info me-2"><i class="ti ti-edit ti-sm"></i></a>';
                 }
     
-                // Check if the authenticated user has permission to delete the user
                 if (auth()->user()->can('delete shipment')) {
                     $options .= '<button class="btn btn-xs btn-danger me-2 delete-record"><i class="ti ti-trash ti-sm"></i></button>';
                 }

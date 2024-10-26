@@ -357,7 +357,7 @@ class ShipmentController extends Controller
                 if ($tripRoute && $tripRoute->legs) {
                     foreach ($tripRoute->legs as $leg) {
                         if (!empty($leg['country'])) {
-                            $legsCombined .= ($legsCombined ? '. ' : '') . ' (' . __($leg['country']) . ') ';
+                            $legsCombined .= ($legsCombined ? '. ' : '') . ' ' . __($leg['type']) . ' (' . __($leg['country']) . ') ';
                         }
                     }
                 }

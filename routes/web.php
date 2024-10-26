@@ -154,6 +154,7 @@ Route::middleware(['auth', 'complete.registration'])->group(function () {
   Route::resource('countries', CountryController::class);
 
   //Cities
+  Route::get('get-cities/{id}', [CityController::class, 'getCitiesByCountry'])->name('get-cities');
   Route::resource('cities', CityController::class);
 
   //Addresses

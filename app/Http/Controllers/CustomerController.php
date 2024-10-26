@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Mail\UserLoginCredentials;
 use App\Models\CashBalance;
+use App\Models\City;
+use App\Models\Country;
 use App\Models\Coupons;
 use App\Models\Customer;
 use App\Models\Shipment;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +19,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
-
+use Illuminate\Validation\Rule;
 
 class CustomerController extends Controller
 {
@@ -245,8 +248,10 @@ class CustomerController extends Controller
   public function showProfile()
   {
     $user = auth()->user();
-    $customer = Customer::with('shipments', 'country', 'cashBalance', 'coupons')->where('user_id', $user->id)->first();
-    return view('customers.show')->with('customer', $customer);
+    $customer = Customer::with('shipments', 'country', 'cashBalance', 'coupons')
+    ->where('user_id', $user->id)->first();
+    $countries = Country::all();
+    return view('customers.show')->with('customer', $customer)->with('countries', $countries);
   }
   public function show(Customer $customer)
   {
@@ -256,9 +261,6 @@ class CustomerController extends Controller
     return view('customers.show')->with('customer', $customer);
   }
 
-  /**
-   * Show the form for editing the specified resource.
-   */
   public function edit(Customer $customer)
   {
     //
@@ -269,7 +271,51 @@ class CustomerController extends Controller
    */
   public function update(Request $request, Customer $customer)
   {
-    //
+    try {
+      $validator = Validator::make($request->all(), [
+        'first_name'     => 'required|string|min:3|max:30',
+        'last_name'     => 'required|string|min:3|max:30',
+        'phone'     => [
+          'required',
+          'string',
+          'max:20',
+          Rule::unique('customers', 'phone')->ignore($customer->id, 'id'),
+        ],
+        'email'    => [
+          'nullable',
+          'email',
+          Rule::unique('users', 'email')->ignore($customer->user->id, 'id'),
+          Rule::unique('customers', 'email')->ignore($customer->id, 'id'),
+        ],
+      ]);
+      if ($validator->fails()) {
+        return response()->json([
+          'message' => __('The given data was invalid'),
+          'errors' => $validator->errors()
+        ], 422);
+      }
+      DB::transaction(function () use ($request, $customer) {
+        $customer->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'phone' => $request->phone
+        ]);
+        $customer->user->update([
+            'name' => $request->first_name. ' '. $request->last_name,
+            'email' => $request->email,
+        ]);
+      
+          
+      });
+
+      return response()->json(['message' => __('User updated successfully')], 200);
+    } catch (ModelNotFoundException $e) {
+      return response()->json([
+        'message' => __('The given data was invalid'),
+        'errors' => [__('User not found')]
+      ], 404);
+    }
   }
 
   /**

@@ -20,9 +20,13 @@ class CityController extends Controller
         return view('cities.index', compact('citiesList', 'cities', 'countries'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function getCitiesByCountry($countryID)
+    {
+      $cities = City::where('country_id', $countryID)->get();
+  
+      return response()->json($cities);
+    }
+
     public function create()
     {
         //

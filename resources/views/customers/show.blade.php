@@ -54,9 +54,9 @@ $configData = Helper::appClasses();
         <h4 class="mb-1">
           {{ __('Customer ID') }} #{{$customer->customer_code}}
         </h4>
-        <p class="mb-0">
+        <!-- <p class="mb-0">
           Aug 17, 2020, 5:48 (ET)
-        </p>
+        </p> -->
       </div>
     </div>
   </div>
@@ -70,11 +70,11 @@ $configData = Helper::appClasses();
       <button type="button" class="btn btn-label-danger w-100 delete-customer">{{ __('Delete Customer') }}</button>
     </div>
   @endcan
-
-  <div class="col-12 col-md-8 offset-md-2 mt-4"> <!-- Full width on mobile, offset for larger screens -->
+  <br>
+  <!-- <div class="col-12 col-md-8 offset-md-2 mt-4"> 
     <div class="alert alert-warning d-flex align-items-start" role="alert">
       <div class="flex-shrink-0 me-3">
-        <i class="ti ti-key ti-lg"></i> <!-- Icon added for better visual indication -->
+        <i class="ti ti-key ti-lg"></i> 
       </div>
       <div class="flex-grow-1">
         <h5 class="alert-heading mb-2">{{ __('Your Membership Key') }}</h5>
@@ -88,7 +88,7 @@ $configData = Helper::appClasses();
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
 
@@ -128,7 +128,7 @@ $configData = Helper::appClasses();
               </div>
             </div>
             <div class="gap-0 d-flex flex-column">
-              <p class="mb-0 fw-medium">$12,378</p>
+              <p class="mb-0 fw-medium">{{$customer->getTotalShipmentPrice()}}</p>
               <small>{{__('Spent')}}</small>
             </div>
           </div>

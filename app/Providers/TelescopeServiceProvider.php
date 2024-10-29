@@ -18,7 +18,9 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
 
         $this->hideSensitiveRequestDetails();
 
-        $isLocal = $this->app->environment('local');
+        // $isLocal = $this->app->environment('local');
+        // temporarily return true if you want recording in production env
+        $isLocal = true;
 
         Telescope::filter(function (IncomingEntry $entry) use ($isLocal) {
             return $isLocal ||

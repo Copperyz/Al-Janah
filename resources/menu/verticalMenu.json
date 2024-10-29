@@ -128,10 +128,16 @@
       "slug": "currencies.index"
     },
     {
-      "url": "/telescope",
+      "url": "telescope",
       "icon": "menu-icon tf-icons ti ti-dashboard",
       "name": "Monitor System",
       "slug": "view telescope"
+    },
+    {
+      "url": "log-viewer",
+      "icon": "menu-icon tf-icons ti ti-files",
+      "name": "Logs",
+      "slug": "view logs"
     }
   ]
 }

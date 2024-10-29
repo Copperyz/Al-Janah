@@ -72,7 +72,7 @@ return [
     |
     */
 
-    'middleware' => ['web', 'auth:web', 'permission:view telescope', Authorize::class],
+    'middleware' => ['web', 'auth:web', 'permission:view logs', Authorize::class],
 
     /*
     |--------------------------------------------------------------------------

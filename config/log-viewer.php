@@ -1,6 +1,4 @@
 <?php
-use Laravel\Telescope\Http\Middleware\Authorize;
-
 return [
 
     /*
@@ -72,7 +70,7 @@ return [
     |
     */
 
-    'middleware' => ['web', 'auth:web', 'permission:view telescope', Authorize::class],
+    'middleware' => ['web', 'auth:web', 'permission:view telescope'],
 
     /*
     |--------------------------------------------------------------------------

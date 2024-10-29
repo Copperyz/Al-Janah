@@ -1,4 +1,6 @@
 <?php
+use Laravel\Telescope\Http\Middleware\Authorize;
+
 return [
 
     /*
@@ -13,7 +15,7 @@ return [
 
     'api_only' => env('LOG_VIEWER_API_ONLY', false),
 
-    'require_auth_in_production' => true,
+    'require_auth_in_production' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -70,7 +72,7 @@ return [
     |
     */
 
-    'middleware' => ['web', 'auth:web', 'permission:view telescope'],
+    'middleware' => ['web', 'auth:web', 'permission:view telescope', Authorize::class],
 
     /*
     |--------------------------------------------------------------------------

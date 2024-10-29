@@ -1,4 +1,5 @@
 <?php
+use Laravel\Telescope\Http\Middleware\Authorize;
 
 return [
 

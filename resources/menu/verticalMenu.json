@@ -126,6 +126,12 @@
       "icon": "menu-icon tf-icons ti ti-exchange",
       "name": "Currencies",
       "slug": "currencies.index"
+    },
+    {
+      "url": "/telescope",
+      "icon": "menu-icon tf-icons ti ti-dashboard",
+      "name": "Monitor System",
+      "slug": "view telescope"
     }
   ]
 }

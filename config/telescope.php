@@ -104,9 +104,8 @@ return [
     |
     */
 
-    'only_paths' => [
-        // 'api/*'
-    ],
+    'only_paths' => ['*'], // Allow all paths temporarily
+
 
     'ignore_paths' => [
         'livewire*',
@@ -167,7 +166,7 @@ return [
 
         Watchers\LogWatcher::class => [
             'enabled' => env('TELESCOPE_LOG_WATCHER', true),
-            'level' => 'error',
+            'level' => 'info',
         ],
 
         Watchers\MailWatcher::class => env('TELESCOPE_MAIL_WATCHER', true),

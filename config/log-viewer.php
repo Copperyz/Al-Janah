@@ -49,7 +49,7 @@ return [
     |
     */
 
-    'back_to_system_url' => config('app.url', null),
+    'back_to_system_url' => config('app.url').'/dashboard',
 
     'back_to_system_label' => null, // Displayed by default: "Back to {{ app.name }}"
 

@@ -61,7 +61,7 @@ Route::post('/shipment-online', [ShipmentOnlineController::class, 'store'])->nam
 Route::middleware(['guest'])->group(function () {
   Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
   Route::post('/login', [AuthController::class, 'Login'])->name('Login');
-  Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+  Route::get('/register', [AuthController::class, 'showRegister'])->name('showRegister');
   Route::post('/register', [AuthController::class, 'Register'])->name('register');
 });
 //customer register

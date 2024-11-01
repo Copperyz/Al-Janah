@@ -254,11 +254,10 @@ $configData = Helper::appClasses();
         <!-- / customer cards -->
         <!-- Invoice table -->
         <div class="card mb-4">
-          <div class="table-responsive mb-3">
-            <table class="table datatables-customer-shipments border-top" data-customer="{{$customer->id}}">
+          <div class="table-responsive mb-3 mt-3">
+            <table class="table datatables-customer-shipments" data-customer="{{$customer->id}}">
               <thead>
                 <tr>
-                  <th></th>
                   <th>{{__('Tracking Number')}}</th>
                   <th>{{__('Status')}}</th>
                   <th>{{__('Amount')}}</th>

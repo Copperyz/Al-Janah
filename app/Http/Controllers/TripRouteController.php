@@ -6,6 +6,9 @@ use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Models\TripRoute;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
+
+
 class TripRouteController extends Controller
 
 {
@@ -32,12 +35,23 @@ class TripRouteController extends Controller
      */
     public function store(Request $request)
     {
+
         // Validate the request data
-        $request->validate([
-            'type' => 'required|string',
-            'points' => 'required|array',
-            // 'trip_price' => 'required|numeric',
+        $validator = Validator::make($request->all(), [
+            'type' => ['required', 'string'],
+            'points' => ['required', 'array'],
+            'points.*.type' => ['required', 'string', 'in:Origin,Transit,Destination'],
+            'points.*.country' => ['required', 'string', 'exists:countries,name']
         ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => __('The given data was invalid'),
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        
+        return $request;
 
         // Create a new TripRoute instance
         $tripRoute = new TripRoute([
@@ -83,11 +97,18 @@ class TripRouteController extends Controller
     public function update(Request $request, string $id)
     {
         // Validate the request data
-        $request->validate([
-            'type' => 'required|string',
-            'points' => 'required|array',
-            // 'trip_price' => 'required|numeric', // Use numeric for number validation
+        $validator = Validator::make($request->all(), [
+            'type' => ['required', 'string'],
+            'points' => ['required', 'array'],
+            'points.*.type' => ['required', 'string', 'in:Origin,Transit,Destination'],
+            'points.*.country' => ['required', 'string', 'exists:countries,name']
         ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => __('The given data was invalid'),
+                'errors' => $validator->errors()
+            ], 422);
+        }
 
         // Find the existing TripRoute by ID
         $tripRoute = TripRoute::findOrFail($id);

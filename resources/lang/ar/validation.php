@@ -141,6 +141,12 @@ return [
     */
 
   'custom' => [
+    'points.*.type' => [
+        'required' => __('حقل :attribute مطلوب.'),
+    ],
+    'points.*.country' => [
+        'required' => __('حقل :attribute مطلوب.'),
+    ],
     'required' => 'حقل :attribute مطلوب.',
   ],
 
@@ -235,6 +241,8 @@ return [
     'currentPassword' => 'كلمة المرور الحالية',
     'new_password' => 'كلمة المرور الجديدة',
     'new_password_confirmation' => "تأكيد كلمة المرور الجديدة",
-    'country' => "الدولة"
+    'country' => "الدولة",
+    'points.*.type' => __('نوع النقطة'),
+    'points.*.country' => __('الدولة'),
   ],
 ];

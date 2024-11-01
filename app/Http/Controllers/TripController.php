@@ -70,7 +70,7 @@ class TripController extends Controller
   {
     $validator = Validator::make($request->all(), [
       'trip_route_id' => ['required', 'string', 'exists:trip_routes,id'],
-      'current_status' => ['required', 'string'],
+      // 'current_status' => ['required', 'string'],
       'departure_date' => ['nullable', 'date_format:Y-m-d h:i A'],
       'estimated_delivery_date' => ['nullable', 'date_format:Y-m-d h:i A'],
     ]);
@@ -104,7 +104,8 @@ class TripController extends Controller
     // Create the trip
     $trip = Trip::create([
       'trip_route_id' => $request->trip_route_id,
-      'current_status' => $request->input('current_status'),
+      // 'current_status' => $request->input('current_status'),
+      'current_status' => 'In Preparation',
       'current_route_leg' => 0,
       'departure_date' => $departureDate,
       'estimated_delivery_date' => $estimatedDeliveryDate,
@@ -144,7 +145,7 @@ class TripController extends Controller
   {
     $validator = Validator::make($request->all(), [
       'trip_route_id' => ['required', 'string', 'exists:trip_routes,id'],
-      'current_status' => ['required', 'string'],
+      // 'current_status' => ['required', 'string'],
       'departure_date' => ['nullable'],
       'estimated_delivery_date' => ['nullable'],
     ]);
@@ -174,7 +175,7 @@ class TripController extends Controller
     $trip->departure_date = $departureDate;
     $trip->estimated_delivery_date = $estimatedDeliveryDate;
     $trip->trip_route_id = $request->input('trip_route_id');
-    $trip->current_status = $request->input('current_status');
+    // $trip->current_status = $request->input('current_status');
     $trip->updated_by = auth()->user()->id;
 
     // Save the updated instance to the database

@@ -317,94 +317,48 @@ $configData = Helper::appClasses();
           <div class="card-header align-items-center py-4">
             <h5 class="card-action-title mb-0">Address Book</h5>
             <div class="card-action-element">
-              <button class="btn btn-label-primary" type="button" data-bs-toggle="modal" data-bs-target="#addNewAddress">Add new address</button>
+              <button class="btn btn-label-primary" type="button" data-bs-toggle="modal" data-bs-target="#addNewAddress">{{__('Add new address')}}</button>
             </div>
           </div>
+          <!-- accordion-button -->
           <div class="card-body">
             <div class="accordion accordion-flush accordion-arrow-left" id="ecommerceBillingAccordionAddress">
+              @foreach($customer->addresses as $address)
               <div class="accordion-item border-bottom">
                 <div class="accordion-header d-flex justify-content-between align-items-center flex-wrap flex-sm-nowrap" id="headingHome">
-                  <a class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#ecommerceBillingAddressHome" aria-expanded="false" aria-controls="headingHome" role="button">
+                  <a class="my-3 collapsed" data-bs-toggle="collapse" data-bs-target="#ecommerceBillingAddressHome" aria-expanded="false" aria-controls="headingHome" role="button">
                     <span>
                       <span class="d-flex gap-2 align-items-baseline">
-                        <span class="h6 mb-1">Home</span>
+                        <span class="h6 mb-1">{{$address->type}}</span>
+                        @if($address->is_default)
                         <span class="badge bg-label-success">Default Address</span>
+                        @endif
                       </span>
-                      <span class="mb-0 text-muted">23 Shatinon Mekalan</span>
+                      <span class="mb-0 text-muted">{{$address->address_line}}</span>
                     </span>
                   </a>
                   <div class="d-flex gap-3 p-4 p-sm-0 pt-0 ms-1 ms-sm-0">
                     <a href="javascript:void(0);"><i class="ti ti-pencil text-secondary ti-sm"></i></a>
-                    <a href="javascript:void(0);"><i class="ti ti-trash text-secondary ti-sm"></i></a>
+                    <!-- <a href="javascript:void(0);"><i class="ti ti-trash text-secondary ti-sm"></i></a> -->
                     <button class="btn p-0" data-bs-toggle="dropdown" aria-expanded="false" role="button"><i class="ti ti-dots-vertical text-secondary ti-sm mt-1"></i></button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="javascript:void(0);">Set as default address</a></li>
+                      <li>
+                        <form class="changeDefaultAddressForm" action="{{route('customer.address.setDefault', $address->id)}}" method="POST">
+                          <button class="dropdown-item" type="submit">Set as default address</button>
+                        </form>
+                      </li>
                     </ul>
                   </div>
                 </div>
-                <div id="ecommerceBillingAddressHome" class="accordion-collapse collapse" data-bs-parent="#ecommerceBillingAccordionAddress">
+                <!-- <div id="ecommerceBillingAddressHome" class="accordion-collapse collapse" data-bs-parent="#ecommerceBillingAccordionAddress">
                   <div class="accordion-body ps-4 ms-2">
-                    <h6 class="mb-1">Violet Mendoza</h6>
-                    <p class="mb-1">23 Shatinon Mekalan,</p>
-                    <p class="mb-1">Melbourne, VIC 3000,</p>
-                    <p class="mb-1">LondonUK</p>
+                    <h6 class="mb-1"></h6>
+                    <p class="mb-1"></p>
+                    
                   </div>
-                </div>
+                </div> -->
               </div>
-              <div class="accordion-item border-bottom border-top-0">
-                <div class="accordion-header d-flex justify-content-between align-items-center flex-wrap flex-sm-nowrap" id="headingOffice">
-                  <a class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#ecommerceBillingAddressOffice" aria-expanded="false" aria-controls="headingOffice" role="button">
-                    <span class="d-flex flex-column">
-                      <span class="h6 mb-0">Office</span>
-                      <span class="mb-0 text-muted">45 Roker Terrace</span>
-                    </span>
-                  </a>
-                  <div class="d-flex gap-3 p-4 p-sm-0 pt-0 ms-1 ms-sm-0">
-                    <a href="javascript:void(0);"><i class="ti ti-pencil text-secondary ti-sm"></i></a>
-                    <a href="javascript:void(0);"><i class="ti ti-trash text-secondary ti-sm"></i></a>
-                    <button class="btn p-0" data-bs-toggle="dropdown" aria-expanded="false" role="button"><i class="ti ti-dots-vertical text-secondary ti-sm mt-1"></i></button>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="javascript:void(0);">Set as default address</a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div id="ecommerceBillingAddressOffice" class="accordion-collapse collapse" aria-labelledby="headingOffice" data-bs-parent="#ecommerceBillingAccordionAddress">
-                  <div class="accordion-body ps-4 ms-2">
-                    <h6 class="mb-1">Violet Mendoza</h6>
-                    <p class="mb-1">45 Roker Terrace,</p>
-                    <p class="mb-1">Latheronwheel,</p>
-                    <p class="mb-1">KW5 8NW</p>
-                    <p class="mb-1">LondonUK</p>
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item border-top-0">
-                <div class="accordion-header d-flex justify-content-between align-items-center flex-wrap flex-sm-nowrap" id="headingFamily">
-                  <a class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#ecommerceBillingAddressFamily" aria-expanded="false" aria-controls="headingFamily" role="button">
-                    <span class="d-flex flex-column">
-                      <span class="h6 mb-0">Family</span>
-                      <span class="mb-0 text-muted">512 Water Plant</span>
-                    </span>
-                  </a>
-                  <div class="d-flex gap-3 p-4 p-sm-0 pt-0 ms-1 ms-sm-0">
-                    <a href="javascript:void(0);"><i class="ti ti-pencil text-secondary ti-sm"></i></a>
-                    <a href="javascript:void(0);"><i class="ti ti-trash text-secondary ti-sm"></i></a>
-                    <button class="btn p-0" data-bs-toggle="dropdown" aria-expanded="false" role="button"><i class="ti ti-dots-vertical text-secondary ti-sm mt-1"></i></button>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="javascript:void(0);">Set as default address</a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div id="ecommerceBillingAddressFamily" class="accordion-collapse collapse" aria-labelledby="headingFamily" data-bs-parent="#ecommerceBillingAccordionAddress">
-                  <div class="accordion-body ps-4 ms-2">
-                    <h6 class="mb-1">Violet Mendoza</h6>
-                    <p class="mb-1">512 Water Plant,</p>
-                    <p class="mb-1">Melbourne, NY 10036,</p>
-                    <p class="mb-1">New York,</p>
-                    <p class="mb-1">United States</p>
-                  </div>
-                </div>
-              </div>
+              @endforeach
             </div>
           </div>
         </div>
@@ -419,6 +373,7 @@ $configData = Helper::appClasses();
 
 <!-- Modal -->
 @include('_partials/_modals/customers/modal-edit-user')
+@include('_partials/_modals/customers/modal-add-address')
 @include('_partials/_modals/cashBalance/modal-add-cash')
 @include('_partials/_modals/coupons/modal-add-coupons')
 <!-- /Modal -->

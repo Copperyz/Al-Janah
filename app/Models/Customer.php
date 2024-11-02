@@ -34,7 +34,10 @@ class Customer extends Model
     {
         return $this->belongsTo(City::class, 'city_id');
     }
-
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
      public function shipments()
     {
         return $this->hasMany(Shipment::class);

@@ -63,32 +63,140 @@ $(function () {
             });
         }
     });
-
-    $('#country').on('change', function () {
-      console.log('helll')
-      var countryId = $(this).val();
-      $('#city').html('<option value="">Loading...</option>');
-
-      if (countryId) {
-          $.ajax({
-              url: '/get-cities/' + countryId,
-              type: 'GET',
-              dataType: 'json',
-              success: function (data) {
-                  $('#city').empty().append('<option value="">Select City</option>');
-                  $.each(data, function (id, name) {
-                      $('#city').append('<option value="' + id + '">' + name + '</option>');
-                  });
-              },
-              error: function () {
-                  alert('Error loading cities.');
-              }
-          });
-      } else {
-          $('#city').html('<option value="">Select City</option>');
-      }
   });
+  $("#addNewAddressForm").on("submit", function (event) {
+    event.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+    var formData = form.serialize();
 
+    $.ajax({
+        url: url,
+        method: 'POST',
+        data: formData,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (response, status, xhr) {
+            if (xhr.status === 200) {
+                // Handle a successful response
+                // dt_currencies.ajax.url('get-currencies').load();
+                Swal.fire({
+                    title: '',
+                    text: response.message,
+                    icon: 'success',
+                    confirmButtonText: doneTranslation,
+                    customClass: {
+                        confirmButton: 'btn btn-success'
+                    },
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $("#addNewAddress").trigger('reset');
+                        // location.reload();
+                        $('#addNewAddress').modal('hide');
+                    }
+                });
+            }
+            else {
+                // Handle other status codes
+            }
+        },
+        error: function (response, xhr, status, error) {
+            // Handle the error response here
+            var errorMessages = Object.values(response.responseJSON.errors).flat();
+            // Format error messages with line breaks
+            var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
+            // Create the Swal alert
+            Swal.fire({
+                title: response.responseJSON.message,
+                html: formattedErrorMessages,
+                icon: 'error',
+                confirmButtonText: doneTranslation,
+                customClass: {
+                    confirmButton: 'btn btn-primary'
+                },
+                buttonsStyling: false
+            });
+        }
+    });
+  });
+  // change default address for a customer
+  $(".changeDefaultAddressForm").on("submit", function (event) {
+    event.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+    var formData = form.serialize();
+
+    $.ajax({
+        url: url,
+        method: 'POST',
+        data: formData,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (response, status, xhr) {
+            if (xhr.status === 200) {
+                // Handle a successful response
+                // dt_currencies.ajax.url('get-currencies').load();
+                Swal.fire({
+                    title: '',
+                    text: response.message,
+                    icon: 'success',
+                    confirmButtonText: doneTranslation,
+                    customClass: {
+                        confirmButton: 'btn btn-success'
+                    },
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
+            }
+            else {
+                // Handle other status codes
+            }
+        },
+        error: function (response, xhr, status, error) {
+            // Handle the error response here
+            var errorMessages = Object.values(response.responseJSON.errors).flat();
+            // Format error messages with line breaks
+            var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
+            // Create the Swal alert
+            Swal.fire({
+                title: response.responseJSON.message,
+                html: formattedErrorMessages,
+                icon: 'error',
+                confirmButtonText: doneTranslation,
+                customClass: {
+                    confirmButton: 'btn btn-primary'
+                },
+                buttonsStyling: false
+            });
+        }
+    });
+  });
+$('#countrySelect').on('change', function () {
+  var countryId = $(this).val();
+  $('#city').html('<option value="">Loading...</option>');
+
+  if (countryId) {
+      $.ajax({
+          url: '/get-cities/' + countryId,
+          type: 'GET',
+          dataType: 'json',
+          success: function (data) {
+            console.log(data)
+              $.each(data, function (index, city) {
+                  $('#city').append('<option value="'+ city.id + '">' + city.name + '</option>');
+              });
+          },
+          error: function () {
+              alert('Error loading cities.');
+          }
+      });
+  } else {
+      $('#city').html('<option value="">Select City</option>');
+  }
 });
   const numeralMask = document.querySelector('.numeral-mask')
     //Numeral

@@ -154,10 +154,55 @@ class CustomerController extends Controller
   {
     //
   }
+  public function changeDefaultAddress($addressID)
+  {
+    $customer = auth()->user()->customer;
+    $address = $customer->addresses()->findOrFail($addressID);
+    if($address->is_default){
+      return;
+    }
+    DB::transaction(function() use ($customer, $address){
+      //rest all addresss to not default
+      $customer->addresses()->update(['is_default' => 0]);
 
-  /**
-   * Store a newly created resource in storage.
-   */
+      $address->update(['is_default' => 1]);
+    });
+    return response()->json(['message' => __('Default address updated successfully')]);
+  }
+  public function storeAddress(Request $request)
+  {
+    $validator = Validator::make($request->all(), [
+      'address_type' => ['required', 'string', 'max:255'],
+      'address_line' => ['required', 'string', 'max:255'],
+      'city' => ['required', 'exists:cities,id'],
+    ]);
+
+    if ($validator->fails()) {
+      return response()->json(
+        [
+          'message' => __('The given data was invalid'),
+          'errors' => $validator->errors(),
+        ],
+        422
+      );
+    }
+    try {
+
+      $customer = auth()->user()->customer;
+      $isDefalut = $request->address_switch ? 1 : 0;
+      $customer->addresses()->update(['is_default' => 0]);
+      $customer->addresses()->create([
+            'type' => $request->address_type,
+            'address_line' => $request->address_line,
+            'city_id' => $request->city,
+            'is_default' => $isDefalut,
+      ]);
+      return response()->json(['message' => __('Address Added successfully')]);
+    } catch (\Throwable $th) {
+      return response()->json(['message' => __('Something went wrong')], 422);
+    }
+  }
+
   public function store(Request $request)
   {
 
@@ -166,7 +211,8 @@ class CustomerController extends Controller
       'last_name' => ['required', 'string', 'max:255'],
       'email' => ['required', 'email', 'max:255', 'unique:customers,email'],
       'phone' => ['required', 'string', 'max:20', 'unique:customers,phone'],
-      'address' => ['required', 'string', 'max:255'],
+      'address_type' => ['required', 'string', 'max:255'],
+      'address_line' => ['required', 'string', 'max:255'],
       'country_id' => ['required', 'exists:countries,id'],
       'city_id' => ['required', 'exists:cities,id'],
     ]);
@@ -224,7 +270,7 @@ class CustomerController extends Controller
           $customer->last_name = $request->last_name;
           $customer->email = $request->email;
           $customer->phone = $request->phone;
-          $customer->address = $request->address;
+          // $customer->address = $request->address;
           $customer->country_id = $request->country_id;
           $customer->city_id = $request->city_id;
           $customer->status = 1;
@@ -232,12 +278,19 @@ class CustomerController extends Controller
           $customer->created_by = auth()->id();
           $customer->save();
 
+          $customer->addresses()->create([
+            'type' => $request->address_type,
+            'address_line' => $request->address_line,
+            'city_id' => $request->city_id,
+            'is_default' => 1,
+          ]);
+
           Mail::to($user->email)->send(new UserLoginCredentials($user));
         
       });
       return response()->json(['message' => __('Customer added successfully')]);
     } catch (\Throwable $th) {
-      return $th;
+      // dd($th);
       return response()->json(['message' => __('Something went wrong')], 422);
     }
   }
@@ -248,7 +301,7 @@ class CustomerController extends Controller
   public function showProfile()
   {
     $user = auth()->user();
-    $customer = Customer::with('shipments', 'country', 'cashBalance', 'coupons')
+    $customer = Customer::with('shipments', 'country', 'cashBalance', 'coupons','addresses')
     ->where('user_id', $user->id)->first();
     $countries = Country::all();
     return view('customers.show')->with('customer', $customer)->with('countries', $countries);

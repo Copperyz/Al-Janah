@@ -19,7 +19,6 @@ return new class extends Migration {
       $table->string('last_name', 50);
       $table->string('email')->unique();
       $table->string('phone')->unique();
-      $table->string('address');
       $table->unsignedBigInteger('city_id')->nullable();
       $table->unsignedBigInteger('country_id')->nullable();
       $table->string('status');

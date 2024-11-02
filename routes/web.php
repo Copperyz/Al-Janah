@@ -139,6 +139,8 @@ Route::middleware(['auth', 'complete.registration'])->group(function () {
   Route::post('customer-add-cash/{id}', [CustomerController::class, 'addCashBalance'])->name('customer.add-cash');
   Route::post('customer-add-coupon/{id}', [CustomerController::class, 'addCoupon'])->name('customer.add-coupon');
   Route::get('customer/profile', [CustomerController::class, 'showProfile'])->name('customer.profile');
+  Route::post('customer/address', [CustomerController::class, 'storeAddress'])->name('customer.address.store');
+  Route::post('customer/address/{id}/set-default', [CustomerController::class, 'changeDefaultAddress'])->name('customer.address.setDefault');
   Route::resource('customers', CustomerController::class);
 
   // Payments

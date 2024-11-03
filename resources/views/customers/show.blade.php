@@ -5,7 +5,7 @@ $configData = Helper::appClasses();
 
 @extends('layouts/layoutMaster')
 
-@section('title', __('Customer Overview'))
+@section('title', __('Customer Profile'))
 
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}" />
@@ -46,7 +46,17 @@ $configData = Helper::appClasses();
 <!-- <h4 class="py-3 mb-2">
   <span class="text-muted fw-light">eCommerce / Customer Details /</span> Overview
 </h4> -->
-
+<style>
+  .step-trigger:hover{
+    background-color: rgba(128, 169, 212, 0.3) !important;
+    color: rgb(128, 169, 212) !important;
+    /* opacity: 1 !important; */
+  }
+  .step-trigger.active:hover {
+  background-color: rgb(128, 169, 212) !important;
+  color: white !important;
+}
+</style>
 <div class="d-flex flex-column flex-sm-row align-items-center justify-content-sm-between mb-4 text-center text-sm-start gap-2">
   <div class="row col-12">
     <div class="col-md-6">
@@ -175,10 +185,10 @@ $configData = Helper::appClasses();
   <!-- Customer Content -->
   <div class="col-xl-8 col-lg-7 col-md-7 order-0 order-md-1 bs-stepper wizard-icons wizard-modern wizard-modern-icons-example">
     <!-- Customer Pills -->
-    <ul style="padding: 0;" class="nav nav-pills flex-column flex-md-row mb-3 bs-stepper-header">
-      <li class="nav-item step" data-target="#Overview"><a style="flex-direction: row" class="step-trigger nav-link active py-2" href="javascript:void(0);"><i class="ti ti-user me-1"></i>{{__('Overview')}}</a></li>
-      <li class="nav-item step" data-target="#Security"><a style="flex-direction: row" class="step-trigger nav-link py-2" href="javascript:void(0);"><i class="ti ti-lock me-1"></i>{{__('Security')}}</a></li>
-      <li class="nav-item step" data-target="#Billing"><a style="flex-direction: row" class="step-trigger nav-link py-" href="javascript:void(0);"><i class="ti ti-file-invoice me-1"></i>{{__('Address & Billing')}}</a></li>
+    <ul style="padding: 0;" class="nav nav-pills flex-column flex-sm-row mb-4 bs-stepper-header">
+      <li class="nav-item step" data-target="#Overview"><a style="padding: .5rem 1rem; gap: 0" class="step-trigger nav-link active flex-row" href="javascript:void(0);"><i class="ti ti-user me-1"></i>{{__('Overview')}}</a></li>
+      <li class="nav-item step" data-target="#Security"><a style="padding: .5rem 1rem; gap: 0" class="step-trigger nav-link flex-row" href="javascript:void(0);"><i class="ti ti-lock me-1"></i>{{__('Security')}}</a></li>
+      <li class="nav-item step" data-target="#Billing"><a style="padding: .5rem 1rem; gap: 0" class="step-trigger nav-link flex-row" href="javascript:void(0);"><i class="ti ti-file-invoice me-1"></i>{{__('Address & Billing')}}</a></li>
     </ul>
     <!--/ Customer Pills -->
 
@@ -338,7 +348,7 @@ $configData = Helper::appClasses();
                     </span>
                   </a>
                   <div class="d-flex gap-3 p-4 p-sm-0 pt-0 ms-1 ms-sm-0">
-                    <a href="javascript:void(0);"><i class="ti ti-pencil text-secondary ti-sm"></i></a>
+                  <!-- <button class="btn btn-label-primary btn-small" type="button" data-bs-toggle="modal" data-bs-target="#editAddressModal"><i class="ti ti-pencil text-secondary ti-sm"></i></button> -->
                     <!-- <a href="javascript:void(0);"><i class="ti ti-trash text-secondary ti-sm"></i></a> -->
                     <button class="btn p-0" data-bs-toggle="dropdown" aria-expanded="false" role="button"><i class="ti ti-dots-vertical text-secondary ti-sm mt-1"></i></button>
                     <ul class="dropdown-menu">
@@ -370,10 +380,21 @@ $configData = Helper::appClasses();
   </div>
   <!--/ Customer Content -->
 </div>
-
+<script>
+  $(document).ready(function() {
+  $('.step-trigger').on('click', function() {
+    // Remove the 'active' class from all step triggers
+    $('.step-trigger').removeClass('active');
+    
+    // Add the 'active' class to the clicked tab
+    $(this).addClass('active');
+  });
+});
+</script>
 <!-- Modal -->
 @include('_partials/_modals/customers/modal-edit-user')
 @include('_partials/_modals/customers/modal-add-address')
+@include('_partials/_modals/customers/modal-edit-address')
 @include('_partials/_modals/cashBalance/modal-add-cash')
 @include('_partials/_modals/coupons/modal-add-coupons')
 <!-- /Modal -->

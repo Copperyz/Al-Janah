@@ -202,6 +202,39 @@ class CustomerController extends Controller
       return response()->json(['message' => __('Something went wrong')], 422);
     }
   }
+  public function updateAddress(Request $request)
+  {
+    $validator = Validator::make($request->all(), [
+      'address_type' => ['required', 'string', 'max:255'],
+      'address_line' => ['required', 'string', 'max:255'],
+      'city' => ['required', 'exists:cities,id'],
+    ]);
+
+    if ($validator->fails()) {
+      return response()->json(
+        [
+          'message' => __('The given data was invalid'),
+          'errors' => $validator->errors(),
+        ],
+        422
+      );
+    }
+    try {
+
+      $customer = auth()->user()->customer;
+      $isDefalut = $request->address_switch ? 1 : 0;
+      $customer->addresses()->update(['is_default' => 0]);
+      $customer->addresses()->update([
+            'type' => $request->address_type,
+            'address_line' => $request->address_line,
+            'city_id' => $request->city,
+            'is_default' => $isDefalut,
+      ]);
+      return response()->json(['message' => __('Address Updated successfully')]);
+    } catch (\Throwable $th) {
+      return response()->json(['message' => __('Something went wrong')], 422);
+    }
+  }
 
   public function store(Request $request)
   {

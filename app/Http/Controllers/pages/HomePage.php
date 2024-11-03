@@ -22,7 +22,7 @@ class HomePage extends Controller
       $shipments = Shipment::where('customer_id', $customerData->id)->count();
       $payments = Shipment::withCount('payment')->where('customer_id', $customerData->id)
         ->get()
-        ->sum('payment_count');;
+        ->sum('payment_count');
     } else {
       $shipments = Shipment::count();
       $payments = Payment::count();

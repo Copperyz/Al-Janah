@@ -153,17 +153,18 @@ Route::middleware(['auth', 'complete.registration'])->group(function () {
   });
 
   // Customers
-  Route::get('customer/profile', [CustomerController::class, 'showProfile'])->name('customer.profile');
   Route::group(['middleware' => ['permission:customers']], function () {
     Route::get('customers-all', [CustomerController::class, 'getCustomers'])->name('customers.all');
     Route::get('customers-shipments/{id}', [CustomerController::class, 'getShipmetns'])->name('customers.shipments');
     Route::post('customer-update', [CustomerController::class, 'updateCustomerData'])->name('customer.updateData');
     Route::post('customer-add-cash/{id}', [CustomerController::class, 'addCashBalance'])->name('customer.add-cash');
     Route::post('customer-add-coupon/{id}', [CustomerController::class, 'addCoupon'])->name('customer.add-coupon');
+    Route::get('customer/profile', [CustomerController::class, 'showProfile'])->name('customer.profile');
+    Route::post('customer/address', [CustomerController::class, 'storeAddress'])->name('customer.address.store');
+    Route::post('customer/address/{id}/set-default', [CustomerController::class, 'changeDefaultAddress'])->name('customer.address.setDefault');
     Route::resource('customers', CustomerController::class);
   });
   
-
   // Payments
   Route::group(['middleware' => ['permission:payments.index']], function () {
     Route::get('get-payments', [PaymentController::class, 'getPayments'])->name('get-payments');
@@ -182,9 +183,9 @@ Route::middleware(['auth', 'complete.registration'])->group(function () {
 
   //Cities
   Route::group(['middleware' => ['permission:cities']], function () {
+    Route::get('get-cities/{id}', [CityController::class, 'getCitiesByCountry'])->name('get-cities');
     Route::resource('cities', CityController::class);
   });
-
   //Addresses
   Route::group(['middleware' => ['permission:addresses']], function () {
     Route::resource('addresses', AddressController::class);

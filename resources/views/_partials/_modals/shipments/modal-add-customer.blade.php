@@ -28,8 +28,12 @@
                         <input name="phone" type="text" class="form-control mb-3" placeholder="{{__('Phone')}}" />
                     </div>
                     <div class="col-12">
-                        <label class="form-label">{{__('Address')}}</label>
-                        <textarea name="address" class="form-control mb-3" placeholder="{{__('Address')}}"></textarea>
+                        <label class="form-label">{{__('Address Type')}}</label>
+                        <input name="address_type" type="text" class="form-control mb-3" placeholder="{{__('Home, Office')}}"/>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">{{__('Address Line')}}</label>
+                        <textarea name="address_line" class="form-control mb-3" placeholder="{{__('Address Line')}}"></textarea>
                     </div>
                     <div class="col-12 col-md-6">
                         <label class="form-label">{{__('Country')}}</label>

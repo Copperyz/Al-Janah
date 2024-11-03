@@ -4,11 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Str;
 
 class Customer extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['first_name', 'last_name', 'phone', 'email'];
 
     protected static function boot()
     {
@@ -18,8 +21,11 @@ class Customer extends Model
             $model->customer_reference = (string) Str::orderedUuid(); // Generate UUID using Str::uuid()
         });
     }
-
-     public function country()
+    public function user() 
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function country()
     {
         return $this->belongsTo(Country::class, 'country_id');
     }
@@ -28,11 +34,25 @@ class Customer extends Model
     {
         return $this->belongsTo(City::class, 'city_id');
     }
-
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
      public function shipments()
     {
         return $this->hasMany(Shipment::class);
     }
+
+    public function payments(): HasManyThrough
+    {
+        return $this->hasManyThrough(Payment::class, Shipment::class);
+    }
+
+    public function getTotalShipmentPrice()
+    {
+        return $this->payments()->sum('shipment_amount');
+    }
+
     public function cashBalance()
     {
         return $this->hasMany(CashBalance::class);

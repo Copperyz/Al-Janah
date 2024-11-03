@@ -5,7 +5,7 @@ $configData = Helper::appClasses();
 
 @extends('layouts/layoutMaster')
 
-@section('title', __('Customer Overview'))
+@section('title', __('Customer Profile'))
 
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}" />
@@ -46,7 +46,17 @@ $configData = Helper::appClasses();
 <!-- <h4 class="py-3 mb-2">
   <span class="text-muted fw-light">eCommerce / Customer Details /</span> Overview
 </h4> -->
-
+<style>
+  .step-trigger:hover{
+    background-color: rgba(128, 169, 212, 0.3) !important;
+    color: rgb(128, 169, 212) !important;
+    /* opacity: 1 !important; */
+  }
+  .step-trigger.active:hover {
+  background-color: rgb(128, 169, 212) !important;
+  color: white !important;
+}
+</style>
 <div class="d-flex flex-column flex-sm-row align-items-center justify-content-sm-between mb-4 text-center text-sm-start gap-2">
   <div class="row col-12">
     <div class="col-md-6">
@@ -54,9 +64,9 @@ $configData = Helper::appClasses();
         <h4 class="mb-1">
           {{ __('Customer ID') }} #{{$customer->customer_code}}
         </h4>
-        <p class="mb-0">
+        <!-- <p class="mb-0">
           Aug 17, 2020, 5:48 (ET)
-        </p>
+        </p> -->
       </div>
     </div>
   </div>
@@ -70,11 +80,11 @@ $configData = Helper::appClasses();
       <button type="button" class="btn btn-label-danger w-100 delete-customer">{{ __('Delete Customer') }}</button>
     </div>
   @endcan
-
-  <div class="col-12 col-md-8 offset-md-2 mt-4"> <!-- Full width on mobile, offset for larger screens -->
+  <br>
+  <!-- <div class="col-12 col-md-8 offset-md-2 mt-4"> 
     <div class="alert alert-warning d-flex align-items-start" role="alert">
       <div class="flex-shrink-0 me-3">
-        <i class="ti ti-key ti-lg"></i> <!-- Icon added for better visual indication -->
+        <i class="ti ti-key ti-lg"></i> 
       </div>
       <div class="flex-grow-1">
         <h5 class="alert-heading mb-2">{{ __('Your Membership Key') }}</h5>
@@ -88,7 +98,7 @@ $configData = Helper::appClasses();
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
 
@@ -128,7 +138,7 @@ $configData = Helper::appClasses();
               </div>
             </div>
             <div class="gap-0 d-flex flex-column">
-              <p class="mb-0 fw-medium">$12,378</p>
+              <p class="mb-0 fw-medium">{{$customer->getTotalShipmentPrice()}}</p>
               <small>{{__('Spent')}}</small>
             </div>
           </div>
@@ -175,10 +185,10 @@ $configData = Helper::appClasses();
   <!-- Customer Content -->
   <div class="col-xl-8 col-lg-7 col-md-7 order-0 order-md-1 bs-stepper wizard-icons wizard-modern wizard-modern-icons-example">
     <!-- Customer Pills -->
-    <ul style="padding: 0;" class="nav nav-pills flex-column flex-md-row mb-3 bs-stepper-header">
-      <li class="nav-item step" data-target="#Overview"><a style="flex-direction: row" class="step-trigger nav-link active py-2" href="javascript:void(0);"><i class="ti ti-user me-1"></i>{{__('Overview')}}</a></li>
-      <li class="nav-item step" data-target="#Security"><a style="flex-direction: row" class="step-trigger nav-link py-2" href="javascript:void(0);"><i class="ti ti-lock me-1"></i>{{__('Security')}}</a></li>
-      <li class="nav-item step" data-target="#Billing"><a style="flex-direction: row" class="step-trigger nav-link py-" href="javascript:void(0);"><i class="ti ti-file-invoice me-1"></i>{{__('Address & Billing')}}</a></li>
+    <ul style="padding: 0;" class="nav nav-pills flex-column flex-sm-row mb-4 bs-stepper-header">
+      <li class="nav-item step" data-target="#Overview"><a style="padding: .5rem 1rem; gap: 0" class="step-trigger nav-link active flex-row" href="javascript:void(0);"><i class="ti ti-user me-1"></i>{{__('Overview')}}</a></li>
+      <li class="nav-item step" data-target="#Security"><a style="padding: .5rem 1rem; gap: 0" class="step-trigger nav-link flex-row" href="javascript:void(0);"><i class="ti ti-lock me-1"></i>{{__('Security')}}</a></li>
+      <li class="nav-item step" data-target="#Billing"><a style="padding: .5rem 1rem; gap: 0" class="step-trigger nav-link flex-row" href="javascript:void(0);"><i class="ti ti-file-invoice me-1"></i>{{__('Address & Billing')}}</a></li>
     </ul>
     <!--/ Customer Pills -->
 
@@ -316,94 +326,48 @@ $configData = Helper::appClasses();
           <div class="card-header align-items-center py-4">
             <h5 class="card-action-title mb-0">Address Book</h5>
             <div class="card-action-element">
-              <button class="btn btn-label-primary" type="button" data-bs-toggle="modal" data-bs-target="#addNewAddress">Add new address</button>
+              <button class="btn btn-label-primary" type="button" data-bs-toggle="modal" data-bs-target="#addNewAddress">{{__('Add new address')}}</button>
             </div>
           </div>
+          <!-- accordion-button -->
           <div class="card-body">
             <div class="accordion accordion-flush accordion-arrow-left" id="ecommerceBillingAccordionAddress">
+              @foreach($customer->addresses as $address)
               <div class="accordion-item border-bottom">
                 <div class="accordion-header d-flex justify-content-between align-items-center flex-wrap flex-sm-nowrap" id="headingHome">
-                  <a class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#ecommerceBillingAddressHome" aria-expanded="false" aria-controls="headingHome" role="button">
+                  <a class="my-3 collapsed" data-bs-toggle="collapse" data-bs-target="#ecommerceBillingAddressHome" aria-expanded="false" aria-controls="headingHome" role="button">
                     <span>
                       <span class="d-flex gap-2 align-items-baseline">
-                        <span class="h6 mb-1">Home</span>
+                        <span class="h6 mb-1">{{$address->type}}</span>
+                        @if($address->is_default)
                         <span class="badge bg-label-success">Default Address</span>
+                        @endif
                       </span>
-                      <span class="mb-0 text-muted">23 Shatinon Mekalan</span>
+                      <span class="mb-0 text-muted">{{$address->address_line}}</span>
                     </span>
                   </a>
                   <div class="d-flex gap-3 p-4 p-sm-0 pt-0 ms-1 ms-sm-0">
-                    <a href="javascript:void(0);"><i class="ti ti-pencil text-secondary ti-sm"></i></a>
-                    <a href="javascript:void(0);"><i class="ti ti-trash text-secondary ti-sm"></i></a>
+                  <!-- <button class="btn btn-label-primary btn-small" type="button" data-bs-toggle="modal" data-bs-target="#editAddressModal"><i class="ti ti-pencil text-secondary ti-sm"></i></button> -->
+                    <!-- <a href="javascript:void(0);"><i class="ti ti-trash text-secondary ti-sm"></i></a> -->
                     <button class="btn p-0" data-bs-toggle="dropdown" aria-expanded="false" role="button"><i class="ti ti-dots-vertical text-secondary ti-sm mt-1"></i></button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="javascript:void(0);">Set as default address</a></li>
+                      <li>
+                        <form class="changeDefaultAddressForm" action="{{route('customer.address.setDefault', $address->id)}}" method="POST">
+                          <button class="dropdown-item" type="submit">Set as default address</button>
+                        </form>
+                      </li>
                     </ul>
                   </div>
                 </div>
-                <div id="ecommerceBillingAddressHome" class="accordion-collapse collapse" data-bs-parent="#ecommerceBillingAccordionAddress">
+                <!-- <div id="ecommerceBillingAddressHome" class="accordion-collapse collapse" data-bs-parent="#ecommerceBillingAccordionAddress">
                   <div class="accordion-body ps-4 ms-2">
-                    <h6 class="mb-1">Violet Mendoza</h6>
-                    <p class="mb-1">23 Shatinon Mekalan,</p>
-                    <p class="mb-1">Melbourne, VIC 3000,</p>
-                    <p class="mb-1">LondonUK</p>
+                    <h6 class="mb-1"></h6>
+                    <p class="mb-1"></p>
+                    
                   </div>
-                </div>
+                </div> -->
               </div>
-              <div class="accordion-item border-bottom border-top-0">
-                <div class="accordion-header d-flex justify-content-between align-items-center flex-wrap flex-sm-nowrap" id="headingOffice">
-                  <a class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#ecommerceBillingAddressOffice" aria-expanded="false" aria-controls="headingOffice" role="button">
-                    <span class="d-flex flex-column">
-                      <span class="h6 mb-0">Office</span>
-                      <span class="mb-0 text-muted">45 Roker Terrace</span>
-                    </span>
-                  </a>
-                  <div class="d-flex gap-3 p-4 p-sm-0 pt-0 ms-1 ms-sm-0">
-                    <a href="javascript:void(0);"><i class="ti ti-pencil text-secondary ti-sm"></i></a>
-                    <a href="javascript:void(0);"><i class="ti ti-trash text-secondary ti-sm"></i></a>
-                    <button class="btn p-0" data-bs-toggle="dropdown" aria-expanded="false" role="button"><i class="ti ti-dots-vertical text-secondary ti-sm mt-1"></i></button>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="javascript:void(0);">Set as default address</a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div id="ecommerceBillingAddressOffice" class="accordion-collapse collapse" aria-labelledby="headingOffice" data-bs-parent="#ecommerceBillingAccordionAddress">
-                  <div class="accordion-body ps-4 ms-2">
-                    <h6 class="mb-1">Violet Mendoza</h6>
-                    <p class="mb-1">45 Roker Terrace,</p>
-                    <p class="mb-1">Latheronwheel,</p>
-                    <p class="mb-1">KW5 8NW</p>
-                    <p class="mb-1">LondonUK</p>
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-item border-top-0">
-                <div class="accordion-header d-flex justify-content-between align-items-center flex-wrap flex-sm-nowrap" id="headingFamily">
-                  <a class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#ecommerceBillingAddressFamily" aria-expanded="false" aria-controls="headingFamily" role="button">
-                    <span class="d-flex flex-column">
-                      <span class="h6 mb-0">Family</span>
-                      <span class="mb-0 text-muted">512 Water Plant</span>
-                    </span>
-                  </a>
-                  <div class="d-flex gap-3 p-4 p-sm-0 pt-0 ms-1 ms-sm-0">
-                    <a href="javascript:void(0);"><i class="ti ti-pencil text-secondary ti-sm"></i></a>
-                    <a href="javascript:void(0);"><i class="ti ti-trash text-secondary ti-sm"></i></a>
-                    <button class="btn p-0" data-bs-toggle="dropdown" aria-expanded="false" role="button"><i class="ti ti-dots-vertical text-secondary ti-sm mt-1"></i></button>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="javascript:void(0);">Set as default address</a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div id="ecommerceBillingAddressFamily" class="accordion-collapse collapse" aria-labelledby="headingFamily" data-bs-parent="#ecommerceBillingAccordionAddress">
-                  <div class="accordion-body ps-4 ms-2">
-                    <h6 class="mb-1">Violet Mendoza</h6>
-                    <p class="mb-1">512 Water Plant,</p>
-                    <p class="mb-1">Melbourne, NY 10036,</p>
-                    <p class="mb-1">New York,</p>
-                    <p class="mb-1">United States</p>
-                  </div>
-                </div>
-              </div>
+              @endforeach
             </div>
           </div>
         </div>
@@ -415,9 +379,21 @@ $configData = Helper::appClasses();
   </div>
   <!--/ Customer Content -->
 </div>
-
+<script>
+  $(document).ready(function() {
+  $('.step-trigger').on('click', function() {
+    // Remove the 'active' class from all step triggers
+    $('.step-trigger').removeClass('active');
+    
+    // Add the 'active' class to the clicked tab
+    $(this).addClass('active');
+  });
+});
+</script>
 <!-- Modal -->
 @include('_partials/_modals/customers/modal-edit-user')
+@include('_partials/_modals/customers/modal-add-address')
+@include('_partials/_modals/customers/modal-edit-address')
 @include('_partials/_modals/cashBalance/modal-add-cash')
 @include('_partials/_modals/coupons/modal-add-coupons')
 <!-- /Modal -->

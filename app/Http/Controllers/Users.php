@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
@@ -114,8 +115,9 @@ class Users extends Controller
           $user->email = $request->filled('email') ? $request->email : $user->email;
           $user->password = $request->filled('password') ? Hash::make($request->password) : $user->password;
           $user->save();
-          
-          $user->syncRoles($request->filled('role') ? $request->role : '');
+          if($request->filled('role')){
+            $user->syncRoles($request->role);
+          }
 
           return response()->json(['message' => __('User updated successfully')], 200);
         } catch (ModelNotFoundException $e) {

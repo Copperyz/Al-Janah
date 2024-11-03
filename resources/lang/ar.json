@@ -561,5 +561,11 @@
   "Enter Tracking Number": "ادخل رقم التتبع",
   "No updates have been made for this stage yet": "لم يتم إجراء أي تحديثات لهذه المرحلة حتى الآن",
   "Monitor System": "مراقبة النظام",
-  "Logs": "السجلات"
+  "Logs": "السجلات",
+  "Edit": "تعديل",
+  "Delete": "إلغاء",
+  "Show Shipments": "عرض الشحنات",
+  "Track": "تتبع",
+  "Show Route": "عرض المسار",
+  "Refund": "استرداد"
 }

@@ -56,9 +56,9 @@
                     <tr>
                         <th></th>
                         <th>{{ __('Name') }}</th>
-                        <th>{{ __('Symbol') }}</th>
+                        <th dir="ltr">{{ __('Symbol') }}</th>
                         <th>{{ __('Value in USD') }}</th>
-                        <th>{{ __('Actions') }}</th>
+                        <th class="text-center">{{ __('Actions') }}</th>
                     </tr>
                 </thead>
             </table>

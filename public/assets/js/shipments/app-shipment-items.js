@@ -26,7 +26,7 @@ $(function () {
         { data: 'width' },
         { data: 'weight' },
         { data: 'price' },
-        { data: 'action' }
+        { data: 'options' }
       ],
       columnDefs: [
         {
@@ -45,12 +45,6 @@ $(function () {
           targets: -1,
           searchable: false,
           orderable: false,
-          render: function (data, type, full, meta) {
-            return (
-              '<span><button class="btn btn-sm btn-info me-2 editShipmentItem" data-bs-target="#editShipmentItemModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit"></i></button>' +
-              '<span><button class="btn btn-sm btn-danger me-2 delete-record"><i class="ti ti-trash"></i></button>'
-            );
-          }
         }
       ],
       order: [[1, 'desc']],
@@ -287,7 +281,7 @@ $(function () {
     });
   });
 
-  $(document).on('click', 'button.editShipmentItem', function () {
+  $(document).on('click', 'a.editShipmentItem', function () {
     $('#editShipmentItemForm').trigger('reset');
     var data = dt_shipmentItems.row($(this).closest('tr')).data();
     $('#editShipmentItemForm').find('[name="name"]').val(data.name);

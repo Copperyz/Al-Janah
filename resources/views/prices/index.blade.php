@@ -59,7 +59,7 @@
                         <th>{{ __('To') }}</th>
                         <th>{{ __('Good Type') }}</th>
                         <th>{{ __('Price') }}</th>
-                        <th>{{ __('Actions') }}</th>
+                        <th class="text-center">{{ __('Actions') }}</th>
                     </tr>
                 </thead>
             </table>

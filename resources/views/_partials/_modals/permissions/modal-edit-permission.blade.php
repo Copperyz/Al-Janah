@@ -18,7 +18,7 @@
                     <div class="col-sm-9">
                         <label class="form-label" for="name">{{__('Name')}}</label>
                         <input type="text" id="name" name="name" class="form-control"
-                            placeholder="{{__('Enter a permission name')}}" tabindex="-1" />
+                            placeholder="{{__('Enter a permission name')}}" tabindex="-1" autocomplete="off"/>
                     </div>
                     <div class="col-sm-3 mb-3">
                         <input type="hidden" name="id" id="id">

@@ -213,26 +213,35 @@ class TripController extends Controller
         return $trip->shipments->count();
       })
       ->addColumn('options', function ($trip) {
-        $options = '';
-        
-        if (auth()->user()->can('show trip')) {
-            $options .= '<a href="./trips/'.$trip->id.'" class= "btn btn-sm btn-success me-2" > <i class="ti ti-eye"></i></a >';
-        }
+          $options = '<div class="text-xxl-center">';
+          $options .= '<button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>';
+          $options .= '<div class="dropdown-menu dropdown-menu-end m-0">';
 
-        if (auth()->user()->can('show trip shipments')) {
-          $options .= '<span><button class="btn btn-sm btn-warning me-2 showTripShipment" data-bs-target="#showTripShipmentModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-package"></i></button>';
-        }
+          if (auth()->user()->can('show trip')) {
+              $options .= '<a href="./trips/' . $trip->id . '" class="dropdown-item">' .
+                          '<i class="ti ti-eye me-2"></i>' . __('Track') . '</a>';
+          }
 
-        if (auth()->user()->can('edit trip')) {
-            $options .= '<span><button class="btn btn-sm btn-info me-2 editTrip" data-bs-target="#editTripModal" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="ti ti-edit"></i></button>';
-        }
+          if (auth()->user()->can('show trip shipments')) {
+              $options .= '<a href="javascript:;" class="dropdown-item showTripShipment" data-bs-target="#showTripShipmentModal" data-bs-toggle="modal" data-bs-dismiss="modal">' .
+                          '<i class="ti ti-package me-2"></i>' . __('Show Shipments') . '</a>';
+          }
 
-        if (auth()->user()->can('delete trip')) {
-          $options .= '<span><button class="btn btn-sm btn-danger me-2 delete-record"><i class="ti ti-trash"></i></button>';
-        }
+          if (auth()->user()->can('edit trip')) {
+              $options .= '<a href="javascript:;" class="dropdown-item editTrip" data-bs-target="#editTripModal" data-bs-toggle="modal" data-bs-dismiss="modal">' .
+                          '<i class="ti ti-edit me-2"></i>' . __('Edit') . '</a>';
+          }
 
-        return $options;
-    })
+          if (auth()->user()->can('delete trip')) {
+              $options .= '<a href="javascript:;" class="dropdown-item delete-record">' .
+                          '<i class="ti ti-trash me-2"></i>' . __('Delete') . '</a>';
+          }
+
+          $options .= '</div></div>';
+
+          return $options;
+      })
+
     ->rawColumns(['options'])
       ->make(true);
   }

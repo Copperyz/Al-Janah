@@ -152,6 +152,24 @@ class ShipmentItemController extends Controller
             $shipmentItem->parcelTypeName = $shipmentItem->parcelType->name;
         }
         return Datatables::of($shipmentItems)
+        ->addColumn('options', function ($shipment) {
+            $options = '<div class="text-xxl-center">';
+            $options .= '<button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>';
+            $options .= '<div class="dropdown-menu dropdown-menu-end m-0">';
+
+            // Change the first button to an anchor tag
+            $options .= '<a href="javascript:;" class="dropdown-item editShipmentItem" data-bs-target="#editShipmentItemModal" data-bs-toggle="modal" data-bs-dismiss="modal">' .
+                        '<i class="ti ti-edit"></i> ' . __('Edit') . '</a>';
+
+            // Change the delete button to an anchor tag
+            $options .= '<a href="javascript:;" class="dropdown-item delete-record">' .
+                        '<i class="ti ti-trash"></i> ' . __('Delete') . '</a>';
+
+            $options .= '</div></div>';
+
+            return $options;
+        })
+        ->rawColumns(['options'])
         ->make(true);
     }
 }

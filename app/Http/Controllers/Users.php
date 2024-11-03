@@ -163,18 +163,23 @@ class Users extends Controller
             return $user->getRoleNames()->toArray();
         })
         ->addColumn('options', function ($user) {
-            $options = '';
+            $options = '<div class="text-xxl-center">';
+            $options .= '<button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>';
+            $options .= '<div class="dropdown-menu dropdown-menu-end m-0">';
 
             // Check if the authenticated user has permission to edit the user
             if (auth()->user()->can('edit user')) {
-                $options .= '<a href="javascript:;" class="text-body editUser" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEditUser">' .
-                    '<i class="ti ti-edit ti-sm me-2"></i></a>';
+                $options .= '<a href="javascript:;" class="dropdown-item editUser" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEditUser">' .
+                            '<i class="ti ti-edit ti-sm me-2"></i>'.__('Edit').'</a>';
             }
 
             // Check if the authenticated user has permission to delete the user
             if (auth()->user()->can('delete user')) {
-                $options .= '<a href="javascript:;" class="text-body delete-record"><i class="ti ti-trash ti-sm mx-2"></i></a>';
+                $options .= '<a href="javascript:;" class="dropdown-item delete-record">' .
+                            '<i class="ti ti-trash ti-sm me-2"></i>'.__('Delete').'</a>';
             }
+
+            $options .= '</div></div>';
 
             return $options;
         })

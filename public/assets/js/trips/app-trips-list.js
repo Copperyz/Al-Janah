@@ -155,7 +155,7 @@ $(function () {
     });
   });
 
-  $(document).on('click', 'button.editTrip', function () {
+  $(document).on('click', 'a.editTrip', function () {
     $('#editTripForm').trigger('reset');
     var defaultTripRouteId = $('#edit_trip_route_id option:selected').val();
     var defaultCurrentStatus = $('#edit_current_status option:selected').val();

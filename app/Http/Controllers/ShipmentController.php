@@ -365,16 +365,22 @@ class ShipmentController extends Controller
                 return $legsCombined;
             })
             ->addColumn('options', function ($shipment) {
-                $options = '';
-    
+                $options = '<div class="text-xxl-center">';
+                $options .= '<button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>';
+                $options .= '<div class="dropdown-menu dropdown-menu-end m-0">';
+
                 if (auth()->user()->can('edit shipment')) {
-                    $options .= '<a href="./shipments/'.$shipment->id.'/edit" class="btn btn-xs btn-info me-2"><i class="ti ti-edit ti-sm"></i></a>';
+                    $options .= '<a href="./shipments/' . $shipment->id . '/edit" class="dropdown-item">' .
+                                '<i class="ti ti-edit ti-sm me-2"></i>' . __('Edit') . '</a>';
                 }
-    
+
                 if (auth()->user()->can('delete shipment')) {
-                    $options .= '<button class="btn btn-xs btn-danger me-2 delete-record"><i class="ti ti-trash ti-sm"></i></button>';
+                    $options .= '<a href="javascript:;" class="dropdown-item delete-record">' .
+                                '<i class="ti ti-trash ti-sm me-2"></i>' . __('Delete') . '</a>';
                 }
-    
+
+                $options .= '</div></div>';
+
                 return $options;
             })
             ->rawColumns(['paymentStatus', 'inventoryStatus', 'totalAmount', 'options'])

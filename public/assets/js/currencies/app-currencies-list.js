@@ -143,7 +143,7 @@ $(function () {
     });
 
 
-    $(document).on('click', 'button.editCurrency', function () {
+    $(document).on('click', 'a.editCurrency', function () {
         $("#editCurrencyForm").trigger('reset');
         var data = dt_currencies.row($(this).closest('tr')).data();
         $('#editCurrencyForm').find('[name="name"]').val(data.name);

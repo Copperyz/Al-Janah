@@ -57,7 +57,7 @@
                         <th></th>
                         <th>{{ __('Type') }}</th>
                         <th>{{ __('Legs') }}</th>
-                        <th>{{ __('Actions') }}</th>
+                        <th class="text-center">{{ __('Actions') }}</th>
                     </tr>
                 </thead>
             </table>

@@ -143,7 +143,7 @@ $(function () {
 
     });
 
-    $(document).on('click', 'button.showTripRoute', function () {
+    $(document).on('click', 'a.showTripRoute', function () {
         var data = dt_trip_routes.row($(this).closest('tr')).data();
         $.ajax({
             url: './trip_routes/' + data.id,
@@ -265,7 +265,7 @@ $(function () {
         // $('#editUserForm').find('[name="id"]').val(data.id);
     });
 
-    $(document).on('click', 'button.editTripRoute', function () {
+    $(document).on('click', 'a.editTripRoute', function () {
         $("#editTripRouteForm").trigger('reset');
         $("#legsContainer").empty();
         var data = dt_trip_routes.row($(this).closest('tr')).data();

@@ -164,37 +164,30 @@ class TripRouteController extends Controller
         return Datatables::of($tripRoutes)
             // Add the 'options' column based on permissions
             ->addColumn('options', function ($tripRoute) {
-                $options = '<span class="text-nowrap">';
-    
+                $options = '<div class="text-xxl-center">';
+                $options .= '<button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>';
+                $options .= '<div class="dropdown-menu dropdown-menu-end m-0">';
+
                 // Show button based on 'show trip route' permission
                 if (auth()->user()->can('show trip route')) {
-                    $options .= '<button class="btn btn-sm btn-icon me-2 showTripRoute" 
-                                    data-bs-target="#showTripRouteModal" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-dismiss="modal">
-                                    <i class="ti ti-eye"></i>
-                                </button>';
+                    $options .= '<a href="javascript:;" class="dropdown-item showTripRoute" data-bs-target="#showTripRouteModal" data-bs-toggle="modal" data-bs-dismiss="modal">' .
+                                '<i class="ti ti-eye me-2"></i>' . __('Show Route') . '</a>';
                 }
-    
+
                 // Edit button based on 'edit trip route' permission
                 if (auth()->user()->can('edit trip route')) {
-                    $options .= '<button class="btn btn-sm btn-icon me-2 editTripRoute" 
-                                    data-bs-target="#editTripRouteModal" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-dismiss="modal">
-                                    <i class="ti ti-edit"></i>
-                                </button>';
+                    $options .= '<a href="javascript:;" class="dropdown-item editTripRoute" data-bs-target="#editTripRouteModal" data-bs-toggle="modal" data-bs-dismiss="modal">' .
+                                '<i class="ti ti-edit me-2"></i>' . __('Edit') . '</a>';
                 }
-    
+
                 // Delete button based on 'delete trip route' permission
                 if (auth()->user()->can('delete trip route')) {
-                    $options .= '<a href="javascript:;" class="text-body delete-record">
-                                    <i class="ti ti-trash ti-sm mx-2"></i>
-                                </a>';
+                    $options .= '<a href="javascript:;" class="dropdown-item delete-record">' .
+                                '<i class="ti ti-trash me-2"></i>' . __('Delete') . '</a>';
                 }
-    
-                $options .= '</span>';
-    
+
+                $options .= '</div></div>';
+
                 return $options;
             })
             // Allow raw HTML for 'options' column

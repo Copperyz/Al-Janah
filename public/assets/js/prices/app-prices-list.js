@@ -144,7 +144,7 @@ $(function () {
     });
 
 
-    $(document).on('click', 'button.editPrice', function () {
+    $(document).on('click', 'a.editPrice', function () {
         $("#editPriceForm").trigger('reset');
         var data = dt_prices.row($(this).closest('tr')).data();
         $('#editPriceForm').find('[name="from_country_id"]').val(data.from_country_id).trigger('change');

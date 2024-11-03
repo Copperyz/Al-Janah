@@ -119,29 +119,28 @@ class PermissionsController extends Controller
         
         // Create DataTable response
         return Datatables::of($permissions)
-            ->addColumn('options', function ($permission) {
-                $options = '<span class="text-nowrap">';
-                
-                // Check if the user has permission to edit
-                if (auth()->user()->can('edit permission')) {
-                    $options .= '<button class="btn btn-sm btn-icon me-2 editPermission" 
-                                    data-bs-target="#editPermissionModal" 
-                                    data-bs-toggle="modal">
-                                    <i class="ti ti-edit"></i>
-                                </button>';
-                }
-                
-                // Check if the user has permission to delete
-                if (auth()->user()->can('delete permission')) {
-                    $options .= '<button class="btn btn-sm btn-icon delete-record">
-                                    <i class="ti ti-trash"></i>
-                                </button>';
-                }
-                
-                $options .= '</span>';
-                
-                return $options;
-            })
+        ->addColumn('options', function ($permission) {
+            $options = '<div class="text-xxl-center">';
+            $options .= '<button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>';
+            $options .= '<div class="dropdown-menu dropdown-menu-end m-0">';
+
+            // Check if the user has permission to edit
+            if (auth()->user()->can('edit permission')) {
+                $options .= '<a href="javascript:;" class="dropdown-item editPermission" data-bs-target="#editPermissionModal" data-bs-toggle="modal">' .
+                            '<i class="ti ti-edit ti-sm me-2"></i>' . __('Edit') . '</a>';
+            }
+
+            // Check if the user has permission to delete
+            if (auth()->user()->can('delete permission')) {
+                $options .= '<a href="javascript:;" class="dropdown-item delete-record">' .
+                            '<i class="ti ti-trash ti-sm me-2"></i>' . __('Delete') . '</a>';
+            }
+
+            $options .= '</div></div>';
+
+            return $options;
+        })
+
             ->rawColumns(['options'])
             ->make(true);
     }

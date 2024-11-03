@@ -115,7 +115,7 @@ $(function () {
 
   });
 
-  $(document).on('click', 'button.editPermission', function () {
+  $(document).on('click', 'a.editPermission', function () {
     $("#editPermissionForm").trigger('reset');
     var data = dt_permission.row($(this).closest('tr')).data();
     $('#editPermissionForm').find('[name="name"]').val(data.name);

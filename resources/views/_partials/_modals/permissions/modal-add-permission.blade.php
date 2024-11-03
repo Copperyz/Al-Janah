@@ -13,7 +13,7 @@
                     <div class="col-12 mb-3">
                         <label class="form-label" for="name">{{__('Name')}}</label>
                         <input type="text" id="name" name="name" class="form-control"
-                            placeholder="{{__('Enter a permission name')}}" autofocus />
+                            placeholder="{{__('Enter a permission name')}}" autofocus autocomplete="off"/>
                     </div>
                     <!-- <div class="col-12 mb-2">
                         <div class="form-check">

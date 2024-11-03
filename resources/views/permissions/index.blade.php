@@ -16,10 +16,6 @@
 
 @section('vendor-script')
     <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
-
-    <script src="{{ asset('assets/vendor/libs/@form-validation/umd/bundle/popular.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js') }}"></script>
 @endsection
 
 @section('page-script')
@@ -43,12 +39,12 @@
     <div class="card">
         <div class="card-datatable table-responsive mt-3">
             <table class="datatables-permissions table">
-                <thead class="border-top">
+                <thead>
                     <tr>
                         <th></th>
                         <th>{{ __('Name') }}</th>
                         <th>{{ __('Created Date') }}</th>
-                        <th>{{ __('Actions') }}</th>
+                        <th class="text-center">{{ __('Actions') }}</th>
                     </tr>
                 </thead>
             </table>
@@ -74,7 +70,25 @@
 
             var areYouSureTranslation = @json(__('Are you sure?'));
             var areYouSureTextTranslation = @json(__('You will not be able to revert this!'));
+
+            var addButton = '<br>';
         </script>
+
+        @if (auth()->user()->can('add permission'))
+            <script>
+                addButton = {
+                    text: `<i class="ti ti-plus me-md-1"></i><span class="d-md-inline-block d-none">${addPermissionTranslation}</span>`,
+                    className: 'add-new btn btn-primary mt-2 mb-2',
+                    attr: {
+                        'data-bs-toggle': 'modal',
+                        'data-bs-target': '#addPermissionModal'
+                    },
+                    init: function(api, node) {
+                        $(node).removeClass('btn-secondary'); // Remove secondary class
+                    }
+                };
+            </script>
+        @endif
 
         <!-- Modal -->
         @include('_partials/_modals/permissions/modal-add-permission')

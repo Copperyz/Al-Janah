@@ -125,6 +125,28 @@ class PriceController extends Controller
             $price->goodType = $price->goodType->name;
         }
         return Datatables::of($prices)
+        ->addColumn('options', function ($price) {
+            $options = '<div class="text-xxl-center">';
+            $options .= '<button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>';
+            $options .= '<div class="dropdown-menu dropdown-menu-end m-0">';
+
+            // Edit button based on 'edit price' permission
+            if (auth()->user()->can('edit price')) {
+                $options .= '<a href="javascript:;" class="dropdown-item editPrice" data-bs-target="#editPriceModal" data-bs-toggle="modal" data-bs-dismiss="modal">' .
+                            '<i class="ti ti-edit me-2"></i>' . __('Edit') . '</a>';
+            }
+
+            // Delete button based on 'delete price' permission
+            if (auth()->user()->can('delete price')) {
+                $options .= '<a href="javascript:;" class="dropdown-item delete-record">' .
+                            '<i class="ti ti-trash me-2"></i>' . __('Delete') . '</a>';
+            }
+
+            $options .= '</div></div>';
+
+            return $options;
+        })
+        ->rawColumns(['options'])
         ->make(true);
     }
 

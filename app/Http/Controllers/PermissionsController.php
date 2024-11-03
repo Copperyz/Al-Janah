@@ -108,21 +108,43 @@ class PermissionsController extends Controller
         // Start building the query and order by ID in descending order
         $query = Permission::orderBy('id', 'DESC');
     
-
-        // Paginate the results using DataTable parameters
+        // Fetch the permissions from the database
         $permissions = $query->get();
-    
+        
         // Format the created_at date using Carbon for each permission
         $permissions->each(function ($permission) {
             $carbonDate = Carbon::parse($permission->created_at);
             $permission->setAttribute('carbonDate', $carbonDate->format('Y-m-d g:i A'));
         });
-    
+        
         // Create DataTable response
         return Datatables::of($permissions)
-            ->rawColumns(['Options'])
+        ->addColumn('options', function ($permission) {
+            $options = '<div class="text-xxl-center">';
+            $options .= '<button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>';
+            $options .= '<div class="dropdown-menu dropdown-menu-end m-0">';
+
+            // Check if the user has permission to edit
+            if (auth()->user()->can('edit permission')) {
+                $options .= '<a href="javascript:;" class="dropdown-item editPermission" data-bs-target="#editPermissionModal" data-bs-toggle="modal">' .
+                            '<i class="ti ti-edit ti-sm me-2"></i>' . __('Edit') . '</a>';
+            }
+
+            // Check if the user has permission to delete
+            if (auth()->user()->can('delete permission')) {
+                $options .= '<a href="javascript:;" class="dropdown-item delete-record">' .
+                            '<i class="ti ti-trash ti-sm me-2"></i>' . __('Delete') . '</a>';
+            }
+
+            $options .= '</div></div>';
+
+            return $options;
+        })
+
+            ->rawColumns(['options'])
             ->make(true);
     }
+    
     
     
 }

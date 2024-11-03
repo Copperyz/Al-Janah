@@ -35,92 +35,6 @@
 
 @section('content')
 
-    <!-- <div class="row g-4 mb-4">
-                                    <div class="col-sm-6 col-xl-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="d-flex align-items-start justify-content-between">
-                                                    <div class="content-left">
-                                                        <span>Session</span>
-                                                        <div class="d-flex align-items-center my-2">
-                                                            <h3 class="mb-0 me-2">21,459</h3>
-                                                            <p class="text-success mb-0">(+29%)</p>
-                                                        </div>
-                                                        <p class="mb-0">Total Users</p>
-                                                    </div>
-                                                    <div class="avatar">
-                                                        <span class="avatar-initial rounded bg-label-primary">
-                                                            <i class="ti ti-user ti-sm"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-xl-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="d-flex align-items-start justify-content-between">
-                                                    <div class="content-left">
-                                                        <span>Paid Users</span>
-                                                        <div class="d-flex align-items-center my-2">
-                                                            <h3 class="mb-0 me-2">4,567</h3>
-                                                            <p class="text-success mb-0">(+18%)</p>
-                                                        </div>
-                                                        <p class="mb-0">Last week analytics </p>
-                                                    </div>
-                                                    <div class="avatar">
-                                                        <span class="avatar-initial rounded bg-label-danger">
-                                                            <i class="ti ti-user-plus ti-sm"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-xl-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="d-flex align-items-start justify-content-between">
-                                                    <div class="content-left">
-                                                        <span>Active Users</span>
-                                                        <div class="d-flex align-items-center my-2">
-                                                            <h3 class="mb-0 me-2">19,860</h3>
-                                                            <p class="text-danger mb-0">(-14%)</p>
-                                                        </div>
-                                                        <p class="mb-0">Last week analytics</p>
-                                                    </div>
-                                                    <div class="avatar">
-                                                        <span class="avatar-initial rounded bg-label-success">
-                                                            <i class="ti ti-user-check ti-sm"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-xl-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="d-flex align-items-start justify-content-between">
-                                                    <div class="content-left">
-                                                        <span>Pending Users</span>
-                                                        <div class="d-flex align-items-center my-2">
-                                                            <h3 class="mb-0 me-2">237</h3>
-                                                            <p class="text-success mb-0">(+42%)</p>
-                                                        </div>
-                                                        <p class="mb-0">Last week analytics</p>
-                                                    </div>
-                                                    <div class="avatar">
-                                                        <span class="avatar-initial rounded bg-label-warning">
-                                                            <i class="ti ti-user-exclamation ti-sm"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
     <!-- Users List Table -->
     <div class="card mb-4">
         <div class="card-header">
@@ -147,104 +61,118 @@
                 </thead>
             </table>
         </div>
-        <!-- Offcanvas to add new user -->
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddUser" aria-labelledby="offcanvasAddUserLabel">
-            <div class="offcanvas-header">
-                <h5 id="offcanvasAddUserLabel" class="offcanvas-title">{{ __('Add User') }}</h5>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body mx-0 flex-grow-0 pt-0 h-100">
-                <form class="add-new-user pt-0 addNewUserForm" id="addNewUserForm" action="{{ route('users.store') }}"
-                    method="POST">
-                    <div class="mb-3">
-                        <label class="form-label" for="name">{{ __('Name') }}</label>
-                        <input type="text" class="form-control" placeholder="John Doe" name="name"
-                            aria-label="John Doe" />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="email">{{ __('Email') }}</label>
-                        <input type="text" class="form-control" placeholder="john.doe@example.com"
-                            aria-label="john.doe@example.com" name="email" />
-                    </div>
-                    <div class="mb-3 form-password-toggle">
-                        <label class="form-label" for="password">{{ __('Password') }}</label>
-                        <div class="input-group input-group-merge">
-                            <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                name="password"
-                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                aria-describedby="password" />
-                            <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
-                        </div>
 
-                    </div>
+    </div>
 
-                    <div class="mb-3">
-                        <label for="role" class="form-label me-4 fw-medium">{{ __('Role') }}</label>
-                        <select id="addrole" class="select2 form-select" data-allow-clear="true" name="role">
-                            <option disabled selected>{{ __('Select') }}</option>
-                            @foreach ($roles as $role)
-                                <option value="{{ $role->name }}">{{ $role->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary me-sm-3 me-1 data-sumbit">{{ __('Submit') }}</button>
-                    <button type="reset" class="btn btn-label-secondary"
-                        data-bs-dismiss="offcanvas">{{ __('Cancel') }}</button>
-                </form>
-            </div>
+    <!-- Offcanvas to add new user -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddUser" aria-labelledby="offcanvasAddUserLabel">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasAddUserLabel" class="offcanvas-title">{{ __('Add User') }}</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-
-        <!-- Offcanvas to edit user -->
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEditUser"
-            aria-labelledby="offcanvasEditUserLabel">
-            <div class="offcanvas-header">
-                <h5 id="offcanvasEditUserLabel" class="offcanvas-title">{{ __('Edit User') }}</h5>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                    aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body mx-0 flex-grow-0 pt-0 h-100">
-                <form class="edit-new-user pt-0 editUserForm" id="editUserForm" action="" method="PUT">
-                    <div class="mb-3">
-                        <label class="form-label" for="name">{{ __('Name') }}</label>
-                        <input type="text" class="form-control" placeholder="John Doe" name="name"
-                            aria-label="John Doe" />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="email">{{ __('Email') }}</label>
-                        <input type="text" class="form-control" placeholder="john.doe@example.com"
-                            aria-label="john.doe@example.com" name="email" />
-                    </div>
-                    <div class="mb-3 form-password-toggle">
-                        <label class="form-label" for="password">{{ __('Password') }}</label>
-                        <div class="input-group input-group-merge">
-                            <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                name="password"
-                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                aria-describedby="password" />
-                            <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
-                        </div>
-
+        <div class="offcanvas-body mx-0 flex-grow-0 pt-0 h-100">
+            <form class="add-new-user pt-0 addNewUserForm" id="addNewUserForm" action="{{ route('users.store') }}"
+                method="POST">
+                <div class="mb-3">
+                    <label class="form-label" for="name">{{ __('Name') }}</label>
+                    <input type="text" class="form-control" placeholder="John Doe" name="name"
+                        aria-label="John Doe" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="email">{{ __('Email') }}</label>
+                    <input type="text" class="form-control" placeholder="john.doe@example.com"
+                        aria-label="john.doe@example.com" name="email" />
+                </div>
+                <div class="mb-3 form-password-toggle">
+                    <label class="form-label" for="password">{{ __('Password') }}</label>
+                    <div class="input-group input-group-merge">
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password"
+                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                            aria-describedby="password" />
+                        <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="role" class="form-label me-4 fw-medium">{{ __('Role') }}</label>
-                        <select id="role" class="select2 form-select" data-allow-clear="true" name="role">
-                            @foreach ($roles as $role)
-                                <option value="{{ $role->name }}">{{ $role->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <input type="hidden" name="id" id="id">
-                    <button type="submit" class="btn btn-primary me-sm-3 me-1 data-sumbit">{{ __('Submit') }}</button>
-                    <button type="reset" class="btn btn-label-secondary"
-                        data-bs-dismiss="offcanvas">{{ __('Cancel') }}</button>
-                </form>
-            </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="role" class="form-label me-4 fw-medium">{{ __('Role') }}</label>
+                    <select id="addrole" class="select2 form-select" data-allow-clear="true" name="role">
+                        <option disabled selected>{{ __('Select') }}</option>
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->name }}">{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary me-sm-3 me-1 data-sumbit">{{ __('Submit') }}</button>
+                <button type="reset" class="btn btn-label-secondary"
+                    data-bs-dismiss="offcanvas">{{ __('Cancel') }}</button>
+            </form>
         </div>
     </div>
+
+    <!-- Offcanvas to edit user -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEditUser" aria-labelledby="offcanvasEditUserLabel">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasEditUserLabel" class="offcanvas-title">{{ __('Edit User') }}</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body mx-0 flex-grow-0 pt-0 h-100">
+            <form class="edit-new-user pt-0 editUserForm" id="editUserForm" action="" method="PUT">
+                <div class="mb-3">
+                    <label class="form-label" for="name">{{ __('Name') }}</label>
+                    <input type="text" class="form-control" placeholder="John Doe" name="name"
+                        aria-label="John Doe" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="email">{{ __('Email') }}</label>
+                    <input type="text" class="form-control" placeholder="john.doe@example.com"
+                        aria-label="john.doe@example.com" name="email" />
+                </div>
+                <div class="mb-3 form-password-toggle">
+                    <label class="form-label" for="password">{{ __('Password') }}</label>
+                    <div class="input-group input-group-merge">
+                        <input type="password" class="form-control @error('password') is-invalid @enderror"
+                            name="password"
+                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                            aria-describedby="password" />
+                        <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                    </div>
+
+                </div>
+
+                <div class="mb-3">
+                    <label for="role" class="form-label me-4 fw-medium">{{ __('Role') }}</label>
+                    <select id="role" class="select2 form-select" data-allow-clear="true" name="role">
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->name }}">{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <input type="hidden" name="id" id="id">
+                <button type="submit" class="btn btn-primary me-sm-3 me-1 data-sumbit">{{ __('Submit') }}</button>
+                <button type="reset" class="btn btn-label-secondary"
+                    data-bs-dismiss="offcanvas">{{ __('Cancel') }}</button>
+            </form>
+        </div>
+    </div>
+
     <script>
         var addNewUserTranslation = @json(__('Add User'));
+        var addButton = '<br>';
     </script>
+
+    @if (auth()->user()->can('add user'))
+        <script>
+            addButton = {
+                text: `<i class="ti ti-plus ti-sm me-2"></i>${addNewUserTranslation}`,
+                className: 'btn btn-primary text-white d-flex align-items-center mt-2 mb-2',
+                action: function(e, dt, button, config) {
+                    const offcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasAddUser'));
+                    offcanvas.show();
+                }
+            }
+        </script>
+    @endif
 
 
 

@@ -220,6 +220,7 @@
   "China": "الصين",
   "Dubai": "دبي",
   "Tunis": "تونس",
+  "India": "الهند",
   "  You have selected  ": "  لقد قمت باختيار",
   "rows": "صفوف",
   "  Click a row to select it  ": "  انقر على الصف لتحديده",
@@ -558,5 +559,13 @@
   "Shipment Created": "تم إنشاء الشحنة",
   "Track my Shipment": "تتبع شحنتي",
   "Enter Tracking Number": "ادخل رقم التتبع",
-  "No updates have been made for this stage yet": "لم يتم إجراء أي تحديثات لهذه المرحلة حتى الآن"
+  "No updates have been made for this stage yet": "لم يتم إجراء أي تحديثات لهذه المرحلة حتى الآن",
+  "Monitor System": "مراقبة النظام",
+  "Logs": "السجلات",
+  "Edit": "تعديل",
+  "Delete": "إلغاء",
+  "Show Shipments": "عرض الشحنات",
+  "Track": "تتبع",
+  "Show Route": "عرض المسار",
+  "Refund": "استرداد"
 }

@@ -24,7 +24,7 @@ $(function () {
                 { data: 'payment_method' },
                 { data: 'date' },
                 { data: 'statusCapped' },
-                { data: 'action' }
+                { data: 'options' }
             ],
             columnDefs: [
                 {
@@ -62,20 +62,6 @@ $(function () {
                     targets: -1,
                     searchable: false,
                     orderable: false,
-                    render: function (data, type, full, meta) {
-                        if (full['status'] == 'paid') {
-                            return (
-                                '<div class="d-flex align-items-center">' +
-                                '<a href="javascript:;" class="text-body refund-record"><i class="ti ti-receipt-refund ti-sm mx-2"></i></a>' +
-                                '</div>'
-                            );
-                        }
-                        return (
-                            '<div class="d-flex align-items-center">' +
-                            '<button class="btn btn-sm btn-primary me-2 refund-record"><i class="ti ti-reload"></i></button>' +
-                            '</div>'
-                        );
-                    }
                 }
             ],
             order: [[1, 'desc']],

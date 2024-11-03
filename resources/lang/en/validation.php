@@ -140,7 +140,12 @@ return [
     |
     */
 
-  'custom' => [],
+  'custom' => [
+    'points.*.type' => [
+        'required' => __('The :attribute field is required.'),
+        'in' => __('The :attribute must be either Origin, Transit, or Destination.'),
+    ],
+  ],
 
   /*
     |--------------------------------------------------------------------------
@@ -209,5 +214,7 @@ return [
     'productWeight' => __('Weight'),
     'shipmentID' => __('Shipment'),
     'parcelType' => __('Parcel Type'),
+    'points.*.type' => __('Point Type'),
+    'points.*.country' => __('Country'),
   ],
 ];

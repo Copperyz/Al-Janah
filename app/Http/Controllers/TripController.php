@@ -70,7 +70,7 @@ class TripController extends Controller
   {
     $validator = Validator::make($request->all(), [
       'trip_route_id' => ['required', 'string', 'exists:trip_routes,id'],
-      'current_status' => ['required', 'string'],
+      // 'current_status' => ['required', 'string'],
       'departure_date' => ['nullable', 'date_format:Y-m-d h:i A'],
       'estimated_delivery_date' => ['nullable', 'date_format:Y-m-d h:i A'],
     ]);
@@ -104,7 +104,8 @@ class TripController extends Controller
     // Create the trip
     $trip = Trip::create([
       'trip_route_id' => $request->trip_route_id,
-      'current_status' => $request->input('current_status'),
+      // 'current_status' => $request->input('current_status'),
+      'current_status' => 'In Preparation',
       'current_route_leg' => 0,
       'departure_date' => $departureDate,
       'estimated_delivery_date' => $estimatedDeliveryDate,
@@ -144,7 +145,7 @@ class TripController extends Controller
   {
     $validator = Validator::make($request->all(), [
       'trip_route_id' => ['required', 'string', 'exists:trip_routes,id'],
-      'current_status' => ['required', 'string'],
+      // 'current_status' => ['required', 'string'],
       'departure_date' => ['nullable'],
       'estimated_delivery_date' => ['nullable'],
     ]);
@@ -174,7 +175,7 @@ class TripController extends Controller
     $trip->departure_date = $departureDate;
     $trip->estimated_delivery_date = $estimatedDeliveryDate;
     $trip->trip_route_id = $request->input('trip_route_id');
-    $trip->current_status = $request->input('current_status');
+    // $trip->current_status = $request->input('current_status');
     $trip->updated_by = auth()->user()->id;
 
     // Save the updated instance to the database
@@ -211,6 +212,37 @@ class TripController extends Controller
       ->addColumn('shipmentsCount', function ($trip) {
         return $trip->shipments->count();
       })
+      ->addColumn('options', function ($trip) {
+          $options = '<div class="text-xxl-center">';
+          $options .= '<button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>';
+          $options .= '<div class="dropdown-menu dropdown-menu-end m-0">';
+
+          if (auth()->user()->can('show trip')) {
+              $options .= '<a href="./trips/' . $trip->id . '" class="dropdown-item">' .
+                          '<i class="ti ti-eye me-2"></i>' . __('Track') . '</a>';
+          }
+
+          if (auth()->user()->can('show trip shipments')) {
+              $options .= '<a href="javascript:;" class="dropdown-item showTripShipment" data-bs-target="#showTripShipmentModal" data-bs-toggle="modal" data-bs-dismiss="modal">' .
+                          '<i class="ti ti-package me-2"></i>' . __('Show Shipments') . '</a>';
+          }
+
+          if (auth()->user()->can('edit trip')) {
+              $options .= '<a href="javascript:;" class="dropdown-item editTrip" data-bs-target="#editTripModal" data-bs-toggle="modal" data-bs-dismiss="modal">' .
+                          '<i class="ti ti-edit me-2"></i>' . __('Edit') . '</a>';
+          }
+
+          if (auth()->user()->can('delete trip')) {
+              $options .= '<a href="javascript:;" class="dropdown-item delete-record">' .
+                          '<i class="ti ti-trash me-2"></i>' . __('Delete') . '</a>';
+          }
+
+          $options .= '</div></div>';
+
+          return $options;
+      })
+
+    ->rawColumns(['options'])
       ->make(true);
   }
 

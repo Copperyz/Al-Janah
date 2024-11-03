@@ -45,7 +45,7 @@ class Handler extends ExceptionHandler
     }
 
     if ($exception instanceof HttpException) {
-      return response()->view('errors.pages-misc-under-maintenance', [], 500);
+      return response()->view('errors.pages-misc-not-authorized', [], 500);
     }
 
     if ($exception instanceof AuthorizationException) {

@@ -11,7 +11,7 @@
                 <form class="form-repeater" id="addTripForm" onsubmit="return false" action="{{ route('trips.store') }}"
                     method="POST">
                     <div class="row">
-                        <div class="col-md-6 mb-3 mb-3">
+                        <div class="col-md-12 mb-3 mb-3">
                             <label for="trip_route_id" class="form-label me-4 fw-medium">{{__('Trip Route')}}</label>
                             <select id="trip_route_id" class="select2 form-select form-select-lg"
                                 data-allow-clear="true" name="trip_route_id">
@@ -21,7 +21,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-6 mb-3 mb-3">
+                        <!-- <div class="col-md-6 mb-3 mb-3">
                             <label for="current_status" class="form-label me-4 fw-medium">{{__('Status')}}</label>
                             <select id="current_status" class="select2 form-select form-select-lg"
                                 data-allow-clear="true" name="current_status">
@@ -31,7 +31,7 @@
                                 <option value="Enroute">{{__('Enroute')}}</option>
                                 <option value="Ready to Pickup">{{__('Ready to Pickup')}}</option>
                             </select>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">

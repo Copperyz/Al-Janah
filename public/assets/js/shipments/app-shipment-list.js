@@ -20,12 +20,12 @@ $(function () {
         { data: '' },
         { data: 'tracking_no' },
         { data: 'customerName' },
-        { data: 'delivery_code' },
+        { data: 'shipmentRoute' },
         { data: 'date' },
         { data: 'totalAmount' },
         { data: 'paymentStatus' },
         { data: 'inventoryStatus' },
-        { data: 'action' }
+        { data: 'options' }
       ],
       columnDefs: [
         {
@@ -118,12 +118,6 @@ $(function () {
           targets: -1,
           searchable: false,
           orderable: false,
-          render: function (data, type, full, meta) {
-            return (
-              '<a href="./shipments/' + full['id'] + '/edit" class="btn btn-xs btn-info me-2"><i class="ti ti-edit ti-sm"></i></a>' +  
-              '<button class="btn btn-xs btn-danger me-2 delete-record"><i class="ti ti-trash ti-sm"></i></button>'
-            );
-          }
         }
       ],
       order: [[1, 'desc']],
@@ -149,13 +143,7 @@ $(function () {
       },
       // Buttons with Dropdown
       buttons: [
-        {
-          text: `<i class="ti ti-plus ti-sm me-2"></i>${addShipmentTranslation}`,
-          className: 'btn btn-primary mt-2 mb-2',
-          action: function (e, dt, button, config) {
-            window.location = './shipments/create';
-          }
-        }
+        addButton
       ]
     });
   }

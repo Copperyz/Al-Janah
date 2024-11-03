@@ -17,6 +17,13 @@ use Illuminate\Support\Facades\Validator;
 
 class PaymentController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:print invoice')->only('print');
+    }
+
+
     /**
      * Display a listing of the resource.
      */
@@ -163,6 +170,24 @@ class PaymentController extends Controller
         // Access shipment data here, for example:
         return $payment->status == 'Paid' ? __('Paid') : __('Refunded');
         })
+        ->addColumn('options', function ($payment) {
+            $options = '<div class="text-xxl-center">';
+            $options .= '<button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>';
+            $options .= '<div class="dropdown-menu dropdown-menu-end m-0">';
+
+            if (auth()->user()->can('refund payment')) {
+                if ($payment->status == 'Refunded') {
+                    $options .= '<a href="javascript:;" class="dropdown-item refund-record" title="' . __('Payment') . '"><i class="ti ti-receipt me-2"></i>' . __('Payment') . '</a>';
+                } else {
+                    $options .= '<a href="javascript:;" class="dropdown-item refund-record" title="' . __('Refund') . '"><i class="ti ti-reload me-2"></i>' . __('Refund') . '</a>';
+                }
+            }
+
+            $options .= '</div></div>';
+
+            return $options;
+        })
+        ->rawColumns(['options'])
         ->make(true);
     }
 

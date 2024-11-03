@@ -16,6 +16,8 @@ use App\Models\ParcelType;
 use Illuminate\Support\Str;
 use App\Models\ShipmentItem;
 use App\Models\ShipmentHistory;
+use App\Models\TripShipment;
+use App\Models\Trip;
 use App\Models\Currency;
 use Illuminate\Http\Request;
 use App\Models\InventoryItem;
@@ -28,6 +30,19 @@ use Illuminate\Support\Facades\Auth;
 
 class ShipmentController extends Controller
 {
+
+    public function __construct()
+    {
+        // Protect only the 'edit' action with 'edit shipment' permission
+        $this->middleware('permission:edit shipment')->only('edit');
+
+        // Protect only the 'add' action with 'add shipment' permission
+        $this->middleware('permission:add shipment')->only('create');
+
+        // Protect only the 'show' action with 'show shipment' permission
+        $this->middleware('permission:show shipment')->only('show');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -314,7 +329,7 @@ class ShipmentController extends Controller
         if ($roles->contains('Customer')) {
             $shipmentsQuery = Shipment::with(['customer', 'currency', 'payment'])->where('customer_id', $user->customer->id)->orderBy('id', 'DESC');
         } else {
-            $shipmentsQuery = Shipment::with(['customer', 'currency', 'payment'])->orderBy('id', 'DESC');
+            $shipmentsQuery = Shipment::with(['customer', 'currency', 'payment', 'trips'])->orderBy('id', 'DESC');
         }
         
 
@@ -333,7 +348,42 @@ class ShipmentController extends Controller
                 $inventoryStatus = InventoryItem::where('shipment_id', $shipment->id)->pluck('status')->first();
                 return $inventoryStatus ? '<span class="badge bg-label-info">' . __($inventoryStatus) . '</span>' : '<span class="badge bg-label-warning">' . __('Unallocated') . '</span>';
             })
-            ->rawColumns(['paymentStatus', 'inventoryStatus', 'totalAmount'])
+            ->addColumn('shipmentRoute', function($shipment) {
+                $tripId = TripShipment::where('shipment_id', $shipment->id)->value('trip_id');
+                $tripRouteId = Trip::where('id', $tripId)->value('trip_route_id');
+                $tripRoute = TripRoute::find($tripRouteId);
+            
+                $legsCombined = '';
+                if ($tripRoute && $tripRoute->legs) {
+                    foreach ($tripRoute->legs as $leg) {
+                        if (!empty($leg['country'])) {
+                            $legsCombined .= ($legsCombined ? '. ' : '') . ' ' . __($leg['type']) . ' (' . __($leg['country']) . ') ';
+                        }
+                    }
+                }
+            
+                return $legsCombined;
+            })
+            ->addColumn('options', function ($shipment) {
+                $options = '<div class="text-xxl-center">';
+                $options .= '<button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>';
+                $options .= '<div class="dropdown-menu dropdown-menu-end m-0">';
+
+                if (auth()->user()->can('edit shipment')) {
+                    $options .= '<a href="./shipments/' . $shipment->id . '/edit" class="dropdown-item">' .
+                                '<i class="ti ti-edit ti-sm me-2"></i>' . __('Edit') . '</a>';
+                }
+
+                if (auth()->user()->can('delete shipment')) {
+                    $options .= '<a href="javascript:;" class="dropdown-item delete-record">' .
+                                '<i class="ti ti-trash ti-sm me-2"></i>' . __('Delete') . '</a>';
+                }
+
+                $options .= '</div></div>';
+
+                return $options;
+            })
+            ->rawColumns(['paymentStatus', 'inventoryStatus', 'totalAmount', 'options'])
             ->make(true);
     }
 }

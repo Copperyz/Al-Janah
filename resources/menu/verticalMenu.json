@@ -95,7 +95,7 @@
       "url": "trips",
       "icon": "menu-icon tf-icons ti ti-plane",
       "name": "Trips",
-      "slug": "trips.index"
+      "slug": "trips"
     },
     {
       "url": "trip_routes",
@@ -126,6 +126,18 @@
       "icon": "menu-icon tf-icons ti ti-exchange",
       "name": "Currencies",
       "slug": "currencies.index"
+    },
+    {
+      "url": "telescope",
+      "icon": "menu-icon tf-icons ti ti-dashboard",
+      "name": "Monitor System",
+      "slug": "view telescope"
+    },
+    {
+      "url": "log-viewer",
+      "icon": "menu-icon tf-icons ti ti-files",
+      "name": "Logs",
+      "slug": "view logs"
     }
   ]
 }

@@ -3,7 +3,6 @@
     $configData = Helper::appClasses();
 @endphp
 
-
 @extends('layouts/layoutMaster')
 
 @section('title', __('Edit Shipment'))
@@ -37,7 +36,6 @@
     <script src="{{ asset('assets/js/extends/forms-selects.js') }}"></script>
     <script src="{{ asset('assets/js/extends/form-layouts.js') }}"></script>
 @endsection
-
 @section('content')
     <div class="row invoice-edit">
         <!-- Invoice Edit-->

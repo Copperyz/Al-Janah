@@ -50,9 +50,12 @@ class PaymentController extends Controller
         'date' => ['required', 'date'],
         'shipment_id' => ['required', 'string', 'exists:shipments,id'],
         'currency' => ['required', 'string', 'exists:currencies,id'],
-        'shipment_amount' => ['required', 'string'],
-        'order_amount' => ['required', 'string'],
-        'paymentMethod' => ['required', 'string']
+        'currency' => ['required', 'exists:currencies,id'],
+        'shipment_amount' => ['required', 'numeric', 'min:0'],
+        'order_amount' => ['required', 'numeric', 'min:0'],
+        'additional_amount' => ['nullable', 'numeric', 'min:0'],
+        'paymentMethod' => ['required', 'string', 'in:cash,cashBalance'],
+        'fulfilled' => ['nullable']
         ]);
         
         if ($validator->fails()) {
@@ -60,8 +63,7 @@ class PaymentController extends Controller
             [
             'message' => __('The given data was invalid'),
             'errors' => $validator->errors(),
-            ],
-            422
+            ],422
         );
         }
         try {
@@ -84,12 +86,13 @@ class PaymentController extends Controller
             // Create the Payment
             $payment = Payment::create([
             'shipment_id' => $request->shipment_id,
-            // 'date' => $request->input('date'),
             'currency_id' => $request->currency,
             'payment_method' =>  $paymentMethod,
             'transaction_id' => $transaction_id,
             'shipment_amount' =>  $request->shipment_amount,
             'order_amount' =>  $request->order_amount,
+            'additional_amount' =>  $request->additional_amount,
+            'total_amount' =>  $request->shipment_amount + $request->order_amount + $request->additional_amount,
             'created_by' => auth()->user()->id,
             ]);
 

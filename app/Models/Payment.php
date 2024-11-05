@@ -17,6 +17,8 @@ class Payment extends Model
         'date',
         'shipment_amount',
         'order_amount',
+        'additional_amount',
+        'total_amount',
         'currency_id',
         'payment_method',
         'transaction_id',

@@ -85,7 +85,7 @@
         </div>
         <hr />
 
-
+        <!-- Items Table -->
         <div class="table-responsive" dir="{{ app()->isLocale('ar') ? 'rtl' : 'ltr' }}">
             <table class="table m-0">
                 <thead class="table-light">
@@ -104,31 +104,88 @@
                             <td>{{ $shipmentItem->parcelType->name }}</td>
                             <td>{{ $shipmentItem->quantity }}</td>
                             <td>{{ $shipmentItem->weight }} {{ __('Kg') }}</td>
-                            <td>{{ number_format($shipmentItem->price, 2) }} {{ __($shipment->currency->symbol) }}</td>
+                            <td>{{ number_format($shipmentItem->price, 2) }}
+                                {{ __(isset($payment) ? $payment->currency->symbol : $shipment->currency->symbol) }}</td>
                         </tr>
                     @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Cost Summary Table -->
+        <div class="table-responsive mt-4" dir="{{ app()->isLocale('ar') ? 'rtl' : 'ltr' }}">
+            <table class="table m-0">
+                <thead class="table-light">
                     <tr>
-                        <td colspan="3" class="align-top px-4 py-3">
-                            <p class="mb-2">
-                                <span class="me-1 fw-medium"></span>
-                                <span></span>
-                            </p>
-                            <span></span>
-                        </td>
-                        <td class="">
-                            <p class="mb-2">{{ __('Packages cost') }}:</p>
-                            <p class="mb-2">{{ __('Freight cost') }}:</p>
-                            <p class="mb-0">{{ __('Total Amount') }}:</p>
-                        </td>
-                        <td class="">
-                            <!-- Reduced vertical padding -->
-                            <p class="fw-medium mb-2">{{ $payment->order_amount }} {{ __($payment->currency->symbol) }}</p>
-                            <p class="fw-medium mb-2">{{ $payment->shipment_amount }} {{ __($payment->currency->symbol) }}</p>
-                            <p class="fw-medium mb-2">{{ number_format($payment->order_amount + $payment->shipment_amount, 2) }}
-                                {{ __($payment->currency->symbol) }}
-                            </p>
-                        </td>
+                        <th>{{ __('Cost Type') }}</th>
+                        <th>{{ __('Amount') }}</th>
                     </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $isConvertedCurrency = isset($payment) && $payment->currency->code !== '$';
+                        $currencySymbol = isset($payment)
+                            ? __($payment->currency->symbol)
+                            : __($shipment->currency->symbol);
+                    @endphp
+
+                    @if ($isConvertedCurrency)
+                        <tr>
+                            <td>{{ __('Packages cost') }}</td>
+                            <td>
+                                {{ number_format($shipment->amount, 2) }} {{ __($shipment->currency->symbol) }}
+                                <br>
+                                <small>({{ number_format($payment->order_amount, 2) }} {{ $currencySymbol }})</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{{ __('Freight cost') }}</td>
+                            <td>
+                                {{ number_format($shipment->shipmentPrice, 2) }} {{ __($shipment->currency->symbol) }}
+                                <br>
+                                <small>({{ number_format($payment->shipment_amount, 2) }} {{ $currencySymbol }})</small>
+                            </td>
+                        </tr>
+                        @if ($payment->additional_amount > 0)
+                            <tr>
+                                <td>{{ __('Additional Amount') }}</td>
+                                <td>{{ number_format($payment->additional_amount, 2) }} {{ $currencySymbol }}</td>
+                            </tr>
+                        @endif
+                        <tr class="table-active">
+                            <td><strong>{{ __('Total Amount') }}</strong></td>
+                            <td>
+                                <strong>{{ number_format($shipment->amount + $shipment->shipmentPrice, 2) }}
+                                    {{ __($shipment->currency->symbol) }}</strong>
+                                <br>
+                                <small>({{ number_format($payment->total_amount, 2) }} {{ $currencySymbol }})</small>
+                            </td>
+                        </tr>
+                    @else
+                        <tr>
+                            <td>{{ __('Packages cost') }}</td>
+                            <td>{{ number_format(isset($payment) ? $payment->order_amount : $shipment->amount, 2) }}
+                                {{ $currencySymbol }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ __('Freight cost') }}</td>
+                            <td>{{ number_format(isset($payment) ? $payment->shipment_amount : $shipment->shipmentPrice, 2) }}
+                                {{ $currencySymbol }}</td>
+                        </tr>
+                        @if (isset($payment) && $payment->additional_amount > 0)
+                            <tr>
+                                <td>{{ __('Additional Amount') }}</td>
+                                <td>{{ number_format($payment->additional_amount, 2) }} {{ $currencySymbol }}</td>
+                            </tr>
+                        @endif
+                        <tr class="table-active">
+                            <td><strong>{{ __('Total Amount') }}</strong></td>
+                            <td>
+                                <strong>{{ number_format(isset($payment) ? $payment->total_amount : $shipment->amount + $shipment->shipmentPrice, 2) }}
+                                    {{ $currencySymbol }}</strong>
+                            </td>
+                        </tr>
+                    @endif
                 </tbody>
             </table>
         </div>

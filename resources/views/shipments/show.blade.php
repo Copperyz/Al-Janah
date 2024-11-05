@@ -102,22 +102,31 @@
                                     <tr>
                                         <td class="pe-4">{{ __('Shipment Price') }}:</td>
                                         <td class="fw-medium" dir="ltr">
-                                            {{ __($shipment->currency->symbol ?? '$') }}
-                                            {{ $shipment->shipmentPrice }}
+                                            {{ __(isset($payment) ? $payment->currency->symbol : $shipment->currency->symbol ?? '$') }}
+                                            {{ isset($payment) ? $payment->shipment_amount : $shipment->shipmentPrice }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="pe-4">{{ __('Packages cost') }}:</td>
                                         <td class="fw-medium" dir="ltr">
-                                            {{ __($shipment->currency->symbol ?? '$') }}
-                                            {{ number_format($shipment->amount, 2) }}
+                                            {{ __(isset($payment) ? $payment->currency->symbol : $shipment->currency->symbol ?? '$') }}
+                                            {{ number_format(isset($payment) ? $payment->order_amount : $shipment->amount, 2) }}
                                         </td>
                                     </tr>
+                                    @if (isset($payment) && $payment->additional_amount)
+                                        <tr>
+                                            <td class="pe-4">{{ __('Additional Amount') }}:</td>
+                                            <td class="fw-medium" dir="ltr">
+                                                {{ __($payment->currency->symbol ?? '$') }}
+                                                {{ number_format($payment->additional_amount, 2) }}
+                                            </td>
+                                        </tr>
+                                    @endif
                                     <tr>
                                         <td class="pe-4">{{ __('Total') }}:</td>
                                         <td class="fw-medium" dir="ltr">
-                                            {{ __($shipment->currency->symbol ?? '$') }}
-                                            {{ number_format($shipment->amount + $shipment->shipmentPrice, 2) }}
+                                            {{ __(isset($payment) ? $payment->currency->symbol : $shipment->currency->symbol ?? '$') }}
+                                            {{ number_format(isset($payment) ? $payment->shipment_amount + $payment->order_amount + $payment->additional_amount : $shipment->amount + $shipment->shipmentPrice, 2) }}
                                         </td>
                                     </tr>
                                 </tbody>

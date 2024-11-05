@@ -26,9 +26,8 @@
                         <div class="mb-3">
                             <label class="form-label" for="currency">{{ __('Currency') }}</label>
                             <select class="select2 form-select" id="currency" name="currency">
-                                @foreach($currencies as $currency)
-                                    <option value="{{ $currency->id }}" 
-                                        data-rate="{{ $currency->valueInUsd }}"
+                                @foreach ($currencies as $currency)
+                                    <option value="{{ $currency->id }}" data-rate="{{ $currency->valueInUsd }}"
                                         {{ $currency->symbol === 'USD' ? 'selected' : '' }}>
                                         {{ $currency->name }} ( {{ $currency->symbol }} )
                                     </option>
@@ -38,11 +37,20 @@
 
                         {{-- Temporary debug output --}}
                         <div style="display: none;">
-                            @foreach($currencies as $currency)
+                            @foreach ($currencies as $currency)
                                 <div>
                                     {{ $currency->symbol }} - Rate: {{ $currency->valueInUsd }}
                                 </div>
                             @endforeach
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="additionalAmount">{{ __('Additional Amount') }}</label>
+                            <div class="input-group" dir="ltr">
+                                <span class="input-group-text currency-symbol">USD</span>
+                                <input type="number" id="additionalAmount" name="additional_amount"
+                                    class="form-control {{ session()->get('locale') == 'ar' ? 'text-start' : 'text-end' }}"
+                                    placeholder="0.00" value="0" step="0.01" />
+                            </div>
                         </div>
 
                         <div class="mb-3">
@@ -122,6 +130,8 @@
                         <input type="hidden" name="order_amount" value="{{ $shipment->amount }}">
                         <input type="hidden" name="shipment_id" value="{{ $shipment->id }}">
 
+
+
                         <div class="col-12 text-center">
                             <button type="submit" class="btn btn-primary me-3">{{ __('Submit') }}</button>
                             <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal"
@@ -134,43 +144,58 @@
     </div>
 
     <script>
-    // Initialize Select2
-    $(document).ready(function() {
         // Initialize Select2
-        $('#currency').select2();
+        $(document).ready(function() {
+            // Initialize Select2
+            $('#currency').select2();
 
-        // Store original USD values as data attributes
-        const originalShipmentAmount = {{ $shipment->shipmentPrice }};
-        const originalOrderAmount = {{ $shipment->amount }};
-        
-        $('input[name="shipment_amount"]').data('usd-amount', originalShipmentAmount);
-        $('input[name="order_amount"]').data('usd-amount', originalOrderAmount);
+            // Store original USD values as data attributes
+            const originalShipmentAmount = {{ $shipment->shipmentPrice }};
+            const originalOrderAmount = {{ $shipment->amount }};
 
-        // Listen for both regular change and Select2 change events
-        $('#currency').on('change select2:select', function() {
-            const selectedOption = this.options[this.selectedIndex];
-            const exchangeRate = parseFloat(selectedOption.getAttribute('data-rate')) || 1;
-            const currencySymbol = selectedOption.textContent.match(/\((.*?)\)/)[1].trim();
-            
-            // Get original USD values from data attributes
-            const shipmentUsdAmount = parseFloat($('input[name="shipment_amount"]').data('usd-amount'));
-            const orderUsdAmount = parseFloat($('input[name="order_amount"]').data('usd-amount'));
-            
-            // Calculate converted values
-            const convertedShipmentAmount = (shipmentUsdAmount * exchangeRate).toFixed(2);
-            const convertedOrderAmount = (orderUsdAmount * exchangeRate).toFixed(2);
-            
-            // Update hidden inputs
-            $('input[name="shipment_amount"]').val(convertedShipmentAmount);
-            $('input[name="order_amount"]').val(convertedOrderAmount);
-            
-            // Update displayed amounts using specific IDs
-            $('#shipmentPrice .amount').text(convertedShipmentAmount);
-            $('#packagesPrice .amount').text(convertedOrderAmount);
-            
-            // Update currency symbols
-            $('.currency').text(currencySymbol);
-            $('.currency-symbol').text(currencySymbol);
+            $('input[name="shipment_amount"]').data('usd-amount', originalShipmentAmount);
+            $('input[name="order_amount"]').data('usd-amount', originalOrderAmount);
+
+            // Listen for both regular change and Select2 change events
+            $('#currency').on('change select2:select', function() {
+                const selectedOption = this.options[this.selectedIndex];
+                const exchangeRate = parseFloat(selectedOption.getAttribute('data-rate')) || 1;
+                const currencySymbol = selectedOption.textContent.match(/\((.*?)\)/)[1].trim();
+
+                // Get original USD values from data attributes
+                const shipmentUsdAmount = parseFloat($('input[name="shipment_amount"]').data('usd-amount'));
+                const orderUsdAmount = parseFloat($('input[name="order_amount"]').data('usd-amount'));
+
+                // Calculate converted values
+                const convertedShipmentAmount = (shipmentUsdAmount * exchangeRate).toFixed(2);
+                const convertedOrderAmount = (orderUsdAmount * exchangeRate).toFixed(2);
+
+                // Update hidden inputs
+                $('input[name="shipment_amount"]').val(convertedShipmentAmount);
+                $('input[name="order_amount"]').val(convertedOrderAmount);
+
+                // Update displayed amounts using specific IDs
+                $('#shipmentPrice .amount').text(convertedShipmentAmount);
+                $('#packagesPrice .amount').text(convertedOrderAmount);
+
+                // Update currency symbols
+                $('.currency').text(currencySymbol);
+                $('.currency-symbol').text(currencySymbol);
+
+                // Don't forget to update the total amount when currency changes
+                const additionalAmount = parseFloat($('#additionalAmount').val()) || 0;
+                const total = (parseFloat(convertedShipmentAmount) + parseFloat(convertedOrderAmount) +
+                    additionalAmount).toFixed(2);
+                $('#invoiceAmount').val(total);
+            });
+
+            $('#additionalAmount').on('input', function() {
+                const additionalAmount = parseFloat(this.value) || 0;
+                const shipmentAmount = parseFloat($('#shipmentPrice .amount').text()) || 0;
+                const packagesAmount = parseFloat($('#packagesPrice .amount').text()) || 0;
+
+                const total = (additionalAmount + shipmentAmount + packagesAmount).toFixed(2);
+                $('#invoiceAmount').val(total);
+            });
         });
-    });
     </script>

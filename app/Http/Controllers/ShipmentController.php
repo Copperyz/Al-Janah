@@ -204,6 +204,7 @@ class ShipmentController extends Controller
         $goodTypes = GoodType::all();
         $payment = Payment::where('shipment_id', $shipment->id)->first();
         $tripRoutes = TripRoute::all();
+        $currencies = Currency::all();
         foreach ($tripRoutes as $tripRoute) {
             $legsCombined = '';
             foreach ($tripRoute->legs as $leg) {
@@ -214,7 +215,7 @@ class ShipmentController extends Controller
             $tripRoute->legs_combined = $legsCombined;    
             $tripRoute->typeLocale = __($tripRoute->type); 
         }
-        return view('shipments.show', compact('shipment', 'parcelTypes', 'goodTypes', 'payment','tripRoutes'));
+        return view('shipments.show', compact('shipment', 'parcelTypes', 'goodTypes', 'payment','tripRoutes', 'currencies'));
     }
 
     /**

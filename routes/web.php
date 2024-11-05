@@ -33,178 +33,189 @@ use Spatie\Permission\Contracts\Role;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Public Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
 */
+
 // Front Pages
-Route::get('/', [FrontPagesController::class, 'index'])->name('landing-page');
-Route::get('/warehouses/{id}', [FrontPagesController::class, 'ourBranches'])->name('branches-page');
-Route::get('/rates', [FrontPagesController::class, 'showPriceSections'])->name('shipment-price');
-Route::post('/shipment/price-submit', [FrontPagesController::class, 'getPrice'])->name('shipment.get.price');
-Route::get('tracking', [FrontPagesController::class, 'trackShipmentPage'])->name('track-shipment');
-Route::post('track-shipment-data', [FrontPagesController::class, 'trackShipmentData'])->name('track-shipment-data');
-// TTurk
-Route::post('/handle-redirection', [ShipmentOnlineController::class, 'handleRedirection'])->name('handle.redirection');
-Route::get('/test-form', [ShipmentOnlineController::class, 'testForm'])->name('test-form');
-
-Route::post('/web-hook', [ShipmentOnlineController::class, 'webHook'])->name('web-hook');
-
-
-Route::post('/shipment-online', [ShipmentOnlineController::class, 'store'])->name('shipmentOnline.store');
-// Route::get('/test', [AuthController::class, 'test'])->name('test');
-
-Route::middleware(['guest'])->group(function () {
-  Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-  Route::post('/login', [AuthController::class, 'Login'])->name('Login');
-  Route::get('/register', [AuthController::class, 'showRegister'])->name('showRegister');
-  Route::post('/register', [AuthController::class, 'Register'])->name('register');
+Route::group(['namespace' => 'App\Http\Controllers'], function () {
+    Route::get('/', [FrontPagesController::class, 'index'])->name('landing-page');
+    Route::get('/warehouses/{id}', [FrontPagesController::class, 'ourBranches'])->name('branches-page');
+    Route::get('/rates', [FrontPagesController::class, 'showPriceSections'])->name('shipment-price');
+    Route::get('tracking', [FrontPagesController::class, 'trackShipmentPage'])->name('track-shipment');
+    
+    // Shipment Related
+    Route::post('/shipment/price-submit', [FrontPagesController::class, 'getPrice'])->name('shipment.get.price');
+    Route::post('track-shipment-data', [FrontPagesController::class, 'trackShipmentData'])->name('track-shipment-data');
+    Route::post('/shipment-online', [ShipmentOnlineController::class, 'store'])->name('shipmentOnline.store');
 });
-//customer register
-Route::post('store-account/{id}', [AuthController::class, 'storeAccount'])->name('store-account');
-Route::get('/confirm-account/{token}', [AuthController::class, 'confirmAccount'])->name('confirm-account');
+
+// Payment Gateway Routes
+Route::controller(ShipmentOnlineController::class)->group(function () {
+    Route::post('/handle-redirection', 'handleRedirection')->name('handle.redirection');
+    Route::post('/web-hook', 'webHook')->name('web-hook');
+    Route::get('/test-form', 'testForm')->name('test-form');
+});
+
+// Authentication Routes
+Route::middleware(['guest'])->controller(AuthController::class)->group(function () {
+    Route::get('/login', 'showLogin')->name('login');
+    Route::post('/login', 'Login')->name('Login');
+    Route::get('/register', 'showRegister')->name('showRegister');
+    Route::post('/register', 'Register')->name('register');
+});
+
+// Account Management
+Route::controller(AuthController::class)->group(function () {
+    Route::post('store-account/{id}', 'storeAccount')->name('store-account');
+    Route::get('/confirm-account/{token}', 'confirmAccount')->name('confirm-account');
+});
 
 // Settings
 Route::get('/change-locale/{locale}', [Settings::class, 'setLocale'])->name('changeLocale');
 
-// Auth
-Route::middleware(['auth'])->group(function (){
-  Route::post('/logout', [AuthController::class, 'Logout'])->name('logout');
+/*
+|--------------------------------------------------------------------------
+| Authenticated Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/logout', [AuthController::class, 'Logout'])->name('logout');
 });
+
 Route::middleware(['auth', 'complete.registration'])->group(function () {
+    Route::get('dashboard', [HomePage::class, 'index'])->name('dashboard');
 
-  Route::get('dashboard', [HomePage::class, 'index'])->name('dashboard');
-
-  // Users
-  Route::group(['middleware' => ['permission:users']], function () {
-    Route::get('get-users', [Users::class, 'get_users'])->name('get-users');
-    Route::resource('users', Users::class);
-  });
+    // Admin Management Routes
+    Route::group(['middleware' => ['permission:users']], function () {
+        Route::resource('users', Users::class);
+        Route::get('get-users', [Users::class, 'get_users'])->name('get-users');
+    });
 
 
-  // Roles
+
+  // Role Management
   Route::group(['middleware' => ['permission:roles']], function () {
     Route::resource('roles', RolesController::class);
   });
 
-  // Permissions
+  // Permission Management  
   Route::group(['middleware' => ['permission:permissions']], function () {
     Route::get('get-permissions', [PermissionsController::class, 'get_permissions'])->name('get-permissions');
     Route::resource('permissions', PermissionsController::class);
   });
 
+  // Shipment Management
   Route::group(['middleware' => ['permission:shipments']], function () {
-    // Shipments
     Route::get('get-shipments', [ShipmentController::class, 'get_shipments'])->name('get-shipments');
     Route::resource('shipments', ShipmentController::class);
-
-    // Shipment Items
-    Route::get('get-shipmentItems/{id}', [ShipmentItemController::class, 'get_shipment_itmes'])->name(
-      'get-shipment-itmes'
-    );
-    Route::post('add-shipmentItem/{id}', [ShipmentItemController::class, 'add_shipment_item'])->name('add-shipment-item');
-    Route::resource('shipment-itmes', ShipmentItemController::class);
-
-    // Shipment history
-    Route::resource('shipment-history', ShipmentHistoryController::class);
+    
+    Route::controller(ShipmentItemController::class)->group(function() {
+      Route::get('get-shipmentItems/{id}', 'get_shipment_itmes')->name('get-shipment-itmes');
+      Route::post('add-shipmentItem/{id}', 'add_shipment_item')->name('add-shipment-item');
+      Route::resource('shipment-itmes', ShipmentItemController::class);
     });
 
-  
+    Route::resource('shipment-history', ShipmentHistoryController::class);
+  });
 
-    // Trips
-    Route::group(['middleware' => ['permission:trips']], function () {
-      Route::get('get-trips', [TripController::class, 'get_trips'])->name('get-trips');
-      Route::get('get-trip-shipments/{id}', [TripController::class, 'get_trip_shipments'])->name('get-trip-shipments');
-      Route::get('tracking/{id}', [TripController::class, 'tracking'])->name('tracking');
+  // Trip Management
+  Route::group(['middleware' => ['permission:trips']], function () {
+    Route::controller(TripController::class)->group(function() {
+      Route::get('get-trips', 'get_trips')->name('get-trips');
+      Route::get('get-trip-shipments/{id}', 'get_trip_shipments')->name('get-trip-shipments');
+      Route::get('tracking/{id}', 'tracking')->name('tracking');
       Route::resource('trips', TripController::class);
     });
+  });
 
-
-  // Trip Shipment
   Route::resource('trip_shipments', TripShipmentController::class);
 
-  // Trips Routes
   Route::group(['middleware' => ['permission:trip_routes.index']], function () {
     Route::get('get-trip-routes', [TripRouteController::class, 'get_trip_routes'])->name('get-trip-routes');
     Route::resource('trip_routes', TripRouteController::class);
   });
 
-  // Trips History
-  // Route::get('get-trip-routes', [TripRouteController::class, 'get_trip_routes'])->name('get-trip-routes');
   Route::resource('trip-history', TripHistoryController::class);
 
-  //Inventory
-  Route::get('get-inventories', [InventoryController::class, 'getInventories'])->name('get-inventories');
-  Route::resource('inventory', InventoryController::class);
-  //InventoryItems
-  Route::get('get-inventoryItems', [InventoryItemsController::class, 'getInventoryItems'])->name('get-inventoryItems');
-  Route::resource('inventoryItems', InventoryItemsController::class);
+  // Inventory Management
+  Route::controller(InventoryController::class)->group(function() {
+    Route::get('get-inventories', 'getInventories')->name('get-inventories');
+    Route::resource('inventory', InventoryController::class);
+  });
 
-  // Prices
-  Route::get('get-prices', [PriceController::class, 'get_prices'])->name('get-prices');
-  Route::get('get-price', [PriceController::class, 'get_price'])->name('get-price');
+  Route::controller(InventoryItemsController::class)->group(function() {
+    Route::get('get-inventoryItems', 'getInventoryItems')->name('get-inventoryItems');
+    Route::resource('inventoryItems', InventoryItemsController::class);
+  });
+
+  // Price Management
+  Route::controller(PriceController::class)->group(function() {
+    Route::get('get-prices', 'get_prices')->name('get-prices');
+    Route::get('get-price', 'get_price')->name('get-price');
+  });
 
   Route::group(['middleware' => ['permission:prices.index']], function () {
     Route::resource('prices', PriceController::class);
   });
 
-  // Customers
+  // Customer Management
   Route::group(['middleware' => ['permission:customers']], function () {
-    Route::get('customers-all', [CustomerController::class, 'getCustomers'])->name('customers.all');
-    Route::get('customers-shipments/{id}', [CustomerController::class, 'getShipmetns'])->name('customers.shipments');
-    Route::post('customer-update', [CustomerController::class, 'updateCustomerData'])->name('customer.updateData');
-    Route::post('customer-add-cash/{id}', [CustomerController::class, 'addCashBalance'])->name('customer.add-cash');
-    Route::post('customer-add-coupon/{id}', [CustomerController::class, 'addCoupon'])->name('customer.add-coupon');
-    Route::get('customer/profile', [CustomerController::class, 'showProfile'])->name('customer.profile');
-    Route::post('customer/address', [CustomerController::class, 'storeAddress'])->name('customer.address.store');
-    Route::post('customer/address/{id}/set-default', [CustomerController::class, 'changeDefaultAddress'])->name('customer.address.setDefault');
-    Route::resource('customers', CustomerController::class);
+    Route::controller(CustomerController::class)->group(function() {
+      Route::get('customers-all', 'getCustomers')->name('customers.all');
+      Route::get('customers-shipments/{id}', 'getShipmetns')->name('customers.shipments');
+      Route::post('customer-update', 'updateCustomerData')->name('customer.updateData');
+      Route::post('customer-add-cash/{id}', 'addCashBalance')->name('customer.add-cash');
+      Route::post('customer-add-coupon/{id}', 'addCoupon')->name('customer.add-coupon');
+      Route::get('customer/profile', 'showProfile')->name('customer.profile');
+      Route::post('customer/address', 'storeAddress')->name('customer.address.store');
+      Route::post('customer/address/{id}/set-default', 'changeDefaultAddress')->name('customer.address.setDefault');
+      Route::resource('customers', CustomerController::class);
+    });
   });
   
-  // Payments
+  // Payment Management
   Route::group(['middleware' => ['permission:payments.index']], function () {
-    Route::get('get-payments', [PaymentController::class, 'getPayments'])->name('get-payments');
-    Route::get('payments/refund/{id}', [PaymentController::class, 'refund'])->name('refund');
-    Route::get('/payments/{id}/print', [PaymentController::class, 'print'])->name('print');
-    Route::resource('payments', PaymentController::class);
+    Route::controller(PaymentController::class)->group(function() {
+      Route::get('get-payments', 'getPayments')->name('get-payments');
+      Route::get('payments/refund/{id}', 'refund')->name('refund');
+      Route::get('/payments/{id}/print', 'print')->name('print');
+      Route::resource('payments', PaymentController::class);
+    });
   });
 
-  //Coupon
+  // Coupon Management
   Route::get('coupon-verified/{id}', [CouponsController::class, 'checkCoupon'])->name('coupon.verified');
 
-  //Countries
+  // Location Management
   Route::group(['middleware' => ['permission:countries']], function () {
     Route::resource('countries', CountryController::class);
   });
 
-  //Cities
   Route::group(['middleware' => ['permission:cities']], function () {
     Route::get('get-cities/{id}', [CityController::class, 'getCitiesByCountry'])->name('get-cities');
     Route::resource('cities', CityController::class);
   });
-  //Addresses
+
   Route::group(['middleware' => ['permission:addresses']], function () {
     Route::resource('addresses', AddressController::class);
   });
 
-  //Good Types
+  // Type Management
   Route::group(['middleware' => ['permission:good_types.index']], function () {
     Route::resource('good_types', GoodTypeController::class);
   });
   
-  //Parcel Types
   Route::group(['middleware' => ['permission:parcel_types.index']], function () {
     Route::resource('parcel_types', ParcelTypeController::class);
   });
-  
 
-  //Currencies
+  // Currency Management
   Route::group(['middleware' => ['permission:currencies.index']], function () {
-    Route::get('get-currencies', [CurrencyController::class, 'getCurrencies'])->name('get-currencies');
-    Route::resource('currencies', CurrencyController::class);
+    Route::controller(CurrencyController::class)->group(function() {
+      Route::get('get-currencies', 'getCurrencies')->name('get-currencies');
+      Route::resource('currencies', CurrencyController::class);
+    });
   });
 });

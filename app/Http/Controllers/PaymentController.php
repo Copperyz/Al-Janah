@@ -46,10 +46,10 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
         $validator = Validator::make($request->all(), [
         'date' => ['required', 'date'],
         'shipment_id' => ['required', 'string', 'exists:shipments,id'],
+        'currency' => ['required', 'string', 'exists:currencies,id'],
         'shipment_amount' => ['required', 'string'],
         'order_amount' => ['required', 'string'],
         'paymentMethod' => ['required', 'string']
@@ -85,6 +85,7 @@ class PaymentController extends Controller
             $payment = Payment::create([
             'shipment_id' => $request->shipment_id,
             // 'date' => $request->input('date'),
+            'currency_id' => $request->currency,
             'payment_method' =>  $paymentMethod,
             'transaction_id' => $transaction_id,
             'shipment_amount' =>  $request->shipment_amount,
@@ -170,6 +171,9 @@ class PaymentController extends Controller
         // Access shipment data here, for example:
         return $payment->status == 'Paid' ? __('Paid') : __('Refunded');
         })
+        ->addColumn('currency', function ($payment) {
+            return $payment->currency ? __($payment->currency->symbol) : __('USD');
+        })
         ->addColumn('options', function ($payment) {
             $options = '<div class="text-xxl-center">';
             $options .= '<button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>';
@@ -182,9 +186,7 @@ class PaymentController extends Controller
                     $options .= '<a href="javascript:;" class="dropdown-item refund-record" title="' . __('Refund') . '"><i class="ti ti-reload me-2"></i>' . __('Refund') . '</a>';
                 }
             }
-
             $options .= '</div></div>';
-
             return $options;
         })
         ->rawColumns(['options'])

@@ -21,6 +21,7 @@ $(function () {
                 { data: 'delivery_code' },
                 { data: 'shipment_amount' },
                 { data: 'order_amount' },
+                { data: 'currency' },
                 { data: 'payment_method' },
                 { data: 'date' },
                 { data: 'statusCapped' },

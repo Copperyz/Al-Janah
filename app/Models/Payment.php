@@ -17,6 +17,7 @@ class Payment extends Model
         'date',
         'shipment_amount',
         'order_amount',
+        'currency_id',
         'payment_method',
         'transaction_id',
         'created_by',
@@ -27,5 +28,10 @@ class Payment extends Model
     public function shipment()
     {
         return $this->belongsTo(Shipment::class, 'shipment_id');
+    }
+
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class, 'currency_id');
     }
 }

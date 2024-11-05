@@ -59,6 +59,7 @@
                         <th>{{ __('Shipment') }}</th>
                         <th>{{ __('Freight cost') }}</th>
                         <th>{{ __('Trip fare') }}</th>
+                        <th>{{ __('Currency') }}</th>
                         <th>{{ __('Payment Method') }}</th>
                         <th>{{ __('Date') }}</th>
                         <th>{{ __('Status') }}</th>

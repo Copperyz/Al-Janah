@@ -128,6 +128,7 @@
                         </div>
                         <input type="hidden" name="shipment_amount" value="{{ $shipment->shipmentPrice }}">
                         <input type="hidden" name="order_amount" value="{{ $shipment->amount }}">
+                        <input type="hidden" name="exchange_rate" value="1">    
                         <input type="hidden" name="shipment_id" value="{{ $shipment->id }}">
 
 
@@ -173,6 +174,7 @@
                 // Update hidden inputs
                 $('input[name="shipment_amount"]').val(convertedShipmentAmount);
                 $('input[name="order_amount"]').val(convertedOrderAmount);
+                $('input[name="exchange_rate"]').val(exchangeRate);
 
                 // Update displayed amounts using specific IDs
                 $('#shipmentPrice .amount').text(convertedShipmentAmount);

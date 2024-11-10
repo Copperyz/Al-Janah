@@ -172,7 +172,7 @@
                         <a href="{{ route('shipments.edit', ['shipment' => $shipment->id]) }}"
                             class="btn btn-label-warning d-flex align-items-center w-100 mb-2">
                             <i class="ti ti-pencil ti-xs me-2"></i>
-                            {{ __('Edit Order') }}
+                            {{ __('Edit') }}
                         </a>
                     @endcan
                     @can('add payment')
@@ -180,7 +180,7 @@
                             <button class="btn btn-label-success d-grid w-100" data-bs-toggle="modal"
                                 data-bs-target="#addPaymentModal">
                                 <span class="d-flex align-items-center justify-content-center text-nowrap"><i
-                                        class="ti ti-currency-dollar ti-xs me-2"></i>{{ __('Add Payment') }}</span>
+                                        class="ti ti-currency-dollar ti-xs me-2"></i>{{ __('Payment') }}</span>
                             </button>
                         @endif
                     @endcan

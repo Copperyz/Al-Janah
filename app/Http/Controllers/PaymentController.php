@@ -49,8 +49,8 @@ class PaymentController extends Controller
         $validator = Validator::make($request->all(), [
         'date' => ['required', 'date'],
         'shipment_id' => ['required', 'string', 'exists:shipments,id'],
-        'currency' => ['required', 'string', 'exists:currencies,id'],
         'currency' => ['required', 'exists:currencies,id'],
+        'exchange_rate' => ['required', 'numeric', 'min:0'],
         'shipment_amount' => ['required', 'numeric', 'min:0'],
         'order_amount' => ['required', 'numeric', 'min:0'],
         'additional_amount' => ['nullable', 'numeric', 'min:0'],
@@ -87,6 +87,7 @@ class PaymentController extends Controller
             $payment = Payment::create([
             'shipment_id' => $request->shipment_id,
             'currency_id' => $request->currency,
+            'exchange_rate' => $request->exchange_rate,
             'payment_method' =>  $paymentMethod,
             'transaction_id' => $transaction_id,
             'shipment_amount' =>  $request->shipment_amount,

@@ -20,6 +20,7 @@ class Payment extends Model
         'additional_amount',
         'total_amount',
         'currency_id',
+        'exchange_rate',
         'payment_method',
         'transaction_id',
         'created_by',

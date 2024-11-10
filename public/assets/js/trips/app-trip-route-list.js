@@ -290,7 +290,7 @@ $(function () {
             countrySelect.find('select').append('<option selected disabled>' + selectTranslation + '</option>');
             countrySelect.find('select').append('<option value="Turkey">' + turkeyTranslation + '</option>');
             countrySelect.find('select').append('<option value="China">' + chinaTranslation + '</option>');
-            countrySelect.find('select').append('<option value="Tunis">' + tunisTranslation + '</option>');
+            // countrySelect.find('select').append('<option value="Tunis">' + tunisTranslation + '</option>');
             countrySelect.find('select').append('<option value="Dubai">' + dubaiTranslation + '</option>');
             countrySelect.find('select').append('<option value="Libya">' + libyaTranslation + '</option>');
             countrySelect.find('select').val(leg.country);
@@ -362,11 +362,11 @@ $(function () {
         for (var i = 0; i < pointsData.length / 2; i++) {
             reorderedPointsData.push({
                 name: 'points[' + i + '][type]',
-                value: pointsData[i * 2].value
+                value: pointsData[i * 2] ? pointsData[i * 2].value : ''
             });
             reorderedPointsData.push({
                 name: 'points[' + i + '][country]',
-                value: pointsData[i * 2 + 1].value
+                value: pointsData[i * 2 + 1] ? pointsData[i * 2 + 1].value : ''
             });
         }
 
@@ -374,6 +374,7 @@ $(function () {
         formData = formData.filter(function (item) {
             return !item.name.startsWith('points');
         }).concat(reorderedPointsData);
+        console.log(formData);
 
         $.ajax({
             url: './trip_routes/' + $('#editTripRouteForm').find('[name="id"]').val(),

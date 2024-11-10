@@ -33,6 +33,7 @@ class CurrencyController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:30'],
+            'symbol' => ['required', 'string', 'max:10'],
             'valueInUsd' => ['required', 'numeric', 'min:0']
         ]);
         if ($validator->fails()) {
@@ -73,6 +74,7 @@ class CurrencyController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:30'],
+            'symbol' => ['required', 'string', 'max:10'],
             'valueInUsd' => ['required', 'numeric', 'min:0']
         ]);
         if ($validator->fails()) {

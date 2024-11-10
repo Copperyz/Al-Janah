@@ -247,6 +247,7 @@ class ShipmentController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
+            'customer_id' => ['required', 'exists:customers,id'],
             'date' => ['required', 'date_format:Y-m-d h:i A'],
             'amount' => ['required', 'numeric'],
             'currency_id' => ['required', 'exists:currencies,id'],

@@ -255,6 +255,7 @@ return [
     'shipmentItems.*.width' => __('Width'),
     'shipmentItems.*.weight' => __('Weight'),
     'shipmentItems.*.quantity' => __('Quantity'),
+    'shipmentItems.*.length' => __('Length'),
     'trip_route_id' => __('Trip Route'),
     'points' => __('Points'),
     'from_country_id' => __('From Country'),

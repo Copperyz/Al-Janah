@@ -30,6 +30,7 @@ class FrontPagesController extends Controller
     $pageConfigs = ['myLayout' => 'blank'];
     $numberOfImage = 0;
     $warehouse = config('constants.'.$branch);
+    // return $warehouse;
     // return $warehouse['title'];
      switch ($branch) {
       case 'Turkey2':
@@ -42,6 +43,7 @@ class FrontPagesController extends Controller
         $numberOfImage = 5;
         break;
     }
+    // return $warehouse;
     return view('front-pages.branches-page', compact('pageConfigs', 'branch', 'numberOfImage', 'warehouse'));
   }
 

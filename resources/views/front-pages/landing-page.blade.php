@@ -379,7 +379,7 @@ $configData = Helper::appClasses();
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
                                     <span class="before-heading fst-normal">{{__('Turkey')}}</span>
                                     <div class="entry-title nott">
-                                        <h3 class="fw-normal"><a href="#">{{__('Başakşehir - Eyüpsultan - Sultangazi')}}</a></h3>
+                                        <h3 class="fw-normal"><a href="#">{{__('Merter, Istanbul')}}</a></h3>
                                     </div>
                                     <div class="entry-content">
                                         <a href="{{route('branches-page', 'Turkey1')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
@@ -397,7 +397,7 @@ $configData = Helper::appClasses();
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
                                     <span class="before-heading fst-normal">{{__('Turkey')}}</span>
                                     <div class="entry-title nott">
-                                        <h3 class="fw-normal"><a href="#">{{__('Istanbul - Fatih - Laleli')}}</a></h3>
+                                        <h3 class="fw-normal"><a href="#">{{__('Bağcılar, Istanbul')}}</a></h3>
                                     </div>
                                     <div class="entry-content">
                                         <a href="{{route('branches-page', 'Turkey2')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
@@ -413,12 +413,12 @@ $configData = Helper::appClasses();
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
-                                    <span class="before-heading fst-normal">{{__('Palestine')}}</span>
+                                    <span class="before-heading fst-normal">{{__('USA')}}</span>
                                     <div class="entry-title nott">
                                         <h3 class="fw-normal"><a href="#">{{__('')}}</a></h3>
                                     </div>
                                     <div class="entry-content">
-                                        <a href="{{route('branches-page', 'Palestine')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
+                                        <a href="{{route('branches-page', 'USA')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
                                     </div>
                                 </div>
                             </div>

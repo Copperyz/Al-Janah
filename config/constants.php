@@ -334,27 +334,49 @@ return [
         'description' => "Rome's warehouse lies close to the ancient city, yet is thoroughly modern in its operations. Near Leonardo da Vinci Airport and the Port of Civitavecchia, it's well-placed for Mediterranean trade routes, with excellent road links ensuring swift distribution across Europe."
     ],
     'Turkey1' => [
-        'title' => 'Başakşehir, Turkey',
-        'description' => "Nestled in Istanbul's modern district, the Başakşehir warehouse stands as a hub of logistics efficiency. Surrounded by the city's expansive road network, it offers swift access to both Atatürk Airport and the Trans-European Motorway. The facility is equipped with state-of-the-art technology, ensuring rapid processing and distribution."
+        'title' => ['Merter, Istanbul'],
+        'description' => ["Situated in Merter, Istanbul, this ALJANAH warehouse is strategically located for efficient cargo handling and distribution across Europe and Asia. With proximity to key transportation routes and Istanbul's business districts, it provides easy access for local and international shipments. The facility features secure storage, climate-controlled areas, and advanced logistics systems, enabling effective management of diverse cargo types and fast, reliable dispatch operations."],
+        'addresses' =>   [
+            "Mehmet Nesih Özmen Mh.\nKeresteciler Sitesi Pelit Sk.\nAğaoğlu işhanı No:14/A\nMerter, istanbul",  
+        ]
     ],
     'Turkey2' => [
-        'title' => 'Laleli, Turkey',
-        'description' => "In the heart of Istanbul's bustling trade center, Laleli's warehouse serves a myriad of businesses from textiles to electronics. Its proximity to the Golden Horn provides seamless maritime connectivity, while nearby tram and metro stations facilitate easy urban access."
+        'title' => ['Bağcılar, Istanbul'],
+        'description' => ["Located in Bağcılar, Istanbul, this ALJANAH warehouse serves as a critical hub for cargo distribution across Europe and Asia. Positioned near major highways and transit routes, it offers efficient access to both local and international markets. The facility includes secure storage areas, modern loading docks, and advanced inventory systems to handle a wide range of cargo types. Designed to support rapid turnaround times, it facilitates streamlined logistics and dependable shipping services."],
+        'addresses' =>   [
+            "Kemal Paşa Mah,\nAtatürk Blv,\nEmlak Bankası,\nApt No. 30,\nC Blok / Kat4 / D17",
+        ]
     ],
     'China' => [
-        'title' => 'Hong Kong, China',
-        'description' => "Overlooking the South China Sea, this warehouse in Hong Kong is a cornerstone of international trade. Adjacent to the container port, it benefits from Hong Kong's status as a free port, with no cumbersome customs procedures, making it highly accessible for global shipping."
+        'title' => ['Hong Kong, China'],
+        'description' => ["Overlooking the South China Sea, this warehouse in Hong Kong is a cornerstone of international trade. Adjacent to the container port, it benefits from Hong Kong's status as a free port, with no cumbersome customs procedures, making it highly accessible for global shipping."],
+        'addresses' =>   [
+            "Guangzhou Shenl.\nCo., Ltd,\nBuilding G, No. 1 Wenrong Road\nXintang Town, Zengcheng District\nGuangzhou (Navigation: Shenli Logistics)",
+        ]
     ],
     'Libya' => [
-        'title' => 'Misurata, Libya',
-        'description' => "Misurata's warehouse is a lifeline in a city known for its resilience. Located near the port, it's a gateway for goods entering Libya, supported by the city's extensive maritime and desert trade routes. Despite regional challenges, it remains a beacon of commerce"
+        'title' =>['Tripoli, Libya','Misurata, Libya','Benghazi, Libya'],
+        'description' => ["Our Tripoli warehouse is a modern, high-capacity facility optimized for handling diverse cargo needs. Located near major transport routes, it supports efficient storage, processing, and dispatching. Equipped with advanced security systems and climate-controlled areas, it ensures safe handling of sensitive goods.",
+                         "Misurata's warehouse is a lifeline in a city known for its resilience. Located near the port, it's a gateway for goods entering Libya, supported by the city's extensive maritime and desert trade routes. Despite regional challenges, it remains a beacon of commerce",
+                         "Our warehouse in the second largest city in Libya is strategically located to facilitate swift regional distribution. Designed for both bulk and high-value shipments, it includes secure storage zones and efficient loading bays. This facility prioritizes quick turnaround and robust inventory management to support timely shipments across the area."],
+        'addresses' =>   [
+            "Al Janah Cargo Transport Co. Ltd.\n2nd Floor, Al Madina Building,\nMitiga Airport\nTripoli – Libya",
+            "شارع طرابلس خلف المستشفى المركزي شارع المعدات الطبية.\nمبني جبران.\nالدور الثالث شقة 11 .\nمصراته-ليبيا",
+            "TABLENO.\nALSHMELA PHARMASY BUILDING - SECOND FLOOR,\nOFFICE NO 4.\nBenghazi – Libya",
+        ]
     ],
-    'Palestine' => [
-        'title' => 'Jericho, Palestine',
-        'description' => "In the historical landscape of Jericho, the warehouse stands as a testament to enduring trade. It's a vital node in Palestine's logistics, leveraging its location near the Jordan River crossing for access to Middle Eastern markets, amidst ancient agricultural lands"
+    'USA' => [
+        'title' => ['Orlando, Florida, US'],
+        'description' => ["A state-of-the-art facility in Orlando, this warehouse serves as a key hub for ALJANAH's international cargo operations. Strategically positioned near major ports and highways, it offers advanced inventory management, climate-controlled storage, and high-security systems. The warehouse efficiently handles various cargo types, ensuring safe storage and smooth dispatch for U.S. and international shipments."],
+        'addresses' =>   [
+            "10078 covered moss Drive\nOrlando,\nFL32836",
+        ]
     ],
     'Algeria' => [
-        'title' => 'Algiers, Algeria',
-        'description' => "Algiers hosts a warehouse that mirrors the city's blend of history and modernity. Positioned strategically along the Mediterranean, it's part of Algeria's largest port, with a robust infrastructure that includes railways and highways extending into the Sahara and beyond"
+        'title' => ['Algiers, Algeria'],
+        'description' => ["Algiers hosts a warehouse that mirrors the city's blend of history and modernity. Positioned strategically along the Mediterranean, it's part of Algeria's largest port, with a robust infrastructure that includes railways and highways extending into the Sahara and beyond"],
+        'addresses' =>   [
+            "Cite Salam 02 lot N° 115.\nFerme TAHERBOUCHE,\nBIRKHADEM\n16000 ALGER",
+        ]
     ],
 ];

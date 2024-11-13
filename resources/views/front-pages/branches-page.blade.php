@@ -105,64 +105,33 @@ $configData = Helper::appClasses();
                     <!-- Portfolio Single Content
             ============================================= -->
                     <div class="portfolio-single-content">
-
-                        <div class="row gutter-50 justify-content-between">
-                            <div class="col-md-6" style="margin: 4em 0;">
-                                <!-- Portfolio Single - Description
-                        ============================================= -->
-                                <h2>{{__($warehouse['title'])}}</h2>
-                                <p class="op-07 fw-normal lead font-primary">{{__($warehouse['description'])}}</p>
-                                
-                                <!-- Portfolio Single - Description End -->
-                            </div>
-                            <div class="col-md-5" style="margin: 4em 0;">
-                                <!-- Portfolio Single - Meta
-                        ============================================= -->
-                                <ul class="portfolio-meta">
-                                    <li><span><i class="icon-user"></i>Created by:</span> John Doe</li>
-                                    <li><span><i class="icon-calendar3"></i>Completed on:</span> 17th March 2021</li>
-                                    <li><span><i class="icon-lightbulb"></i>Skills:</span> HTML5 / PHP / CSS3</li>
-                                    <li><span><i class="icon-link"></i>Client:</span> <a href="#">Google</a></li>
-                                </ul><!-- Portfolio Single - Meta End -->
-
-                                <div class="line my-4"></div>
-
-                                <!-- Portfolio Single - Share
-                        ============================================= -->
-                                <!-- <div class="d-flex justify-content-between align-items-center">
-                                <span>Share:</span>
-                                <div>
-                                    <a href="#" class="social-icon si-small si-light si-facebook">
-                                        <i class="icon-facebook"></i>
-                                        <i class="icon-facebook"></i>
-                                    </a>
-                                    <a href="#" class="social-icon si-small si-light si-twitter">
-                                        <i class="icon-twitter"></i>
-                                        <i class="icon-twitter"></i>
-                                    </a>
-                                    <a href="#" class="social-icon si-small si-light si-pinterest">
-                                        <i class="icon-pinterest"></i>
-                                        <i class="icon-pinterest"></i>
-                                    </a>
-                                    <a href="#" class="social-icon si-small si-light si-gplus">
-                                        <i class="icon-gplus"></i>
-                                        <i class="icon-gplus"></i>
-                                    </a>
-                                    <a href="#" class="social-icon si-small si-light si-rss">
-                                        <i class="icon-rss"></i>
-                                        <i class="icon-rss"></i>
-                                    </a>
-                                    <a href="#" class="social-icon si-small si-light si-email3">
-                                        <i class="icon-email3"></i>
-                                        <i class="icon-email3"></i>
-                                    </a>
+                            @foreach($warehouse['title'] as $key => $value)
+                            <div class="row gutter-50 justify-content-between">
+                                <div class="col-md-6" style="margin: 4em 0;">
+                                    <!-- Portfolio Single - Description
+                                ============================================= -->
+                                    <h2>{{__($value)}}</h2>
+                                    <p class="op-07 fw-normal lead font-primary">{{__($warehouse['description'][$key])}}</p>
+                                    
+                                    <!-- Portfolio Single - Description End -->
                                 </div>
-                            </div>Portfolio Single - Share End -->
+                                <div class="col-md-5" style="margin: 4em 0;">
+                                    <ul class="portfolio-meta">
+                                    @php
+                                        $addressLines = explode("\n", $warehouse['addresses'][$key]); // Split the address by new lines
+                                    @endphp
+                                    @foreach ($addressLines as $line)
+                                    <li><span><i class="icon-user"></i>{{$line}}</li>
+                                    @endforeach                                      
+                                    </ul>
+
+                                    <div class="line my-4"></div>
+
+                                </div>
                             </div>
-                        </div>
-
-                    </div><!-- .portfolio-single-content end -->
-
+                            @endforeach 
+                        
+                    </div>
                 </div>
             </div>
         </section><!-- #content end -->

@@ -330,8 +330,9 @@ return [
         'ye' => "Sana'a",
     ],
     'Italy' => [
-        'title' => 'Rome, Italy',
-        'description' => "Rome's warehouse lies close to the ancient city, yet is thoroughly modern in its operations. Near Leonardo da Vinci Airport and the Port of Civitavecchia, it's well-placed for Mediterranean trade routes, with excellent road links ensuring swift distribution across Europe."
+        'title' => ['Rome, Italy'],
+        'description' => ["Rome's warehouse lies close to the ancient city, yet is thoroughly modern in its operations. Near Leonardo da Vinci Airport and the Port of Civitavecchia, it's well-placed for Mediterranean trade routes, with excellent road links ensuring swift distribution across Europe."],
+        'addresses' => []
     ],
     'Turkey1' => [
         'title' => ['Merter, Istanbul'],

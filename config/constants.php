@@ -374,7 +374,7 @@ return [
         ]
     ],
     'Algeria' => [
-        'title' => ['Algiers, Algeria'],
+        'title' => ['Birkhadem, Algiers'],
         'description' => ["Algiers hosts a warehouse that mirrors the city's blend of history and modernity. Positioned strategically along the Mediterranean, it's part of Algeria's largest port, with a robust infrastructure that includes railways and highways extending into the Sahara and beyond"],
         'addresses' =>   [
             "Cite Salam 02 lot N° 115.\nFerme TAHERBOUCHE,\nBIRKHADEM\n16000 ALGER",

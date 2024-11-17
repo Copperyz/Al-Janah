@@ -283,13 +283,13 @@ $configData = Helper::appClasses();
                             <div class="grid-inner row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="entry-image">
-                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/china800x600.jpg')}}" alt="China warehouse"></a>
+                                        <a href="{{route('branches-page', 'China')}}"><img src="{{asset('assets/img/front-pages/landing-page/china800x600.jpg')}}" alt="China warehouse"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
                                     <span class="before-heading fst-normal">{{__('China')}}</span>
                                     <div class="entry-title nott">
-                                        <h3 class="fw-normal">{{__('Hong Kong - Guangdong - Shanghai')}}</h3>
+                                        <h3 class="fw-normal"><a href="{{route('branches-page', 'China')}}">{{__('Hong Kong - Guangdong - Shanghai')}}</a></h3>
                                     </div>
                                     <div class="entry-content">
                                         <a href="{{route('branches-page', 'China')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
@@ -301,13 +301,13 @@ $configData = Helper::appClasses();
                             <div class="grid-inner row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="entry-image">
-                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/libya800x600.jpg')}}" alt="Libya warehouse"></a>
+                                        <a href="{{route('branches-page', 'Libya')}}"><img src="{{asset('assets/img/front-pages/landing-page/libya800x600.jpg')}}" alt="Libya warehouse"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
                                     <span class="before-heading fst-normal">{{__('Libya')}}</span>
                                     <div class="entry-title nott">
-                                        <h3 class="fw-normal"><a href="#">{{__('Tripoli - Misurata - Benghazi')}}</a></h3>
+                                        <h3 class="fw-normal"><a href="{{route('branches-page', 'Libya')}}">{{__('Tripoli - Misurata - Benghazi')}}</a></h3>
                                     </div>
                                     <div class="entry-content">
                                         <a href="{{route('branches-page', 'Libya')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
@@ -337,13 +337,13 @@ $configData = Helper::appClasses();
                             <div class="grid-inner row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="entry-image">
-                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/italy800x600.jpg')}}" alt="italy warhouse"></a>
+                                        <a href="{{route('branches-page', 'Italy')}}"><img src="{{asset('assets/img/front-pages/landing-page/italy800x600.jpg')}}" alt="italy warhouse"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
                                     <span class="before-heading fst-normal">{{__('Italy')}}</span>
                                     <div class="entry-title nott">
-                                        <h3 class="fw-normal"><a href="#">{{__('Roma, Prato, Venezia, Milano, Gioia Tauro Port')}}</a></h3>
+                                        <h3 class="fw-normal"><a href="{{route('branches-page', 'Italy')}}">{{__('Roma, Prato, Venezia, Milano, Gioia Tauro Port')}}</a></h3>
                                     </div>
                                     <div class="entry-content">
                                         <a href="{{route('branches-page', 'Italy')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
@@ -355,13 +355,13 @@ $configData = Helper::appClasses();
                             <div class="grid-inner row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="entry-image">
-                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/algeria800x600.jpg')}}" alt="algeria warhouse"></a>
+                                        <a href="{{route('branches-page', 'Algeria')}}"><img src="{{asset('assets/img/front-pages/landing-page/algeria800x600.jpg')}}" alt="algeria warhouse"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
                                     <span class="before-heading fst-normal">{{__('Algeria')}}</span>
                                     <div class="entry-title nott">
-                                        <h3 class="fw-normal"><a href="#">{{__('Algiers')}}</a></h3>
+                                        <h3 class="fw-normal"><a href="{{route('branches-page', 'Algeria')}}">{{__('Birkhadem, Algiers')}}</a></h3>
                                     </div>
                                     <div class="entry-content">
                                         <a href="{{route('branches-page', 'Algeria')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
@@ -373,13 +373,13 @@ $configData = Helper::appClasses();
                             <div class="grid-inner row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="entry-image">
-                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/turkey800x600.jpg')}}" alt="Turkey 1 warhouse"></a>
+                                        <a href="{{route('branches-page', 'Turkey1')}}"><img src="{{asset('assets/img/front-pages/landing-page/turkey800x600.jpg')}}" alt="Turkey 1 warhouse"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
                                     <span class="before-heading fst-normal">{{__('Turkey')}}</span>
                                     <div class="entry-title nott">
-                                        <h3 class="fw-normal"><a href="#">{{__('Merter, Istanbul')}}</a></h3>
+                                        <h3 class="fw-normal"><a href="{{route('branches-page', 'Turkey1')}}">{{__('Merter, Istanbul')}}</a></h3>
                                     </div>
                                     <div class="entry-content">
                                         <a href="{{route('branches-page', 'Turkey1')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
@@ -391,13 +391,13 @@ $configData = Helper::appClasses();
                             <div class="grid-inner row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="entry-image">
-                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/turkey2800x600.jpg')}}" alt="Turkey 2 warhouse"></a>
+                                        <a href="{{route('branches-page', 'Turkey2')}}"><img src="{{asset('assets/img/front-pages/landing-page/turkey2800x600.jpg')}}" alt="Turkey 2 warhouse"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
                                     <span class="before-heading fst-normal">{{__('Turkey')}}</span>
                                     <div class="entry-title nott">
-                                        <h3 class="fw-normal"><a href="#">{{__('Bağcılar, Istanbul')}}</a></h3>
+                                        <h3 class="fw-normal"><a href="{{route('branches-page', 'Turkey2')}}">{{__('Bağcılar, Istanbul')}}</a></h3>
                                     </div>
                                     <div class="entry-content">
                                         <a href="{{route('branches-page', 'Turkey2')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>
@@ -409,13 +409,13 @@ $configData = Helper::appClasses();
                             <div class="grid-inner row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="entry-image">
-                                        <a href="#"><img src="{{asset('assets/img/front-pages/landing-page/palestine800x600.jpg')}}" alt="Palestine warhouse"></a>
+                                        <a href="{{route('branches-page', 'USA')}}"><img src="{{asset('assets/img/front-pages/landing-page/palestine800x600.jpg')}}" alt="Palestine warhouse"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">
                                     <span class="before-heading fst-normal">{{__('USA')}}</span>
                                     <div class="entry-title nott">
-                                        <h3 class="fw-normal"><a href="#">{{__('')}}</a></h3>
+                                        <h3 class="fw-normal"><a href="{{route('branches-page', 'USA')}}">{{__('Orlando, Florida')}}</a></h3>
                                     </div>
                                     <div class="entry-content">
                                         <a href="{{route('branches-page', 'USA')}}" class="more-link">{{__('Details')}} <i class="ti ti-chevron-right" style="width: 12px"></i></a>

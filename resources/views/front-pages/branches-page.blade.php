@@ -115,6 +115,7 @@ $configData = Helper::appClasses();
                                     
                                     <!-- Portfolio Single - Description End -->
                                 </div>
+                                @if(isset($warehouse['addresses'][$key]))
                                 <div class="col-md-5" style="margin: 4em 0;">
                                     <ul class="portfolio-meta">
                                     @php
@@ -128,6 +129,7 @@ $configData = Helper::appClasses();
                                     <div class="line my-4"></div>
 
                                 </div>
+                                @endif
                             </div>
                             @endforeach 
                         

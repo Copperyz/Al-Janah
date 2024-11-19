@@ -343,8 +343,8 @@ class CustomerController extends Controller
   {
     
       $customer = Customer::with('shipments', 'country', 'cashBalance', 'coupons')->findOrFail($customer->id);
-
-    return view('customers.show')->with('customer', $customer);
+      $countries = Country::all();
+    return view('customers.show')->with('customer', $customer)->with('countries', $countries);
   }
 
   public function edit(Customer $customer)

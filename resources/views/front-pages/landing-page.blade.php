@@ -409,7 +409,7 @@ $configData = Helper::appClasses();
                             <div class="grid-inner row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="entry-image">
-                                        <a href="{{route('branches-page', 'USA')}}"><img src="{{asset('assets/img/front-pages/landing-page/palestine800x600.jpg')}}" alt="Palestine warhouse"></a>
+                                        <a href="{{route('branches-page', 'USA')}}"><img src="{{asset('assets/img/front-pages/landing-page/usa800x600.jpg')}}" alt="USA warhouse"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-3 mt-lg-0" style="padding: 0 0.75rem">

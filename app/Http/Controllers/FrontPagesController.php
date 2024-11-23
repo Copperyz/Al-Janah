@@ -28,22 +28,10 @@ class FrontPagesController extends Controller
   public function ourBranches($branch){
 
     $pageConfigs = ['myLayout' => 'blank'];
-    $numberOfImage = 0;
     $warehouse = config('constants.'.$branch);
-    // return $warehouse;
-    // return $warehouse['title'];
-     switch ($branch) {
-      case 'Turkey2':
-        $numberOfImage = 6;
-        break;
-      case 'Italy':
-        $numberOfImage = 6;
-        break;
-      default:
-        $numberOfImage = 5;
-        break;
-    }
-    // return $warehouse;
+    $numberOfImage = $warehouse['numberOfImages'];
+
+    // return $warehouse['addresses'];
     return view('front-pages.branches-page', compact('pageConfigs', 'branch', 'numberOfImage', 'warehouse'));
   }
 

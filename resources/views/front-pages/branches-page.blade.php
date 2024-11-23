@@ -118,12 +118,7 @@ $configData = Helper::appClasses();
                                 @if(isset($warehouse['addresses'][$key]))
                                 <div class="col-md-5" style="margin: 4em 0;">
                                     <ul class="portfolio-meta">
-                                    @php
-                                        $addressLines = explode("\n", $warehouse['addresses'][$key]); // Split the address by new lines
-                                    @endphp
-                                    @foreach ($addressLines as $line)
-                                    <li><span><i class="icon-user"></i>{{$line}}</li>
-                                    @endforeach                                      
+                                    <li style="line-height: 2.5;">{!! nl2br(e($warehouse['addresses'][$key])) !!}</li>
                                     </ul>
 
                                     <div class="line my-4"></div>
@@ -153,7 +148,7 @@ $configData = Helper::appClasses();
                 prevEl: '.slider-arrow-left',
             },
             loop: true,
-            loopedSlides: 4
+            loopedSlides: 3
         });
         var sliderThumbs = new Swiper('.slider-thumbs', {
             spaceBetween: 10,
@@ -162,7 +157,7 @@ $configData = Helper::appClasses();
             touchRatio: 0.2,
             slideToClickedSlide: true,
             loop: true,
-            loopedSlides: 4
+            loopedSlides: 3
         });
 
         sliderTop.controller.control = sliderThumbs;

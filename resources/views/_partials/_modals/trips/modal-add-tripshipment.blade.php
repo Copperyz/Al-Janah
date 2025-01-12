@@ -18,12 +18,15 @@
                                 <th class="text-truncate">{{__('Amount')}}</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            
+                        </tbody>
                     </table>
                 </div>
             </div>
             <hr>
             <div class="modal-footer">
-                <input type="hidden" name="id" id="id">
+                <input type="hidden" name="id" id="id" value="">
                 <button type="button" class="btn btn-primary">{{__('Submit')}}</button>
                 <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">{{__('Cancel')}}</button>
             </div>

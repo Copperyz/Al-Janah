@@ -389,4 +389,11 @@ return [
         ],
         'numberOfImages' => 5
     ],
+    'modelsMapping' => [
+        'customers' => ['Customer', 'User', 'Shipment', 'Payment'],
+        'users' => ['User', 'Customer', 'Shipment', 'Payment'],
+        'shipments' => ['Shipment', 'User', 'Customer', 'Payment'],
+        'payments' => ['Payment', 'User', 'Shipment', 'Customer'],
+    ],
+    'models' => ['customers', 'users', 'shipments', 'payments']
 ];

@@ -248,6 +248,7 @@ class TripController extends Controller
 
   public function get_trip_shipments($id)
   {
+    // dd($id);
     $shipments = Shipment::select(
         'shipments.*',
         DB::raw('(CASE WHEN trip_shipments.trip_id = ' . intval($id) . ' THEN 1 ELSE 0 END) AS selected')
@@ -257,7 +258,7 @@ class TripController extends Controller
         $query->whereNull('trip_shipments.shipment_id')
               ->orWhere('trip_shipments.trip_id', $id);
     });
-
+    // return $shipments->trips;
     return Datatables::eloquent($shipments)
         ->addColumn('customerName', function ($shipment) {
             return $shipment->customer ? $shipment->customer->first_name . ' ' . $shipment->customer->last_name : 'N/A';

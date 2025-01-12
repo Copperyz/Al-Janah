@@ -436,7 +436,7 @@ $(function () {
       });
     });
 
-  $(document).on('click', 'button.showTripShipment', function () {
+  $(document).on('click', 'a.showTripShipment', function () {
     var data = dt_trips.row($(this).closest('tr')).data();
     $('#id').val(data.id);
 
@@ -460,6 +460,7 @@ $(function () {
   // Event listener for the submit button
   $('#showTripShipmentModal').on('click', 'button.btn-primary', function () {
     $.ajax({
+      
       url: './trip_shipments/' + $('#id').val(),
       method: 'PUT',
       data: { selectedRows, deSelectedRows, selectedChangeType },

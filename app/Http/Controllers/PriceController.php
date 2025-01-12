@@ -157,7 +157,7 @@ class PriceController extends Controller
         $tripCountries = array_map(function ($leg) {
             return $leg['country'];
         }, $tripRoute->legs);
-
+        // return $tripCountries;
         for ($i = 0; $i < count($tripCountries) - 1; $i++) {
             $query = Price::query();
                

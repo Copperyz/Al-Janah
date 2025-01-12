@@ -128,6 +128,12 @@
       "slug": "currencies.index"
     },
     {
+      "url": "reports",
+      "icon": "menu-icon tf-icons ti ti-report",
+      "name": "Reports",
+      "slug": "reports.index"
+    },
+    {
       "url": "telescope",
       "icon": "menu-icon tf-icons ti ti-dashboard",
       "name": "Monitor System",

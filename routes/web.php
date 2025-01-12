@@ -28,6 +28,8 @@ use App\Http\Controllers\ShipmentOnlineController;
 use App\Http\Controllers\GoodTypeController;
 use App\Http\Controllers\ParcelTypeController;
 use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\ReportController;
+use App\Livewire\TemplateCard;
 use Spatie\Permission\Contracts\Role;
 
 
@@ -39,10 +41,17 @@ use Spatie\Permission\Contracts\Role;
 
 // Front Pages
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
-    Route::get('/', [FrontPagesController::class, 'index'])->name('landing-page');
+    if(config('features.home'))
+      {
+        Route::get('/', [FrontPagesController::class, 'index'])->name('landing-page');
+      }
     Route::get('/warehouses/{id}', [FrontPagesController::class, 'ourBranches'])->name('branches-page');
-    Route::get('/rates', [FrontPagesController::class, 'showPriceSections'])->name('shipment-price');
-    Route::get('tracking', [FrontPagesController::class, 'trackShipmentPage'])->name('track-shipment');
+    if(config('features.rates')){
+      Route::get('/rates', [FrontPagesController::class, 'showPriceSections'])->name('shipment-price');
+    }
+    if(config('features.track')){
+      Route::get('tracking', [FrontPagesController::class, 'trackShipmentPage'])->name('track-shipment');
+    }
     
     // Shipment Related
     Route::post('/shipment/price-submit', [FrontPagesController::class, 'getPrice'])->name('shipment.get.price');
@@ -218,4 +227,7 @@ Route::middleware(['auth', 'complete.registration'])->group(function () {
       Route::resource('currencies', CurrencyController::class);
     });
   });
+  //reports
+  Route::resource('reports', ReportController::class);
+  Route::get('template', TemplateCard::class);
 });

@@ -7,6 +7,20 @@
 // Datatable (jquery)
 $(function () {
 
+  const date = document.querySelectorAll('.date-picker');
+
+  // Datepicker
+  if (date) {
+    date.forEach(function (invoiceDateEl) {
+      invoiceDateEl.flatpickr({
+        enableTime: true,         // Enable time picker
+        dateFormat: "Y-m-d H:i K", // Format for date and time (24-hour with AM/PM)
+        time_24hr: false,         // Set to false to use 12-hour format with AM/PM
+        monthSelectorType: 'static' // Static month dropdown
+      });
+    });
+  }
+
   $("#editCustomerUserForm").on("submit", function (event) {
     event.preventDefault();
     // Get the serialized array

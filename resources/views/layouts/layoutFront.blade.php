@@ -6,12 +6,13 @@ $isFront = true;
 @section('layoutContent')
 
 @extends('layouts/commonMaster' )
-
-@include('layouts/sections/navbar/navbar-front')
-
+@if(config('features.header'))
+    @include('layouts/sections/navbar/navbar-front')
+@endif
 <!-- Sections:Start -->
 @yield('content')
 <!-- / Sections:End -->
-
-@include('layouts/sections/footer/footer-front')
+@if(config('features.footer'))
+    @include('layouts/sections/footer/footer-front')
+@endif
 @endsection

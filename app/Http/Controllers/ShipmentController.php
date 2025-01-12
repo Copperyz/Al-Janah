@@ -336,6 +336,7 @@ class ShipmentController extends Controller
         
 
         // Use DataTables for server-side processing
+        // return $shipmentsQuery;
         return Datatables::of($shipmentsQuery)
             ->addColumn('customerName', function($shipment) {
                 return $shipment->customer ? $shipment->customer->first_name . ' ' . $shipment->customer->last_name : 'N/A';

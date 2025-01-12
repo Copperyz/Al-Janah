@@ -51,7 +51,7 @@ class TripRouteController extends Controller
         }
 
         
-        return $request;
+        // return $request;
 
         // Create a new TripRoute instance
         $tripRoute = new TripRoute([

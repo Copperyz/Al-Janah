@@ -171,7 +171,7 @@ $configData = Helper::appClasses();
         </div>
     </section> -->
     <!-- Useful features: End -->
-    <section class="section bg-body">
+    <section class="section bg-body" id="landingFeatures">
         <div class="mt-5" style="overflow: hidden;">
             <div class="section m-0 text-center" style="padding: 60px 0;">
                 <div class="container clearfix">

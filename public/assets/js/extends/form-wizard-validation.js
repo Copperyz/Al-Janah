@@ -1,7 +1,3 @@
-/**
- *  Form Wizard
- */
-
 'use strict';
 
 (function () {
@@ -15,9 +11,9 @@
     // Wizard form
     const wizardValidationForm = wizardValidation.querySelector('#wizard-validation-form');
     // Wizard steps
-    const wizardValidationFormStep1 = wizardValidationForm.querySelector('#account-details-validation');
-    const wizardValidationFormStep2 = wizardValidationForm.querySelector('#personal-info-validation');
-    const wizardValidationFormStep3 = wizardValidationForm.querySelector('#social-links-validation');
+    const wizardValidationFormStep1 = wizardValidationForm.querySelector('#report-type');
+    const wizardValidationFormStep2 = wizardValidationForm.querySelector('#report-info');
+    const wizardValidationFormStep3 = wizardValidationForm.querySelector('#report-template');
     // Wizard next prev button
     const wizardValidationNext = [].slice.call(wizardValidationForm.querySelectorAll('.btn-next'));
     const wizardValidationPrev = [].slice.call(wizardValidationForm.querySelectorAll('.btn-prev'));
@@ -29,52 +25,13 @@
     // Account details
     const FormValidation1 = FormValidation.formValidation(wizardValidationFormStep1, {
       fields: {
-        formValidationUsername: {
-          validators: {
-            notEmpty: {
-              message: 'The name is required'
-            },
-            stringLength: {
-              min: 6,
-              max: 30,
-              message: 'The name must be more than 6 and less than 30 characters long'
-            },
-            regexp: {
-              regexp: /^[a-zA-Z0-9 ]+$/,
-              message: 'The name can only consist of alphabetical, number and space'
+        radioReportType: {
+            validators: {
+              notEmpty: {
+                message: 'Please select report type'
+              }
             }
-          }
         },
-        formValidationEmail: {
-          validators: {
-            notEmpty: {
-              message: 'The Email is required'
-            },
-            emailAddress: {
-              message: 'The value is not a valid email address'
-            }
-          }
-        },
-        formValidationPass: {
-          validators: {
-            notEmpty: {
-              message: 'The password is required'
-            }
-          }
-        },
-        formValidationConfirmPass: {
-          validators: {
-            notEmpty: {
-              message: 'The Confirm Password is required'
-            },
-            identical: {
-              compare: function () {
-                return wizardValidationFormStep1.querySelector('[name="formValidationPass"]').value;
-              },
-              message: 'The password and its confirm are not the same'
-            }
-          }
-        }
       },
       plugins: {
         trigger: new FormValidation.plugins.Trigger(),
@@ -103,34 +60,30 @@
     // Personal info
     const FormValidation2 = FormValidation.formValidation(wizardValidationFormStep2, {
       fields: {
-        formValidationFirstName: {
+        formValidationReport: {
           validators: {
             notEmpty: {
-              message: 'The first name is required'
+              message: 'The name is required'
+            },
+            stringLength: {
+              min: 6,
+              max: 30,
+              message: 'The name must be more than 6 and less than 30 characters long'
+            },
+            regexp: {
+              regexp: /^[a-zA-Z0-9 ]+$/,
+              message: 'The name can only consist of alphabetical, number and space'
             }
           }
         },
-        formValidationLastName: {
+        formValidationModel: {
           validators: {
             notEmpty: {
-              message: 'The last name is required'
+              message: 'The model is required'
             }
           }
         },
-        formValidationCountry: {
-          validators: {
-            notEmpty: {
-              message: 'The Country is required'
-            }
-          }
-        },
-        formValidationLanguage: {
-          validators: {
-            notEmpty: {
-              message: 'The Languages is required'
-            }
-          }
-        }
+        
       },
       plugins: {
         trigger: new FormValidation.plugins.Trigger(),
@@ -165,12 +118,12 @@
         $this.wrap('<div class="position-relative"></div>');
         $this
           .select2({
-            placeholder: 'Select an country',
+            placeholder: 'Select a model',
             dropdownParent: $this.parent()
           })
           .on('change.select2', function () {
             // Revalidate the color field when an option is chosen
-            FormValidation2.revalidateField('formValidationCountry');
+            FormValidation2.revalidateField('formValidationModel');
           });
       });
     }
@@ -178,46 +131,15 @@
     // Social links
     const FormValidation3 = FormValidation.formValidation(wizardValidationFormStep3, {
       fields: {
-        formValidationTwitter: {
+        formValidationTemplate: {
           validators: {
             notEmpty: {
-              message: 'The Twitter URL is required'
+              message: 'The template is required'
             },
-            uri: {
-              message: 'The URL is not proper'
-            }
+          
           }
         },
-        formValidationFacebook: {
-          validators: {
-            notEmpty: {
-              message: 'The Facebook URL is required'
-            },
-            uri: {
-              message: 'The URL is not proper'
-            }
-          }
-        },
-        formValidationGoogle: {
-          validators: {
-            notEmpty: {
-              message: 'The Google URL is required'
-            },
-            uri: {
-              message: 'The URL is not proper'
-            }
-          }
-        },
-        formValidationLinkedIn: {
-          validators: {
-            notEmpty: {
-              message: 'The LinkedIn URL is required'
-            },
-            uri: {
-              message: 'The URL is not proper'
-            }
-          }
-        }
+        
       },
       plugins: {
         trigger: new FormValidation.plugins.Trigger(),
@@ -231,11 +153,59 @@
         submitButton: new FormValidation.plugins.SubmitButton()
       }
     }).on('core.form.valid', function () {
-      // You can submit the form
-      // wizardValidationForm.submit()
-      // or send the form data to server via an Ajax request
-      // To make the demo simple, I just placed an alert
-      alert('Submitted..!!');
+     
+      submitButton.setAttribute('disabled', true);
+      var form = wizardValidationForm;
+      var url = form.attr('action');
+      var method = form.attr('method');
+      var formData = form.serialize();
+
+    $.ajax({
+      url: url,
+      method: method,
+      data: formData,
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function (response, status, xhr) {
+        if (xhr.status === 200) {
+          // Handle a successful response
+          Swal.fire({
+            title: '',
+            text: response.message,
+            icon: 'success',
+            confirmButtonText: doneTranslation,
+            customClass: {
+              confirmButton: 'btn btn-success'
+            }
+          }).then(result => {
+            // if (result.isConfirmed) {
+            //   // location.reload();
+            //   form.trigger('reset');
+            //   location.reload();
+            // }
+          });
+        }
+      },
+      error: function (response, xhr, status, error) {
+        // Handle the error response here
+        var errorMessages = Object.values(response.responseJSON.errors).flat();
+        // Format error messages with line breaks
+        var formattedErrorMessages = errorMessages.join('<br>'); // Join the error messages with <br> tags
+        // Create the Swal alert
+        Swal.fire({
+          title: response.responseJSON.message,
+          html: formattedErrorMessages,
+          icon: 'error',
+          confirmButtonText: doneTranslation,
+          customClass: {
+            confirmButton: 'btn btn-primary'
+          },
+          buttonsStyling: false
+        });
+        submitButton.removeAttribute('disabled');
+      }
+    });
     });
 
     wizardValidationNext.forEach(item => {

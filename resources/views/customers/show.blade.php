@@ -15,7 +15,9 @@ $configData = Helper::appClasses();
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/@form-validation/umd/styles/index.min.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/select2/select2.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/bs-stepper/bs-stepper.css')}}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-select-bs5/select.bootstrap5.css') }}">
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/flatpickr/flatpickr.css')}}" />
+
 
 @endsection
 
@@ -37,6 +39,7 @@ $configData = Helper::appClasses();
 @section('page-script')
 <!-- <script src="{{asset('assets/js/modal-edit-user.js')}}"></script> -->
 <!-- <script src="{{asset('assets/js/app-ecommerce-customer-detail.js')}}"></script> -->
+<script src="{{ asset('assets/js/extends/forms-selects.js') }}"></script>
 <script src="{{asset('assets/js/extends/form-layouts.js')}}"></script>
 <script src="{{asset('assets/js/customers/customer-overview.js')}}"></script>
 <script src="{{asset('assets/js/customers/customer-add-cash-and-coupons.js')}}"></script>

@@ -37,10 +37,12 @@ $configData = Helper::appClasses();
         <!-- /Left Text -->
         <div class="d-none d-lg-flex col-lg-7 p-0">
             <div class="auth-cover-bg auth-cover-bg-color d-flex justify-content-center align-items-center">
+                @if(config('variables.loginSideBackground'))
                 <img src="{{ asset('assets/img/front-pages/landing-page/0-945x1069.png') }}"
                     alt="auth-login-cover" class="img-fluid my-5 auth-illustration"
                     data-app-light-img="front-pages/landing-page/0-945x1069.png"
                     data-app-dark-img="front-pages/landing-page/0-945x1069.png">
+                @endif
                 <img src="{{ asset('assets/img/illustrations/bg-shape-image-'.$configData['style'].'.png') }}"
                     alt="auth-login-cover" class="platform-bg"
                     data-app-light-img="illustrations/bg-shape-image-light.png"
